@@ -1,6 +1,6 @@
 ---
-name: pull-request issue template
-about: 일반적인 pr 이슈 등록 템플릿
+name: general issue template
+about: 기본 이슈 등록 템플릿
 title: ''
 labels: ''
 assignees: ''
