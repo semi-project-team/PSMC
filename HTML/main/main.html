@@ -28,6 +28,22 @@
     background-color: skyblue; /* 배경색 지정 */
     color: #fff; /* 텍스트 색상 지정 */
     padding-top: 20px; /* 상단 여백 추가 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    
+}
+#mainNav {
+    display: flex;
+    flex-direction: column;
+
+    
+}
+#subNav{
+    position: absolute;
+    bottom: 10%
 }
 
 .mainbar ul {
@@ -36,6 +52,7 @@
     padding: 0;
     display:flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .mainbar li {
@@ -58,41 +75,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>웹 페이지</title>
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <div class="mainbar">
         <!-- 메인 바 내용 -->
-        <ul>
-            <br>
-            <br>
-            <li><a href="#">Main Page</a></li>
-            <br>
-            <br>
-            <li><a href="#">Schedule</a></li>
-            <br>
-            <br>
-            <li><a href="#">MediConnect</a></li>
-            <br>
-            <br>
-            <li><a href="#">TheraLink</a></li>
-            <br>
-            <br>
-            <li><a href="#">Medical Log</a></li>
-            <br>
-            <br>
-            <li><a href="#">Therapy Log</a></li>
-            <br>
-            <br>
-            <br>
-            <br>
-            <li style="align-self: flex-end baseline;"><a href="#">Log Out</a></li>
-        </ul>
+        
+            <div id="mainNav">
+                <a href="#">Main Page</a> 
+                <a href="#">Schedule</a>
+                <a href="#">MediConnect</a>
+                <a href="#">TheraLink</a>
+                <a href="#">Medical Log</a>
+                <a href="#">Therapy Log</a>
+            </div>
+            
+            <div id="subNav">
+                <a href="#">Log Out</a>
+            </div>
+            
+        
     </div>
-    <script src="script.js">
+    <script src="/main/script.js">
         document.getElementById("menuButton").addEventListener("mouseover", function() {
     document.getElementById("dropdownContent").classList.toggle("show");
 });
