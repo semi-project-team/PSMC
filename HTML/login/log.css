@@ -2,11 +2,13 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
   }
   
   body{
       font-family: 'Poppins', sans-serif;
       overflow: hidden;
+      background-color: rgb(215, 214, 214);
   }
   
   .wave{
@@ -64,7 +66,7 @@
       grid-template-columns: 7% 93%;
       margin: 25px 0;
       padding: 5px 0;
-      border-bottom: 2px solid #d9d9d9;
+      border-bottom: 2px solid #ffffff;
   }
   
   .login-content .input-div.one{
@@ -72,7 +74,7 @@
   }
   
   .i{
-    color: #d9d9d9;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +105,7 @@
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: lightblue;
+    background-color: rgb(3, 61, 94);
     transition: .4s;
   }
   
@@ -125,7 +127,7 @@
   }
   
   .input-div.focus > .i > i{
-    color: lightblue;
+    color: rgb(3, 61, 94);
   }
   
   .input-div > div > input{
@@ -163,7 +165,7 @@
   }
   
   .find:hover{
-    color: lightblue;
+    color: rgb(3, 61, 94);
   }
   
   .button {
@@ -173,7 +175,7 @@
     border-radius: 25px;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, lightblue, skyblue, lightblue);
+    background-image: linear-gradient(to right, rgb(3, 61, 94), rgb(4, 93, 148), rgb(3, 61, 94));
     background-size: 200%;
     font-size: 1.2rem;
     color: #fff;
