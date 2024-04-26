@@ -1,7 +1,4 @@
-document.getElementById("menuButton").addEventListener("mouseover", function() {
-    document.getElementById("dropdownContent").classList.toggle("show");
-});
-
-document.getElementById("menuButton").addEventListener("mouseout", function() {
-    document.getElementById("dropdownContent").classList.remove("show");
-});
+function toggleWidth() {
+    var mainbar = document.querySelector('.mainbar');
+    mainbar.classList.toggle('expanded');
+}
