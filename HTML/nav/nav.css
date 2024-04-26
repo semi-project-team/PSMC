@@ -14,12 +14,12 @@
 #mainbar:hover {
     width: 15%; /* 마우스를 가져다대면 너비가 늘어나도록 설정 */
 }
-#mainbar:hover>#mainNav{
+#mainbar:hover>#mainNav,#subNav{
     align-items: flex-start;
 }
-#mainbar:hover>#subNav{
+/* #mainbar:hover>#subNav{
     align-items: flex-start;
-}
+} */
 
 
 
@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    
     
     
 }
@@ -52,8 +52,9 @@
     font-size: 15px ;
 }
 
-#mainbar a:hover {
-    color: rgb(192, 242, 255); /* 호버 시 텍스트 색상 변경 */
+
+#mainbar a:hover>i{
+    color: rgb(192, 242, 255);
 }
 
 
@@ -67,7 +68,12 @@ i{
 
 .title{
     
-    font-size: 10px;
+    font-size: 15px;
+}
+#pack{
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 

@@ -1,13 +1,20 @@
+const $mainbar = document.getElementById('mainbar');
+        
+        $mainbar.addEventListener('mouseover',e=>{
+            const $title= $mainbar.getElementsByClassName('title');
+            for(let i =0 ; i<$title.length;i++){
+                if($title[i].classList.contains('hidden'))
+                $title[i].classList.remove('hidden')
+                $title[i].style.display='inline'
+            }
+        })
 
-const $mainbar = document.getElementById('mainbar')
-
-$mainbar.addEventListener(mouseover,e=>{
-    console.log('읽힘?')
-    alert('마우스 오버 됨?')
-    const $title = $mainbar.getElementsByTagNameNS
-    $title.forEach(element => {
-        e.classlist.remove('hidden')
-    });
-    
-    
-})
+        $mainbar.addEventListener('mouseout',e=>{
+            const $title=$mainbar.getElementsByClassName('title');
+            for(let i = 0; i< $title.length;i++){
+                if(!$title[i].classList.contains('hidden')){
+                    $title[i].classList.add('hidden');
+                    $title[i].style.display='none'
+                }
+            }
+        })
