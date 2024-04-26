@@ -5,111 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
     <style>
+        .mainbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8%; /* 너비 조정 */
+            height: 100%; /* 화면 전체 높이까지 확장 */
+            background-color: skyblue; /* 배경색 지정 */
+            transition: width 0.5s ease; /* 너비 변화에 대한 애니메이션 효과 적용 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.navbar {
-    position: fixed;
-    top: 0;
-    left: -200px; /* 왼쪽으로 숨겨진 상태 */
-    width: 200px;
-    background-color: #333;
-    transition: left 0.3s; /* 왼쪽으로 열릴 때 애니메이션 효과 */
-}
+        .mainbar:hover {
+            width: 15%; /* 마우스를 가져다대면 너비가 늘어나도록 설정 */
+        }
 
-.navbar.open {
-    left: 0; /* 오른쪽으로 열리는 상태 */
-}
+        #mainNav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.mainbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px; /* 메인 바의 너비 조정 */
-    height: 100%; /* 화면 전체 높이까지 확장 */
-    background-color: lightblue; /* 배경색 지정 */
-    color: #fff; /* 텍스트 색상 지정 */
-    padding-top: 20px; /* 상단 여백 추가 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
+        #subNav {
+            position: absolute;
+            bottom: 10%;
+        }
 
-    
-}
-#mainNav {
-    display: flex;
-    flex-direction: column;
+        .mainbar ul {
+            list-style-type: none; /* 목록 기호 제거 */
+            text-align: center;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    
-}
-#subNav{
-    position: absolute;
-    bottom: 10%
-}
+        .mainbar li {
+            padding: 10px;
+        }
 
-.mainbar ul {
-    list-style-type: none; /* 목록 기호 제거 */
-    text-align: center;
-    padding: 0;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+        .mainbar a {
+            color: #fff; /* 링크 색상 지정 */
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
 
-.mainbar li {
-    padding: 10px;
-}
-
-.mainbar a {
-    color: #fff; /* 링크 색상 지정 */
-    text-decoration: none; /* 링크 밑줄 제거 */
-}
-
-.mainbar a:hover {
-    color:black; /* 호버 시 배경색 변경 */
-}
-
-
-
+        .mainbar a:hover {
+            color: black; /* 호버 시 텍스트 색상 변경 */
+        }
     </style>
-</head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웹 페이지</title>
-    
 </head>
 <body>
     <div class="mainbar">
         <!-- 메인 바 내용 -->
-        
-            <div id="mainNav">
-                <a href="#">Main Page</a> 
-                <a href="#">Schedule</a>
-                <a href="#">MediConnect</a>
-                <a href="#">TheraLink</a>
-                <a href="#">Medical Log</a>
-                <a href="#">Therapy Log</a>
-            </div>
-            
-            <div id="subNav">
-                <a href="#">Log Out</a>
-            </div>
-            
-        
+        <div id="mainNav">
+            <br><br><br><br>
+            <div style="font-size: 10px;"><i class="fa-solid fa-house-user fa-3x" ><p hidden>Main Page</p></i></div>
+            <br><br><br><br>
+            <div style="font-size: 10px;"><i class="fa-regular fa-calendar-days fa-3x"><p hidden>Schedule</p></i></div>
+            <br><br><br><br>
+            <div style="font-size: 10px;"><i class="fa-solid fa-notes-medical fa-3x"><p hidden>MediConnect</p></i></div>
+            <br><br><br><br>
+            <div style="font-size: 10px;"><i class="fa-solid fa-hospital-user fa-3x"><p hidden>TheraLink</p></i></div>
+            <br><br><br><br>
+            <div style="font-size: 10px;"><i class="fa-solid fa-hand-holding-medical fa-3x"><p hidden>Therapy Log</p></i></div>
+            <br><br><br><br>
+        </div>
+        <div id="subNav" >
+            <div style="font-size: 10px;"><i class="fa-solid fa-right-from-bracket fa-3x"><p hidden>Log Out</p></i></div>
+        </div>
     </div>
-    <script src="/main/script.js">
-        document.getElementById("menuButton").addEventListener("mouseover", function() {
-    document.getElementById("dropdownContent").classList.toggle("show");
-});
-
-document.getElementById("menuButton").addEventListener("mouseout", function() {
-    document.getElementById("dropdownContent").classList.remove("show");
-});
-
+    <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
     </script>
 </body>
 </html>
