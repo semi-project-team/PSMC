@@ -71,6 +71,7 @@ i{
     font-size: 15px;
 }
 #pack{
+    text-align: center;
     position: relative;
     display: flex;
     justify-content: center;
