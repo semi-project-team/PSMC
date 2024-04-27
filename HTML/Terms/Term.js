@@ -68,6 +68,10 @@ function createClickHandler(index) {
         if (!agree[index]) {
             e.currentTarget.firstElementChild.style.color = 'rgb(3, 61, 94)';
             agree[index] = true;
+            if(agree.every(agreed=>agreed)){
+                agreeAll = true;
+                $checkAll.firstElementChild.style.color='rgb(3, 61, 94)';
+            }
         } else {
             e.currentTarget.firstElementChild.style.color = 'lightgray';
             agree[index] = false;
