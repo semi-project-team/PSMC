@@ -53,13 +53,22 @@ header.pagetitle{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    flex-wrap: nowrap;
 }
 
 .btn-custom-male{
     color:  rgb(3, 61, 94);
 }
 
+#duplicate{
+  position: absolute;
+  margin-left: 40vw;
+  margin-right: 40vw;
+  margin-top: -40px;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 80px;
+}
 
 
 
