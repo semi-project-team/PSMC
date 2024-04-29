@@ -63,8 +63,7 @@ header.pagetitle{
 #duplicate{
   position: absolute;
   margin-left: 40vw;
-  margin-right: 40vw;
-  margin-top: -40px;
+  margin-bottom: 600px;
   display: flex;
   flex-wrap: nowrap;
   width: 80px;
@@ -152,14 +151,11 @@ a:hover, a:focus {
 }
 .radio{
     display: flex;
-}
-.radiogroup{
-    display: flex;
-    flex-wrap: nowrap;
-    position: absolute;
-    margin-left: 25vw;
+    justify-content: center;
+    width: 40vw;
 
 }
+
 .raidogroup>input{
     margin-left: 5vw;
 }
@@ -285,7 +281,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
 
 
 .bg-2 {
-  background: rgb(3, 61, 94);
+  /* background: rgb(3, 61, 94); */
   color: #ECEFF1;
 }
 
@@ -423,6 +419,9 @@ input[type=date]::-webkit-datetime-edit-year-field {
     transition-delay: 0.45s;
   }
 
+
+
+
 /* datepicker */
 
 .datepicker {
@@ -434,7 +433,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
     display: list-item;
 }
 .datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
-    background: #3546b3;
+    background:  rgb(3, 61, 94);
     color: #ffffff;
     border-radius: 0;
 }
@@ -458,7 +457,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
     padding: 0 12px;
 }
 .datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
-    background: #3546b3;
+    background:  rgb(3, 61, 94);
     color: #ffffff;
     border-radius: 0;
 }
@@ -491,7 +490,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
     width: 27%;
 }
 .datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
-  background-color: #3546b3;
+  background-color:  rgb(3, 61, 94);
   background-image: none;
 }
 .dropdown-menu {
@@ -507,7 +506,6 @@ input[type=date]::-webkit-datetime-edit-year-field {
     font-size: small;
     color: red;
     font-weight: bold;
-    display: hidden;
     
     display: none;
 }
@@ -516,7 +514,6 @@ input[type=date]::-webkit-datetime-edit-year-field {
     font-size: small;
     color: red;
     font-weight: bold;
-    display: hidden;
     
     display: none;
 }
@@ -525,8 +522,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
     font-size: small;
     color: red;
     font-weight: bold;
-    display: hidden;
-    
+   
     display: none;
 }
 #phoneMessage{
@@ -542,7 +538,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
     font-size: small;
     color: red;
     font-weight: bold;
-    display: hidden;
+    
     
     display: none;
 }
@@ -550,7 +546,61 @@ input[type=date]::-webkit-datetime-edit-year-field {
     font-size: small;
     color: red;
     font-weight: bold;
-    display: hidden;
-    
-    display: none;
+    display: block;
 }
+
+
+/* 중복확인 버튼 */
+.idcheck {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 15px;
+  min-width: 80px;
+  outline: none;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 80px;
+  will-change: transform;
+  text-wrap: nowrap;
+  position: absolute;
+  margin-left: 42vw;
+  margin-top: -100px;
+  
+
+}
+
+.idcheck:disabled {
+  pointer-events: none;
+}
+
+.idcheck:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.idcheck:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+
+/* 키활성화 */
+
