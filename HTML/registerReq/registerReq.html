@@ -22,7 +22,7 @@
     <header class="pagetitle">
             
                 <ul class="menu align-center expanded text-center SMN_effect-46">
-                    <li><a href="/HTML/Terms/TermFinal.html" id="one">1</a></li>
+                    <li><a href="/Terms/TermFinal.html" id="one">1</a></li>
                     <li><a href="" style="pointer-events: none;"><i class="fa-solid fa-chevron-right"></i></a></li>
                     <li><a href="">2</a></li>
                     <li><a href="" style="pointer-events: none;"><i class="fa-solid fa-chevron-right"></i></a></li>
@@ -30,7 +30,7 @@
                     <li><a href="" style="pointer-events: none;"><i class="fa-solid fa-chevron-right"></i></a></li>
                     <li><a href="" style="pointer-events: none;">4</a></li>
                 </ul>
-                <a href="/HTML/login/log.html" id="home"><img src="/HTML/common/img/backLogo.png"></a>
+                <a href="/HTML/login/log.html" id="home"><img src="/common/img/backLogo.png"></a>
             
     </header>
     
@@ -38,15 +38,15 @@
         <form>
             <div class="group">      
                 <input type="text" required name="userId question" id="userId" autocomplete="off" class="cusInput">
-                <span class="highlight"></span>
+                <span class="highlight"></span><button class="idcheck" id="idcheck">중복확인</button>
                 <span class="bar"></span>
-                <label class="l">id</label>
+                <label class="l">ID</label>
                 <div id="message"><i class="fa-solid fa-triangle-exclamation">아이디는 8자 이상 영어/숫자를 포함해야합니다!</i></div>
                 
                 <!-- <div id="duplicate"><button type="button">중복확인</button></div> -->
                 
             </div>
-            <button class="idcheck" >중복확인</button>
+            
             <!-- <div class="box bg-1" id="duplicate">
                 <button class="button button--rayen button--border-thin button--text-thick button--text-upper button--size-s" data-text="check"><span>중복확인</span></button>
             </div> -->
@@ -56,14 +56,14 @@
                 <input type="password" required name="userPass" autocomplete="off"  class="cusInput question" id="password">
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label class="l">password</label>
+                <label class="l">Password</label>
                 <div id="messagePass"><i class="fa-solid fa-triangle-exclamation">비밀번호는 10자 이상 영어 대소문자/숫자/특수문자를 포함해야합니다!</i></div>
             </div>
             <div class="group">      
                 <input type="password" required name="confirmPass" autocomplete="off"  class="cusInput question" id="conPass">
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label class="l">confirm password</label>
+                <label class="l">Confirm Password</label>
                 <div id="conMessage"><i class="fa-solid fa-triangle-exclamation">비밀번호가 일치하지 않습니다!</i></div>
             </div>
             <div class="group">      
@@ -76,10 +76,10 @@
 
                 <!-- <input type="date" required name="birth" autocomplete="off"  class="cusInput"> -->
 
-                <input type="text" class="dateselect cusInput question" id="birth" required/>
+                <input type="text" class="dateselect cusInput question" id="birth" required autocomplete="off"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label class="l">birthday</label>
+                <label class="l">Birthday</label>
 
                 <!-- <label>
                     <input type="text" class="dateselect" required="required"/>
@@ -107,7 +107,7 @@
                 <input type="text" required name="phone" id="phone" autocomplete="off"  class="cusInput question" maxlength="11">
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label class="l">phone</label>
+                <label class="l">Phone</label>
                 <div id="phoneMessage"><i class="fa-solid fa-triangle-exclamation">"-" 를 제외한 10자리수 이상 숫자만 입력하세요</i></div>
                 <!-- <div id="phoneLength"><i class="fa-solid fa-triangle-exclamation">010 을 포함한 10자리수 이상이어야 합니다</i></div></div> -->
             </div>
