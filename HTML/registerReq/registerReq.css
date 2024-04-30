@@ -548,6 +548,18 @@ input[type=date]::-webkit-datetime-edit-year-field {
     font-weight: bold;
     display: block;
 }
+#dupliOk{
+  font-size: small;
+  color: red;
+  font-weight: bold;
+  display: none;
+}
+#dupliFail{
+  font-size: small;
+  color: red;
+  font-weight: bold;
+  display: none;
+}
 
 
 /* 중복확인 버튼 */
