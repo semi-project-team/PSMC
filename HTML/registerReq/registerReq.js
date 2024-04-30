@@ -1,4 +1,4 @@
-let check = [false,false,false,false,false,false,false,true]
+let check = [false,false,false,false,true,false,false,false]
 
 const $userId = document.getElementById('userId')
 const $message = document.getElementById('message')
@@ -74,24 +74,24 @@ $phone.addEventListener('input',e=>{
 const $email = document.getElementById('email')
 const $emailMessage = document.getElementById('emailMessage')
 $email.addEventListener('input',e=>{
-    // const value = $email.value
-    // const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($email)
-    // if(!isValid){
-    //     $emailMessage.style.display='block'
-    //     check[7]=false
-    // }else{
-    //     $emailMessage.style.display='none'
-    //     check[7]=true
-    
-    // check[7]=true;
+    const value = $email.value;
+    const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net)$/.test(value)
+    if(!isValid){
+        $emailMessage.style.display='block';
+        check[7]=false;
     }
-
-)
+    else{
+        $emailMessage.style.display='none';
+        check[7]=true;
+    }
+    checking();
+})
 
 
 
 const $name = document.getElementById('name')
 $name.addEventListener('input',e=>{
+    
     if($name.value){
         check[3]=true
     }
@@ -102,8 +102,11 @@ $name.addEventListener('input',e=>{
 })
 
 const $birth = document.getElementById('birth')
-$birth.addEventListener('input',e=>{
+$birth.addEventListener('click',e=>{
+    
     if($birth.value){
+        console.log($birth.value)
+        console.log('읽히나요')
         check[4]=true
     }
     else{
@@ -151,3 +154,26 @@ function checking(){
     }
 }
 
+// 아이디 중복 확인
+
+const $idChecker = document.getElementById('idcheck');
+const $idCheckFail = document.getElementById('dupliFail');
+const $idCheckOk = document.getElementById('dupliOk');
+$idChecker.addEventListener('click',function(){
+    
+    fetch("/")
+    .then(res=>res.json)
+    .then(data=>{
+        data.forEach(element => {
+            if(element===$userId){
+                console.log('여긴')
+                $idCheckFail.style.display='block'
+                $idCheckOk.style.display='none'
+            }
+            else{
+                $idCheckFail.style.display='none'
+                $idCheckOk.style.display='block'
+            }
+        });
+    })
+})
