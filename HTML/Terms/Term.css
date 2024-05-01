@@ -49,7 +49,7 @@ heaer.pagetitle>ul{
     
 }
 
-#buttonouter{
+.buttonouter{
     display: flex;
     justify-content: flex-end;
     

@@ -1,0 +1,608 @@
+body, html {
+    margin: 0;
+    padding: 0;
+
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+
+    background-color: rgb(215, 214, 214);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header.pagetitle{
+    background-color: rgb(3, 61, 94);
+    height: 80px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    z-index: 4;
+}
+
+
+#one{
+    margin-left: 5vw;
+}
+
+#home{
+    position: absolute;
+    /* margin-top: 2vh; */
+    margin-left: 90vw;
+    z-index: 5;
+}
+#home img{
+    width: 45px;
+
+}
+
+.main{
+    background: white;
+    width: 80vw;
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.btn-custom-male{
+    color:  rgb(3, 61, 94);
+}
+
+#duplicate{
+    position: absolute;
+    margin-left: 40vw;
+    margin-bottom: 600px;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 80px;
+}
+
+
+
+/* 상단 버튼 호버 효과 */
+
+
+a:hover, a:focus {
+    outline: none;
+}
+
+.menu{
+    list-style-type: none;
+    display: flex;
+    white-space: nowrap;
+
+
+}
+
+.menu a {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Poppins', sans-serif;
+    font-size: 17pt;
+    font-weight: 400;
+    padding: 15px 25px;
+    /**/
+    position: relative;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+
+}
+
+.SMN_effect-46 a {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.SMN_effect-46 a:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    height: 3px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.SMN_effect-46 a:hover:before, .SMN_effect-46 a:focus:before, .SMN_effect-46 a:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+    transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+
+/* 인풋 관련 css */
+
+.group{
+    position:relative;
+    margin-top: 10vh;
+    margin-bottom:45px;
+    width: 40vw;
+}
+.radio{
+    display: flex;
+    justify-content: center;
+    width: 40vw;
+
+}
+
+.raidogroup>input{
+    margin-left: 5vw;
+}
+
+.cusInput{
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:100%;
+    border:none;
+    border-bottom:1px solid #757575;
+
+}
+.cusInput:focus{
+    outline:none;
+}
+
+/* LABEL ======================================= */
+label.l{
+    color:#999;
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+.cusInput:focus ~ label.l, .cusInput:valid ~ label.l{
+    top:-20px;
+    font-size:14px;
+    color:rgb(3, 61, 94);
+}
+
+/* BOTTOM BARS ================================= */
+.bar{
+    position:relative; display:block; width:40vw;
+}
+.bar:before, .bar:after{
+    content:'';
+    height:2px;
+    width:0;
+    bottom:1px;
+    position:absolute;
+    background:rgb(3, 61, 94);
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+.bar:before {
+    left:50%;
+}
+.bar:after {
+    right:50%;
+}
+
+/* active state */
+.cusInput:focus ~ .bar:before, .cusInput:focus ~ .bar:after {
+    width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position:absolute;
+    height:60%;
+    width:100px;
+    top:25%;
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+/* active state */
+.cusInput:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:rgb(3, 61, 94) }
+    to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background:rgb(3, 61, 94); }
+    to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+    from { background:rgb(3, 61, 94); }
+    to 	{ width:0; background:transparent; }
+}
+
+/* date picker placeholder  */
+input[type=date]::-webkit-datetime-edit-text {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-month-field{
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-day-field {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-year-field {
+    -webkit-appearance: none;
+    display: none;
+}
+
+
+/* nina-button */
+.container{
+    position:relative;
+    display: flex;
+    justify-content: center;
+}
+
+
+.bg-2 {
+    /* background: rgb(3, 61, 94); */
+    color: #ECEFF1;
+}
+
+
+/* Common button styles */
+.button {
+    float: left;
+    min-width: 150px;
+    max-width: 250px;
+    display: block;
+    margin: 1em;
+    padding: 1em 2em;
+    border: none;
+    background: none;
+    color: inherit;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+}
+.button:focus {
+    outline: none;
+}
+.button > span {
+    vertical-align: middle;
+}
+
+
+.bg-2 .button {
+    color: #ECEFF1;
+    border-color: #ECEFF1;
+}
+
+.button--text-thick {
+    font-weight: 600;
+}
+
+.button--round-l {
+    border-radius: 40px;
+}
+
+
+
+.button--nina {
+    padding: 0 2em;
+    background: rgb(3, 61, 94);
+    color: #fff;
+    overflow: hidden;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    pointer-events: none;
+    opacity: 55%;
+}
+.button--nina.button--inverted {
+    background: #fff;
+    color: rgb(3, 61, 94);
+}
+.button--nina > span {
+    display: inline-block;
+    padding: 1em 0;
+    opacity: 0;
+    color: #fff;
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+.button--nina::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1em 0;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+.button--nina:hover {
+    background-color: rgb(3, 61, 94);
+}
+.button--nina:hover::before {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+}
+.button--nina:hover > span {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+.button--nina:hover > span:nth-child(1) {
+    -webkit-transition-delay: 0.045s;
+    transition-delay: 0.045s;
+}
+.button--nina:hover > span:nth-child(2) {
+    -webkit-transition-delay: 0.09s;
+    transition-delay: 0.09s;
+}
+.button--nina:hover > span:nth-child(3) {
+    -webkit-transition-delay: 0.135s;
+    transition-delay: 0.135s;
+}
+.button--nina:hover > span:nth-child(4) {
+    -webkit-transition-delay: 0.18s;
+    transition-delay: 0.18s;
+}
+.button--nina:hover > span:nth-child(5) {
+    -webkit-transition-delay: 0.225s;
+    transition-delay: 0.225s;
+}
+.button--nina:hover > span:nth-child(6) {
+    -webkit-transition-delay: 0.27s;
+    transition-delay: 0.27s;
+}
+.button--nina:hover > span:nth-child(7) {
+    -webkit-transition-delay: 0.315s;
+    transition-delay: 0.315s;
+}
+.button--nina:hover > span:nth-child(8) {
+    -webkit-transition-delay: 0.36s;
+    transition-delay: 0.36s;
+}
+.button--nina:hover > span:nth-child(9) {
+    -webkit-transition-delay: 0.405s;
+    transition-delay: 0.405s;
+}
+.button--nina:hover > span:nth-child(10) {
+    -webkit-transition-delay: 0.45s;
+    transition-delay: 0.45s;
+}
+
+
+
+
+/* datepicker */
+
+.datepicker {
+    border-radius: 0;
+    padding: 0;
+}
+.datepicker-days table thead, .datepicker-days table tbody, .datepicker-days table tfoot {
+    padding: 10px;
+    display: list-item;
+}
+.datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+    background:  rgb(3, 61, 94);
+    color: #ffffff;
+    border-radius: 0;
+}
+.datepicker-days table thead tr:nth-child(2n+0) td, .datepicker-days table thead tr:nth-child(2n+0) th {
+    border-radius: 3px;
+}
+.datepicker-days table thead tr:nth-child(3n+0) {
+    text-transform: uppercase;
+    font-weight: 300 !important;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+.table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
+    padding: 11px 13px;
+}
+.datepicker-months table thead td, .datepicker-months table thead th, .datepicker-years table thead td, .datepicker-years table thead th, .datepicker-decades table thead td, .datepicker-decades table thead th, .datepicker-centuries table thead td, .datepicker-centuries table thead th {
+    border-radius: 0;
+}
+.datepicker td, .datepicker th {
+    border-radius: 50%;
+    padding: 0 12px;
+}
+.datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+    background:  rgb(3, 61, 94);
+    color: #ffffff;
+    border-radius: 0;
+}
+.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+    background-image: none;
+}
+.datepicker .prev, .datepicker .next {
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
+    width: 37px;
+    height: 37px;
+}
+.datepicker .prev:hover, .datepicker .next:hover {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.99);
+    font-size: 21px;
+}
+.datepicker .datepicker-switch {
+    font-size: 24px;
+    font-weight: 400;
+    transition: 0.3s;
+}
+.datepicker .datepicker-switch:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
+}
+.datepicker table tr td span {
+    border-radius: 2px;
+    margin: 3%;
+    width: 27%;
+}
+.datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
+    background-color:  rgb(3, 61, 94);
+    background-image: none;
+}
+.dropdown-menu {
+    border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.datepicker-dropdown.datepicker-orient-top:before {
+    border-top: 7px solid rgba(0,0,0,.1);
+}
+
+/*정규 포현식*/
+#message{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+
+    display: none;
+}
+
+#messagePass{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+
+    display: none;
+}
+
+#conMessage{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+
+    display: none;
+}
+#phoneMessage{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+    display: hidden;
+
+    display: none;
+}
+
+#emailMessage{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+
+
+    display: none;
+}
+#genderMessage{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+    display: block;
+}
+#dupliOk{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+#dupliFail{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+
+
+/* 중복확인 버튼 */
+#idcheck {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid  rgb(3, 61, 94);
+    border-radius: 15px;
+    box-sizing: border-box;
+    color:  rgb(3, 61, 94);
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 12px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 15px;
+    min-width: 80px;
+    outline: none;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 80px;
+    will-change: transform;
+    text-wrap: nowrap;
+    position: absolute;
+    margin-left: 43vw;
+    margin-top: -55px;
+
+}
+
+#idcheck:disabled {
+    pointer-events: none;
+}
+
+
+#idcheck:hover {
+    color: #fff;
+    background-color:  rgb(3, 61, 94);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+
+#idcheck:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
