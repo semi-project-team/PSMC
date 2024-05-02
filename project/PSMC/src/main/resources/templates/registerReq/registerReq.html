@@ -26,9 +26,9 @@
 </header>
 
 <div class="main">
-    <form>
+    <form action="/registerReq/signup" method="post">
         <div class="group">
-            <input type="text" required name="userId question" id="userId" autocomplete="off" class="cusInput">
+            <input type="text" required name="userId" id="userId" autocomplete="off" class="cusInput">
             <span class="highlight"></span><button class="idcheck" id="idcheck">중복확인</button>
             <span class="bar"></span>
             <label class="l">ID</label>
@@ -60,7 +60,7 @@
         </div>
         <div class="group">
 
-            <input type="text" class="dateselect cusInput question" id="birth" required autocomplete="off"/>
+            <input type="text" class="dateselect cusInput question" name="birth" id="birth" required autocomplete="off"/>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label class="l">Birthday</label>

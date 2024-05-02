@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaclass.psmc.user.model.dao.UserMapper">
+    <resultMap id="employeeMap" type="com.javaclass.psmc.common.model.dto.EmployeeDTO">
+        <id property="pmCode" column="pm_code"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="positionCode" column="position_code"/>
+        <result property="gender" column="gender"/>
+        <result property="labNo" column="lab_no"/>
+        <result property="fieldCode" column="field_code"/>
+    </resultMap>
+
+    <select id="getAllMember" resultMap="employeeMap">
+        select
+            *
+        from
+            employee
+    </select>
+    <select id="findMember" resultMap="employeeMap" parameterType="hashmap">
+        select
+            *
+        from
+            employee
+        where
+            pm_code = #{pmCode}
+        and
+            emp_no = #{empNo)
+    </select>
+    <insert id="registMember" parameterType="com.javaclass.psmc.user.model.dto.SignUpDTO"
+    useGeneratedKeys="true" keyProperty="registNo">
+        insert into
+            member_regist
+            (id,password,phone,email,birth,employee_status)
+        values
+            (#{id},#{password},#{phone},#{email},#{birth},#{employeeStatus})
+    </insert>
+</mapper>
