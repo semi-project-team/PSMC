@@ -1,9 +1,10 @@
 package com.javaclass.psmc.auth.model.service;
 
-import com.javaclass.psmc.user.model.dao.UserMapper;
-import com.javaclass.psmc.user.model.dto.SignUpDTO;
+import com.javaclass.psmc.auth.model.AuthDetails;
+import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +22,9 @@ public class AuthService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        SignUpDTO sign = userService.findUser(user);
-        return null;
+        LoginUserDTO loginUserDTO = userService.findByUsername(username);
+        return new AuthDetails(loginUserDTO);
+
+
     }
 }

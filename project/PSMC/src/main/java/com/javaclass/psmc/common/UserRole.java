@@ -2,8 +2,8 @@ package com.javaclass.psmc.common;
 
 public enum UserRole {
 
-    DOCTOR("D"),
-    THERAPY("T");
+    d("d"),
+    t("t");
 
     private String role;
 
