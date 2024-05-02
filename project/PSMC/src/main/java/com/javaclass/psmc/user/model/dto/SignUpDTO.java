@@ -12,4 +12,6 @@ public class SignUpDTO {
     private String email;
     private String birth;
     private String employeeStatus;
+    private String pmCode;
+
 }

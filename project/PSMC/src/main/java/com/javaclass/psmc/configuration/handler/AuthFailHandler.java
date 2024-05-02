@@ -34,6 +34,7 @@ public class AuthFailHandler extends SimpleUrlAuthenticationFailureHandler {
             errorMessage="알수없는 오류로 로그인 요청을 처리 할 수 없습니다";
         }
 
+        System.out.println("나냐");
         errorMessage = URLEncoder.encode("/auth/fail?message="+errorMessage);
         super.onAuthenticationFailure(request, response, exception);
     }

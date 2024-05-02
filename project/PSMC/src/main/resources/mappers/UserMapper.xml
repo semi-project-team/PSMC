@@ -30,14 +30,33 @@
         where
             pm_code = #{pmCode}
         and
-            emp_no = #{empNo)
+            emp_no = #{empNo}
     </select>
     <insert id="registMember" parameterType="com.javaclass.psmc.user.model.dto.SignUpDTO"
     useGeneratedKeys="true" keyProperty="registNo">
         insert into
             member_regist
-            (id,password,phone,email,birth,employee_status)
+            (id,password,phone,email,birth,employee_status,pm_code)
         values
-            (#{id},#{password},#{phone},#{email},#{birth},#{employeeStatus})
+            (#{id},#{password},#{phone},#{email},#{birth},'Y',#{pmCode})
     </insert>
+
+    <resultMap id="memberMap" type="com.javaclass.psmc.user.model.dto.SignUpDTO">
+        <id property="registNo" column="regist_no"/>
+        <result property="id" column="id"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="birth" column="birth"/>
+        <result property="employeeStatus" column="employee_status"/>
+        <result property="pmCode" column="pm_code"/>
+    </resultMap>
+    <select id="findByUsername" parameterType="string" resultMap="memberMap">
+        select
+            *
+        from
+            member_regist
+        where
+            id = #{
+    </select>
 </mapper>

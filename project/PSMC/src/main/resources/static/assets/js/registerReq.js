@@ -163,19 +163,18 @@ function checking(){
 // const $idCheckOk = document.getElementById('dupliOk');
 // $idChecker.addEventListener('click',function(){
 
-//     fetch("/")
-//     .then(res=>res.json)
-//     .then(data=>{
-//         data.forEach(element => {
-//             if(element===$userId){
-//                 console.log('여긴')
-//                 $idCheckFail.style.display='block'
-//                 $idCheckOk.style.display='none'
-//             }
-//             else{
-//                 $idCheckFail.style.display='none'
-//                 $idCheckOk.style.display='block'
-//             }
-//         });
-//     })
-// })
+    // fetch("/allMember")
+    // .then(res=>res.json)
+    // .then(data=> {
+    //     data.forEach(element => {
+    //         if (element === $userId) {
+    //             console.log('여긴')
+    //             $idCheckFail.style.display = 'block'
+    //             $idCheckOk.style.display = 'none'
+    //             return;
+    //         } else {
+    //             $idCheckFail.style.display = 'none'
+    //             $idCheckOk.style.display = 'block'
+    //         }
+    //     })
+    // });
