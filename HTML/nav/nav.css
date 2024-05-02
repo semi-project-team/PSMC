@@ -13,7 +13,7 @@
 }
 
 #mainbar:hover {
-    width: 15%; /* 마우스를 가져다대면 너비가 늘어나도록 설정 */
+    width: 14%; /* 마우스를 가져다대면 너비가 늘어나도록 설정 */
 }
 #mainbar:hover>#mainNav,#subNav{
     align-items: flex-start;

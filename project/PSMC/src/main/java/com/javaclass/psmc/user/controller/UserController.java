@@ -22,6 +22,11 @@ public class UserController {
         return "member/term";
     }
 
+    @GetMapping("/#")           // nav 바에서 받은 주소 도착지
+    public String selectPatient() {
+        return "selectPatient/selectPatient";
+    }
+
 
 
 
