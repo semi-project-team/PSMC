@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사원확인</title>
+</head>
+
+<body>
+    <form th:action="@{/auth/takeCode}" method="post">
+        <input type="text" name="pmCode" placeholder="의료진코드">
+        <input type="text" name="empNo" placeholder="사원번호">
+        <button type="submit">제출</button>
+    </form>
+</body>
+</html>

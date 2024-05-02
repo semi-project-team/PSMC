@@ -26,9 +26,9 @@
 </header>
 
 <div class="main">
-    <form action="/registerReq/signup" method="post">
+    <form action="/member/signup" method="post">
         <div class="group">
-            <input type="text" required name="userId" id="userId" autocomplete="off" class="cusInput">
+            <input type="text" required name="id" id="userId" autocomplete="off" class="cusInput">
             <span class="highlight"></span><button class="idcheck" id="idcheck">중복확인</button>
             <span class="bar"></span>
             <label class="l">ID</label>
@@ -39,7 +39,7 @@
 
         </div>
         <div class="group">
-            <input type="password" required name="userPass" autocomplete="off"  class="cusInput question" id="password">
+            <input type="password" required name="password" autocomplete="off"  class="cusInput question" id="password">
             <span class="highlight"></span>
             <span class="bar"></span>
             <label class="l">Password</label>
@@ -70,9 +70,9 @@
         <div class="group radio">
             <div class="radiogroup col-12">
                 <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check question" name="gender" id="Male" autocomplete="off" value="Male" required>
+                    <input type="radio" class="btn-check question" name="gender" id="Male" autocomplete="off" value="M" required>
                     <label class="btn btn-outline-dark" for="Male">Male</label>
-                    <input type="radio" class="btn-check question" name="gender" id="Female" autocomplete="off" value="Female" required>
+                    <input type="radio" class="btn-check question" name="gender" id="Female" autocomplete="off" value="F" required>
                     <label class="btn btn-outline-dark" for="Female">Female</label>
                 </div>
                 <div id="genderMessage"><i class="fa-solid fa-triangle-exclamation">성별을 선택하세요</i></div>
@@ -97,11 +97,11 @@
         <div class="container" id="con">
             <header class="codrops-header">
                 <div class="box bg-2">
-                    <a href="#">
+
                         <button type="submit" class="button button--nina button--round-l button--text-thick button--inverted ccc" data-text="PSMC" id="nextPage">
                             <span>가</span><span>입</span><span>하</span><span>기</span>
                         </button>
-                    </a>
+
                 </div>
             </header>
         </div>

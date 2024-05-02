@@ -11,7 +11,9 @@ import java.util.Map;
 public interface UserMapper {
     List<EmployeeDTO> getAllMember();
 
-    EmployeeDTO findMember(Map<String, String> param);
+    List<EmployeeDTO> findMember(Map<String, String> param);
 
     int registMember(SignUpDTO signup);
+
+
 }

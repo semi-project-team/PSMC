@@ -572,7 +572,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
     line-height: normal;
     margin: 0;
     min-height: 15px;
-    min-width: 80px;
+    min-width: 85px;
     outline: none;
     padding: 15px 15px;
     text-align: center;

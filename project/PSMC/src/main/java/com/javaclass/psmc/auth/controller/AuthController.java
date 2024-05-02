@@ -40,18 +40,22 @@ public class AuthController {
 
     @PostMapping("/takeCode")
     public String takeCode(@RequestParam String pmCode, @RequestParam String empNo, Model model, HttpSession httpSession){
+        System.out.println("여기로는 오기는 하냐");
         Map<String,String> param = new HashMap<>();
         param.put("pmCode",pmCode);
         param.put("empNo",empNo);
-        EmployeeDTO employee = userService.findMember(param);
+        List<EmployeeDTO> employee = userService.findMember(param);
 
-        if(employee.getPmCode()==null){
+        if(employee.isEmpty()){
             model.addAttribute("message","코드를 잘못입력하셨습니다. 다시 입력하세요");
-            return "redirect:/registerReq/takeCode";
+            return "redirect:/member/takeCode";
+
         }
         else{
-            httpSession.setAttribute("employeeInfo",employee);
-            return "redirect:/registerReq/registerReq";
+            httpSession.setAttribute("employeeInfo",employee.get(0));
+            return "redirect:/member/registerReq";
+
+
         }
     }
 

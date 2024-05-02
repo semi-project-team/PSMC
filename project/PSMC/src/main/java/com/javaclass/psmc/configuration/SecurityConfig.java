@@ -28,19 +28,24 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
-        return web->web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        return web->web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                /*static 폴더 하위에 assets 파일또한 제외 시키기 위한 방법*/
+                .requestMatchers(new AntPathRequestMatcher("/assets/**"))
+                .requestMatchers(new AntPathRequestMatcher("/common/**"));
+
     }
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(auth->{
-            auth.requestMatchers("/auth/login","/user/signup","/auth/fail","/registerReq/","/","/main").permitAll();
+
+            auth.requestMatchers("/auth/login","/user/signup","/auth/fail","/member/*","auth/takeCode","/","/main").permitAll();
 
             auth.requestMatchers("/doc/*").hasAnyAuthority(UserRole.DOCTOR.getRole());
             auth.requestMatchers("/thera/*").hasAnyAuthority(UserRole.THERAPY.getRole());
 
 
-            
+
             // 로그인 한사람은 누구나 접근가능한 url을 여기다 적어주세요
             auth.anyRequest().authenticated();
         }).formLogin(login->{
@@ -62,7 +67,6 @@ public class SecurityConfig {
             session.maximumSessions(1);
             session.invalidSessionUrl("/");
         }).csrf(csrf->csrf.disable());
-
 
 
         return httpSecurity.build();

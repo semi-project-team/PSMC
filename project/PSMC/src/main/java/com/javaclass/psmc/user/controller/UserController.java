@@ -18,8 +18,8 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String sign(){
-        return "/registerReq/term";
+    public String term(){
+        return "member/term";
     }
 
 
