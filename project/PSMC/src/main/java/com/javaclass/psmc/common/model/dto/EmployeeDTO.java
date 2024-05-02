@@ -16,5 +16,4 @@ public class EmployeeDTO {
     private String labNo;
     private int fieldCode;
 
-
 }
