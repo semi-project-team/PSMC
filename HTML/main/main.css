@@ -1,20 +1,4 @@
-/* .background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/common/img/main.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-    opacity: 0.5;
-}
 
-.content {
-    position: relative;
-    z-index: 1;
-} */
 
 .mainPage{
     display: flex ;
@@ -62,6 +46,42 @@ body {
     margin-top: 100px; 
 }
 
+.profile-image {
+    width: 100px;
+    height: 100px;
+    background-image: url(); /* 프로필 이미지 경로 */
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%; /* 동그랗게 만듭니다. */
+    margin-bottom: 10px;
+}
+
+/* 프로필 상세 정보 스타일링 */
+.profile-details {
+    position: fixed;
+    text-align: center;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin-top: 170px;
+}
+
+.profile-details h3 {
+    margin: 0;
+    font-size: 23px;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.profile-details h2 {
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+
+
 .box2 {
     width: 40vw; /* 너비를 %로 설정 */
     height: 45vh;
@@ -108,6 +128,15 @@ body {
         width: 80%; /* 화면이 작아질 때 너비를 조정 */
     }
 }
+
+.main-title img {
+    position: fixed;
+    width: 100px; /* 이미지의 너비를 필요에 따라 조절합니다. */
+    height: auto; /* 가로세로 비율을 유지합니다. */
+    margin-right: 10px; /* 이미지와 텍스트 사이에 여백을 추가합니다. */
+    margin-top: -10px;
+}
+
     
 
 
@@ -115,9 +144,9 @@ body {
     position: fixed;
     width: 100vw; /* 선의 길이를 늘림 */
     /* margin-left: 290px; */
-    margin-top: -40px;
-    font-size: 22px;
-    font-family: Arial, sans-serif;
+    /* margin-top: -10px; */
+    /* font-size: 22px; */
+    /* font-family: Arial, sans-serif; */
     margin-left: 280px;
     margin-top: 20px;
     justify-content: space-between; /* 제목과 아이콘을 좌우로 분리하여 배치 */
@@ -125,12 +154,34 @@ body {
     
 }
 
+.psmc{
+    position: fixed;
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    font-weight: bold; 
+    margin-top:20px;
+    margin-left: 100px;
+    color:rgb(3, 61, 94);
+}
+
+.mainpage {
+    position: fixed;
+    margin-left: -10px;
+    margin-top:123px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    color:rgb(3, 61, 94);
+    
+}
+
+
+
 .line {
     position: fixed;
     width: 75vw; /* 선의 길이를 늘림 */
     height: 2px; /* 선의 높이 */
     background-color: rgb(3, 61, 94); /* 선의 색상 */
-    margin-top: 10px; /* 선 위 여백 추가 */
+    margin-top: 90px; /* 선 위 여백 추가 */
     margin-bottom: 20px; /* 선 아래 여백 추가 */
 }
 
@@ -140,4 +191,116 @@ body {
     font-size: 40px;
     margin-top: 70px; /* 이동 거리 조정 */
     margin-left: 88%;
+}
+
+#profile {
+    position: fixed;
+    color: white; /* 글자색 */
+    text-align: center; /* 가운데 정렬 */
+    margin-top: -200px;
+
+  }
+
+  /* main.css */
+
+/* 전체 폼 스타일 */
+form {
+    /* width: 50%; */
+    margin: 0 auto;
+  }
+  
+  /* 레이블 스타일 */
+  label {
+    display: inline-block;
+    width: 150px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  
+  /* 입력 필드 스타일
+  input[type="text"],
+  input[type="tel"],
+  textarea {
+    width: calc(100% - 160px);
+    padding: 5px;
+    margin-bottom: 10px;
+  } */
+
+
+  /* 버튼 스타일 */
+  button {
+    position:flex;
+    padding: 5px 10px;
+    background-color:rgb(3, 61, 94);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* 버튼 호버 스타일 */
+  button:hover {
+    position:flex;
+    background-color:rgb(3, 61, 94);
+  }
+  
+ 
+  
+  /* 텍스트 영역 스타일 */
+  textarea {
+    position:flex;
+    width: calc(100% - 160px);
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 20px;
+  }
+  
+  /* 폼 필드를 감싸는 fieldset 스타일 */
+  fieldset {
+    position:flex;
+    border: 2px solid rgb(3, 61, 94);
+    margin-bottom: 3px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* 전설(legend) 스타일 */
+  legend {
+    display:flex;
+    font-weight: bold;
+    color:rgb(3, 61, 94);
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+  }
+
+
+  /* 예약 및 예약 취소 버튼 스타일 */
+input[type="submit"],
+input[type="reset"] {
+  padding: 5px 20px;
+  margin-right: 5px; 
+  background-color:rgb(3, 61, 94); /* 파란색 배경색 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: -10px; /* 버튼 위쪽 여백 조정 */
+  vertical-align: top; /* 버튼을 필드셋 상단에 정렬 */
+ 
+}
+
+/* 예약 및 예약 취소 버튼 호버 스타일 */
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background-color:rgb(3, 61, 94); /* 진한 파란색 배경색 */
+}
+.patientinfo {
+    width: 90%;
+    height: 10%;
+}
+
+.timeslot{
+    width: 90%;
+    height: 30%;
 }

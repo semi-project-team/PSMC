@@ -16,8 +16,9 @@
     <div class="mainPage">
         <div class="main-title">
             <br>
-            <h3>MAIN PAGE</h3>
-            
+            <img src="/image/psmc.png" alt="PSMC Logo">
+            <div class="psmc">PRO SPORTS MEDICAL CENTER</div>
+            <div class="mainpage">MAIN PAGE</div>
             <div class="line"></div>
         </div>
         <span class="icon" ><i class="fa-solid fa-user-doctor "></i></span>
@@ -25,9 +26,53 @@
             <div class="row">
                 <div class="box1">
                     <a href=""></a>
+                    <div id="profile" style="font-size: 50px; color:white;"><i class="fa-solid fa-circle-user fa-3x"></i></a></div>
+                    <div class="profile-details">
+                    <h3>김의사 <span id="profileName"></span></h3>
+                    <p>(D12345) <span id="profilePosition"></span></p>
+                    <br>
+                    <p>재활의학과 <span id="profilePosition"></span></p>
+                    <p>재활전문 <span id="profileSpecialty"></span></p>
+                    <p>PSMC 소속 <span id="profileWorkplace"></span></p>
+                    <p>83.12.04 <span id="profileBirthDate"></span></p>
+                    <p>010-9999-9999 <span id="profilePhoneNumber"></span></p>
+                    <p>doctor01@google.com <span id="profileEmail"></span></p>
                 </div>
+                </div>
+
+
                 <div class="box2">
-                    <a href=""></a>
+                    <form method="get" action="">
+                        <fieldset class="patientinfo">
+                        <legend>Patient Info</legend>
+                        <label for="sub"> 환자 이름  :</label>
+                        <input type="text" name="person" id="sub"/><br>
+                        <label for="sub"> 환자 번호  :</label>
+                        <input type="text" name="person" id="sub"/><br>
+                        <label for="phone">휴대폰 번호 : </label>
+                        <input type="tel" name="tell" id="phone" placeholder="010-0000-0000"
+                            pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
+                        </fieldset>
+                    <fieldset class="timeslot">
+                    <legend>TimeSlot</legend>
+                    <label for="sub">날짜 및 시간 :</label> 
+                    <input type="date" name="reservation_date"/>
+                    <input type="time" name="reservation_time" min="09:00" max="20:00"/><br>
+                    <label for="position">진료실 위치 : </label>
+                    <input type="radio" name="site" id="position" value="yes"/>R1
+                    <input type="radio" name="site" value="no"/> R2<br>
+
+                    <form action="#">
+                        <textarea name="contents" cols="30" row="60">
+                        </textarea>
+                        <button>확인</button>
+                </fieldset>
+                <br>
+                <input type="submit" value="예약"/>
+                <input type="reset" value="취소"/>
+
+
+                    </form>
                 </div>
                 <div class="box2">
                     <a href=""></a>
@@ -35,7 +80,7 @@
             </div>
             <div class="row">
                 <div class="box3">
-                    <a href=""></a>
+                    <a href="">아</a>
                 </div>
                 <div class="box4">
                     <a href=""></a>
