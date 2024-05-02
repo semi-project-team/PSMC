@@ -1,4 +1,4 @@
-package com.javaclass.psmc.controller.main;
+package com.javaclass.psmc.auth.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/")
+    @GetMapping(value={"/","/main"})
     public String main(){
         return "/main";
     }
