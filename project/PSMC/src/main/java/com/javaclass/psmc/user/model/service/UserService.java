@@ -2,7 +2,8 @@ package com.javaclass.psmc.user.model.service;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.user.model.dao.UserMapper;
-import com.javaclass.psmc.user.model.dto.SignUpDTO;
+import com.javaclass.psmc.user.model.dto.LoginUserDTO;
+import com.javaclass.psmc.user.model.dto.SignupDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class UserService {
         return userMapper.findMember(param);
     }
 
-    public int registMember(SignUpDTO signup) {
+    public int registMember(SignupDTO signup) {
 
         signup.setPassword(passwordEncoder.encode(signup.getPassword()));
         int result =0;
@@ -48,7 +49,8 @@ public class UserService {
     }
 
 
-    public SignUpDTO findByUsername(String username) {
-        userMapper
+    public LoginUserDTO findByUsername(String username) {
+
+        return userMapper.findByUsername(username);
     }
 }

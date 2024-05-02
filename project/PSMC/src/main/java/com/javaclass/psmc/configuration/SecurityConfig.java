@@ -41,8 +41,8 @@ public class SecurityConfig {
 
             auth.requestMatchers("/auth/login","/user/signup","/auth/fail","/member/*","auth/takeCode","/","/main").permitAll();
 
-            auth.requestMatchers("/doc/*").hasAnyAuthority(UserRole.DOCTOR.getRole());
-            auth.requestMatchers("/thera/*").hasAnyAuthority(UserRole.THERAPY.getRole());
+            auth.requestMatchers("/doc/*").hasAnyAuthority(UserRole.d.getRole());
+            auth.requestMatchers("/thera/*").hasAnyAuthority(UserRole.t.getRole());
 
 
 

@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="login-content">
-            <form>
+            <form th:action="@{/auth/login}" method="post">
                 <img src="/common/img/nobackLogo.png">
                 <h2 class="title">Welcome</h2>
                 <div class="input-div one">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="div">
                         <h5>DoctorCode</h5>
-                        <input type="text" class="input">
+                        <input type="text" class="input" name="pmCode">
                     </div>
                 </div>
 
