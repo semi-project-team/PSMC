@@ -28,7 +28,7 @@ public class AuthController {
     }
     @GetMapping("/login")
     public String login(){
-        return "/main";
+        return "/auth/login";
     }
 
     @GetMapping("/fail")
@@ -40,7 +40,6 @@ public class AuthController {
 
     @PostMapping("/takeCode")
     public String takeCode(@RequestParam String pmCode, @RequestParam String empNo, Model model, HttpSession httpSession){
-        System.out.println("여기로는 오기는 하냐");
         Map<String,String> param = new HashMap<>();
         param.put("pmCode",pmCode);
         param.put("empNo",empNo);

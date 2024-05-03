@@ -54,7 +54,7 @@ public class SecurityConfig {
             login.passwordParameter("pass");
 
             // 로그인 성공시 보낼 url 을 적어주세요
-            login.defaultSuccessUrl("/",true);
+            login.defaultSuccessUrl("/auth/login",true);
 
             // 로그인 실패시
             login.failureHandler(authFailHandler);
