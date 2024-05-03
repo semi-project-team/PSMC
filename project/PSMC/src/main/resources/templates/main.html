@@ -7,8 +7,10 @@
     <script src="https://kit.fontawesome.com/530e719840.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/assets/css/main.css">
     <title>Main Page</title>
+
 </head>
 <body>
+
     <div class="container">
         <div class="img">
             <div id="carouselExampleAutoplaying" class="carousel slide w-100 h-100 position-relative" data-bs-ride="carousel">
@@ -32,7 +34,7 @@
             </div>
         </div>
         <div class="login-content">
-            <form th:action="@{/auth/login}" method="post">
+            <form th:action="@{/auth/login}" th:method="post">
                 <img src="/common/img/nobackLogo.png">
                 <h2 class="title">Welcome</h2>
                 <div class="input-div one">

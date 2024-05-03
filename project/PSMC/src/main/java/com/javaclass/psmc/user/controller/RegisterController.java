@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/member")
 @Controller
@@ -36,7 +37,7 @@ public class RegisterController {
     public void registerReq(){}
 
     @PostMapping("/signup")
-    public String signup(@ModelAttribute SignupDTO signup, Model model, HttpSession session){
+    public ModelAndView signup(@ModelAttribute SignupDTO signup, ModelAndView mv, HttpSession session){
         EmployeeDTO e = (EmployeeDTO) session.getAttribute("employeeInfo");
         System.out.println(e);
         signup.setPmCode(e.getPmCode());
@@ -45,14 +46,15 @@ public class RegisterController {
         String message ="";
         if (result > 0) {
             message="회원가입성공 했습니다";
-            model.addAttribute("message",message);
-            return "redirect:/";
+
         }
         else{
             message="회원가입에 실패했습니다";
-            model.addAttribute("message",message);
-            return "redirect:/registerReq/registerReq";
+
+
         }
+
+        return mv.addObject("message",message);
     }
 
 }
