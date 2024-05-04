@@ -39,14 +39,14 @@ public class AuthController {
     }
 
     @PostMapping("/takeCode")
-    public String takeCode(@RequestParam String pmCode, @RequestParam String empNo, Model model, HttpSession httpSession){
+    public String takeCode(@RequestParam String pmCode, @RequestParam String empNo, HttpSession httpSession){
         Map<String,String> param = new HashMap<>();
         param.put("pmCode",pmCode);
         param.put("empNo",empNo);
         List<EmployeeDTO> employee = userService.findMember(param);
 
         if(employee.isEmpty()){
-            model.addAttribute("message","코드를 잘못입력하셨습니다. 다시 입력하세요");
+
             return "redirect:/member/takeCode";
 
         }
@@ -56,6 +56,8 @@ public class AuthController {
 
 
         }
+
     }
+
 
 }

@@ -56,4 +56,12 @@
         where
             id=#{username}
     </select>
+
+
+    <select id="allIds" resultMap="memberMap">
+        select
+            id
+        where
+            member_regist
+    </select>
 </mapper>

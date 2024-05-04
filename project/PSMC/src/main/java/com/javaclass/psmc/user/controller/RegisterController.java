@@ -1,27 +1,29 @@
 package com.javaclass.psmc.user.controller;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.user.model.dto.IdDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RequestMapping("/member")
 @Controller
 public class RegisterController {
 
     private final UserService userService;
+    private final HttpSession httpSession;
 
     @Autowired
-    public RegisterController(UserService userService){
+    public RegisterController(UserService userService, HttpSession httpSession){
         this.userService=userService;
+        this.httpSession = httpSession;
     }
 
 
@@ -42,6 +44,7 @@ public class RegisterController {
         System.out.println(e);
         signup.setPmCode(e.getPmCode());
         signup.setRole(e.getPmCode().charAt(0)+"");
+
         int result = userService.registMember(signup);
         String message ="";
         if (result > 0) {
@@ -50,11 +53,13 @@ public class RegisterController {
         }
         else{
             message="회원가입에 실패했습니다";
-
-
         }
+        mv.setViewName("redirect:/common/signal");
+        session.setAttribute("message",message);
 
-        return mv.addObject("message",message);
+        return mv;
     }
+
+
 
 }
