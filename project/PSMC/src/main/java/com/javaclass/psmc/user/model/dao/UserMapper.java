@@ -1,6 +1,7 @@
 package com.javaclass.psmc.user.model.dao;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.user.model.dto.IdDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +19,7 @@ public interface UserMapper {
 
 
     LoginUserDTO findByUsername(String username);
+
+
+    List<IdDTO> allIds();
 }

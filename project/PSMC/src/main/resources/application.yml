@@ -4,6 +4,12 @@ spring:
     url: jdbc:mysql://localhost:3306/psmcdb
     username: psmc
     password: psmc
+  security:
+    headers:
+      content-security-policy: "script-src 'self' http://ajax.googleapis.com"
+
 mybatis:
   mapper-locations: mappers/*.xml
+
+
 

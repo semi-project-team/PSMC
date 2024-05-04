@@ -56,6 +56,7 @@
 // 클로저를 사용하여 문제를 해결함
 
 const $check = document.getElementsByClassName('checkbutton');
+
 let agree = [false, false, false, false];
 let agreeAll = false; // agreeAll을 외부로 빼서 클로저 활용
 

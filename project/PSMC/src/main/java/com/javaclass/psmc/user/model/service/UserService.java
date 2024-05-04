@@ -2,6 +2,7 @@ package com.javaclass.psmc.user.model.service;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.user.model.dao.UserMapper;
+import com.javaclass.psmc.user.model.dto.IdDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +56,12 @@ public class UserService {
         return userMapper.findByUsername(username);
     }
 
+
+    public List<IdDTO> allIds() {
+        List<IdDTO> ids =userMapper.allIds();
+        for(IdDTO i : ids){
+            System.out.println(i);
+        }
+        return ids;
+    }
 }
