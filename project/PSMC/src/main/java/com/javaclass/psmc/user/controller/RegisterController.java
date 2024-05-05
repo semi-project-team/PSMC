@@ -36,13 +36,11 @@ public class RegisterController {
 
 
     @GetMapping("/takeCode")
-    public String stepTwo(HttpSession session,Model model){
+    public void stepTwo(HttpSession session,Model model){
             model.addAttribute("message",session.getAttribute("message"));
         System.out.println("여기로 왔는가"+session.getAttribute("message"));
-            session.invalidate();
+           session.invalidate();
 
-
-            return "/member/takeCode";
     }
 
     @GetMapping("/registerReq")
@@ -66,7 +64,7 @@ public class RegisterController {
         }
         mv.setViewName("redirect:/common/signal");
         session.setAttribute("message",message);
-
+        session.invalidate();
         return mv;
     }
 

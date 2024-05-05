@@ -46,7 +46,7 @@ public class AuthController {
         param.put("pmCode",pmCode);
         param.put("empNo",empNo);
         List<EmployeeDTO> employee = userService.findMember(param);
-
+        System.out.println("takeCode 여기");
         if(employee.isEmpty()){
             httpSession.setAttribute("message","잘못된 코드입니다. 코드를 확인하세요");
             return "redirect:/member/takeCode";
