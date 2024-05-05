@@ -2,19 +2,72 @@ let check = [false,false,false,false,false,false,false,false];
 
 const $userId = document.getElementById('userId');
 const $message = document.getElementById('message');
-$userId.addEventListener('input',e=>{
+const $idCheck = document.getElementById('idcheck');
+const $dupliFail = document.getElementById('dupliFail');
+const $dupliOk = document.getElementById('dupliOk');
+const $checker = document.getElementById('checker');
+$userId.addEventListener('input', function() {
     const value = $userId.value;
-    const isValid =/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/.test(value);
-    if(!isValid){
-        $message.style.display='block';
-        check[0]=false;
-    }
-    else{
-        $message.style.display='none';
-        check[0]=true;
+    $dupliFail.style.display='none';
+    $dupliOk.style.display='none';
+    $checker.style.display='block';
+    // 중복 검사는 클릭 이벤트에서만 수행되도록 하므로 여기서는 유효성 검사만 수행
+    const isValid = /^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/.test(value);
+    if (isValid) {
+        $message.style.display = 'none';
+
+    } else {
+        $message.style.display = 'block';
+
     }
     checking();
 });
+
+// 아이디 중복 검사
+
+function checkDuplicate() {
+    const value = $userId.value;
+    $checker.style.display='none';
+    fetch('/member/find')
+        .then(res => res.json())
+        .then(data => {
+            let isDuplicate = false;
+
+            data.forEach(member => {
+                if (member.id === value) {
+                    isDuplicate = true;
+                    return;
+                }
+            });
+
+            // 중복되는 아이디가 있을 때
+            if (isDuplicate) {
+                $dupliFail.style.display = 'block';
+                $dupliOk.style.display='none';
+                check[0] = false;
+            } else {
+                $dupliOk.style.display='block';
+                $dupliFail.style.display='none';
+                // 유효성 검사를 통과한 경우
+                const isValid = /^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/.test(value);
+                if (isValid) {
+                    $message.style.display = 'none';
+                    check[0] = true;
+                } else {
+                    // 유효성 검사를 통과하지 못한 경우
+                    $message.style.display = 'block';
+                    check[0] = false;
+                }
+            }
+            checking();
+        });
+}
+
+$idCheck.addEventListener('click', function() {
+    checkDuplicate();
+});
+
+
 
 const $password = document.getElementById('password');
 const $passMessage = document.getElementById('messagePass');
@@ -178,3 +231,34 @@ function checking(){
     //         }
     //     })
     // });
+
+// const $idCheck = document.getElementById('idcheck');
+// const $dupliFail = document.getElementById('dupliFail');
+// const $dupliOk = document.getElementById('dupliOk');
+// $idCheck.addEventListener('click',function(){
+//     fetch('/member/find')
+//         .then(res=>res.json())
+//         .then(data=>{
+//             for(let i =0; i<data.length;i++){
+//                 const value = $userId.value;
+//                 if(data[i].id==value){
+//                     console.log("실패");
+//                     $dupliFail.style.display='block';
+//                     $dupliOk.style.display='none';
+//                     check[0]=false;
+//                     break;
+//
+//                 }else{
+//                     console.log("성공");
+//                     $dupliOk.style.display='block';
+//                     $dupliFail.style.display='none';
+//                     check[0]=true;
+//                 }
+//             }
+//             checking();
+//         })
+// })
+
+
+
+

@@ -1,6 +1,7 @@
 package com.javaclass.psmc.auth.controller;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/auth")
@@ -46,13 +48,22 @@ public class AuthController {
         List<EmployeeDTO> employee = userService.findMember(param);
 
         if(employee.isEmpty()){
-
+            httpSession.setAttribute("message","잘못된 코드입니다. 코드를 확인하세요");
             return "redirect:/member/takeCode";
 
         }
         else{
+            LoginUserDTO loginUserDTO = userService.findMemberByPmCode(employee.get(0).getPmCode());
             httpSession.setAttribute("employeeInfo",employee.get(0));
-            return "redirect:/member/registerReq";
+            if(!Objects.isNull(loginUserDTO)){
+                httpSession.setAttribute("message","이미 가입한 사원입니다");
+                return "redirect:/member/takeCode";
+
+            }
+            else{
+
+                return "redirect:/member/registerReq";
+            }
 
 
         }

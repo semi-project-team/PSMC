@@ -40,34 +40,6 @@ header.pagetitle{
 
 }
 
-.main{
-    background: white;
-    width: 80vw;
-    margin-top: 20vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-.btn-custom-male{
-    color:  rgb(3, 61, 94);
-}
-
-#duplicate{
-    position: absolute;
-    margin-left: 40vw;
-    margin-bottom: 600px;
-    display: flex;
-    flex-wrap: nowrap;
-    width: 80px;
-}
-
-
-
-/* 상단 버튼 호버 효과 */
-
-
 a:hover, a:focus {
     outline: none;
 }
@@ -134,24 +106,25 @@ a:hover, a:focus {
     transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 
+.main{
+    background: white;
+    width: 80vw;
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+}
 
-/* 인풋 관련 css */
+
+
+/* 인풋관련  */
 
 .group{
     position:relative;
     margin-top: 10vh;
     margin-bottom:45px;
     width: 40vw;
-}
-.radio{
-    display: flex;
-    justify-content: center;
-    width: 40vw;
-
-}
-
-.raidogroup>input{
-    margin-left: 5vw;
 }
 
 .cusInput{
@@ -266,7 +239,8 @@ input[type=date]::-webkit-datetime-edit-year-field {
 }
 
 
-/* nina-button */
+/* 니나버튼 */
+
 .container{
     position:relative;
     display: flex;
@@ -328,6 +302,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s;
     pointer-events: none;
+    cursor: pointer;
     opacity: 55%;
 }
 .button--nina.button--inverted {
@@ -414,89 +389,7 @@ input[type=date]::-webkit-datetime-edit-year-field {
 }
 
 
-
-
-/* datepicker */
-
-.datepicker {
-    border-radius: 0;
-    padding: 0;
-}
-.datepicker-days table thead, .datepicker-days table tbody, .datepicker-days table tfoot {
-    padding: 10px;
-    display: list-item;
-}
-.datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
-    background:  rgb(3, 61, 94);
-    color: #ffffff;
-    border-radius: 0;
-}
-.datepicker-days table thead tr:nth-child(2n+0) td, .datepicker-days table thead tr:nth-child(2n+0) th {
-    border-radius: 3px;
-}
-.datepicker-days table thead tr:nth-child(3n+0) {
-    text-transform: uppercase;
-    font-weight: 300 !important;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-}
-.table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
-    padding: 11px 13px;
-}
-.datepicker-months table thead td, .datepicker-months table thead th, .datepicker-years table thead td, .datepicker-years table thead th, .datepicker-decades table thead td, .datepicker-decades table thead th, .datepicker-centuries table thead td, .datepicker-centuries table thead th {
-    border-radius: 0;
-}
-.datepicker td, .datepicker th {
-    border-radius: 50%;
-    padding: 0 12px;
-}
-.datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
-    background:  rgb(3, 61, 94);
-    color: #ffffff;
-    border-radius: 0;
-}
-.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
-    background-image: none;
-}
-.datepicker .prev, .datepicker .next {
-    color: rgba(255, 255, 255, 0.5);
-    transition: 0.3s;
-    width: 37px;
-    height: 37px;
-}
-.datepicker .prev:hover, .datepicker .next:hover {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.99);
-    font-size: 21px;
-}
-.datepicker .datepicker-switch {
-    font-size: 24px;
-    font-weight: 400;
-    transition: 0.3s;
-}
-.datepicker .datepicker-switch:hover {
-    color: rgba(255, 255, 255, 0.7);
-    background: transparent;
-}
-.datepicker table tr td span {
-    border-radius: 2px;
-    margin: 3%;
-    width: 27%;
-}
-.datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
-    background-color:  rgb(3, 61, 94);
-    background-image: none;
-}
-.dropdown-menu {
-    border: 1px solid rgba(0,0,0,.1);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-.datepicker-dropdown.datepicker-orient-top:before {
-    border-top: 7px solid rgba(0,0,0,.1);
-}
-
-/*정규 포현식*/
-#message{
+#pm{
     font-size: small;
     color: red;
     font-weight: bold;
@@ -504,110 +397,10 @@ input[type=date]::-webkit-datetime-edit-year-field {
     display: none;
 }
 
-#messagePass{
+#em{
     font-size: small;
     color: red;
     font-weight: bold;
 
     display: none;
-}
-
-#conMessage{
-    font-size: small;
-    color: red;
-    font-weight: bold;
-
-    display: none;
-}
-#phoneMessage{
-    font-size: small;
-    color: red;
-    font-weight: bold;
-
-
-    display: none;
-}
-
-#emailMessage{
-    font-size: small;
-    color: red;
-    font-weight: bold;
-
-
-    display: none;
-}
-#genderMessage{
-    font-size: small;
-    color: red;
-    font-weight: bold;
-    display: block;
-}
-#dupliOk{
-    font-size: small;
-    color: red;
-    font-weight: bold;
-    display: none;
-}
-#dupliFail{
-    font-size: small;
-    color: red;
-    font-weight: bold;
-    display: none;
-}
-#checker{
-    font-size: small;
-    color: red;
-    font-weight: bold;
-    display: none;
-}
-
-/* 중복확인 버튼 */
-#idcheck {
-    appearance: none;
-    background-color: transparent;
-    border: 2px solid  rgb(3, 61, 94);
-    border-radius: 15px;
-    box-sizing: border-box;
-    color:  rgb(3, 61, 94);
-    cursor: pointer;
-    display: inline-block;
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 12px;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
-    min-height: 15px;
-    min-width: 85px;
-    outline: none;
-    padding: 15px 15px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: 80px;
-    will-change: transform;
-    /*text-wrap: nowrap;*/
-    position: absolute;
-    margin-left: 43vw;
-    margin-top: -55px;
-
-}
-
-#idcheck:disabled {
-    pointer-events: none;
-}
-
-
-#idcheck:hover {
-    color: #fff;
-    background-color:  rgb(3, 61, 94);
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-2px);
-}
-
-#idcheck:active {
-    box-shadow: none;
-    transform: translateY(0);
 }
