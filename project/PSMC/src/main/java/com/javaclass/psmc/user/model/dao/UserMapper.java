@@ -21,5 +21,7 @@ public interface UserMapper {
     LoginUserDTO findByUsername(String username);
 
 
-    List<IdDTO> allIds();
+    List<LoginUserDTO> findAllMember();
+
+    LoginUserDTO findMemberByPmCode(String pmCode);
 }

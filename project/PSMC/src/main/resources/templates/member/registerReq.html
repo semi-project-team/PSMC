@@ -29,12 +29,13 @@
     <form th:action="@{/member/signup}" method="post">
         <div class="group">
             <input type="text" required name="id" id="userId" autocomplete="off" class="cusInput">
-            <span class="highlight"></span><button class="idcheck" id="idcheck">중복확인</button>
+            <span class="highlight"></span><button class="idcheck" id="idcheck" type="button">중복확인</button>
             <span class="bar"></span>
             <label class="l">ID</label>
             <div id="message"><i class="fa-solid fa-triangle-exclamation">아이디는 8자 이상 영어/숫자를 포함해야합니다!</i></div>
             <div id="dupliFail"><i class="fa-solid fa-triangle-exclamation">이미 존재하는 ID 입니다 다른 ID 를 사용하세요</i></div>
             <div id="dupliOk"><i class="fa-solid fa-triangle-exclamation">사용가능한 ID 입니다</i></div>
+            <div id="checker"><i class="fa-solid fa-triangle-exclamation">중복을 확인하세요</i></div>
         </div>
 
         <div class="group">

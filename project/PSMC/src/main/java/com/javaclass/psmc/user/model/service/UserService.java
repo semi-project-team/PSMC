@@ -57,11 +57,13 @@ public class UserService {
     }
 
 
-    public List<IdDTO> allIds() {
-        List<IdDTO> ids =userMapper.allIds();
-        for(IdDTO i : ids){
-            System.out.println(i);
-        }
-        return ids;
+
+
+    public List<LoginUserDTO> findAllMember() {
+        return userMapper.findAllMember();
+    }
+
+    public LoginUserDTO findMemberByPmCode(String pmCode) {
+        return userMapper.findMemberByPmCode(pmCode);
     }
 }

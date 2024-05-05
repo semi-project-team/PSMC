@@ -2,14 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/css/takeCode.css">
     <title>사원확인</title>
 </head>
-
+<script>
+    const message = '[[${message}]]'
+    if(message){
+        alert(message);
+    }
+</script>
 <body>
+<header class="pagetitle">
+    <ul class="menu align-center expanded text-center SMN_effect-46">
+        <li><a href="/member/term" id="one">1</a></li>
+        <li><a href="" style="pointer-events: none;"><i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="" style="pointer-events: none;">사원확인</a></li>
+        <li><a href="" style="pointer-events: none;"><i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="" style="pointer-events: none;">3</a></li>
+        <li><a href="" style="pointer-events: none;"><i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="" style="pointer-events: none;">4</a></li>
+
+    </ul>
+    <a href="/" id="home"><img src="/common/img/backLogo.png"></a>
+</header>
+
+<div class="main">
     <form th:action="@{/auth/takeCode}" method="post">
-        <input type="text" name="pmCode" placeholder="의료진코드">
-        <input type="text" name="empNo" placeholder="사원번호">
-        <button type="submit">제출</button>
+        <div class="group">
+            <input type="text" required name="pmCode" autocomplete="off"  class="cusInput" id="pmCode">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class="l">의료진코드</label>
+            <div id="pm"><i class="fa-solid fa-triangle-exclamation">의료진 코드가 아닙니다</i></div>
+        </div>
+        <div class="group">
+            <input type="text" required name="empNo" autocomplete="off"  class="cusInput" id="empNo">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class="l">사원코드</label>
+            <div id="em"><i class="fa-solid fa-triangle-exclamation">사원코드가 아닙니다</i></div>
+        </div>
+        <div class="container" id="con">
+            <header class="codrops-header">
+                <div class="box bg-2">
+                    <button type="submit" class="button button--nina button--round-l button--text-thick button--inverted ccc" data-text="사원확인" id="nextPage">
+                        <span>확</span><span>인</span><span>하</span><span>기</span>
+                    </button>
+                </div>
+            </header>
+        </div>
     </form>
+</div>
 </body>
+<script src="https://kit.fontawesome.com/530e719840.js" crossorigin="anonymous"></script>
+<script src="/assets/js/takeCode.js"></script>
 </html>

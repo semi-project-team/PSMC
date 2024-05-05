@@ -1,7 +1,10 @@
 package com.javaclass.psmc.user.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.user.model.dto.IdDTO;
+import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -11,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/member")
 @Controller
@@ -31,8 +36,13 @@ public class RegisterController {
 
 
     @GetMapping("/takeCode")
-    public void stepTwo(){
+    public String stepTwo(HttpSession session,Model model){
+            model.addAttribute("message",session.getAttribute("message"));
+        System.out.println("여기로 왔는가"+session.getAttribute("message"));
+            session.invalidate();
 
+
+            return "/member/takeCode";
     }
 
     @GetMapping("/registerReq")
@@ -60,6 +70,17 @@ public class RegisterController {
         return mv;
     }
 
+    @GetMapping(value ="/find", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String getId() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<LoginUserDTO> member = userService.findAllMember();
+        System.out.println("member"+member);
+        return mapper.writeValueAsString(member);
+    }
+
+    @GetMapping("/term")
+    public void term(){}
 
 
 }
