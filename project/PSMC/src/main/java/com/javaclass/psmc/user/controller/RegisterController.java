@@ -39,7 +39,7 @@ public class RegisterController {
     public void stepTwo(HttpSession session,Model model){
             model.addAttribute("message",session.getAttribute("message"));
         System.out.println("여기로 왔는가"+session.getAttribute("message"));
-           session.invalidate();
+           session.removeAttribute("message");
 
     }
 
@@ -64,7 +64,7 @@ public class RegisterController {
         }
         mv.setViewName("redirect:/common/signal");
         session.setAttribute("message",message);
-        session.invalidate();
+
         return mv;
     }
 
