@@ -20,6 +20,8 @@ body {
     align-items: center;
     margin-top: 5vw;
     margin-left: 15vw;
+    justify-content: flex-end; 
+    
 }
 
 .row {
@@ -301,13 +303,13 @@ form {
   /* 버튼 스타일 */
   button {
     /* position:absolute; */
-    padding: 1% 2%;
+    padding: 1.4% 2%;
     background-color:rgb(3, 61, 94);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 10%;
+    width: 30%;
     
   }
   
@@ -316,6 +318,21 @@ form {
     background-color:rgb(3, 61, 94);
   }
   
+  .button-container {
+    text-align: right; /* 버튼을 오른쪽으로 정렬 */
+    margin-top: -1.3vw; /* 버튼과 다른 내용 사이에 간격을 조정 */
+}
+
+.button-container button {
+    padding: 1.4% 2%;
+    background-color:rgb(3, 61, 94);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* width: 30%; */ /* 버튼 너비를 원래 설정에서 제거 */
+}
+
  
   
   /* 텍스트 영역 스타일 */
