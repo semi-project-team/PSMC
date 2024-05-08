@@ -1,195 +1,269 @@
-
+body,html{
+    margin: 0;
+    background-color: rgb(215, 214, 214);
+}
 
 .mainPage{
-    display: flex ;
+    display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    
+    
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 18% 40% 40%;
+    grid-template-rows: minmax(65%,auto) minmax(33%,auto);
+    grid-template-areas: 
+    'a b c'
+    'd e f';
     width: 80vw;
-    margin-left: 1vw;
-}
 
-body {
-    background-color: rgb(215, 214, 214);
-    margin: 0;
-    padding: 0;
-    display: flex;
-} 
-.container {
-    /* width: 100vw; */
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    height: 80vh;
+    margin-right: 2vw;
     position: absolute;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5vw;
-    margin-left: 15vw;
-    justify-content: flex-end; 
-    
+    bottom: 10px;
 }
+/* box1  */
 
-.row {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1vw;
-    /* margin-left: 10vw;  */
-    /* margin-right: 5%; 변경된 부분 */
-    
-}
-
-
-
-/* .profile-image {
-    width: 100%;
-    height: 100%;
-    background-image: url(); 
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%; 
-    margin-bottom: 10px;
-} */
-.profile {
-    position :absolute;
-    color: white; /* 글자색 */
-    text-align: center; /* 가운데 정렬 */
-    width: 100%; 
-    margin-top: -15%;
-    justify-content: center;
-    align-items: center;
-    font-size: 9vw;
-  }
-/* 프로필 상세 정보 스타일링 */
-.profile-details {
-    position: relative;
-    text-align: center;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    margin-top: 70%;
-    width: 100%; 
-}
-
-.profile-details h3 {
-    margin: 0;
-    font-size: 1.6vw;
-}
-
-.profile-details p {
-    margin: 2% 0;
-    font-size: 0.9vw;
-}
-
-.profile-details h2 {
-    /* margin-bottom: 20%; */
-    align-items: center;
-}
 .box1 {
-    width: 20vw; /* 너비를 %로 설정 */
-    /* border: 2px solid rgb(3, 61, 94); */
-    background-color:rgb(3, 61, 94);
-    border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+        background-color:rgb(3, 61, 94);
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: auto;
+}
+
+.empInfo{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* margin-left: 5vw; */
-    margin-top: 6vw; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    flex-direction: column;
+    
 }
 
-.box1, .box3 {
-    width: 20vw; /* 박스1과 박스3의 너비를 동일하게 설정 */
-    margin-top: 6vw;
+.profile{
+        width: 30%;
+        height: auto;
+        align-self: center;
+}
+    
+.profile-details {
+        flex: 1; /* 남은 공간 모두 차지 */
+        color: white;
+        
+}
+    
+.profile-details>p{
+    font-size: 1rem;
+}
+.profileInfo {
+        margin: 5px 0;
 }
 
+/* box1 */
 
-.box2 {
-    width: 40vw;
-    height: 43vh;
+
+.box4{
     background-color: #f5f5f5;
     border-radius: 10px;
-    padding: 20px;
-    margin-left: 2vw;
-    margin-top: 6vw;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    grid-area: d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.box5{
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    grid-area: e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+.box6{
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    grid-area: f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
 }
 
-.box2 h2 {
+
+
+/* mainPage title */
+.contents{
+    display: flex;
+    
+}
+.main-title{
+    
+    width: 80vw;
+    margin-right: 2vw;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.line {
+    
+    width: 80vw; /* 선의 길이를 늘림 */
+    height: 1px; /* 선의 높이 */
+    border-radius: 0.5px;
+    background-color: rgb(3, 61, 94); /* 선의 색상 */
+
+    /* margin-bottom: 20%;  */
+    border: 1px solid rgb(3, 61, 94);
+}
+
+
+
+
+.psmc{
+    
+    font-family: Arial, sans-serif;
+    font-size: 3vw;
+    font-weight: bold; 
+    align-self: flex-end;
+   
+    color:rgb(3, 61, 94);
+}
+.docIcon{
+    font-size: 2vw;
+    color:rgb(3, 61, 94);
+    position: absolute;
+    right: 3vw;
+    align-self: end;
+}
+.mainpage {
+    font-size: 1vw;
+    font-family: Arial, sans-serif;
+    color:rgb(3, 61, 94);
+    margin-top: 2vh;
+}
+.logo{
+    width: 7%;
+    
+}
+
+/* mainPage title */
+
+
+/* box2 */
+
+.box2{
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    grid-area: b;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow:auto;
+    
+}
+
+fieldset {
+    border: 2px solid rgb(3, 61, 94);
+    font-family: Arial, sans-serif;
+    width:80%;
+    position: relative;
+    left: 5%;
+    top: 10%;
+  }
+
+  legend {
+    font-weight: bold;
+    color:rgb(3, 61, 94);
+    font-family: Arial, sans-serif;
+    font-size: 1.2vw;
+    
+  }
+
+
+input[type="submit"],
+input[type="reset"] {
+    padding: 1% 2%;
+    background-color:rgb(3, 61, 94); /* 파란색 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8vw;
+    width: 10%;
+    cursor: pointer;
+    
+}
+input[type="reset"]{
+    background-color: rgb(215, 18, 18);
+}
+
+#newProject{
+    padding: 1% 2%;
+    background-color:rgb(3, 61, 94); /* 파란색 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8vw;
+    width: 20%;
+    align-self: flex-start;
+}
+
+textarea{
+    resize: none;
+    width: 100%;
+    height: 7vh;
+}
+#formmer{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+}
+/* #inputter{
+    position: relative;
+    left: 70%;
+    top: 8%;
+} */
+#inputter{
+    background-color: cyan;
+}
+
+
+/* box3 */
+
+.box3{
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    grid-area: c;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+
+.box3 h2{
     font-size: 1.3em;
     color:rgb(3, 61, 94); /* 짙은 남색 */
     text-align: center; /* 텍스트 가운데 정렬 */
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .schedule-item {
-    margin-bottom: 1vw;
-    border-bottom: 1px solid #ddd; /* 항목 간 구분선 추가 */
-    padding-bottom: 1vw; /* 각 항목의 아래 여백 추가 */
+    border-bottom: 1px solid #ddd;
 }
-
 .schedule-item:last-child {
     border-bottom: none; /* 마지막 항목의 하단 구분선 제거 */
 }
-
 .schedule-item p {
-    margin: 0vw 0;
     font-size: 1em;
     color:rgb(0, 0, 0); /* 진한 회색 */
     font-family: Arial, sans-serif;
 }
-
 .schedule-item p:first-child {
     font-weight: bold; /* 각 항목의 첫 번째 줄 텍스트를 볼드체로 표시 */
     color:rgb(3, 61, 94);
     font-size: 1.2em;
 }
-
 .schedule-item p:last-child {
     margin-bottom: 0; /* 각 항목의 마지막 줄의 아래 여백 제거 */
-}
-
-
-
-
-.box3 {
-    width: 14vw; /* 너비를 %로 설정 */
-    height: 28vh;
-    /* border: 2px solid rgb(3, 61, 94); */
-    background-color: rgb(235, 235, 235);
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: -1vw;
-    margin-top:-10%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-}
-
-.box4 {
-    width: 32vw;
-    height: 23vh;
-    background-color: rgb(235, 235, 235);
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 2vw;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-    padding: 20px; /* 내부 여백 추가 */
-    overflow: auto; /* 내용이 넘칠 경우 스크롤바 표시 */
-}
-.mediconnect{
-    font-size: 1em;
-    color:rgb(0, 0, 0); /* 진한 회색 */
-    font-family: Arial, sans-serif;
-}
-
-.btn {
-    width: 500px;
-    height: 30px;
-    border: 2px solid rgb(3, 61, 94);
-    background-color: transparent;
-    color: rgb(3, 61, 94);
-    font-size: 0.9em;
-    cursor: pointer;
-    margin: 1%; /* 내역 간의 간격 조정 */
-    text-align: left; 
-    font-family: Arial, sans-serif;
 }
 
 .title {
@@ -197,194 +271,59 @@ body {
     font-size: 1.5em;
     color:rgb(3, 61, 94);
     font-weight: bold;
+    border-bottom: 1px solid #ddd ;
 }
 
-.btn:hover {
-    background-color: rgba(0, 71, 111, 0.425); /* 마우스 호버 시 배경색 변경 */
+/* box4 */
+.box4 p{
+    margin: 0;
 }
 
-@media screen and (max-width: 768px) {
-    .box1,
-    .box3 {
-        width: 80%; /* 화면이 작아질 때 너비를 조정 */
-    }
-}
+/* button-6 */
 
-.main-title img {
-    position: absolute;
-    width: 6%; /* 이미지의 너비를 필요에 따라 조절합니다. */
-    height: auto; /* 가로세로 비율을 유지합니다. */
-    margin-right: 10%; /* 이미지와 텍스트 사이에 여백을 추가합니다. */
-    /* margin-top: -0.0%; */
-}
-
-    
-
-
-.main-title {
-    position: absolute;
-    width: 100vw; /* 선의 길이를 늘림 */
-    /* margin-left: 290px; */
-    /* margin-top: -10px; */
-    /* font-size: 22px; */
-    /* font-family: Arial, sans-serif; */
-    margin-left: 17%;
-    margin-top: 1%;
-    justify-content: space-between; /* 제목과 아이콘을 좌우로 분리하여 배치 */
-    align-items: center; /* 수직 가운데 정렬 */
-    
-}
-
-.psmc{
-    position: absolute;
-    font-family: Arial, sans-serif;
-    font-size: 3vw;
-    font-weight: bold; 
-    margin-top:2%;
-    margin-left: 6%;
-    color:rgb(3, 61, 94);
-}
-
-.mainpage {
-    position: absolute;
-    /* margin-left: 0%; */
-    margin-top:7%;
-    font-size: 1vw;
-    font-family: Arial, sans-serif;
-    color:rgb(3, 61, 94);
-    
-}
-
-
-
-.line {
-    position: absolute;
-    width: 75%; /* 선의 길이를 늘림 */
-    height: 10%; /* 선의 높이 */
-    background-color: rgb(3, 61, 94); /* 선의 색상 */
-    margin-top: 6%; /* 선 위 여백 추가 */
-    /* margin-bottom: 20%;  */
-    border: 1px solid rgb(3, 61, 94);
-}
-
-
-.icon {
-    position: absolute;
-    font-size: 2.5vw;
-    margin-top: 4.5%; /* 이동 거리 조정 */
-    margin-left: 88%;
-}
-
-
-  /* main.css */
-
-/* 전체 폼 스타일 */
-form {
-    /* width: 50%; */
-    margin: 0 auto;
-  }
-  
-  /* 레이블 스타일 */
-  label {
-    /* display: inline-block; */
-    width: 20%;
-    margin-bottom: 2%;
-    font-size: 15px;
-  }
-  
-  입력 필드 스타일
-  input[type="text"],
-  input[type="tel"],
-  textarea {
-    margin-bottom: 10px;
-  }
-
-
-  /* 버튼 스타일 */
-  button {
-    /* position:absolute; */
-    padding: 1.4% 2%;
-    background-color:rgb(3, 61, 94);
-    color: white;
-    border: none;
-    border-radius: 5px;
+.button-6 {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
-    width: 30%;
-    
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 100%;
   }
   
-  /* 버튼 호버 스타일 */
-  button:hover {
-    background-color:rgb(3, 61, 94);
+  .button-6:hover,
+  .button-6:focus {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0, 0.65);
   }
   
-  .button-container {
-    text-align: right; /* 버튼을 오른쪽으로 정렬 */
-    margin-top: -1.3vw; /* 버튼과 다른 내용 사이에 간격을 조정 */
-}
-
-.button-container button {
-    padding: 1.4% 2%;
-    background-color:rgb(3, 61, 94);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    /* width: 30%; */ /* 버튼 너비를 원래 설정에서 제거 */
-}
-
- 
-  
-  /* 텍스트 영역 스타일 */
-  textarea {
-    width: 90%;
-    /* margin-bottom: 7%; */
-    /* padding: 2%; */
-    font-size: 2vw;
+  .button-6:hover {
+    transform: translateY(-1px);
   }
   
-  /* 폼 필드를 감싸는 fieldset 스타일 */
-  fieldset {
-    border: 2px solid rgb(3, 61, 94);
-    margin: 0 auto;
-    margin-bottom: 2%;
-    font-family: Arial, sans-serif;
-    width:80%
+  .button-6:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
   }
-  
-  /* 전설(legend) 스타일 */
-  legend {
-    font-weight: bold;
-    color:rgb(3, 61, 94);
-    font-family: Arial, sans-serif;
-    font-size: 1.2vw;
-  }
-
-
-  /* 예약 및 예약 취소 버튼 스타일 */
-input[type="submit"],
-input[type="reset"] {
-  padding: 1% 2%;
-  /* margin-right: 5px;  */
-  background-color:rgb(3, 61, 94); /* 파란색 배경색 */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  /* cursor: pointer; */
-  font-size: 0.8vw;
-  /* margin-top: 2 */
-  width: 10%;
- 
-}
-
-.patientinfo {
-    width: 90%;
-    /* height: %; */
-}
-
-.timeslot{
-    width: 90%;
-    /* height: 10%; */
-}
-
-
