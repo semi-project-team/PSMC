@@ -4,133 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="/main/main.css">
 </head>
 <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
 <body>
-    <!-- <div class="background-container"></div>
-    <div class="content">
-    </div> -->
+    
 
     <!-- mainpage -->
     <div class="mainPage">
         <div class="main-title">
-            <br>
-            <img src="/image/psmc.png" alt="PSMC Logo">
-            <div class="psmc">PRO SPORTS MEDICAL CENTER</div>
-            <div class="mainpage">MAIN PAGE</div>
-            <div class="line"></div>
-        </div>
-        <span class="icon" ><i class="fa-solid fa-user-doctor "></i></span>
-        <div class="container">
-            <div class="row">
-                <div class="box1">
-                    <a href=""></a>
-                    <div class="profile"><i class="fa-solid fa-circle-user"></i></a></div>
-                    <div class="profile-details">
-                    <h3>김의사 <span id="profileName"></span></h3>
-                    <p>(D12345) <span id="profilePosition"></span></p>
-                    <br>
-                    <p>재활의학과 <span id="profilePosition"></span></p>
-                    <p>재활전문 <span id="profileSpecialty"></span></p>
-                    <p>PSMC 소속 <span id="profileWorkplace"></span></p>
-                    <p>83.12.04 <span id="profileBirthDate"></span></p>
-                    <p>010-9999-9999 <span id="profilePhoneNumber"></span></p>
-                    <p>doctor01@google.com <span id="profileEmail"></span></p>
-                </div>
-                </div>
-
-
-                <div class="box2">
-                    <form method="get" action="">
-                        <fieldset class="patientinfo">
-                        <legend>Patient Info</legend>
-                        <label for="sub"> 환자 이름  :</label>
-                        <input type="text" name="person" id="sub"/><br>
-                        <label for="sub"> 환자 번호  :</label>
-                        <input type="text" name="person" id="sub"/><br>
-                        <label for="phone">휴대폰 번호 : </label>
-                        <input type="tel" name="tell" id="phone" placeholder="010-0000-0000"
-                            pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
-                        </fieldset>
-                    <fieldset class="timeslot">
-                    <legend>TimeSlot</legend>
-                    <label for="sub">날짜 및 시간 :</label> 
-                    <input type="date" name="reservation_date"/>
-                    <input type="time" name="reservation_time" min="09:00" max="20:00"/><br>
-                    <label for="position">진료실 위치 : </label>
-                    <input type="radio" name="site" id="position" value="yes"/>R1
-                    <input type="radio" name="site" value="no"/> R2<br>
-
-                    <form action="#">
-                        <textarea name="contents" cols="30" row="60">
-                        </textarea>
-                        
-                </fieldset>
-                <br>
-                <input type="submit" value="예약"/>
-                <input type="reset" value="취소"/>
-            </form>
-            <div class="button-container">
-                <button> 새 프로젝트 생성</button>
-                </div>
-                    
-                </div>
-                <div class="box2">
-                    
-                    <h2>SCHEDULER</h2>
-                    <div class="schedule-item">
-                    <p>24.01.30 (목)</p>
-                    </div>
-                    <div class="schedule-item">
-                        <p>10:00 - 11:00</p>
-                        <p>김철수(30024)</p>
-                        <p>위치: R1</p>
-                    </div>
-                    <div class="schedule-item">
-                        <p>11:00 - 12:00</p>
-                        <p>이영희(34725)</p>
-                        <p>위치: R2</p>
-                    </div>
-                    <div class="schedule-item">
-                        <p>13:00 - 14:00</p>
-                        <p>김진호(35225)</p>
-                        <p>위치: R2</p>
-                    </div>
-                    <!-- 기타 스케줄 항목들을 추가할 수 있습니다 -->
-                </div>
-                
+            <div class="contents">
+                <img src="/common/img/nobackLogo.png" alt="PSMC Logo" class="logo">
+                &nbsp&nbsp
+                <span class="psmc">Pro Sports Medical Center</span>
+                <a class="docIcon" href="#"><i class="fa-solid fa-user-doctor"></i></a>
             </div>
-            <div class="row">
-                <div class="box3">
-                    <a href="">프로젝트 생성</a>
+            <div class="line"></div>
+            <div class="mainpage">MAIN PAGE</div>
+            
+        </div>
+        
+        <div class="container">
+            <div class="box1">
+                <img src="/common/img/about-us-16-64 (1).png" class="profile">
+                <div class="profile-details">
+                    <h3 id="profileName">김의사</h3>
+                    <p id="profilePosition">(D12345)</p>
+                    <p id="profilePosition">재활의학과</p>
+                    <p id="profileSpecialty">재활전문</p>
+                    <p id="profileWorkplace">PSMC 소속</p>
+                    <p id="profilePhoneNumber">010-9999-9999</p>
+                    <p id="profileEmail">doctor01@google.com</p>
                 </div>
-                <div class="box4">
-                        <div class="mediconnect">
-                        <div class="title">mediconnect</div>
-                        <div class="button-bar">
-                            <button class="btn">내역 1.김땡땡 오른쪽 무릎 </button><br>
-                            <button class="btn">내역 2.조땡땡 왼쪽 발목 골절</button><br>
-                            <button class="btn">내역 3.박땡땡  ~~~~</button><br>
-                            <button class="btn">내역 4.이떙떙 ~~~~~</button>
-                        </div>
+            </div>
+            
+            <div class="box2">
+                <form method="get" id="formmer">
+                    <div>
+                        <fieldset class="patientinfo">
+                            <legend>Patient Info</legend>
+                            <label for="sub"> 환자 이름  :</label>
+                            <input type="text" name="person" id="sub"/><br>
+                            <label for="sub"> 환자 번호  :</label>
+                            <input type="text" name="person" id="sub"/><br>
+                            <label for="phone">휴대폰 번호 : </label>
+                            <input type="tel" name="tell" id="phone" placeholder="010-0000-0000" pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset class="timeslot">
+                            <legend>TimeSlot</legend>
+                            <label for="sub">날짜 및 시간 :</label> 
+                            <input type="date" name="reservation_date"/>
+                            <input type="time" name="reservation_time" min="09:00" max="20:00"/><br>
+                            <label for="position">진료실 위치 : </label>
+                            <input type="radio" name="site" id="position" value="yes"/>R1
+                            <input type="radio" name="site" value="no"/> R2<br>
+                            <textarea name="contents" cols="30" row="60"></textarea>
+                        </fieldset>
+                    </div>
+                    <span id="inputter">
+                        <input type="submit" value="예약"></input>
+                        <input type="reset" value="취소"></input>
+                    </span>
+                </form>
+                <div>
+                    <button id="newProject">New Project</button>
+                </div>
+            </div>
+            <div class="box3">
+                <h2>Scheduler</h2>
+                <div class="schedule-item">
+                    <p>24.01.30 (목)</p>
+                </div>
+                <div class="schedule-item">
+                    <p>10:00 - 11:00</p>
+                    <p>김철수(30024)</p>
+                    <p>위치: R1</p>
+                </div>
+                <div class="schedule-item">
+                    <p>11:00 - 12:00</p>
+                    <p>이영희(34725)</p>
+                    <p>위치: R2</p>
+                </div>
+                <div class="schedule-item">
+                    <p>13:00 - 14:00</p>
+                    <p>김진호(35225)</p>
+                    <p>위치: R2</p>
+                </div>
+                    <!-- 기타 스케줄 항목들을 추가할 수 있습니다 -->
+            </div>
+            <div class="box4">
+                <div class="title">Today Menu</div>
+                <p>돈까스</p>
+                <p>돈까스</p>
+                <p>돈까스</p>
+                <p>돈까스</p>
+                <p>돈까스</p>
+            </div>
+            <div class="box5">
+                <div class="mediconnect">
+                    <div class="title">mediconnect</div>
+                    <div class="button-bar">
+                        <button class="button-6">내역 1.김땡땡 오른쪽 무릎 </button><br>
+                        <button class="button-6">내역 2.조땡땡 왼쪽 발목 골절</button><br>
+                        <button class="button-6">내역 3.박땡땡  ~~~~</button><br>
+                        <button class="button-6">내역 4.이떙떙 ~~~~~</button>
                     </div>
                 </div>
-                <div class="box4">
-                    <div class="mediconnect">
+            </div>
+            <div class="box6">
+                <div class="mediconnect">
                     <div class="title">TheraLink</div>
                     <div class="button-bar">
-                        <button class="btn">김땡땡 (23423) 오른쪽 무릎 </button><br>
-                        <button class="btn">조땡땡 (24142)왼쪽 발목 골절</button><br>
-                        <button class="btn">박땡땡 (23424) ~~~~</button><br>
-                        <button class="btn">이떙떙 (24164) ~~~~~</button>
+                        <button class="button-6">김땡땡 (23423) 오른쪽 무릎 </button><br>
+                        <button class="button-6">조땡땡 (24142)왼쪽 발목 골절</button><br>
+                        <button class="button-6">박땡땡 (23424) ~~~~</button><br>
+                        <button class="button-6">이떙떙 (24164) ~~~~~</button>
                     </div>
                 </div>
             </div>
-                <!-- <div class="box4">
-                    <a href=""></a>
-                </div> -->
-            </div>
+        </div>
     </div>
 </body>
 </html>
