@@ -26,21 +26,25 @@
         
         <div class="container">
             <div class="box1">
-                <img src="/common/img/about-us-16-64 (1).png" class="profile">
+                <div class="profile">
+                <i class="fas fa-user-circle profile"></i>
+            </div>
                 <div class="profile-details">
-                    <h3 id="profileName">김의사</h3>
+                    <h2 id="profileName">김의사</h2>
                     <p id="profilePosition">(D12345)</p>
                     <p id="profilePosition">재활의학과</p>
-                    <p id="profileSpecialty">재활전문</p>
-                    <p id="profileWorkplace">PSMC 소속</p>
-                    <p id="profilePhoneNumber">010-9999-9999</p>
-                    <p id="profileEmail">doctor01@google.com</p>
+                    <p id="profileSpecialty">전문의</p>
+                    <p id="profilePhoneNumber">02-999-9999</p>
+                    <p id="profileEmail">doctor01@psmc.co.kr</p>
+                
                 </div>
             </div>
             
             <div class="box2">
                 <form method="get" id="formmer">
                     <div>
+                        <br>
+                        <br>
                         <fieldset class="patientinfo">
                             <legend>Patient Info</legend>
                             <label for="sub"> 환자 이름  :</label>
@@ -51,18 +55,21 @@
                             <input type="tel" name="tell" id="phone" placeholder="010-0000-0000" pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
                         </fieldset>
                     </div>
+                    <br>
                     <div>
                         <fieldset class="timeslot">
                             <legend>TimeSlot</legend>
                             <label for="sub">날짜 및 시간 :</label> 
                             <input type="date" name="reservation_date"/>
-                            <input type="time" name="reservation_time" min="09:00" max="20:00"/><br>
-                            <label for="position">진료실 위치 : </label>
-                            <input type="radio" name="site" id="position" value="yes"/>R1
-                            <input type="radio" name="site" value="no"/> R2<br>
+                            <input type="time" name="reservation_time" min="09:00" max="20:00"/>
+                            <br>
+                            <label for="position">증상 및 진단 정보:  </label>
+                            <!-- <input type="radio" name="site" id="position" value="yes"/>R1
+                            <input type="radio" name="site" value="no"/> R2<br> -->
                             <textarea name="contents" cols="30" row="60"></textarea>
                         </fieldset>
                     </div>
+                    <br>
                     <span id="inputter">
                         <input type="submit" value="예약"></input>
                         <input type="reset" value="취소"></input>
@@ -73,34 +80,38 @@
                 </div>
             </div>
             <div class="box3">
-                <h2>Scheduler</h2>
+                <fieldset class="timeslot">
+                    <legend>Scheduler</legend>
+                <!-- <h2>Scheduler</h2> -->
                 <div class="schedule-item">
                     <p>24.01.30 (목)</p>
                 </div>
                 <div class="schedule-item">
                     <p>10:00 - 11:00</p>
                     <p>김철수(30024)</p>
-                    <p>위치: R1</p>
+                    <p>의료 이력: 수술 이력 있음</p>
                 </div>
                 <div class="schedule-item">
                     <p>11:00 - 12:00</p>
                     <p>이영희(34725)</p>
-                    <p>위치: R2</p>
+                    <p>의료 이력: 골절 수술 이력 있음</p>
                 </div>
                 <div class="schedule-item">
                     <p>13:00 - 14:00</p>
                     <p>김진호(35225)</p>
-                    <p>위치: R2</p>
+                    <p>의료 이력: 특이 사항 없음</p>
                 </div>
                     <!-- 기타 스케줄 항목들을 추가할 수 있습니다 -->
             </div>
+            </fieldset>
             <div class="box4">
                 <div class="title">Today Menu</div>
-                <p>돈까스</p>
-                <p>돈까스</p>
-                <p>돈까스</p>
-                <p>돈까스</p>
-                <p>돈까스</p>
+                <br>
+                <p>소고기 스테이크</p>
+                <p>그린 샐러드</p>
+                <p>멸치국수</p>
+                <p>치즈 케이크</p>
+                <p>요구르트</p>
             </div>
             <div class="box5">
                 <div class="mediconnect">
