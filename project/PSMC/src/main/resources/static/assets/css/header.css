@@ -1,0 +1,79 @@
+body,html{
+    margin: 0;
+    background-color: rgb(215, 214, 214);
+}
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 18% 40% 40%;
+    grid-template-rows: minmax(65%,auto) minmax(33%,auto);
+    grid-template-areas:
+    'a b c'
+    'd e f';
+    width: 80vw;
+
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    height: 80vh;
+    margin-right: 3vw;
+    position: absolute;
+    bottom: 40px;
+}
+
+
+/* mainPage title */
+.contents{
+    display: flex;
+
+}
+.main-title{
+
+    width: 80vw;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.line {
+
+    width: 80vw; /* 선의 길이를 늘림 */
+    height: 1px; /* 선의 높이 */
+    border-radius: 0.5px;
+    background-color: rgb(3, 61, 94); /* 선의 색상 */
+
+    /* margin-bottom: 20%;  */
+    border: 1px solid rgb(3, 61, 94);
+}
+
+
+
+
+.psmc{
+
+    font-family: Arial, sans-serif;
+    font-size: 3vw;
+    font-weight: bold;
+    align-self: flex-end;
+
+    color:rgb(3, 61, 94);
+}
+.docIcon{
+    font-size: 2.5vw;
+    color:rgb(3, 61, 94);
+    position: absolute;
+    right: 3vw;
+    align-self: end;
+}
+.logo{
+    width: 7%;
+
+}
