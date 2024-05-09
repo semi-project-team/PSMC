@@ -23,9 +23,9 @@ body,html{
     grid-row-gap: 10px;
     grid-column-gap: 20px;
     height: 80vh;
-    margin-right: 2vw;
+    margin-right: 3vw;
     position: absolute;
-    bottom: 10px;
+    bottom: 40px;
 }
 /* box1  */
 
@@ -37,31 +37,44 @@ body,html{
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: auto;
+        justify-content: center;
 }
 
 .empInfo{
     display: flex;
     flex-direction: column;
     
+    
 }
 
 .profile{
-        width: 30%;
+        width: 50%;
         height: auto;
         align-self: center;
+        font-size: 2.7em;
+        color:white;
+       display: flex;
+       margin-left: -5%;
+       
 }
     
 .profile-details {
         flex: 1; /* 남은 공간 모두 차지 */
         color: white;
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
         
 }
     
 .profile-details>p{
     font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    
+    
 }
 .profileInfo {
         margin: 5px 0;
+        
 }
 
 /* box1 */
@@ -98,7 +111,7 @@ body,html{
 .main-title{
     
     width: 80vw;
-    margin-right: 2vw;
+    margin-right: 3vw;
     display: flex;
     flex-direction: column;
    
@@ -128,7 +141,7 @@ body,html{
     color:rgb(3, 61, 94);
 }
 .docIcon{
-    font-size: 2vw;
+    font-size: 2.5vw;
     color:rgb(3, 61, 94);
     position: absolute;
     right: 3vw;
@@ -159,12 +172,13 @@ body,html{
     padding-top: 5%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow:auto;
-    
+    /* justify-content: center; */
+    position: relative;
 }
 
 fieldset {
     border: 2px solid rgb(3, 61, 94);
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     width:80%;
     position: relative;
     left: 5%;
@@ -174,7 +188,7 @@ fieldset {
   legend {
     font-weight: bold;
     color:rgb(3, 61, 94);
-    font-family: Arial, sans-serif;
+    ffont-family: 'Roboto', sans-serif;
     font-size: 1.2vw;
     
   }
@@ -217,13 +231,16 @@ textarea{
     flex-direction: column;
     height: 80%;
 }
-/* #inputter{
-    position: relative;
-    left: 70%;
-    top: 8%;
-} */
-#inputter{
-    background-color: cyan;
+
+#inputter {
+    margin-top: 6%; 
+    margin-left:5%;
+}
+
+#newProject {
+    margin-left: 70%; /* 버튼을 오른쪽으로 옮깁니다. */
+    position: absolute; /* 절대 위치 지정 */
+    top: 77%; /* 위로 20px 만큼 이동 */
 }
 
 
@@ -235,19 +252,22 @@ textarea{
     grid-area: c;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: auto;
+    
 }
 
 .box3 h2{
     font-size: 1.3em;
     color:rgb(3, 61, 94); /* 짙은 남색 */
     text-align: center; /* 텍스트 가운데 정렬 */
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
 }
 
 .schedule-item {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 2px;
+    padding-top: 2px;
 }
 .schedule-item:last-child {
     border-bottom: none; /* 마지막 항목의 하단 구분선 제거 */
@@ -272,11 +292,18 @@ textarea{
     color:rgb(3, 61, 94);
     font-weight: bold;
     border-bottom: 1px solid #ddd ;
+    font-family: Arial, sans-serif;
+}
+fieldset.timeslot {
+    margin-top: -20px; /* fieldset을 위로 올립니다. */
+    
 }
 
 /* box4 */
 .box4 p{
     margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 /* button-6 */
@@ -313,7 +340,7 @@ textarea{
   .button-6:focus {
     border-color: rgba(0, 0, 0, 0.15);
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-    color: rgba(0, 0, 0, 0.65);
+    color:rgb(3, 61, 94);;
   }
   
   .button-6:hover {
