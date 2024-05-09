@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 20px;
+        }
+
+        #projectList {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding-right: 50px;
+        }
+
+        .project-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 20vw;
+            margin-left: 20px;
+            background-color: white;
+            text-decoration: none;
+            display: inline-block;
+            color: black;
+        }
+
+        .project-card:hover {
+            background-color: #f0f0f0;
+        }
+
+        .project-card p {
+            font-size: 11px;
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <th:block th:insert="~{/common/nav}"></th:block>
+
+    <div class="header">
+        <h1>MediConnect Projects</h1>
+        <div class="button">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#openDeleteModal">
+                delete project
+            </button>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
