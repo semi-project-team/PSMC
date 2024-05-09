@@ -12,7 +12,7 @@
         <result property="age" column="age"/>
         <result property="positionCode" column="position_code"/>
         <result property="gender" column="gender"/>
-        <result property="labNo" column="lab_no"/>
+        <result property="officeNum" column="lab_no"/>
         <result property="fieldCode" column="field_code"/>
     </resultMap>
 

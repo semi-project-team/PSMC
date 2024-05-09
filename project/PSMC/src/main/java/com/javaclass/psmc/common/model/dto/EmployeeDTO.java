@@ -13,7 +13,7 @@ public class EmployeeDTO {
     private int age;
     private int positionCode;
     private char gender;
-    private String labNo;
+    private String officeNum;
     private int fieldCode;
 
 }
