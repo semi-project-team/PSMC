@@ -1,35 +1,10 @@
-body,html{
-    margin: 0;
-    background-color: rgb(215, 214, 214);
-}
+
 
 .mainPage{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-
-
 }
-
-.container{
-    display: grid;
-    grid-template-columns: 18% 40% 40%;
-    grid-template-rows: minmax(65%,auto) minmax(33%,auto);
-    grid-template-areas:
-    'a b c'
-    'd e f';
-    width: 80vw;
-
-    grid-row-gap: 10px;
-    grid-column-gap: 20px;
-    height: 80vh;
-    margin-right: 3vw;
-    position: absolute;
-    bottom: 40px;
-}
-
-
-/* mainPage title */
 .contents{
     display: flex;
 
