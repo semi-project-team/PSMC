@@ -65,10 +65,10 @@ public class AuthController {
                 return "redirect:/member/registerReq";
             }
 
-
         }
 
     }
+
 
 
 }

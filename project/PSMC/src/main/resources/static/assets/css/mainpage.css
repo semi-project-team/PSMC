@@ -142,13 +142,15 @@ body,html{
 }
 .docIcon{
     font-size: 2.5vw;
-    color:rgb(3, 61, 94);
     position: absolute;
     right: 3vw;
     align-self: end;
 }
+.docIcon i{
+    color:rgb(3, 61, 94);
+}
 .mainpage {
-    font-size: 1vw;
+    font-size: 0.8vw;
     font-family: Arial, sans-serif;
     color:rgb(3, 61, 94);
     margin-top: 2vh;
@@ -286,7 +288,7 @@ textarea{
     margin-bottom: 0; /* 각 항목의 마지막 줄의 아래 여백 제거 */
 }
 
-.title {
+.title2 {
     text-align: center;
     font-size: 1.5em;
     color:rgb(3, 61, 94);
