@@ -296,6 +296,7 @@ textarea{
     border-bottom: 1px solid #ddd ;
     font-family: Arial, sans-serif;
 }
+
 fieldset.timeslot {
     margin-top: -20px; /* fieldset을 위로 올립니다. */
 
@@ -323,7 +324,7 @@ fieldset.timeslot {
     font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
     font-weight: 600;
-    justify-content: center;
+    justify-content: left;
     line-height: 1.25;
     margin: 0;
     min-height: 3rem;
