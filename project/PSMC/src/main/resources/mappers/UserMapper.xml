@@ -179,8 +179,13 @@
             e.pm_code = #{pmCode}
         and
             m.medi_date between #{startDay} and #{endDay}
+        and
+            m.medi_status='Y'
+        and
+            a.project_status='Y'
         order by
             t.time_val;
+
     </select>
 
     <select id="allTimes" resultMap="timeToMediInfoMap" parameterType="string">
@@ -208,5 +213,28 @@
             injury i on i.injury_code = a.injury_code
         where
             e.pm_code = #{pmCode}
+        and
+            medi_status='Y'
+        and
+            a.project_status = 'Y'
     </select>
+
+    <update id="softDelete" parameterType="int">
+        update
+            medi_info
+        set
+            medi_status='N'
+        where
+            medi_code = #{mediCode}
+    </update>
+    <update id="mediInfoUpdate" parameterType="hashmap">
+        update
+            medi_info
+        set
+            project_no=#{projectNo},
+            medi_date = #{mediDate},
+            time_code = #{timeCode}
+        where
+            medi_code = #{mediCode}
+    </update>
 </mapper>

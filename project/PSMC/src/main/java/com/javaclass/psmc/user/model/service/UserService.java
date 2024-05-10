@@ -84,4 +84,12 @@ public class UserService {
 
         return userMapper.allTimes(pmCode);
     }
+
+    public int softDelete(int mediCode) {
+        return userMapper.softDelete(mediCode);
+    }
+
+    public int mediInfoUpdate(Map<String, Object> parameter) {
+        return userMapper.mediInfoUpdate(parameter);
+    }
 }
