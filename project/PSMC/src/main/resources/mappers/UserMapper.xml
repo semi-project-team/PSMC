@@ -15,7 +15,22 @@
         <result property="officeNum" column="lab_no"/>
         <result property="fieldCode" column="field_code"/>
     </resultMap>
-
+    <resultMap id="patientMap" type="com.javaclass.psmc.common.model.dto.PatientDTO">
+        <id property="patientNo" column="patient_no"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <result property="height" column="height"/>
+        <result property="weight" column="weight"/>
+        <result property="phone" column="phone"/>
+        <result property="agree" column="agree"/>
+        <result property="email" column="email"/>
+    </resultMap>
+    <resultMap id="injuryMap" type="com.javaclass.psmc.common.model.dto.InjuryDTO">
+        <id property="injuryCode" column="injury_code"/>
+        <result property="injuryName" column="injury_name"/>
+        <result property="fieldCode" column="field_code"/>
+    </resultMap>
     <select id="getAllMember" resultMap="employeeMap">
         select
             *
@@ -72,5 +87,126 @@
             member_regist
         where
             pm_code = #{pmCode}
+    </select>
+
+    <resultMap id="positionMap" type="com.javaclass.psmc.common.model.dto.PositionDTO">
+        <id property="positionCode" column="position_code"/>
+        <result property="positionName" column="position_name"/>
+    </resultMap>
+    <resultMap id="medicalFieldMap" type="com.javaclass.psmc.common.model.dto.MedicalFieldDTO">
+        <id property="fieldCode" column="field_code"/>
+        <result property="fieldName" column="field_name"/>
+    </resultMap>
+
+    <resultMap id="profileMap" type="com.javaclass.psmc.mainPage.model.dto.ProfileDTO">
+        <id property="pmCode" column="pm_code"/>
+        <result property="name" column="name"/>
+        <result property="fieldCode" column="field_code"/>
+        <result property="positionCode" column="position_code"/>
+        <result property="officeNum" column="officeNum"/>
+        <result property="email" column="email"/>
+        <association property="positionDTO" resultMap="positionMap"/>
+        <association property="medicalFieldDTO" resultMap="medicalFieldMap"/>
+    </resultMap>
+    <select id="findEmployeeByPmCode" parameterType="string" resultMap="profileMap">
+        select
+            a.pm_code,
+            a.name,
+            a.officeNum,
+            a.email,
+            b.field_name,
+            c.position_name
+        from
+            employee a
+        join
+            medical_field b on a.field_code = b.field_code
+        join
+            position c on a.position_code = c.position_code
+        where
+            a.pm_code = #{pmCode}
+    </select>
+    <resultMap id="assignMap" type="com.javaclass.psmc.mainPage.model.dto.AssignToEmpDTO">
+        <association property="employeeDTO" resultMap="employeeMap"/>
+    </resultMap>
+    <resultMap id="createMap" type="com.javaclass.psmc.mainPage.model.dto.CreateToEmpDTO">
+        <association property="employeeDTO" resultMap="employeeMap"/>
+    </resultMap>
+    <resultMap id="connectProjectMap" type="com.javaclass.psmc.mainPage.model.dto.ConnectProjectDTO">
+        <id property="projectNo" column="project_no"/>
+        <association property="create" resultMap="createMap"/>
+        <association property="assign" resultMap="assignMap"/>
+        <association property="patientDTO" resultMap="patientMap"/>
+        <association property="injuryDTO" resultMap="injuryMap"/>
+    </resultMap>
+    <resultMap id="mediInfoToPro" type="com.javaclass.psmc.mainPage.model.dto.MItoProDTO">
+        <id property="mediCode" column="medi_code"/>
+        <result property="mediDate" column="medi_date"/>
+        <result property="day" column="day"/>
+        <association property="connectProjectDTO" resultMap="connectProjectMap"/>
+    </resultMap>
+
+    <resultMap id="timeToMediInfoMap" type="com.javaclass.psmc.mainPage.model.dto.TtoMIDTO">
+        <id property="timeCode" column="time_code"/>
+        <result property="timeVal" column="time_val"/>
+        <collection property="mItoProDTOS" resultMap="mediInfoToPro"/>
+    </resultMap>
+    <select id="todayMedi" parameterType="hashmap" resultMap="timeToMediInfoMap">
+        select
+            e.pm_code,
+            p.name,
+            p.age,
+            m.medi_date,
+            m.medi_code,
+            t.time_code,
+            t.time_val,
+            dayofweek(m.medi_date) as 'day',
+            i.injury_name
+        from
+            res_time t
+        join
+            medi_info m on t.time_code = m.time_code
+        join
+            project a on a.project_no = m.project_no
+        join
+            patient p on p.patient_no = a.patient_no
+        join
+            create_project c on c.project_no = a.project_no
+        join
+            employee e on e.pm_code = c.pm_code
+        join
+            injury i on i.injury_code = a.injury_code
+        where
+            e.pm_code = #{pmCode}
+        and
+            m.medi_date between #{startDay} and #{endDay}
+        order by
+            t.time_val;
+    </select>
+
+    <select id="allTimes" resultMap="timeToMediInfoMap" parameterType="string">
+        select
+            e.pm_code,
+            p.name,
+            m.medi_date,
+            m.medi_code,
+            t.time_code,
+            t.time_val,
+            a.project_no
+        from
+            res_time t
+        join
+            medi_info m on t.time_code = m.time_code
+        join
+            project a on a.project_no = m.project_no
+        join
+            patient p on p.patient_no = a.patient_no
+        join
+            create_project c on c.project_no = a.project_no
+        join
+            employee e on e.pm_code = c.pm_code
+        join
+            injury i on i.injury_code = a.injury_code
+        where
+            e.pm_code = #{pmCode}
     </select>
 </mapper>
