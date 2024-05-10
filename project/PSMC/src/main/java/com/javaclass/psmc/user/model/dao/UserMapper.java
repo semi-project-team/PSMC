@@ -32,4 +32,8 @@ public interface UserMapper {
     List<TtoMIDTO> todayMedi(Map<String, Object> param);
 
     List<TtoMIDTO> allTimes(String pmCode);
+
+    int softDelete(int mediCode);
+
+    int mediInfoUpdate(Map<String, Object> parameter);
 }

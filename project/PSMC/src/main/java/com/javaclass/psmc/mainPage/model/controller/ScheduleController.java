@@ -7,11 +7,11 @@ import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
@@ -78,6 +78,49 @@ public class ScheduleController {
         System.out.println(times);
         return times;
 
+    }
+
+    @GetMapping("/getSchedule")
+    public String getSchedule(@RequestParam String datepick,HttpSession session){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate dating = LocalDate.parse(datepick,formatter);
+        System.out.println("dating here"+dating);
+        // 오늘이 속한 주의 시작 날짜 계산하기 (월요일)
+        LocalDate startOfWeek = dating.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+
+        // 오늘이 속한 주의 끝 날짜 계산하기 (일요일)
+        LocalDate endOfWeek = dating.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+        Map<String, Object> param = (Map<String, Object>) session.getAttribute("param");
+        param.put("startDay",startOfWeek);
+        param.put("endDay",endOfWeek);
+
+        List<TtoMIDTO> schedule = userService.todayMedi(param);
+        param.put("schedule",schedule);
+
+        session.setAttribute("param",param);
+
+        return "/schedule/scheduler";
+    }
+
+    @PostMapping("/delete/{mediCode}")
+    public String delete(@PathVariable int mediCode, HttpSession session){
+
+        String pmCode= ((Map<String,String>)session.getAttribute("param")).get("pmCode");
+        int result = userService.softDelete(mediCode);
+
+        return "redirect:/schedule";
+    }
+
+    @PostMapping("/update/{mediCode}")
+    public String update(@RequestParam Map<String,Object> parameter,@PathVariable int mediCode,HttpSession session){
+
+        parameter.put("mediCode",mediCode);
+
+        int result = userService.mediInfoUpdate(parameter);
+
+
+        return "redirect:/schedule";
     }
 
 }

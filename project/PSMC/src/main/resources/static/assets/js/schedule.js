@@ -109,6 +109,7 @@ fetch("/alltime")
                     projects.push(p);
                     const $option =document.createElement('option');
                     $option.textContent=`${m.connectProjectDTO.patientDTO.name}`;
+                    $option.value = p;
                     $patientName.appendChild($option);
                 }
 
@@ -134,19 +135,30 @@ function doDate(dating){
                     console.log('날짜주세요'+dating);
                     if(m.mediDate === dating){
                         console.log('똑같은가')
+                        console.log(t.timeCode);
                         times.push(t.timeCode);
                     }
                 })
 
             })
+            if(times.length>0){
+                for(let i = 0 ; i<times.length;i++){
+                    console.log('시간 하나씩 꺼내자'+times[i]);
+                    const $option = $time.querySelector(`option[value="${times[i]}"]`);
+                    $option.disabled=true;
+
+                }
+            }
         })
-    if(times!=null){
-        times.forEach(t=>{
-            console.log('시간선이 이싼요')
-            const $option = $time.querySelector(`option[value=${t}]`);
-            $option.disabled=true;
-        })
-    }
+
+    // if(times!=null){
+    //     console.log('시작전')
+    //     times.forEach(t=>{
+    //         console.log('시간선이 이싼요')
+    //         const $option = $time.querySelector(`option[value=${t}]`);
+    //         $option.disabled=true;
+    //     })
+    // }
 }
 
 function increaseDateByOneDay(dateString){
