@@ -87,3 +87,9 @@ body{
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
 }
+
+
+/*select disabled*/
+select[disabled]{
+    background-color: red;
+}

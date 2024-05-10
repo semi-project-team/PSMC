@@ -52,9 +52,9 @@ public class ScheduleController {
         param.put("schedule",dtimes);
             System.out.println(dtimes);
         }
-//        else{
+        else{
 //            List<TheraToProDTO> ttimes = userService.todayThera(param);
-//        }
+        }
 
         session.setAttribute("param",param);
 
