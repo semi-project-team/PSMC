@@ -41,7 +41,8 @@
             </div>
             
             <div class="box2">
-                <form method="get" id="formmer">
+                <div id="formouter">
+                <form method="get">
                     <div>
                         <fieldset class="patientinfo">
                             <legend>Patient Info</legend>
@@ -63,8 +64,6 @@
                             <input type="time" name="reservation_time" min="09:00" max="20:00"/>
                             <br>
                             <label for="position">증상 및 진단 정보:  </label>
-                            <!-- <input type="radio" name="site" id="position" value="yes"/>R1
-                            <input type="radio" name="site" value="no"/> R2<br> -->
                             <textarea name="contents" cols="30" row="60"></textarea>
                         </fieldset>
                     </div>
@@ -73,13 +72,11 @@
                         <input type="submit" value="예약"></input>
                         <input type="reset" value="취소"></input>
                     </span>
-                    <div>
-                        <br>
-                        <br>
+                    <div id="projectButton">
                         <button id="newProject">New Project</button>
                     </div>
                 </form>
-
+                </div>
             </div>
             <div class="box3">
                 <fieldset class="timeslot">

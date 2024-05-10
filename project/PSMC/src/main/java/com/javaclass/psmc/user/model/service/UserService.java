@@ -1,6 +1,8 @@
 package com.javaclass.psmc.user.model.service;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
+import com.javaclass.psmc.mainPage.model.dto.TtoMIDTO;
 import com.javaclass.psmc.user.model.dao.UserMapper;
 import com.javaclass.psmc.user.model.dto.IdDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -65,5 +67,21 @@ public class UserService {
 
     public LoginUserDTO findMemberByPmCode(String pmCode) {
         return userMapper.findMemberByPmCode(pmCode);
+    }
+
+    public ProfileDTO findEmployeeByPmCode(String pmCode) {
+
+        return userMapper.findEmployeeByPmCode(pmCode);
+    }
+
+
+    public List<TtoMIDTO> todayMedi(Map<String, Object> param) {
+
+        return userMapper.todayMedi(param);
+    }
+
+    public List<TtoMIDTO> allTimes(String pmCode) {
+
+        return userMapper.allTimes(pmCode);
     }
 }

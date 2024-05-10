@@ -19,12 +19,12 @@
                 <i class="fas fa-user-circle profile"></i>
             </div>
             <div class="profile-details">
-                <h2 id="profileName">김의사</h2>
-                <p id="profileNumber">(D12345)</p>
-                <p id="profilePosition">재활의학과</p>
-                <p id="profileSpecialty">전문의</p>
-                <p id="profilePhoneNumber">02-999-9999</p>
-                <p id="profileEmail">doctor01@psmc.co.kr</p>
+                <h2 id="profileName" th:text="${profile.name}"></h2>
+                <p id="profileNumber">([[${profile.pmCode}]])</p>
+                <p id="profilePosition" th:text="${profile.getPositionDTO().getPositionName()}"></p>
+                <p id="profileSpecialty" th:text="${profile.getMedicalFieldDTO().getFieldName()}"></p>
+                <p id="profilePhoneNumber" th:text="${profile.getOfficeNum()}"></p>
+                <p id="profileEmail" th:text="${profile.getEmail()}"></p>
 
             </div>
         </div>
@@ -34,10 +34,10 @@
                 <div>
                     <fieldset class="patientinfo">
                         <legend>Patient Info</legend>
-                        <label for="sub"> 환자 이름  :</label>
-                        <input type="text" name="person" id="sub"/><br>
-                        <label for="sub"> 환자 번호  :</label>
-                        <input type="text" name="person" id="sub"/><br>
+                        <label for="patientName"> 환자 이름  :</label>
+                        <input type="text" name="person" id="patientName"/><br>
+                        <label for="patientNum"> 환자 번호  :</label>
+                        <input type="text" name="person" id="patientNum"/><br>
                         <label for="phone">휴대폰 번호 : </label>
                         <input type="tel" name="tell" id="phone" placeholder="010-0000-0000" pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
                     </fieldset>
@@ -46,13 +46,11 @@
                     <br>
                     <fieldset class="timeslot">
                         <legend>TimeSlot</legend>
-                        <label for="sub">날짜 및 시간 :</label>
+                        <label>날짜 및 시간 :</label>
                         <input type="date" name="reservation_date"/>
                         <input type="time" name="reservation_time" min="09:00" max="20:00"/>
                         <br>
                         <label for="position">증상 및 진단 정보:  </label>
-                        <!-- <input type="radio" name="site" id="position" value="yes"/>R1
-                        <input type="radio" name="site" value="no"/> R2<br> -->
                         <textarea name="contents" cols="30" row="60" id="position"></textarea>
                     </fieldset>
                 </div>
