@@ -1,7 +1,19 @@
 package com.javaclass.psmc.mediConnect.model.dto;
 
+import com.javaclass.psmc.common.model.dto.CreateProjectDTO;
+import com.javaclass.psmc.common.model.dto.PatientDTO;
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@ToString
 public class ShowAllProjectsDTO {
 
-//    롬복추가
+    private int projectNo;
+    private int patientNo;
+    private PatientDTO patientDTO;
+    private CreateProjectDTO createProjectDTO;
 
 }
