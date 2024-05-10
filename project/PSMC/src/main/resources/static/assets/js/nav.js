@@ -1,20 +1,13 @@
-const $mainbar = document.getElementById('mainbar');
+document.querySelectorAll('.pack').forEach(item => {
+    item.addEventListener('mouseenter', event => {
+        // 아이콘과 텍스트 색상 변경
+        event.currentTarget.querySelector('i').style.color = 'lightblue'; // 아이콘 색상 변경
+        event.currentTarget.querySelector('span').style.color = 'lightblue'; // 텍스트 색상 변경
+    });
 
-$mainbar.addEventListener('mouseover',e=>{
-    const $title= $mainbar.getElementsByClassName('title');
-    for(let i =0 ; i<$title.length;i++){
-        if($title[i].classList.contains('hidden'))
-            $title[i].classList.remove('hidden')
-        $title[i].style.display='inline'
-    }
-})
-
-$mainbar.addEventListener('mouseout',e=>{
-    const $title=$mainbar.getElementsByClassName('title');
-    for(let i = 0; i< $title.length;i++){
-        if(!$title[i].classList.contains('hidden')){
-            $title[i].classList.add('hidden');
-            $title[i].style.display='none'
-        }
-    }
-})
+    item.addEventListener('mouseleave', event => {
+        // 아이콘과 텍스트 색상 초기화
+        event.currentTarget.querySelector('i').style.color = ''; // 아이콘 기본 색상으로 변경
+        event.currentTarget.querySelector('span').style.color = ''; // 텍스트 기본 색상으로 변경
+    });
+});
