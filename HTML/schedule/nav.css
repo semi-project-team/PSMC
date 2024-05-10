@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 
 /* #mainbar:hover {
@@ -22,18 +22,15 @@
     align-items: flex-start;
 } */
 
-.pack:hover i,
-.pack:hover span {
-    color: lightblue; /* 원하는 호버 색상으로 변경하세요 */
-}
+
 
 #mainNav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
-    
-    
+
+
+
 }
 
 #mainNav>div{
@@ -71,7 +68,7 @@ i{
 } */
 
 .title{
-    
+
     font-size: 15px;
 }
 .pack{
@@ -79,14 +76,10 @@ i{
     position: relative;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
 }
-
-
-.pack span {
+.pack p {
     margin-left: 5px; /* 아이콘과 텍스트 사이의 간격을 조정하세요 */
-    font-size: 14px; /* 원하는 크기로 조정하세요 */
-    font-family: Arial, sans-serif;
 }
 
 #mainNav p {
@@ -98,8 +91,8 @@ i{
 #subNav p {
     font-size: 15px; /* Adjust the font size as needed */
     font-family: Arial, sans-serif;
-    color:white; 
-    
+    color:white;
+
 }
 
 

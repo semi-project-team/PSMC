@@ -7,7 +7,7 @@ body,html{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    
+    height: 20vh;
     
 }
 
@@ -176,6 +176,7 @@ body,html{
     position: relative;
 }
 
+
 fieldset {
     border: 2px solid rgb(3, 61, 94);
     font-family: 'Roboto', sans-serif;
@@ -235,15 +236,23 @@ textarea{
 #inputter {
     margin-top: 5%; 
     margin-left:5%;
+    background-color: blue;
 }
-
-#newProject {
-    margin-left: 70%; 
+#formouter{
+    background-color: cyan;
+    display: flex;
+    flex-direction: column;
+}
+/* 
+#newProject { */
+    
     /* position: absolute;  */
     /* margin-top: -10%; */
+/* } */
+
+#projectButton{
+    
 }
-
-
 /* box3 */
 
 .box3{
