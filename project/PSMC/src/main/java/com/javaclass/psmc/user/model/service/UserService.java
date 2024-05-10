@@ -2,6 +2,7 @@ package com.javaclass.psmc.user.model.service;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
+import com.javaclass.psmc.mainPage.model.dto.TheraToProDTO;
 import com.javaclass.psmc.mainPage.model.dto.TtoMIDTO;
 import com.javaclass.psmc.user.model.dao.UserMapper;
 import com.javaclass.psmc.user.model.dto.IdDTO;
@@ -92,4 +93,7 @@ public class UserService {
     public int mediInfoUpdate(Map<String, Object> parameter) {
         return userMapper.mediInfoUpdate(parameter);
     }
+
+//    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
+//    }
 }
