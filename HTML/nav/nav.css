@@ -22,7 +22,10 @@
     align-items: flex-start;
 } */
 
-
+.pack:hover i,
+.pack:hover span {
+    color: lightblue; /* 원하는 호버 색상으로 변경하세요 */
+}
 
 #mainNav {
     display: flex;
@@ -76,10 +79,14 @@ i{
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
-.pack p {
+
+
+.pack span {
     margin-left: 5px; /* 아이콘과 텍스트 사이의 간격을 조정하세요 */
+    font-size: 14px; /* 원하는 크기로 조정하세요 */
+    font-family: Arial, sans-serif;
 }
 
 #mainNav p {
