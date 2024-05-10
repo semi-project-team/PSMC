@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProjectsController {
 
-//    @GetMapping
+    @GetMapping("/MediConnect")
+    public String mediConnectLink() {
+        return "/doc/projects";
+    }
 
 }
