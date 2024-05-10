@@ -30,10 +30,10 @@ public class ProjectsController {
         return "/doc/projects";
     }
 
-//    @GetMapping(value = "/requestProject", produces = "application/json; charset=UTF-8")
-//    @ResponseBody
-//    public List<ShowAllProjectsDTO> projectList(HttpSession session) {
-//        return session.getAttribute("");
-//    }
+    @GetMapping(value = "/requestProject", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<ShowAllProjectsDTO> projectList(HttpSession session) {
+        return (List<ShowAllProjectsDTO>) session.getAttribute("projectList");
+    }
 
 }

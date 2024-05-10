@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaclass.psmc.mediConnect.model.dao.ProjectsMapper">
+    <resultMap id="patientResultMap" type="com.javaclass.psmc.common.model.dto.PatientDTO">
+        <id property="patientNo" column="patient_no"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"></result>
+        <result property="gender" column="gender"/>
+    </resultMap>
+
+    <resultMap id="injuryResultMap" type="com.javaclass.psmc.common.model.dto.InjuryDTO">
+        <id property="injuryCode" column="injury_code"/>
+        <result property="injuryName" column="injuryName"/>
+    </resultMap>
+
+    <resultMap id="createProjectResultMap" type="com.javaclass.psmc.common.model.dto.CreateProjectDTO">
+        <id property="projectNo" column="project_no"/>
+        <result property="pmCode" column="pm_code"/>
+    </resultMap>
+
+    <resultMap id="showAllProjectsResultMap" type="com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO">
+        <id property="projectNo" column="project_no"/>
+        <result property="patientNo" column="patient_no"/>
+        <association property="injuryDTO" resultMap="injuryResultMap"/>
+        <association property="patientDTO" resultMap="patientResultMap"/>
+        <association property="createProjectDTO" resultMap="createProjectResultMap"/>
+    </resultMap>
+
+    <select id="showAllProjects" resultMap="showAllProjectsResultMap">
+        select
+            a.name,
+            a.age,
+            a.gender,
+            b.patient_no,
+            b.project_no,
+            c.injury_code,
+            c.injury_name
+        from
+            patient a
+        join
+            project b on a.patient_no = b.patient_no
+        join
+            injury c on b.injury_code = c.injury_code
+        join
+            create_project d on b.project_no = d.project_no
+        where
+            b.project_status = 'Y'
+            and
+            d.pm_code like 'd%';
+    </select>
+
+</mapper>
