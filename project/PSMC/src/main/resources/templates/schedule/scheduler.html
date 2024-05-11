@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -8,12 +8,18 @@
     <link href="/assets/css/schedule.css" rel="stylesheet">
     <title>Title</title>
 </head>
+<script>
+    const message = '[[${message}]]';
+    if(message){
+        alert(message);
+    }
+</script>
 <body>
     <th:block th:insert="~{/common/nav}"></th:block>
     <th:block th:insert="~{/common/header}"></th:block>
     <div class="container py-9 py-lg-11 position-relative z-index-1" id="outer">
         <div class="searchdate">
-            <form action="/getSchedule" method="get">
+            <form action="/schedule/getSchedule" method="get">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control dateselect" placeholder="find reservation" aria-label="Recipient's username" aria-describedby="button-addon2" name="datepick" autocomplete="off">
                     <button class="btn btn-outline-dark" type="submit" id="button-addon2">Go</button>
@@ -150,7 +156,7 @@
 
                             <input type="date" class="form-control" id="reservationDate" name="mediDate">
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-4" sec:authorize="hasAnyAuthority('d')">
 
                             <select class="form-select" aria-label="Default select example" id="reservationTime" name="timeCode">
                                 <option disabled>예약 시간 선택</option>
@@ -172,6 +178,10 @@
                                 <option value="16">17:30~18:00</option>
                             </select>
                         </div>
+                        <div class="mb-4 d-flex" sec:authorize="hasAnyAuthority('t')">
+                            <input type="time" class="form-control" id="timeInput1" name="timeInput" step="60">~<input type="time" class="form-control" id="timeInput2" name="timeInput" step="60">
+                        </div>
+
                     </form>
                 </div>
 
@@ -184,6 +194,7 @@
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/schedule.js"></script>
 <script src="/assets/js/bootstrap-datepicker.js"></script>
