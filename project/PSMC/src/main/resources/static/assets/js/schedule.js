@@ -26,45 +26,87 @@ fetch("/setSchedule")
 
             date[i].textContent = day;
         }
-        data.schedule.forEach(t=>{
-            const time = t.timeVal;
-            const code = t.timeCode;
-            let start = time.substring(0,time.length-3);
-            const end = ending(start);
-            t.mitoProDTOS.forEach(m=>{
-                const dayNum = m.day;
-                const mediDate = m.mediDate;
-                const mediCode = m.mediCode;
-                const p = m.connectProjectDTO.patientDTO
-                const age = p.age;
-                const name = p.name;
-                const injuryName = m.connectProjectDTO.injuryDTO.injuryName;
+        if('dschedule' in data) {
+            data.dschedule.forEach(t => {
+                const time = t.timeVal;
+                const code = t.timeCode;
+                let start = time.substring(0, time.length - 3);
+                const end = ending(start);
+                t.mitoProDTOS.forEach(m => {
+                    const dayNum = m.day;
+                    const mediDate = m.mediDate;
+                    const mediCode = m.mediCode;
+                    const p = m.connectProjectDTO.patientDTO
+                    const age = p.age;
+                    const name = p.name;
+                    const injuryName = m.connectProjectDTO.injuryDTO.injuryName;
 
+                    switch (dayNum) {
+                        case 1:
+                            makeSchedule(day1, start, end, name, injuryName, age, code, mediDate, mediCode)
+                            break;
+                        case 2:
+                            makeSchedule(day2, start, end, name, injuryName, age, code, mediDate, mediCode)
+                            break;
+                        case 3:
+                            makeSchedule(day3, start, end, name, injuryName, age, code, mediDate, mediCode)
+                            break;
+                        case 4:
+                            makeSchedule(day4, start, end, name, injuryName, age, code, mediDate, mediCode)
+                            break;
+                        case 5:
+                            makeSchedule(day5, start, end, name, injuryName, age, code, mediDate, mediCode)
+                            break;
+                        case 6:
+                            makeSchedule(day6, start, end, name, injuryName, age, code, mediDate, mediCode)
+                            break;
+                        case 7:
+                            makeSchedule(day7, start, end, name, injuryName, age, code, mediDate, mediCode)
+                            break;
+                    }
+                })
+            })
+        }
+        else if('tschedule' in data){
+            data.tschedule.forEach(t=>{
+                console.table(t);
+                const dayNum = t.day;
+                const theraDate = t.theraDate;
+                const theraCode = t.theraCode;
+                const p  = t.connectProjectDTO.patientDTO;
+                const name = p.name;
+                const age = p.age;
+                const injuryName = t.connectProjectDTO.injuryDTO.injuryName;
+                const start = t.start;
+                const newStart = start.substring(0,start.length-3);
+                const end = t.end;
+                const newEnd = end.substring(0,end.length-3);
                 switch (dayNum){
                     case 1:
-                        makeSchedule(day1,start,end,name,injuryName,age,code,mediDate,mediCode)
+                        makeSchedule(day1,newStart,newEnd,name,injuryName,age,'none',theraDate,theraCode);
                         break;
                     case 2:
-                        makeSchedule(day2,start,end,name,injuryName,age,code,mediDate,mediCode)
+                        makeSchedule(day2,newStart,newEnd,name,injuryName,age,'none',theraDate,theraCode);
                         break;
                     case 3:
-                        makeSchedule(day3,start,end,name,injuryName,age,code,mediDate,mediCode)
+                        makeSchedule(day3,newStart,newEnd,name,injuryName,age,'none',theraDate,theraCode);
                         break;
                     case 4:
-                        makeSchedule(day4,start,end,name,injuryName,age,code,mediDate,mediCode)
+                        makeSchedule(day4,newStart,newEnd,name,injuryName,age,'none',theraDate,theraCode);
                         break;
                     case 5:
-                        makeSchedule(day5,start,end,name,injuryName,age,code,mediDate,mediCode)
+                        makeSchedule(day5,newStart,newEnd,name,injuryName,age,'none',theraDate,theraCode);
                         break;
                     case 6:
-                        makeSchedule(day6,start,end,name,injuryName,age,code,mediDate,mediCode)
+                        makeSchedule(day6,newStart,newEnd,name,injuryName,age,'none',theraDate,theraCode);
                         break;
                     case 7:
-                        makeSchedule(day7,start,end,name,injuryName,age,code,mediDate,mediCode)
+                        makeSchedule(day7,newStart,newEnd,name,injuryName,age,'none',theraDate,theraCode);
                         break;
+
                 }
             })
-        })
+        }
 
         const $modalButton = document.querySelectorAll('.button-6');
         $modalButton.forEach(b=>{
@@ -75,17 +117,30 @@ fetch("/setSchedule")
                         option.selected=true;
                     }
                 })
+
                 const timeCode = b.classList;
                 const val = timeCode[1].split("-")[1];
-                $time.value = val;
+                if(val!="none") {
+                    $time.value = val;
+                }
+
 
                 const date = timeCode[2].split("/")[1];
-                console.log('date 시작')
-                doDate(date);
+
+                if(val!="none") {
+                    doDate(date);
+                }
                 const mediCode = timeCode[3].split("-")[1];
                 $date.value=date;
                 $delete.style.display='block';
-
+                const timeRange = b.parentElement.previousElementSibling.textContent;
+                console.log(timeRange);
+                if(val=="none"){
+                   const startTime = timeRange.split("-")[0].trim();
+                   const endTime = timeRange.split("-")[1].trim();
+                   $start.value=startTime;
+                   $end.value=endTime;
+                }
                 modiButton(mediCode);
                 deleteButton(mediCode);
             })
@@ -96,26 +151,40 @@ fetch("/setSchedule")
 const $patientName = document.getElementById('patientName');
 const $time = document.getElementById('reservationTime');
 const $date = document.getElementById('reservationDate');
-
+const $start = document.getElementById('timeInput1');
+const $end  = document.getElementById('timeInput2');
 fetch("/alltime")
     .then(res=>res.json())
     .then(data=>{
-        let projects =[];
-        data.forEach(t=>{
-            console.table(t);
-            t.mitoProDTOS.forEach(m=>{
-                const p = m.connectProjectDTO.projectNo;
-                if(projects.indexOf(p) === -1){
-                    projects.push(p);
-                    const $option =document.createElement('option');
-                    $option.textContent=`${m.connectProjectDTO.patientDTO.name}`;
-                    $option.value = p;
-                    $patientName.appendChild($option);
+
+            let projects = [];
+            data.times.forEach(t => {
+                console.table(t);
+                if(data.pmCode.charAt(0)=='d'){
+                    t.mitoProDTOS.forEach(m => {
+                        const p = m.connectProjectDTO.projectNo;
+                        if (projects.indexOf(p) === -1) {
+                            projects.push(p);
+                            const $option = document.createElement('option');
+                            $option.textContent = `${m.connectProjectDTO.patientDTO.name}`;
+                            $option.value = p;
+                            $patientName.appendChild($option);
+                        }
+
+                    })
+                }
+                else{
+                    const p = t.connectProjectDTO.projectNo;
+                    if(projects.indexOf(p)===-1){
+                        projects.push(p);
+                        const $option = document.createElement('option');
+                        $option.textContent = `${t.connectProjectDTO.patientDTO.name}`;
+                        $option.value = p;
+                        $patientName.appendChild($option);
+                    }
                 }
 
             })
-
-        })
 
     })
 
@@ -151,14 +220,7 @@ function doDate(dating){
             }
         })
 
-    // if(times!=null){
-    //     console.log('시작전')
-    //     times.forEach(t=>{
-    //         console.log('시간선이 이싼요')
-    //         const $option = $time.querySelector(`option[value=${t}]`);
-    //         $option.disabled=true;
-    //     })
-    // }
+
 }
 
 function increaseDateByOneDay(dateString){

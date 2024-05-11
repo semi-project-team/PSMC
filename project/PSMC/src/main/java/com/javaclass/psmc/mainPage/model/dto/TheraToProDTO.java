@@ -11,5 +11,6 @@ public class TheraToProDTO {
     private Date theraDate;
     private Time start;
     private Time end;
+    private int day;
     private ConnectProjectDTO connectProjectDTO;
 }

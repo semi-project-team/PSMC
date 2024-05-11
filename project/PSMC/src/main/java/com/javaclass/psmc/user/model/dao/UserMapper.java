@@ -2,6 +2,7 @@ package com.javaclass.psmc.user.model.dao;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
+import com.javaclass.psmc.mainPage.model.dto.TheraToProDTO;
 import com.javaclass.psmc.mainPage.model.dto.TtoMIDTO;
 import com.javaclass.psmc.user.model.dto.IdDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -33,7 +34,11 @@ public interface UserMapper {
 
     List<TtoMIDTO> allTimes(String pmCode);
 
-    int softDelete(int mediCode);
+    int softDelete(Map<String,Object> delete);
 
     int mediInfoUpdate(Map<String, Object> parameter);
+
+    List<TheraToProDTO> todayThera(Map<String, Object> param);
+
+    List<TheraToProDTO> allThera(String pmCode);
 }

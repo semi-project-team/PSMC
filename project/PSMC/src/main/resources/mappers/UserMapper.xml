@@ -219,13 +219,28 @@
             a.project_status = 'Y'
     </select>
 
-    <update id="softDelete" parameterType="int">
+    <update id="softDelete" parameterType="hashmap">
         update
-            medi_info
+            <if test="pmCode == 'd'">
+                medi_info
+            </if>
+            <if test="pmCode == 't'">
+                thera_info
+            </if>
         set
-            medi_status='N'
+            <if test="pmCode=='d'">
+                medi_status = 'N'
+            </if>
+            <if test="pmCode == 't' ">
+                thera_status = 'N'
+            </if>
         where
-            medi_code = #{mediCode}
+            <if test="pmCode=='d'">
+                medi_code = #{code}
+            </if>
+            <if test="pmCode=='t'">
+                thera_code = #{code}
+            </if>
     </update>
     <update id="mediInfoUpdate" parameterType="hashmap">
         update
@@ -237,4 +252,81 @@
         where
             medi_code = #{mediCode}
     </update>
+
+    <resultMap id="theraToPro" type="com.javaclass.psmc.mainPage.model.dto.TheraToProDTO">
+        <id property="theraCode" column="thera_code"/>
+        <result property="theraDate" column="thera_date"/>
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+        <result property="day" column="day"/>
+        <association property="connectProjectDTO" resultMap="connectProjectMap"/>
+    </resultMap>
+
+    <select id="todayThera" parameterType="hashmap" resultMap="theraToPro">
+        select
+            t.thera_code,
+            t.thera_date,
+            t.start,
+            t.end,
+            dayofweek(t.thera_date) as 'day',
+            a.project_no,
+            i.injury_name,
+            e.pm_code,
+            p.name,
+            p.age
+        from
+            thera_info t
+        join
+            project a on t.project_no = a.project_no
+        join
+            injury i on i.injury_code = a.injury_code
+        join
+            assign_project s on s.project_no = a.project_no
+        join
+            employee e on e.pm_code = s.pm_code
+        join
+            patient p on p.patient_no = a.patient_no
+        where
+            e.pm_code = #{pmCode}
+<!--        and-->
+<!--            t.thera_date between #{startDay} and #{endDay}-->
+<!--        데이터 사이즈가 작아서 잠시 주석 처리-->
+        order by
+            t.start
+
+    </select>
+
+    <select id="allThera" resultMap="theraToPro" parameterType="string">
+        select
+            t.thera_code,
+            t.thera_date,
+            t.start,
+            t.end,
+            dayofweek(t.thera_date) as 'day',
+            a.project_no,
+            i.injury_name,
+            e.pm_code,
+            p.name,
+            p.age
+        from
+            thera_info t
+        join
+            project a on t.project_no = a.project_no
+        join
+            injury i on i.injury_code = a.injury_code
+        join
+            assign_project s on s.project_no = a.project_no
+        join
+            employee e on e.pm_code = s.pm_code
+        join
+            patient p on p.patient_no = a.patient_no
+        where
+            e.pm_code = #{pmCode}
+        and
+            a.project_status='Y'
+        and
+            t.thera_status = 'Y'
+        order by
+            t.start
+    </select>
 </mapper>

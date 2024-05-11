@@ -4,9 +4,11 @@ import com.javaclass.psmc.mainPage.model.dto.TheraToProDTO;
 import com.javaclass.psmc.mainPage.model.dto.TtoMIDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
@@ -17,6 +19,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class ScheduleController {
@@ -28,7 +31,11 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedule/scheduler")
-    public void scheduler(){}
+    public void scheduler(Model model, HttpServletRequest request){
+        System.out.println("와주십숑 scheduler 입니다");
+        String message = (String) request.getAttribute("message");
+        model.addAttribute("message",message);
+    }
 
     @GetMapping("/schedule")
     public String schedule(HttpSession session){
@@ -36,11 +43,12 @@ public class ScheduleController {
 
         String pmCode = loginUserDTO.getPmCode();
         String role = loginUserDTO.getRole().toString();
-        System.out.println("오긴 했니");
-        System.out.println(role);
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+        System.out.println("startOfWeek = " + startOfWeek);
+        System.out.println("endOfWeek = " + endOfWeek);
 
         Map<String,Object> param = new HashMap<>();
         param.put("pmCode",pmCode);
@@ -48,18 +56,19 @@ public class ScheduleController {
         param.put("endDay",endOfWeek);
 
         if(role.equals("[d]")){
-        List<TtoMIDTO> dtimes = userService.todayMedi(param);
-        param.put("schedule",dtimes);
-            System.out.println(dtimes);
+            List<TtoMIDTO> dtimes = userService.todayMedi(param);
+            param.put("dschedule",dtimes);
+            System.out.println("dtimes = " + dtimes);
         }
         else{
-//            List<TheraToProDTO> ttimes = userService.todayThera(param);
+            List<TheraToProDTO> ttimes = userService.todayThera(param);
+            param.put("tschedule",ttimes);
         }
 
         session.setAttribute("param",param);
 
 
-        return "/schedule/scheduler";
+        return "forward:/schedule/scheduler";
 
     }
 
@@ -71,16 +80,24 @@ public class ScheduleController {
 
     @GetMapping(value = "/alltime", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<TtoMIDTO> getSchedule(HttpSession session){
+    public Map<String,Object> getSchedule(HttpSession session){
         String pmCode = (String) ((Map<String,Object>) session.getAttribute("param")).get("pmCode");
-        List<TtoMIDTO> times = userService.allTimes(pmCode);
+        Map<String,Object> allSchedule = new HashMap<>();
+        allSchedule.put("pmCode",pmCode);
+        if(pmCode.charAt(0)=='d') {
+            List<TtoMIDTO> times = userService.allTimes(pmCode);
+            allSchedule.put("times",times);
 
-        System.out.println(times);
-        return times;
+        }
+        else{
+            List<TheraToProDTO> times =userService.allThera(pmCode);
+            allSchedule.put("times",times);
+        }
 
+        return allSchedule;
     }
 
-    @GetMapping("/getSchedule")
+    @GetMapping("/schedule/getSchedule")
     public String getSchedule(@RequestParam String datepick,HttpSession session){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate dating = LocalDate.parse(datepick,formatter);
@@ -107,7 +124,11 @@ public class ScheduleController {
     public String delete(@PathVariable int mediCode, HttpSession session){
 
         String pmCode= ((Map<String,String>)session.getAttribute("param")).get("pmCode");
-        int result = userService.softDelete(mediCode);
+        String role = String.valueOf(pmCode.charAt(0));
+        Map<String,Object> delete = new HashMap<>();
+        delete.put("pmCode",role);
+        delete.put("code",mediCode);
+        int result = userService.softDelete(delete);
 
         return "redirect:/schedule";
     }
@@ -122,5 +143,6 @@ public class ScheduleController {
 
         return "redirect:/schedule";
     }
+
 
 }

@@ -86,12 +86,20 @@ public class UserService {
         return userMapper.allTimes(pmCode);
     }
 
-    public int softDelete(int mediCode) {
-        return userMapper.softDelete(mediCode);
+    public int softDelete(Map<String,Object> delete) {
+        return userMapper.softDelete(delete);
     }
 
     public int mediInfoUpdate(Map<String, Object> parameter) {
         return userMapper.mediInfoUpdate(parameter);
+    }
+
+    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
+        return userMapper.todayThera(param);
+    }
+
+    public List<TheraToProDTO> allThera(String pmCode) {
+        return userMapper.allThera(pmCode);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
