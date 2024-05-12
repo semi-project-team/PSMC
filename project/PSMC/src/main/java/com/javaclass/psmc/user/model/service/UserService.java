@@ -1,9 +1,7 @@
 package com.javaclass.psmc.user.model.service;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
-import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
-import com.javaclass.psmc.mainPage.model.dto.TheraToProDTO;
-import com.javaclass.psmc.mainPage.model.dto.TtoMIDTO;
+import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.user.model.dao.UserMapper;
 import com.javaclass.psmc.user.model.dto.IdDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -86,7 +84,7 @@ public class UserService {
         return userMapper.allTimes(pmCode);
     }
 
-    public int softDelete(Map<String,Object> delete) {
+    public int softDelete(Map<String,String> delete) {
         return userMapper.softDelete(delete);
     }
 
@@ -100,6 +98,17 @@ public class UserService {
 
     public List<TheraToProDTO> allThera(String pmCode) {
         return userMapper.allThera(pmCode);
+    }
+
+
+
+    public List<AllMediDTO> allMedi(Map<String, Object> param) {
+
+        return userMapper.allMedi(param);
+    }
+
+    public List<AllTheraDTO> allTheraInfo(Map<String, Object> param) {
+        return userMapper.allTheraInfo(param);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {

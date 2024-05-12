@@ -15,6 +15,8 @@ const day5 =document.getElementById('day5').firstElementChild;
 const day6 =document.getElementById('day6').firstElementChild;
 const day7 =document.getElementById('day7').firstElementChild;
 
+const warningtext = document.getElementById('warningarea');
+
 fetch("/setSchedule")
     .then(res=>res.json())
     .then(data=>{
@@ -128,7 +130,8 @@ fetch("/setSchedule")
                 const date = timeCode[2].split("/")[1];
 
                 if(val!="none") {
-                    doDate(date);
+                    const projectNo = $patientName.value
+                    doDate(date,projectNo);
                 }
                 const mediCode = timeCode[3].split("-")[1];
                 $date.value=date;
@@ -188,41 +191,151 @@ fetch("/alltime")
 
     })
 
-function doDate(dating){
-    console.log('date 들어옮')
+function doDate(dating,projectNo){
+    console.log('date 들어옮');
     Array.from($time.options).forEach(function(option){
         option.disabled=false;
+
+
 
     })
     $time[0].disabled=true;
     let times = [];
-    fetch("/alltime")
+    fetch("/allProjects")
         .then(res=>res.json())
         .then(data=>{
-            data.forEach(t=>{
-                t.mitoProDTOS.forEach(m=>{
-                    console.log('날짜주세요'+dating);
-                    if(m.mediDate === dating){
-                        console.log('똑같은가')
-                        console.log(t.timeCode);
-                        times.push(t.timeCode);
+            console.table(data);
+
+            if(data.role == "doctor"){
+                data.allMedi.forEach(m=>{
+                    m.mediInfoDTOS.forEach(t=>{
+                        if(t.mediDate == dating){
+                            times.push(t.timeCode);
+                        }
+                    })
+                })
+                times.forEach(time=>{
+                    const $option = $time.querySelector(`option[value="${time}"]`);
+                    $option.disabled=true;
+                })
+                data.allThera.forEach(thera=>{
+                    console.table(thera);
+                    console.log('thera 들어옴');
+                    console.log(projectNo);
+                    if(thera.projectNo==projectNo){
+                        console.log('project no 맞음')
+                        thera.theraInfoDTOS.forEach(info=>{
+                            if(info.theraDate==dating){
+                                console.log('thera 날짜도 맞음')
+                                const startTime = info.start;
+                                console.log("startTime"+startTime);
+
+                                const endTime = info.end;
+                                console.log("endTime"+endTime);
+                                let code = [];
+                                for(let i =1 ; i<17 ;i++){
+                                    const startCode = startTimeCode(i);
+                                    const endCode = endTimeCode(i);
+                                    if(!(subtractTime(endCode,startTime)>=0 || subtractTime(startCode,endTime)<=0)){
+                                        code.push(i);
+                                    }
+
+                                }
+                                code.forEach(i=>{
+                                    console.log("코등"+i);
+                                    const $option =  $time.querySelector(`option[value="${i}"]`);
+                                    $option.disabled=true;
+                                })
+                            }
+                        })
                     }
                 })
 
-            })
-            if(times.length>0){
-                for(let i = 0 ; i<times.length;i++){
-                    console.log('시간 하나씩 꺼내자'+times[i]);
-                    const $option = $time.querySelector(`option[value="${times[i]}"]`);
-                    $option.disabled=true;
-
-                }
             }
+            // data.forEach(t=>{
+            //     t.mitoProDTOS.forEach(m=>{
+            //         console.log('날짜주세요'+dating);
+            //         if(m.mediDate === dating){
+            //             console.log('똑같은가')
+            //             console.log(t.timeCode);
+            //             times.push(t.timeCode);
+            //         }
+            //     })
+            //
+            // })
+            // if(times.length>0){
+            //     for(let i = 0 ; i<times.length;i++){
+            //         console.log('시간 하나씩 꺼내자'+times[i]);
+            //         const $option = $time.querySelector(`option[value="${times[i]}"]`);
+            //         $option.disabled=true;
+            //
+            //     }
+            // }
         })
 
 
 }
+function endTimeCode(i){
+    switch (i){
+        case 1: return "09:30:00";
+        case 2: return "10:00:00";
+        case 3: return "10:30:00";
+        case 4: return "11:00:00";
+        case 5: return "11:30:00";
+        case 6: return "12:00:00";
+        case 7: return "13:30:00";
+        case 8: return "14:00:00";
+        case 9: return "14:30:00";
+        case 10: return "15:00:00";
+        case 11: return "15:30:00";
+        case 12: return "16:00:00";
+        case 13: return "16:30:00";
+        case 14: return "17:00:00";
+        case 15: return "17:30:00";
+        case 16: return "18:00:00";
+    }
 
+}
+function startTimeCode(i){
+    switch (i) {
+        case 1: return '09:00:00';
+        case 2: return '09:30:00';
+        case 3: return '10:00:00';
+        case 4: return '10:30:00';
+        case 5: return '11:00:00';
+        case 6: return '11:30:00';
+        case 7: return '13:00:00';
+        case 8: return '13:30:00';
+        case 9: return '14:00:00';
+        case 10: return '14:30:00';
+        case 11: return '15:00:00';
+        case 12: return '15:30:00';
+        case 13: return '16:00:00';
+        case 14: return '16:30:00';
+        case 15: return '17:00:00';
+        case 16: return '17:30:00';
+        default: return null;
+    }
+}
+
+function subtractTime(start, end) {
+    // 시작 시간과 끝 시간을 Date 객체로 변환
+    const startTime = new Date("1970-01-01T" + start + "Z");
+    const endTime = new Date("1970-01-01T" + end + "Z");
+
+    // 끝 시간에서 시작 시간을 빼서 시간 차이를 구함
+    const timeDiff = endTime.getTime() - startTime.getTime();
+
+   if(timeDiff>0){
+       return  1;
+   }
+   else if(timeDiff<0){
+       return  -1;
+   }
+   else{
+       return 0;
+   }
+}
 function increaseDateByOneDay(dateString){
     let date = new Date(dateString);
     date.setDate(date.getDate()+1);
@@ -280,6 +393,14 @@ $form.addEventListener('change',e=>{
     $delete.style.display='none';
 })
 
-$date.addEventListener('change',function(){doDate($date.value)});
+$date.addEventListener('change',function(){
+    const projectNo = $patientName.value;
+    doDate($date.value,projectNo);
 
+});
+
+$patientName.addEventListener('change',function (){
+    const projectNo = $patientName.value;
+    doDate($date.value,projectNo);
+})
 

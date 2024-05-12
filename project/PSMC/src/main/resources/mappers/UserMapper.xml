@@ -219,38 +219,50 @@
             a.project_status = 'Y'
     </select>
 
-    <update id="softDelete" parameterType="hashmap">
+    <update id="softDelete" parameterType="HashMap">
         update
-            <if test="pmCode == 'd'">
+        <if test="role == 'doctor'">
                 medi_info
-            </if>
-            <if test="pmCode == 't'">
-                thera_info
-            </if>
-        set
-            <if test="pmCode=='d'">
-                medi_status = 'N'
-            </if>
-            <if test="pmCode == 't' ">
-                thera_status = 'N'
-            </if>
-        where
-            <if test="pmCode=='d'">
+            set
+                medi_status ='N'
+            where
                 medi_code = #{code}
-            </if>
-            <if test="pmCode=='t'">
+        </if>
+        <if test="role == 'thera'">
+                thera_info
+            set
+                thera_status = 'N'
+            where
                 thera_code = #{code}
-            </if>
+
+        </if>
     </update>
     <update id="mediInfoUpdate" parameterType="hashmap">
         update
+        <if test="role == 'doctor'">
             medi_info
+        </if>
+        <if test="role == 'thera'">
+            thera_info
+        </if>
+
         set
             project_no=#{projectNo},
-            medi_date = #{mediDate},
-            time_code = #{timeCode}
-        where
-            medi_code = #{mediCode}
+        <if test="role == 'doctor'">
+                medi_date = #{mediDate},
+                time_code = #{timeCode}
+            where
+                medi_code = #{code}
+        </if>
+        <if test="role == 'thera'">
+                thera_date = #{mediDate},
+                start = #{start},
+                end = #{end}
+            where
+                thera_code = #{code}
+        </if>
+
+
     </update>
 
     <resultMap id="theraToPro" type="com.javaclass.psmc.mainPage.model.dto.TheraToProDTO">
@@ -291,6 +303,10 @@
 <!--        and-->
 <!--            t.thera_date between #{startDay} and #{endDay}-->
 <!--        데이터 사이즈가 작아서 잠시 주석 처리-->
+        and
+            a.project_status = 'Y'
+        and
+            t.thera_status = 'Y'
         order by
             t.start
 
@@ -329,4 +345,85 @@
         order by
             t.start
     </select>
+    <resultMap id="mediInfoMap" type="com.javaclass.psmc.common.model.dto.MediInfoDTO">
+        <id property="mediCode" column="medi_code"/>
+        <result property="mediDate" column="medi_date"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="timeCode" column="time_code"/>
+        <result property="mediRegDate" column="medi_reg_date"/>
+        <result property="mediStatus" column="medi_status"/>
+    </resultMap>
+    <resultMap id="theraInfoMap" type="com.javaclass.psmc.common.model.dto.TheraInfoDTO">
+        <id property="theraCode" column="thera_code"/>
+        <result property="theraDate" column="thera_date"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="theraRegDate" column="thera_reg_date"/>
+        <result property="theraStatus" column="thera_status"/>
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+    </resultMap>
+
+
+    <resultMap id="allMediMap" type="com.javaclass.psmc.mainPage.model.dto.AllMediDTO">
+        <result property="projectNo" column="project_no"/>
+        <collection property="mediInfoDTOS" resultMap="mediInfoMap"/>
+    </resultMap>
+
+    <select id="allMedi" resultMap="allMediMap" parameterType="hashmap">
+        select
+            a.project_no,
+            m.time_code,
+            m.medi_date
+        from
+            project a
+
+        <if test="role == 'doctor'">
+            join
+                create_project c on c.project_no = a.project_no
+            join
+                employee e on e.pm_code = c.pm_code
+        </if>
+        <if test="role == 'thera'">
+            join
+                assign_project s on s.project_no = a.project_no
+            join
+                employee e on e.pm_code = s.pm_code
+        </if>
+        join medi_info m
+        on
+            m.project_no = a.project_no
+        where
+            e.pm_code = #{pmCode}
+
+    </select>
+    <resultMap id="allTheraMap" type="com.javaclass.psmc.mainPage.model.dto.AllTheraDTO">
+        <result property="projectNo" column="project_no"/>
+        <collection property="theraInfoDTOS" resultMap="theraInfoMap"/>
+    </resultMap>
+    <select id="allTheraInfo" resultMap="allTheraMap" parameterType="hashmap">
+        select
+            a.project_no,
+            t.start,
+            t.end,
+            t.thera_date
+        from
+            project a
+        <if test="role == 'doctor'">
+            join
+                create_project c on c.project_no=a.project_no
+            join
+                employee e on e.pm_code = c.pm_code
+        </if>
+        <if test="role == 'thera'">
+            join
+                assign_project s on s.project_no = a.project_no
+            join
+                employee e on e.pm_code = s.pm_code
+        </if>
+        join
+            thera_info t on t.project_no = a.project_no
+        where
+            e.pm_code = #{pmCode}
+    </select>
+
 </mapper>

@@ -138,9 +138,9 @@
     <div class="modal fade" id="exampleModal"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title custom-title" id="staticBackdropLabel">Medical Appointment</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" style="background-color: rgb(3, 61, 94)">
+                    <h1 class="modal-title custom-title" id="staticBackdropLabel" style="color: white">Medical Appointment</h1>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close" style="color: white !important;"></button>
                 </div>
 
                 <div class="modal-body text-center">
@@ -179,19 +179,23 @@
                             </select>
                         </div>
                         <div class="mb-4 d-flex" sec:authorize="hasAnyAuthority('t')">
-                            <input type="time" class="form-control" id="timeInput1" name="timeInput" step="60">~<input type="time" class="form-control" id="timeInput2" name="timeInput" step="60">
+                            <input type="time" class="form-control" id="timeInput1" name="start" step="60">~<input type="time" class="form-control" id="timeInput2" name="end" step="60">
+                            <div id="warningarea">
+
+                            </div>
                         </div>
 
                     </form>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="modifyBtn">Update</button>
                     <button type="button" class="btn btn-danger" id="deleteBtn">Delete</button>
+                    <button type="button" class="btn btn-primary" id="modifyBtn">Update</button>
                 </div>
             </div>
         </div>
     </div>
+<!-- modal -->
 </body>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

@@ -1,7 +1,6 @@
 package com.javaclass.psmc.mainPage.model.controller;
 
-import com.javaclass.psmc.mainPage.model.dto.TheraToProDTO;
-import com.javaclass.psmc.mainPage.model.dto.TtoMIDTO;
+import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -122,12 +121,16 @@ public class ScheduleController {
 
     @PostMapping("/delete/{mediCode}")
     public String delete(@PathVariable int mediCode, HttpSession session){
-
+        Map<String,String> delete = new HashMap<>();
         String pmCode= ((Map<String,String>)session.getAttribute("param")).get("pmCode");
         String role = String.valueOf(pmCode.charAt(0));
-        Map<String,Object> delete = new HashMap<>();
-        delete.put("pmCode",role);
-        delete.put("code",mediCode);
+        if(role.equals("d")){
+            delete.put("role","doctor");
+        }else{
+            delete.put("role","thera");
+        }
+        delete.put("code", String.valueOf(mediCode));
+        System.out.println(delete.get("code"));
         int result = userService.softDelete(delete);
 
         return "redirect:/schedule";
@@ -136,13 +139,48 @@ public class ScheduleController {
     @PostMapping("/update/{mediCode}")
     public String update(@RequestParam Map<String,Object> parameter,@PathVariable int mediCode,HttpSession session){
 
-        parameter.put("mediCode",mediCode);
+        parameter.put("code",mediCode);
+        for (String key : parameter.keySet()) {
+            Object value = parameter.get(key);
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
 
+        String role = String.valueOf(((LoginUserDTO)session.getAttribute("auth")).getPmCode().charAt(0));
+        if(role.equals("d")){
+            parameter.put("role","doctor");
+        }
+        else{
+            parameter.put("role","thera");
+        }
         int result = userService.mediInfoUpdate(parameter);
 
 
         return "redirect:/schedule";
     }
 
+    @GetMapping(value = "/allProjects",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public  Map<String,Object> allProjects(HttpSession session){
+        String pmCode = ((LoginUserDTO)session.getAttribute("auth")).getPmCode();
+        String role = String.valueOf(pmCode.charAt(0));
+        Map<String,Object> param = new HashMap<>();
+        param.put("pmCode",pmCode);
+        if(role.equals("d")) {param.put("role","doctor");}
+        else{ param.put("role","thera");}
+
+        List<AllMediDTO> allMedi = userService.allMedi(param);
+        List<AllTheraDTO> allThera = userService.allTheraInfo(param);
+
+
+        System.out.println("allThera = " + allThera);
+        System.out.println("allMedi = " + allMedi);
+
+        param.put("allMedi",allMedi);
+        param.put("allThera",allThera);
+
+        return param;
+
+
+    }
 
 }
