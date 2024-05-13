@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface ProjectsMapper {
-    List<ShowAllProjectsDTO> showAllProjects();
+    List<ShowAllProjectsDTO> showAllProjects(String pmCode);
 
     List<ShowMediConnectDTO> showAllBoards(Map<String, Object> parameter);
 
