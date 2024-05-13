@@ -17,9 +17,9 @@ public class ProjectsService {
 
         this.projectsMapper = projectsMapper;
     }
-    public List<ShowAllProjectsDTO> showAllProjects() {
+    public List<ShowAllProjectsDTO> showAllProjects(String pmCode) {
 
-        return projectsMapper.showAllProjects();
+        return projectsMapper.showAllProjects(pmCode);
     }
 
 //    service

@@ -2,6 +2,7 @@ package com.javaclass.psmc.mediConnect.controller;
 
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.service.ProjectsService;
+import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,10 @@ public class ProjectsController {
     @GetMapping("/MediConnect")
     public String mediConnectLink(HttpSession session) {
 
-        List<ShowAllProjectsDTO> projects = projectsService.showAllProjects();
+        LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
+        String pmCode = loginUserDTO.getPmCode();
+
+        List<ShowAllProjectsDTO> projects = projectsService.showAllProjects(pmCode);
         session.setAttribute("projectList", projects);
 
         return "/doc/projects";

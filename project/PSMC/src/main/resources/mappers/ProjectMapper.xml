@@ -6,13 +6,13 @@
     <resultMap id="patientResultMap" type="com.javaclass.psmc.common.model.dto.PatientDTO">
         <id property="patientNo" column="patient_no"/>
         <result property="patientName" column="patient_name"/>
-        <result property="age" column="age"></result>
+        <result property="age" column="age"/>
         <result property="gender" column="gender"/>
     </resultMap>
 
     <resultMap id="injuryResultMap" type="com.javaclass.psmc.common.model.dto.InjuryDTO">
         <id property="injuryCode" column="injury_code"/>
-        <result property="injuryName" column="injuryName"/>
+        <result property="injuryName" column="injury_name"/>
     </resultMap>
 
     <resultMap id="createProjectResultMap" type="com.javaclass.psmc.common.model.dto.CreateProjectDTO">
@@ -28,7 +28,7 @@
         <association property="createProjectDTO" resultMap="createProjectResultMap"/>
     </resultMap>
 
-    <select id="showAllProjects" resultMap="showAllProjectsResultMap">
+    <select id="showAllProjects" resultMap="showAllProjectsResultMap" parameterType="string">
         select
             a.patient_name,
             a.age,
@@ -48,7 +48,7 @@
         where
             b.project_status = 'Y'
             and
-            d.pm_code like 'd%';
+            d.pm_code = #{pmCode};
     </select>
 
     <resultMap id="showMediConnectsResultMap" type="com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO">
