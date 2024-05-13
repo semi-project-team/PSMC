@@ -151,7 +151,14 @@ public class ScheduleController {
         }
         else{
             parameter.put("role","thera");
+            List<ConnectProjectDTO> projects = userService.checkRes(parameter);
+            System.out.println("projects = 간다 " + projects);
+            List<ConnectProjectDTO> tprojects = userService.tcheckRes(parameter);
+            System.out.println("tprojects  t가 간다= " + tprojects);
         }
+
+
+
         int result = userService.mediInfoUpdate(parameter);
 
 

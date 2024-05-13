@@ -180,9 +180,9 @@
                         </div>
                         <div class="mb-4 d-flex" sec:authorize="hasAnyAuthority('t')">
                             <input type="time" class="form-control" id="timeInput1" name="start" step="60">~<input type="time" class="form-control" id="timeInput2" name="end" step="60">
-                            <div id="warningarea">
-
-                            </div>
+                        </div>
+                        <div sec:authorize="hasAnyAuthority('t')" id="warnningbox">
+                            <ul id="warningText"></ul>
                         </div>
 
                     </form>

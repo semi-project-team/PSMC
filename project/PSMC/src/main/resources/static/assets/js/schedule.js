@@ -15,7 +15,7 @@ const day5 =document.getElementById('day5').firstElementChild;
 const day6 =document.getElementById('day6').firstElementChild;
 const day7 =document.getElementById('day7').firstElementChild;
 
-const warningtext = document.getElementById('warningarea');
+const $warningText = document.getElementById('warningText');
 
 fetch("/setSchedule")
     .then(res=>res.json())
@@ -119,6 +119,7 @@ fetch("/setSchedule")
                         option.selected=true;
                     }
                 })
+                $warningText.textContent="";
 
                 const timeCode = b.classList;
                 const val = timeCode[1].split("-")[1];
@@ -193,20 +194,20 @@ fetch("/alltime")
 
 function doDate(dating,projectNo){
     console.log('date 들어옮');
-    Array.from($time.options).forEach(function(option){
-        option.disabled=false;
-
-
-
-    })
-    $time[0].disabled=true;
     let times = [];
     fetch("/allProjects")
         .then(res=>res.json())
         .then(data=>{
             console.table(data);
 
-            if(data.role == "doctor"){
+
+            if(data.role == "doctor") {
+                Array.from($time.options).forEach(function (option) {
+                    option.disabled = false;
+                })
+                $time[0].disabled = true;
+            }
+
                 data.allMedi.forEach(m=>{
                     m.mediInfoDTOS.forEach(t=>{
                         if(t.mediDate == dating){
@@ -215,8 +216,15 @@ function doDate(dating,projectNo){
                     })
                 })
                 times.forEach(time=>{
-                    const $option = $time.querySelector(`option[value="${time}"]`);
-                    $option.disabled=true;
+                    if(data.role == "doctor") {
+                        const $option = $time.querySelector(`option[value="${time}"]`);
+                        $option.disabled = true;
+                    }
+                    else if(data.role == "thera"){
+                        const $li = document.createElement('li');
+                        $li.textContent= `${startTimeCode(time)} ~ ${endTimeCode(time)}`
+                        $warningText.appendChild($li);
+                    }
                 })
                 data.allThera.forEach(thera=>{
                     console.table(thera);
@@ -228,49 +236,32 @@ function doDate(dating,projectNo){
                             if(info.theraDate==dating){
                                 console.log('thera 날짜도 맞음')
                                 const startTime = info.start;
-                                console.log("startTime"+startTime);
-
                                 const endTime = info.end;
-                                console.log("endTime"+endTime);
-                                let code = [];
-                                for(let i =1 ; i<17 ;i++){
-                                    const startCode = startTimeCode(i);
-                                    const endCode = endTimeCode(i);
-                                    if(!(subtractTime(endCode,startTime)>=0 || subtractTime(startCode,endTime)<=0)){
-                                        code.push(i);
-                                    }
+                                if(data.role=="doctor") {
+                                    let code = [];
+                                    for (let i = 1; i < 17; i++) {
+                                        const startCode = startTimeCode(i);
+                                        const endCode = endTimeCode(i);
+                                        if (!(subtractTime(endCode, startTime) >= 0 || subtractTime(startCode, endTime) <= 0)) {
+                                            code.push(i);
+                                        }
 
+                                    }
+                                    code.forEach(i => {
+                                        const $option = $time.querySelector(`option[value="${i}"]`);
+                                        $option.disabled = true;
+                                    })
                                 }
-                                code.forEach(i=>{
-                                    console.log("코등"+i);
-                                    const $option =  $time.querySelector(`option[value="${i}"]`);
-                                    $option.disabled=true;
-                                })
+                                else{
+                                    const $li = document.createElement('li');
+                                    $li.textContent=`${startTime} ~ ${endTime}`;
+                                    $warningText.appendChild($li);
+                                }
                             }
                         })
                     }
                 })
 
-            }
-            // data.forEach(t=>{
-            //     t.mitoProDTOS.forEach(m=>{
-            //         console.log('날짜주세요'+dating);
-            //         if(m.mediDate === dating){
-            //             console.log('똑같은가')
-            //             console.log(t.timeCode);
-            //             times.push(t.timeCode);
-            //         }
-            //     })
-            //
-            // })
-            // if(times.length>0){
-            //     for(let i = 0 ; i<times.length;i++){
-            //         console.log('시간 하나씩 꺼내자'+times[i]);
-            //         const $option = $time.querySelector(`option[value="${times[i]}"]`);
-            //         $option.disabled=true;
-            //
-            //     }
-            // }
         })
 
 
@@ -396,6 +387,7 @@ $form.addEventListener('change',e=>{
 $date.addEventListener('change',function(){
     const projectNo = $patientName.value;
     doDate($date.value,projectNo);
+
 
 });
 
