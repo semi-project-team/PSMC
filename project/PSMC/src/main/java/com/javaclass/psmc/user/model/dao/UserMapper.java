@@ -1,6 +1,7 @@
 package com.javaclass.psmc.user.model.dao;
 
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
+import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.common.model.dto.MenuDTO;
 import com.javaclass.psmc.mainPage.model.dto.*;
@@ -9,6 +10,7 @@ import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +54,11 @@ public interface UserMapper {
 
     List<ConnectProjectDTO> tcheckRes(Map<String, Object> parameter);
 
-    List<ProjectsDTO> mediToday(Map<String, Object> sender);
+   List<ProjectsDTO> mediToday(Map<String, Object> sender);
 
     MenuDTO menu(String date);
+
+    int findDayNo(String today);
+
+    List<TheraProjectDTO> theraToday(Map<String, Object> sender);
 }

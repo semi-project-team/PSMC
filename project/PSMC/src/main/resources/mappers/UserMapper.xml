@@ -513,8 +513,7 @@
         where
             c.pm_code = #{pmCode}
         and
-<!--            m.medi_date = #{today}-->
-        m.medi_date = '2024-05-12'
+            m.medi_date = #{today}
         and
             a.project_status = 'Y'
         and
@@ -534,5 +533,55 @@
             menu
         where
             day_no = dayofweek(#{date})
+    </select>
+
+    <select resultType="int" id="findDayNo" parameterType="string">
+        select
+            dayofweek(#{today})
+
+    </select>
+    <resultMap id="theraTodayMap" type="com.javaclass.psmc.auth.model.dto.TheraProjectDTO">
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+        <result property="patientName" column="patient_name"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="injuryName" column="injury_name"/>
+        <result property="theraDate" column="thera_date"/>
+    </resultMap>
+    
+    <select id="theraToday" resultMap="theraTodayMap" parameterType="hashmap">
+        select
+            t.start,
+            t.end,
+            p.patient_name,
+            a.project_no,
+            i.injury_name,
+            t.thera_date
+        from
+            project a
+        join
+            thera_info t
+        on
+            a.project_no = t.project_no
+        join
+            injury i
+        on
+            i.injury_code = a.injury_code
+        join
+            assign_project s
+        on
+            s.project_no = a.project_no
+        join
+            patient p
+        on
+            p.patient_no = a.patient_no
+        where
+            t.thera_date = #{today}
+        and
+            s.pm_code = #{pmCode}
+        and
+            t.thera_status='Y'
+        and
+            a.project_status='Y'
     </select>
 </mapper>

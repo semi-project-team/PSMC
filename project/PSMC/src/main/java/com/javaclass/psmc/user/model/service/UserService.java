@@ -1,6 +1,7 @@
 package com.javaclass.psmc.user.model.service;
 
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
+import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.common.model.dto.MenuDTO;
 import com.javaclass.psmc.mainPage.model.dto.*;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -131,6 +133,15 @@ public class UserService {
     public MenuDTO menu(String date) {
 
         return userMapper.menu(date);
+    }
+
+    public int findDayNo(String today) {
+
+        return userMapper.findDayNo(today);
+    }
+
+    public List<TheraProjectDTO> theraToday(Map<String, Object> sender) {
+        return userMapper.theraToday(sender);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {

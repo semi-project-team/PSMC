@@ -11,7 +11,6 @@ public class ProjectsDTO {
     private ResTimeDTO resTimeDTOS;
     private String patientName;
     private String injuryName;
-    private int day;
     private String[] time;
 
 }
