@@ -357,3 +357,9 @@ fieldset.timeslot {
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
 }
+
+#todayMenu{
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}

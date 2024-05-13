@@ -469,4 +469,70 @@
 
 
     </select>
+    <resultMap id="resTimeMap" type="com.javaclass.psmc.common.model.dto.ResTimeDTO">
+        <id property="timeCode" column="time_code"/>
+        <result property="timeVal" column="time_val"/>
+    </resultMap>
+
+    <resultMap id="mainPageScheduleMap" type="com.javaclass.psmc.auth.model.dto.ProjectsDTO">
+        <id property="projectNo" column="project_no"/>
+        <result property="patientName" column="patient_name"/>
+        <result property="injuryName" column="injury_name"/>
+        <result property="day" column="day"/>
+        <association property="resTimeDTOS" resultMap="resTimeMap"/>
+    </resultMap>
+    <select id="mediToday" resultMap="mainPageScheduleMap" parameterType="hashmap">
+        select
+            t.time_val,
+            p.patient_name,
+            a.project_no,
+            i.injury_name,
+            dayofweek(m.medi_date) as 'day'
+        from
+            project a
+        join
+            create_project c
+        on
+            c.project_no = a.project_no
+        join
+            medi_info m
+        on
+            m.project_no = a.project_no
+        join
+            res_time t
+        on
+            t.time_code = m.time_code
+        join
+            patient p
+        on
+            p.patient_no = a.patient_no
+        join
+            injury i
+        on
+            i.injury_code = a.injury_code
+        where
+            c.pm_code = #{pmCode}
+        and
+<!--            m.medi_date = #{today}-->
+        m.medi_date = '2024-05-12'
+        and
+            a.project_status = 'Y'
+        and
+            m.medi_status = 'Y'
+        order by
+            t.time_val
+    </select>
+
+    <resultMap id="menuMap" type="com.javaclass.psmc.common.model.dto.MenuDTO">
+        <id property="dayNo" column="day_no"/>
+        <result property="menuName" column="menu_name"/>
+    </resultMap>
+    <select id="menu" resultMap="menuMap" parameterType="string">
+        select
+            *
+        from
+            menu
+        where
+            day_no = dayofweek(#{date})
+    </select>
 </mapper>
