@@ -116,9 +116,9 @@
             data.forEach(project => {
                 const projectDiv = document.createElement('a');
                 projectDiv.classList.add('project-card');
-                projectDiv.href = "#";
+                projectDiv.href = `/doc/mediConnect/${project.projectNo}`;
                 projectDiv.innerHTML = `
-                    <h3><span id="nameSpan">${project.patientDTO.name}</span> <span id="nameValue">(만 ${project.patientDTO.age}세 ${project.patientDTO.gender})</span></h3>
+                    <h3><span id="nameSpan">${project.patientDTO.patientName}</span> <span id="nameValue">(만 ${project.patientDTO.age}세 ${project.patientDTO.gender})</span></h3>
                     <p>project no: ${project.projectNo}</p>
                     <p>patient code: ${project.patientDTO.patientNo}</p>
                     <p>치료부위 : ${project.injuryDTO.injuryName} (${project.injuryDTO.injuryCode})</p>
