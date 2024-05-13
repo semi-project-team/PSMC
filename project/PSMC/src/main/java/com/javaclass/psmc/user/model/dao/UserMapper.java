@@ -45,4 +45,8 @@ public interface UserMapper {
     List<AllMediDTO> allMedi(Map<String, Object> param);
 
     List<AllTheraDTO> allTheraInfo(Map<String, Object> param);
+
+    List<ConnectProjectDTO> checkRes(Map<String, Object> parameter);
+
+    List<ConnectProjectDTO> tcheckRes(Map<String, Object> parameter);
 }

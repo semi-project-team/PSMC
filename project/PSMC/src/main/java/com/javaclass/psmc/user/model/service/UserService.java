@@ -111,6 +111,16 @@ public class UserService {
         return userMapper.allTheraInfo(param);
     }
 
+    public List<ConnectProjectDTO> checkRes(Map<String, Object> parameter) {
+
+        return userMapper.checkRes(parameter);
+    }
+
+    public List<ConnectProjectDTO> tcheckRes(Map<String, Object> parameter) {
+
+        return userMapper.tcheckRes(parameter);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }

@@ -426,4 +426,47 @@
             e.pm_code = #{pmCode}
     </select>
 
+    <select id="checkRes" resultMap="connectProjectMap" parameterType="hashmap">
+        select
+            a.project_no
+        from
+            project a
+        join
+            assign_project s on a.project_no = s.project_no
+        join
+            employee e on e.pm_code = s.pm_code
+        join
+            medi_info m on m.project_no = a.project_no
+        join
+            res_time r on r.time_code = m.time_code
+        where
+            m.medi_date = #{mediDate}
+        and
+            r.time_val between #{start} and #{end}
+        and
+            m.medi_status = 'Y'
+    </select>
+    <select id="tcheckRes" resultMap="connectProjectMap" parameterType="hashmap">
+        select
+            a.project_no
+        from
+            project a
+        join
+            assign_project s on s.project_no = a.project_no
+        join
+            employee e on e.pm_code = s.pm_code
+        join
+            thera_info t on t.project_no = a.project_no
+        where
+            t.thera_date = #{medi_date}
+        and
+            <![CDATA[
+                t.start > #{start}
+            or
+                t.end < #{end}]]>
+        and
+            t.thera_status  = 'Y'
+
+
+    </select>
 </mapper>
