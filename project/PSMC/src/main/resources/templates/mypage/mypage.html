@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>my page</title>
+  <link rel="stylesheet" href="/assets/css/mainpage.css">
 </head>
 <body>
+<th:block th:insert="~{/common/nav}"></th:block>
+<th:block th:insert="~{/common/header}"></th:block>
   <div class="container1">
     <div class="box1-1">
       <div>My Page</div>
@@ -15,7 +19,7 @@
       </div>
       <br><br>
       <h1>안녕하세요</h1>
-      <h3>홍길동님</h2>
+      <h2>홍길동님</h2>
 
     </div>
     <div class="box3-1">
@@ -59,4 +63,5 @@
       <div class="icon4"><img src="/image/비밀번호변경.png" alt="비밀번호변경"></div>
     </div>
   </div>
+</body>
 </html>
