@@ -2,6 +2,8 @@ package com.javaclass.psmc.common.model.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -14,4 +16,5 @@ public class MediConnectDTO {
     private String mediContent;
     private int projectNo;
     private String mediStatus;
+    private LocalDateTime mediBoardDate;
 }

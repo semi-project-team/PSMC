@@ -40,7 +40,7 @@ fetch("/setSchedule")
                     const mediCode = m.mediCode;
                     const p = m.connectProjectDTO.patientDTO
                     const age = p.age;
-                    const name = p.name;
+                    const name = p.patientName;
                     const injuryName = m.connectProjectDTO.injuryDTO.injuryName;
 
                     switch (dayNum) {
@@ -76,7 +76,7 @@ fetch("/setSchedule")
                 const theraDate = t.theraDate;
                 const theraCode = t.theraCode;
                 const p  = t.connectProjectDTO.patientDTO;
-                const name = p.name;
+                const name = p.patientName;
                 const age = p.age;
                 const injuryName = t.connectProjectDTO.injuryDTO.injuryName;
                 const start = t.start;
@@ -119,11 +119,15 @@ fetch("/setSchedule")
                         option.selected=true;
                     }
                 })
-                $warningText.textContent="";
+
 
                 const timeCode = b.classList;
                 const val = timeCode[1].split("-")[1];
+                if(val=='none'){
+                    $warningText.textContent="";
+                }
                 if(val!="none") {
+
                     $time.value = val;
                 }
 
@@ -170,7 +174,7 @@ fetch("/alltime")
                         if (projects.indexOf(p) === -1) {
                             projects.push(p);
                             const $option = document.createElement('option');
-                            $option.textContent = `${m.connectProjectDTO.patientDTO.name}`;
+                            $option.textContent = `${m.connectProjectDTO.patientDTO.patientName}`;
                             $option.value = p;
                             $patientName.appendChild($option);
                         }
@@ -182,7 +186,7 @@ fetch("/alltime")
                     if(projects.indexOf(p)===-1){
                         projects.push(p);
                         const $option = document.createElement('option');
-                        $option.textContent = `${t.connectProjectDTO.patientDTO.name}`;
+                        $option.textContent = `${t.connectProjectDTO.patientDTO.patientName}`;
                         $option.value = p;
                         $patientName.appendChild($option);
                     }
@@ -209,11 +213,22 @@ function doDate(dating,projectNo){
             }
 
                 data.allMedi.forEach(m=>{
-                    m.mediInfoDTOS.forEach(t=>{
-                        if(t.mediDate == dating){
-                            times.push(t.timeCode);
+                    if(data.role == "doctor") {
+                        m.mediInfoDTOS.forEach(t => {
+                            if (t.mediDate == dating) {
+                                times.push(t.timeCode);
+                            }
+                        })
+                    }
+                    else{
+                        if(m.projectNo == projectNo){
+                            m.mediInfoDTOS.forEach(t=>{
+                                if(t.mediDate == dating){
+                                    times.push(t.timeCode);
+                                }
+                            })
                         }
-                    })
+                    }
                 })
                 times.forEach(time=>{
                     if(data.role == "doctor") {
@@ -230,14 +245,15 @@ function doDate(dating,projectNo){
                     console.table(thera);
                     console.log('thera 들어옴');
                     console.log(projectNo);
-                    if(thera.projectNo==projectNo){
-                        console.log('project no 맞음')
-                        thera.theraInfoDTOS.forEach(info=>{
-                            if(info.theraDate==dating){
-                                console.log('thera 날짜도 맞음')
-                                const startTime = info.start;
-                                const endTime = info.end;
-                                if(data.role=="doctor") {
+                    if(data.role == "doctor") {
+                        if (thera.projectNo == projectNo) {
+                            console.log('project no 맞음')
+                            thera.theraInfoDTOS.forEach(info => {
+                                if (info.theraDate == dating) {
+                                    console.log('thera 날짜도 맞음')
+                                    const startTime = info.start;
+                                    const endTime = info.end;
+
                                     let code = [];
                                     for (let i = 1; i < 17; i++) {
                                         const startCode = startTimeCode(i);
@@ -252,17 +268,29 @@ function doDate(dating,projectNo){
                                         $option.disabled = true;
                                     })
                                 }
-                                else{
-                                    const $li = document.createElement('li');
-                                    $li.textContent=`${startTime} ~ ${endTime}`;
-                                    $warningText.appendChild($li);
-                                }
+                            })
+                        }
+                    }
+                    else{
+                        thera.theraInfoDTOS.forEach(info=>{
+                            if(info.theraDate == dating){
+                                const startTime = info.start;
+                                const endTime = info.end;
+                                const $li = document.createElement('li');
+                                $li.textContent=`${startTime} ~ ${endTime}`;
+                                $warningText.appendChild($li);
                             }
                         })
+
+
                     }
+
                 })
 
         })
+
+
+
 
 
 }
