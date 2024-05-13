@@ -68,39 +68,90 @@
 
         </div>
         <div class="box3">
-            <fieldset class="timeslot">
+            <fieldset class="timeslot" id="timeslot">
                 <legend>Scheduler</legend>
                 <!-- <h2>Scheduler</h2> -->
                 <div class="schedule-item">
-                    <p>24.01.30 (목)</p>
+<!--                    <p>24.01.30 (목)</p>-->
+                    <p id="today"></p>
                 </div>
-                <div class="schedule-item">
-                    <p>10:00 - 11:00</p>
-                    <p>김철수(30024)</p>
-                    <p>의료 이력: 수술 이력 있음</p>
-                </div>
-                <div class="schedule-item">
-                    <p>11:00 - 12:00</p>
-                    <p>이영희(34725)</p>
-                    <p>의료 이력: 골절 수술 이력 있음</p>
-                </div>
-                <div class="schedule-item">
-                    <p>13:00 - 14:00</p>
-                    <p>김진호(35225)</p>
-                    <p>의료 이력: 특이 사항 없음</p>
-                </div>
+                <th:block th:each="project : ${projects}">
+                    <div class="schedule-item">
+                        <p th:text="|${project.time[0]} - ${project.time[1]}|"></p>
+                        <p th:text="|${project.patientName}(${project.projectNo})|"></p>
+                        <p th:text="|부상부위 : ${project.injuryName}|"></p>
+                    </div>
+                </th:block>
+                <script>
+                    const $today = document.getElementById('today');
+                    const $day = parseInt(`[[${projects[0].day}]]`.trim());
+                    const $date = `[[${ModiToday}]]`;
+                    console.log($date+"오늘 날짜");
+                    console.log($day);
+                    switch($day){
+                        case 1:
+                            $today.textContent=`${$date} (Sun)`
+                            break;
+                        case 2:
+                            $today.textContent=`${$date} (Mon)`
+                            break;
+                        case 3:
+                            $today.textContent=`${$date} (Tue)`
+                            break;
+                        case 4:
+                            $today.textContent=`${$date} (Wed)`
+                            break;
+                        case 5:
+                            $today.textContent=`${$date} (Thu)`
+                            break;
+                        case 6:
+                            $today.textContent=`${$date} (Fri)`
+                            break;
+                        case 7:
+                            $today.textContent=`${$date} (Sat)`
+                            break;
+                    }
+
+                </script>
+
+<!--                <div class="schedule-item">-->
+<!--                    <p>11:00 - 12:00</p>-->
+<!--                    <p>이영희(34725)</p>-->
+<!--                    <p>의료 이력: 골절 수술 이력 있음</p>-->
+<!--                </div>-->
+<!--                <div class="schedule-item">-->
+<!--                    <p>13:00 - 14:00</p>-->
+<!--                    <p>김진호(35225)</p>-->
+<!--                    <p>의료 이력: 특이 사항 없음</p>-->
+<!--                </div>-->
                 <!-- 기타 스케줄 항목들을 추가할 수 있습니다 -->
+            </fieldset>
         </div>
-        </fieldset>
+
+
         <div class="box4">
             <div class="title2">Today Menu</div>
             <br>
-            <p>소고기 스테이크</p>
-            <p>그린 샐러드</p>
-            <p>멸치국수</p>
-            <p>치즈 케이크</p>
-            <p>요구르트</p>
+            <div id="todayMenu">
+
+            </div>
         </div>
+
+        <script>
+            fetch("/todayMenu")
+                .then(res=>res.json())
+                .then(data=>{
+                    console.table(data);
+                    const todayMenu = document.getElementById('todayMenu');
+                    const menu = data.menuName.split(",");
+                    menu.forEach(m=>{
+                        const $p= document.createElement('p');
+                        $p.textContent = m;
+                        todayMenu.appendChild($p);
+                    })
+                })
+
+        </script>
         <div class="box5">
             <div class="mediconnect">
                 <div class="title2">mediconnect</div>

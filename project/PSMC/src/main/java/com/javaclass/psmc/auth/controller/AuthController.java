@@ -1,7 +1,10 @@
 package com.javaclass.psmc.auth.controller;
 
 import com.javaclass.psmc.auth.model.AuthDetails;
+import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.common.model.dto.ResTimeDTO;
+import com.javaclass.psmc.common.model.method.TimePlus30;
 import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
@@ -14,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +29,7 @@ import java.util.Objects;
 public class AuthController {
 
     private final UserService userService;
-
+    private TimePlus30 timePlus30 = new TimePlus30();
 
 
     @Autowired
@@ -37,10 +42,34 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AuthDetails authDetails = (AuthDetails) authentication.getPrincipal();
         session.setAttribute("auth",authDetails.getLoginUserDTO());
+
+        Map<String,Object> sender = new HashMap<>();
         String pmCode = authDetails.getLoginUserDTO().getPmCode();
+
+        sender.put("pmCode",pmCode);
         ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
         System.out.println(profileDTO);
         model.addAttribute("profile",profileDTO);
+
+        LocalDateTime today = LocalDateTime.now();
+        sender.put("today",today);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy.MM.dd");
+        String formattedDate = today.format(formatter);
+
+        model.addAttribute("ModiToday",formattedDate);
+
+        if(pmCode.charAt(0) == 'd'){
+            List<ProjectsDTO> projects = userService.mediToday(sender);
+            for(ProjectsDTO p : projects){
+                p.setTime(timePlus30.timeFormat(String.valueOf(p.getResTimeDTOS().getTimeVal())));
+            }
+
+            model.addAttribute("projects",projects);
+        }else{
+            
+        }
+
         return "/auth/login";
     }
 

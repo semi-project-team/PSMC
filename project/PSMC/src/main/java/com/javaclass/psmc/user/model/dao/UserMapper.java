@@ -1,6 +1,8 @@
 package com.javaclass.psmc.user.model.dao;
 
+import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.common.model.dto.MenuDTO;
 import com.javaclass.psmc.mainPage.model.dto.*;
 
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -49,4 +51,8 @@ public interface UserMapper {
     List<ConnectProjectDTO> checkRes(Map<String, Object> parameter);
 
     List<ConnectProjectDTO> tcheckRes(Map<String, Object> parameter);
+
+    List<ProjectsDTO> mediToday(Map<String, Object> sender);
+
+    MenuDTO menu(String date);
 }
