@@ -2,8 +2,8 @@ package com.javaclass.psmc.auth.controller;
 
 import com.javaclass.psmc.auth.model.AuthDetails;
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
+import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
-import com.javaclass.psmc.common.model.dto.ResTimeDTO;
 import com.javaclass.psmc.common.model.method.TimePlus30;
 import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -45,30 +46,45 @@ public class AuthController {
 
         Map<String,Object> sender = new HashMap<>();
         String pmCode = authDetails.getLoginUserDTO().getPmCode();
-
+        String role = String.valueOf(pmCode.charAt(0));
+        model.addAttribute("role",role);
         sender.put("pmCode",pmCode);
         ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
         System.out.println(profileDTO);
         model.addAttribute("profile",profileDTO);
 
-        LocalDateTime today = LocalDateTime.now();
+        LocalDate today = LocalDate.now();
+        System.out.println("today = " + today);
         sender.put("today",today);
 
+        int day = userService.findDayNo(today.toString());
+        System.out.println("day = " + day);
+
+        model.addAttribute("day",day);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy.MM.dd");
         String formattedDate = today.format(formatter);
+
 
         model.addAttribute("ModiToday",formattedDate);
 
         if(pmCode.charAt(0) == 'd'){
             List<ProjectsDTO> projects = userService.mediToday(sender);
-            for(ProjectsDTO p : projects){
-                p.setTime(timePlus30.timeFormat(String.valueOf(p.getResTimeDTOS().getTimeVal())));
+            if(projects!=null) {
+                for (ProjectsDTO p : projects) {
+                    p.setTime(timePlus30.timeFormat(String.valueOf(p.getResTimeDTOS().getTimeVal())));
+                }
             }
 
+            System.out.println(projects);
+
             model.addAttribute("projects",projects);
+
         }else{
-            
+            List<TheraProjectDTO> projects = userService.theraToday(sender);
+            System.out.println("projects tttt = " + projects);
+            model.addAttribute("projects",projects);
         }
+
 
         return "/auth/login";
     }

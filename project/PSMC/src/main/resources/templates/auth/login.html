@@ -56,14 +56,11 @@
                 </div>
                 <br>
                 <span id="inputter">
-                        <input type="submit" value="예약"></input>
-                        <input type="reset" value="취소"></input>
-                    </span>
-                <div>
-                    <br>
-                    <br>
-                    <button id="newProject">New Project</button>
-                </div>
+                        <input type="submit" value="예약">
+                        <input type="reset" value="취소">
+                        <button id="newProject">New Project</button>
+                </span>
+
             </form>
 
         </div>
@@ -75,16 +72,30 @@
 <!--                    <p>24.01.30 (목)</p>-->
                     <p id="today"></p>
                 </div>
-                <th:block th:each="project : ${projects}">
+                <th:block th:if="${projects!=null}">
+                    <th:block th:each="project : ${projects}">
+                        <div class="schedule-item">
+                            <th:block th:if="${role=='d'}">
+                                <p th:text="|${project.time[0]} - ${project.time[1]}|"></p>
+                                <p th:text="|${project.patientName}(${project.projectNo})|"></p>
+                                <p th:text="|부상부위 : ${project.injuryName}|"></p>
+                            </th:block>
+                            <th:block th:if="${role == 't'}">
+                                <p th:text="|${project.start} - ${project.end}|"></p>
+                                <p th:text="|${project.patientName}(${project.projectNo})|"></p>
+                                <p th:text="|부상부위 : ${project.injuryName}|"></p>
+                            </th:block>
+                        </div>
+                    </th:block>
+                </th:block>
+                <th:block th:if="${#lists.isEmpty(projects)}">
                     <div class="schedule-item">
-                        <p th:text="|${project.time[0]} - ${project.time[1]}|"></p>
-                        <p th:text="|${project.patientName}(${project.projectNo})|"></p>
-                        <p th:text="|부상부위 : ${project.injuryName}|"></p>
+                        <p>오늘 일정이 없습니다</p>
                     </div>
                 </th:block>
                 <script>
                     const $today = document.getElementById('today');
-                    const $day = parseInt(`[[${projects[0].day}]]`.trim());
+                    const $day = parseInt(`[[${day}]]`.trim());
                     const $date = `[[${ModiToday}]]`;
                     console.log($date+"오늘 날짜");
                     console.log($day);
@@ -132,7 +143,11 @@
         <div class="box4">
             <div class="title2">Today Menu</div>
             <br>
-            <div id="todayMenu">
+            <div id="menuouter">
+                <button id="leftButton"><i class="fa-solid fa-caret-left" style="color: black"></i></button>
+                <div id="todayMenu">
+                </div>
+                <button id="rightButton"><i class="fa-solid fa-caret-right" style="color: black"></i></button>
 
             </div>
         </div>
@@ -142,6 +157,17 @@
                 .then(res=>res.json())
                 .then(data=>{
                     console.table(data);
+                    const counter = document.getElementById('menuouter');
+                    const left = document.getElementById('leftButton');
+                    const right = document.getElementById('rightButton');
+
+
+
+                    let dayNo = data.dayNo;
+
+
+                    
+
                     const todayMenu = document.getElementById('todayMenu');
                     const menu = data.menuName.split(",");
                     menu.forEach(m=>{
