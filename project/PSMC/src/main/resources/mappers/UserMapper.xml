@@ -12,12 +12,12 @@
         <result property="age" column="age"/>
         <result property="positionCode" column="position_code"/>
         <result property="gender" column="gender"/>
-        <result property="officeNum" column="lab_no"/>
+        <result property="officeNum" column="office_num"/>
         <result property="fieldCode" column="field_code"/>
     </resultMap>
     <resultMap id="patientMap" type="com.javaclass.psmc.common.model.dto.PatientDTO">
         <id property="patientNo" column="patient_no"/>
-        <result property="name" column="name"/>
+        <result property="patientName" column="patient_name"/>
         <result property="age" column="age"/>
         <result property="gender" column="gender"/>
         <result property="height" column="height"/>
@@ -103,7 +103,7 @@
         <result property="name" column="name"/>
         <result property="fieldCode" column="field_code"/>
         <result property="positionCode" column="position_code"/>
-        <result property="officeNum" column="officeNum"/>
+        <result property="officeNum" column="office_num"/>
         <result property="email" column="email"/>
         <association property="positionDTO" resultMap="positionMap"/>
         <association property="medicalFieldDTO" resultMap="medicalFieldMap"/>
@@ -112,7 +112,7 @@
         select
             a.pm_code,
             a.name,
-            a.officeNum,
+            a.office_num,
             a.email,
             b.field_name,
             c.position_name
@@ -153,7 +153,7 @@
     <select id="todayMedi" parameterType="hashmap" resultMap="timeToMediInfoMap">
         select
             e.pm_code,
-            p.name,
+            p.patient_name,
             p.age,
             m.medi_date,
             m.medi_code,
@@ -191,7 +191,7 @@
     <select id="allTimes" resultMap="timeToMediInfoMap" parameterType="string">
         select
             e.pm_code,
-            p.name,
+            p.patient_name,
             m.medi_date,
             m.medi_code,
             t.time_code,
@@ -284,7 +284,7 @@
             a.project_no,
             i.injury_name,
             e.pm_code,
-            p.name,
+            p.patient_name,
             p.age
         from
             thera_info t
@@ -322,7 +322,7 @@
             a.project_no,
             i.injury_name,
             e.pm_code,
-            p.name,
+            p.patient_name,
             p.age
         from
             thera_info t

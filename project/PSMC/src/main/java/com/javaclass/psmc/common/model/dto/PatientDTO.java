@@ -10,7 +10,7 @@ import lombok.*;
 public class PatientDTO {
 
     private int patientNo;
-    private String name;
+    private String patientName;
     private int age;
     private String gender;
     private double height;

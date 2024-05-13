@@ -2,6 +2,8 @@ package com.javaclass.psmc.common.model.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -14,5 +16,6 @@ public class TheraLinkDTO {
     private String title;
     private String contents;
     private String theraStatus;
+    private LocalDateTime theraBoardDate;
 
 }

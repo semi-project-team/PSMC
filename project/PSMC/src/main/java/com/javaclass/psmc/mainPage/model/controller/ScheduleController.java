@@ -100,6 +100,10 @@ public class ScheduleController {
     public String getSchedule(@RequestParam String datepick,HttpSession session){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate dating = LocalDate.parse(datepick,formatter);
+        LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
+
+        String role = loginUserDTO.getRole().toString();
+
         System.out.println("dating here"+dating);
         // 오늘이 속한 주의 시작 날짜 계산하기 (월요일)
         LocalDate startOfWeek = dating.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -111,12 +115,20 @@ public class ScheduleController {
         param.put("startDay",startOfWeek);
         param.put("endDay",endOfWeek);
 
-        List<TtoMIDTO> schedule = userService.todayMedi(param);
-        param.put("schedule",schedule);
+        if(role.equals("[d]")){
+            List<TtoMIDTO> dtimes = userService.todayMedi(param);
+            param.put("dschedule",dtimes);
+            System.out.println("dtimes = " + dtimes);
+        }
+        else{
+            List<TheraToProDTO> ttimes = userService.todayThera(param);
+            param.put("tschedule",ttimes);
+        }
+
 
         session.setAttribute("param",param);
 
-        return "/schedule/scheduler";
+        return "forward:/schedule/scheduler";
     }
 
     @PostMapping("/delete/{mediCode}")
@@ -155,6 +167,9 @@ public class ScheduleController {
             System.out.println("projects = 간다 " + projects);
             List<ConnectProjectDTO> tprojects = userService.tcheckRes(parameter);
             System.out.println("tprojects  t가 간다= " + tprojects);
+            if(!projects.isEmpty() || !tprojects.isEmpty()){
+
+            }
         }
 
 
