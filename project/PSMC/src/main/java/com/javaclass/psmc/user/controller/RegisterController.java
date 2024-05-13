@@ -3,7 +3,7 @@ package com.javaclass.psmc.user.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
-import com.javaclass.psmc.user.model.dto.IdDTO;
+
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import com.javaclass.psmc.user.model.service.UserService;

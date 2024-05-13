@@ -3,7 +3,7 @@ package com.javaclass.psmc.user.model.service;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.user.model.dao.UserMapper;
-import com.javaclass.psmc.user.model.dto.IdDTO;
+
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import org.springframework.beans.factory.annotation.Autowired;
