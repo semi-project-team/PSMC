@@ -54,7 +54,8 @@ body,html{
     font-size: 2.7em;
     color:white;
     display: flex;
-    margin-left: -5%;
+    justify-content: center;
+    /*margin-left: %;*/
 
 }
 
