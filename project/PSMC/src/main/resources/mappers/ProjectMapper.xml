@@ -5,7 +5,7 @@
 <mapper namespace="com.javaclass.psmc.mediConnect.model.dao.ProjectsMapper">
     <resultMap id="patientResultMap" type="com.javaclass.psmc.common.model.dto.PatientDTO">
         <id property="patientNo" column="patient_no"/>
-        <result property="name" column="name"/>
+        <result property="patientName" column="patient_name"/>
         <result property="age" column="age"></result>
         <result property="gender" column="gender"/>
     </resultMap>
@@ -30,7 +30,7 @@
 
     <select id="showAllProjects" resultMap="showAllProjectsResultMap">
         select
-            a.name,
+            a.patient_name,
             a.age,
             a.gender,
             b.patient_no,
@@ -49,6 +49,32 @@
             b.project_status = 'Y'
             and
             d.pm_code like 'd%';
+    </select>
+
+    <resultMap id="showMediConnectsResultMap" type="com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO">
+        <id property="mediNo" column="medi_no"/>
+        <result property="mediTitle" column="medi_title"/>
+        <result property="mediContent" column="medi_content"/>
+        <result property="mediBoardDate" column="medi_board_date"/>
+        <result property="projectNo" column="project_no"/>
+        <association property="createProjectDTO" resultMap="createProjectResultMap"/>
+    </resultMap>
+
+    <select id="showAllBoards" resultMap="showMediConnectsResultMap" parameterType="hashmap">
+        select
+            a.medi_no,
+            a.medi_title,
+            a.medi_content,
+            a.medi_board_date,
+            b.pm_code
+        from
+            medi_connect a
+        join
+            create_project b on a.project_no = b.project_no
+        where
+            b.pm_code = #{pmCode}
+            and
+            b.project_no = #{projectNo};
     </select>
 
 </mapper>

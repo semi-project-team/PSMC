@@ -162,15 +162,36 @@ section {
   #board-search .search-window {
     padding: 15px 0;
     background-color: rgb(3, 61, 94);
+    display: flex;
+    flex-direction: column;
   }
 
+  #search{
+    border-radius: 5px;
+    margin-right: 1%;
+  }
+
+ .delete-btn{
+    display: flex;
+    flex-direction: column;
+    
+ }
+
+ #deleteButton{
+    align-self: flex-end;
+    margin-right: 1.5%;
+    
+ }
+
   #board-search .search-window .search-wrap {
-    position: relative;
+    /* position: relative; */
   /*   padding-right: 124px; */
     margin: 0 auto;
     width: 80%;
     max-width: 564px;
+    flex-direction: row;
   }
+
   #board-search .search-window .search-wrap input {
     height: 40px;
     width: 100%;
@@ -184,11 +205,12 @@ section {
     border-width: 1px;
   }
   #board-search .search-window .search-wrap .btn {
-    position: absolute;
+    /* position: absolute;
     right: 0;
     top: 0;
-    bottom: 0;
+    bottom: 0; */
     width: 108px;
+    height: 40px;
     padding: 0;
     font-size: 16px;
   }
@@ -282,17 +304,6 @@ section {
     color: #fff;
   }
   
-  .btn-dark {
-    background: #555;
-    color: #fff;
-  }
-  
-  .btn-dark:hover, .btn-dark:focus {
-    background: #373737;
-    border-color: #373737;
-    color: #fff;
-  }
-  
   /* reset */
   
   * {
@@ -308,7 +319,7 @@ section {
     clear: both;
   }
   .container {
-    width: 1100px;
+    width: 60%;
     margin: 0 auto;
   }
   .blind {
