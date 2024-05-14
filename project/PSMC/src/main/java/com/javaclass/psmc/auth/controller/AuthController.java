@@ -1,9 +1,14 @@
 package com.javaclass.psmc.auth.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.auth.model.AuthDetails;
+import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.common.model.method.MakePhoneNumber;
+import com.javaclass.psmc.common.model.method.MenuHandling;
 import com.javaclass.psmc.common.model.method.TimePlus30;
 import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -31,22 +36,39 @@ public class AuthController {
 
     private final UserService userService;
     private TimePlus30 timePlus30 = new TimePlus30();
-
+    private MakePhoneNumber makePhoneNumber = new MakePhoneNumber();
+    private ObjectMapper objectMapper;
+    private MenuHandling menuHandling=new MenuHandling();
 
     @Autowired
-    public AuthController(UserService userService){
+    public AuthController(UserService userService,ObjectMapper objectMapper){
+        this.objectMapper=objectMapper;
         this.userService=userService;
     }
+
     @GetMapping("/login")
-    public String login(HttpSession session, Model model){
+    public String loginSuccess(){
+        return "forward:/auth/mainPage";
+    }
+    @GetMapping("/mainPage")
+    public String login(HttpSession session, Model model) throws JsonProcessingException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AuthDetails authDetails = (AuthDetails) authentication.getPrincipal();
+        System.out.println("authDetails = " + authDetails);
         session.setAttribute("auth",authDetails.getLoginUserDTO());
 
         Map<String,Object> sender = new HashMap<>();
         String pmCode = authDetails.getLoginUserDTO().getPmCode();
         String role = String.valueOf(pmCode.charAt(0));
+        if(role.equals("d")){
+            System.out.println("d가 맞아");
+            sender.put("role","doctor");
+        }else{
+            System.out.println("d가 아니야?");
+            sender.put("role","thera");
+        }
+
         model.addAttribute("role",role);
         sender.put("pmCode",pmCode);
         ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
@@ -59,6 +81,9 @@ public class AuthController {
 
         int day = userService.findDayNo(today.toString());
         System.out.println("day = " + day);
+        menuHandling.setDay(day);
+        menuHandling.setDate(today);
+
 
         model.addAttribute("day",day);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy.MM.dd");
@@ -67,7 +92,7 @@ public class AuthController {
 
         model.addAttribute("ModiToday",formattedDate);
 
-        if(pmCode.charAt(0) == 'd'){
+        if(role.equals("d")){
             List<ProjectsDTO> projects = userService.mediToday(sender);
             if(projects!=null) {
                 for (ProjectsDTO p : projects) {
@@ -85,7 +110,14 @@ public class AuthController {
             model.addAttribute("projects",projects);
         }
 
+        List<MyPatientDTO> mypatients = userService.myPatient(sender);
 
+        for(MyPatientDTO p : mypatients){
+            p.setPhone(makePhoneNumber.formatPhoneNumber(p.getPhone()));
+        }
+
+        model.addAttribute("patient",objectMapper.writeValueAsString(mypatients));
+        System.out.println("mypatients = " + mypatients);
         return "/auth/login";
     }
 
@@ -124,6 +156,7 @@ public class AuthController {
         }
 
     }
+
 
 
 

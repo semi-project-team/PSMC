@@ -1,5 +1,6 @@
 package com.javaclass.psmc.user.model.service;
 
+import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
@@ -130,7 +131,7 @@ public class UserService {
         return userMapper.mediToday(sender);
     }
 
-    public MenuDTO menu(String date) {
+    public TodayMenuDTO menu(int date) {
 
         return userMapper.menu(date);
     }
@@ -142,6 +143,11 @@ public class UserService {
 
     public List<TheraProjectDTO> theraToday(Map<String, Object> sender) {
         return userMapper.theraToday(sender);
+    }
+
+    public List<MyPatientDTO> myPatient(Map<String,Object> sender) {
+
+        return userMapper.myPatient(sender);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
