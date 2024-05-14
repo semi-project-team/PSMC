@@ -5,6 +5,7 @@ import java.sql.Time;
 
 public class TheraProjectDTO {
 
+    private String theraCode;
     private Time start;
     private Time end;
     private String patientName;
@@ -14,13 +15,22 @@ public class TheraProjectDTO {
 
     public TheraProjectDTO(){}
 
-    public TheraProjectDTO(Time start, Time end, String patientName, int projectNo, String injuryName, Date theraDate) {
+    public TheraProjectDTO(String theraCode, Time start, Time end, String patientName, int projectNo, String injuryName, Date theraDate) {
+        this.theraCode = theraCode;
         this.start = start;
         this.end = end;
         this.patientName = patientName;
         this.projectNo = projectNo;
         this.injuryName = injuryName;
         this.theraDate = theraDate;
+    }
+
+    public String getTheraCode() {
+        return theraCode;
+    }
+
+    public void setTheraCode(String theraCode) {
+        this.theraCode = theraCode;
     }
 
     public Time getStart() {
@@ -74,7 +84,8 @@ public class TheraProjectDTO {
     @Override
     public String toString() {
         return "TheraProjectDTO{" +
-                "start=" + start +
+                "theraCode='" + theraCode + '\'' +
+                ", start=" + start +
                 ", end=" + end +
                 ", patientName='" + patientName + '\'' +
                 ", projectNo=" + projectNo +

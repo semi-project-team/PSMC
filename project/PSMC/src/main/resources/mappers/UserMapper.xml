@@ -364,6 +364,7 @@
 
 
     <resultMap id="allMediMap" type="com.javaclass.psmc.mainPage.model.dto.AllMediDTO">
+        <id property="mediCode" column="medi_code"/>
         <result property="projectNo" column="project_no"/>
         <collection property="mediInfoDTOS" resultMap="mediInfoMap"/>
     </resultMap>
@@ -396,11 +397,13 @@
 
     </select>
     <resultMap id="allTheraMap" type="com.javaclass.psmc.mainPage.model.dto.AllTheraDTO">
+        <id property="theraCode" column="thera_code"/>
         <result property="projectNo" column="project_no"/>
         <collection property="theraInfoDTOS" resultMap="theraInfoMap"/>
     </resultMap>
     <select id="allTheraInfo" resultMap="allTheraMap" parameterType="hashmap">
         select
+            t.thera_code,
             a.project_no,
             t.start,
             t.end,
@@ -474,19 +477,19 @@
     </resultMap>
 
     <resultMap id="mainPageScheduleMap" type="com.javaclass.psmc.auth.model.dto.ProjectsDTO">
-        <id property="projectNo" column="project_no"/>
+        <id property="mediCode" column="medi_code"/>
+        <result property="projectNo" column="project_no"/>
         <result property="patientName" column="patient_name"/>
         <result property="injuryName" column="injury_name"/>
-        <result property="day" column="day"/>
         <association property="resTimeDTOS" resultMap="resTimeMap"/>
     </resultMap>
     <select id="mediToday" resultMap="mainPageScheduleMap" parameterType="hashmap">
         select
+            m.medi_code,
             t.time_val,
             p.patient_name,
             a.project_no,
-            i.injury_name,
-            dayofweek(m.medi_date) as 'day'
+            i.injury_name
         from
             project a
         join
@@ -543,6 +546,7 @@
 
     </select>
     <resultMap id="theraTodayMap" type="com.javaclass.psmc.auth.model.dto.TheraProjectDTO">
+        <id property="theraCode" column="thera_code"/>
         <result property="start" column="start"/>
         <result property="end" column="end"/>
         <result property="patientName" column="patient_name"/>
@@ -553,6 +557,7 @@
     
     <select id="theraToday" resultMap="theraTodayMap" parameterType="hashmap">
         select
+            t.thera_code,
             t.start,
             t.end,
             p.patient_name,
@@ -588,7 +593,7 @@
     </select>
 
     <resultMap id="mypatientMap" type="com.javaclass.psmc.auth.model.dto.MyPatientDTO">
-        <result property="patientNo" column="patient_no"/>
+        <id property="patientNo" column="patient_no"/>
         <result property="patientName" column="patient_name"/>
         <result property="phone" column="phone"/>
         <result property="projectNo" column="project_no"/>
@@ -623,4 +628,9 @@
             c.pm_code= #{pmCode}
 
     </select>
+
+    <insert id="makeMediInfo" parameterType="com.javaclass.psmc.common.model.dto.MediInfoDTO">
+        insert into medi_info(medi_date,project_no,time_code,medi_reg_date,medi_status)
+        values (#{mediDate},#{projectNo},#{timeCode},#{mediRegDate},'Y')
+    </insert>
 </mapper>

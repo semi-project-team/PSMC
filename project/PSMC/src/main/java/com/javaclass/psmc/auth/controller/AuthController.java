@@ -96,11 +96,11 @@ public class AuthController {
             List<ProjectsDTO> projects = userService.mediToday(sender);
             if(projects!=null) {
                 for (ProjectsDTO p : projects) {
+                    System.out.println("p가 왜 하나냐"+p);
                     p.setTime(timePlus30.timeFormat(String.valueOf(p.getResTimeDTOS().getTimeVal())));
+                    System.out.println("projects 하나 = " + p);
                 }
             }
-
-            System.out.println(projects);
 
             model.addAttribute("projects",projects);
 
@@ -118,6 +118,12 @@ public class AuthController {
 
         model.addAttribute("patient",objectMapper.writeValueAsString(mypatients));
         System.out.println("mypatients = " + mypatients);
+
+        String message = (String) session.getAttribute("reservationMessage");
+        session.removeAttribute("reservationMessage");
+
+        model.addAttribute("reservationMessage",message);
+
         return "/auth/login";
     }
 
