@@ -4,6 +4,7 @@ import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.common.model.dto.MediInfoDTO;
 import com.javaclass.psmc.common.model.dto.MenuDTO;
 import com.javaclass.psmc.mainPage.model.dto.*;
 
@@ -64,4 +65,6 @@ public interface UserMapper {
     List<TheraProjectDTO> theraToday(Map<String, Object> sender);
 
     List<MyPatientDTO> myPatient(Map<String,Object> sender);
+
+    int makeMediInfo(MediInfoDTO mediInfoDTO);
 }

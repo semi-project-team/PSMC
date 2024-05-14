@@ -6,14 +6,24 @@ import lombok.*;
 import java.util.List;
 
 public class AllTheraDTO {
+    private int theraCode;
     private int projectNo;
     private List<TheraInfoDTO> theraInfoDTOS;
 
     public AllTheraDTO(){}
 
-    public AllTheraDTO(int projectNo, List<TheraInfoDTO> theraInfoDTOS) {
+    public AllTheraDTO(int theraCode, int projectNo, List<TheraInfoDTO> theraInfoDTOS) {
+        this.theraCode = theraCode;
         this.projectNo = projectNo;
         this.theraInfoDTOS = theraInfoDTOS;
+    }
+
+    public int getTheraCode() {
+        return theraCode;
+    }
+
+    public void setTheraCode(int theraCode) {
+        this.theraCode = theraCode;
     }
 
     public int getProjectNo() {
@@ -35,7 +45,8 @@ public class AllTheraDTO {
     @Override
     public String toString() {
         return "AllTheraDTO{" +
-                "projectNo=" + projectNo +
+                "theraCode=" + theraCode +
+                ", projectNo=" + projectNo +
                 ", theraInfoDTOS=" + theraInfoDTOS +
                 '}';
     }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -66,17 +67,40 @@ public class MyPageController {
     }
 
     @PostMapping("/reservation")
-    public String reservation(@RequestParam Map<String,Object> parameters, HttpSession session){
+    public String reservation(@RequestParam Map<String,String> parameters, HttpSession session){
         String pmCode = ((LoginUserDTO)session.getAttribute("auth")).getPmCode();
+        int result=0;
+        String message="";
         if(pmCode.charAt(0)=='d'){
             MediInfoDTO mediInfoDTO = new MediInfoDTO();
             System.out.println(parameters.get("projectNo"));
             System.out.println(parameters.get("date"));
             System.out.println(parameters.get("timeCode"));
             System.out.println(parameters.get("contents"));
+            mediInfoDTO.setProjectNo(Integer.parseInt(parameters.get("projectNo")));
+            mediInfoDTO.setTimeCode(Integer.parseInt(parameters.get("timeCode")));
+            mediInfoDTO.setMediDate(Date.valueOf(parameters.get("date")));
+            mediInfoDTO.setMediRegDate(LocalDateTime.now());
+
+
+            result = userService.makeMediInfo(mediInfoDTO);
+
+
+        }else{
+
 
 
         }
+
+        if(result>0){
+            message="예약 등록 했습니다";
+        }
+        else{
+            message="예약 등록에 실패했습니다";
+        }
+
+        session.setAttribute("reservationMessage",message);
+
 
         return "redirect:/auth/mainPage";
     }
