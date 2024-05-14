@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main/main.css">
+
 </head>
+
 <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
 <body>
     
@@ -46,12 +48,27 @@
                     <div>
                         <fieldset class="patientinfo">
                             <legend>Patient Info</legend>
-                            <label for="sub"> 환자 이름  :</label>
-                            <input type="text" name="person" id="sub"/><br>
-                            <label for="sub"> 환자 번호  :</label>
-                            <input type="text" name="person" id="sub"/><br>
-                            <label for="phone">휴대폰 번호 : </label>
-                            <input type="tel" name="tell" id="phone" placeholder="010-0000-0000" pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
+                            <table>
+                            <tr>
+                                <th>환자 이름 : </th>
+                                <td>
+                                    <select class="form-select form-select-sm" aria-label="Small select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>환자 번호 : </th>
+                                <td style="text-align: center;">12313</td>
+                            </tr>
+                            <tr>
+                                <th>휴대폰 번호 : </th>
+                                <td style="text-align: center;">010-1111-1111</td>
+                            </tr>
+                            </table>
                         </fieldset>
                     </div>
                     <br>
@@ -106,7 +123,9 @@
             <div class="box4">
                 <div class="title">Today Menu</div>
                 <br>
+                <span style="text-align: center; font-weight: bold; border-bottom: 1px solid black; width: 50%;">2024-12-10</span>
                 <div id="menuouter">
+                
                     <button><i class="fa-solid fa-caret-left" style="color:black;"></i></button>
                     <div id="todaymenu">
                         <p>소고기 스테이크</p>
@@ -145,4 +164,5 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

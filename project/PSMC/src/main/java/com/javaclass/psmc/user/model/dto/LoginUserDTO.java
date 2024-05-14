@@ -3,12 +3,13 @@ package com.javaclass.psmc.user.model.dto;
 import com.javaclass.psmc.common.UserRole;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class LoginUserDTO {
+public class LoginUserDTO implements Serializable {
 
     private String registNo;
     private String id;

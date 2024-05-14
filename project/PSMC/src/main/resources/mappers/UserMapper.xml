@@ -300,9 +300,8 @@
             patient p on p.patient_no = a.patient_no
         where
             e.pm_code = #{pmCode}
-<!--        and-->
-<!--            t.thera_date between #{startDay} and #{endDay}-->
-<!--        데이터 사이즈가 작아서 잠시 주석 처리-->
+        and
+            t.thera_date between #{startDay} and #{endDay}
         and
             a.project_status = 'Y'
         and
@@ -526,13 +525,16 @@
         <id property="dayNo" column="day_no"/>
         <result property="menuName" column="menu_name"/>
     </resultMap>
-    <select id="menu" resultMap="menuMap" parameterType="string">
+    <resultMap id="todayMenuMap" type="com.javaclass.psmc.mainPage.model.dto.TodayMenuDTO">
+        <association property="menuDTO" resultMap="menuMap"/>
+    </resultMap>
+    <select id="menu" resultMap="todayMenuMap" parameterType="int">
         select
             *
         from
             menu
         where
-            day_no = dayofweek(#{date})
+            day_no = #{day}
     </select>
 
     <select resultType="int" id="findDayNo" parameterType="string">
@@ -583,5 +585,42 @@
             t.thera_status='Y'
         and
             a.project_status='Y'
+    </select>
+
+    <resultMap id="mypatientMap" type="com.javaclass.psmc.auth.model.dto.MyPatientDTO">
+        <result property="patientNo" column="patient_no"/>
+        <result property="patientName" column="patient_name"/>
+        <result property="phone" column="phone"/>
+        <result property="projectNo" column="project_no"/>
+    </resultMap>
+
+    <select id="myPatient" resultMap="mypatientMap" parameterType="hashmap">
+        select
+            p.patient_name,
+            p.patient_no,
+            p.phone,
+            a.project_no
+        from
+            patient p
+        join
+            project a
+        on
+            a.patient_no = p.patient_no
+        <if test="role == 'doctor'">
+            join
+                create_project c
+            on
+                c.project_no = a.project_no
+        </if>
+        <if test="role=='thera'">
+            join
+                assign_project c
+            on
+                c.project_no = a.project_no
+        </if>
+
+        where
+            c.pm_code= #{pmCode}
+
     </select>
 </mapper>

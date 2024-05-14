@@ -34,7 +34,7 @@ fetch("/setSchedule")
                 const code = t.timeCode;
                 let start = time.substring(0, time.length - 3);
                 const end = ending(start);
-                t.mitoProDTOS.forEach(m => {
+                t.mItoProDTOS.forEach(m => {
                     const dayNum = m.day;
                     const mediDate = m.mediDate;
                     const mediCode = m.mediCode;
@@ -169,7 +169,7 @@ fetch("/alltime")
             data.times.forEach(t => {
                 console.table(t);
                 if(data.pmCode.charAt(0)=='d'){
-                    t.mitoProDTOS.forEach(m => {
+                    t.mItoProDTOS.forEach(m => {
                         const p = m.connectProjectDTO.projectNo;
                         if (projects.indexOf(p) === -1) {
                             projects.push(p);

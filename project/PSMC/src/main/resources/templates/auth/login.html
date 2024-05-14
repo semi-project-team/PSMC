@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -30,25 +30,80 @@
         </div>
 
         <div class="box2">
-            <form method="get" id="formmer">
+            <form action="/reservation" method="post" id="formmer">
                 <div>
                     <fieldset class="patientinfo">
                         <legend>Patient Info</legend>
-                        <label for="patientName"> 환자 이름  :</label>
-                        <input type="text" name="person" id="patientName"/><br>
-                        <label for="patientNum"> 환자 번호  :</label>
-                        <input type="text" name="person" id="patientNum"/><br>
-                        <label for="phone">휴대폰 번호 : </label>
-                        <input type="tel" name="tell" id="phone" placeholder="010-0000-0000" pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
+                        <table>
+                            <tr>
+                                <th>환자 이름 : </th>
+                                <td>
+                                    <select style="border: none" id="patientSelect" name="projectNo">
+                                        <option selected disabled>환자를 선택하세요</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>환자 번호 : </th>
+                                <td style="text-align: center;" id="patientNo"></td>
+                            </tr>
+                            <tr>
+                                <th>휴대폰 번호 : </th>
+                                <td style="text-align: center;" id="patientPhone"></td>
+                            </tr>
+                        </table>
                     </fieldset>
                 </div>
+
+                <script th:inline="javascript">
+                    const patients = JSON.parse([[${patient}]]);
+                    console.table(patients);
+                    const patientSelect =document.getElementById('patientSelect');
+                    const patientNo = document.getElementById('patientNo');
+                    const patientPhone =document.getElementById('patientPhone');
+                    patients.forEach(p=>{
+                        const $option = document.createElement('option');
+                        $option.value=p.projectNo;
+                        $option.textContent=p.patientName;
+                        patientSelect.appendChild($option);
+                    })
+
+                    patientSelect.addEventListener('change',e=>{
+                        const val = patientSelect.value;
+                        patients.forEach(p=>{
+                            if(p.patientNo == val){
+                                patientNo.textContent=p.patientNo;
+                                patientPhone.textContent=p.phone;
+                            }
+                        })
+                    })
+                </script>
+
                 <div><br>
                     <br>
-                    <fieldset class="timeslot">
+                    <fieldset class="timeslot" >
                         <legend>TimeSlot</legend>
                         <label>날짜 및 시간 :</label>
-                        <input type="date" name="reservation_date"/>
-                        <input type="time" name="reservation_time" min="09:00" max="20:00"/>
+                        <input type="date" name="date" >
+                        <select name="timeCode" id="time" sec:authorize="hasAnyAuthority('d')">
+                            <option selected disabled>시간을 선택하세요</option>
+                            <option value="1">09:00~09:30</option>
+                            <option value="2">09:30~10:00</option>
+                            <option value="3">10:00~10:30</option>
+                            <option value="4">10:30~11:00</option>
+                            <option value="5">11:00~11:30</option>
+                            <option value="6">11:30~12:00</option>
+                            <option value="7">13:00~13:30</option>
+                            <option value="8">13:30~14:00</option>
+                            <option value="9">14:00~14:30</option>
+                            <option value="10">14:30~15:00</option>
+                            <option value="11">15:00~15:30</option>
+                            <option value="12">15:30~16:00</option>
+                            <option value="13">16:00~16:30</option>
+                            <option value="14">16:30~17:00</option>
+                            <option value="15">17:00~17:30</option>
+                            <option value="16">17:30~18:00</option>
+                        </select>
                         <br>
                         <label for="position">증상 및 진단 정보:  </label>
                         <textarea name="contents" cols="30" row="60" id="position"></textarea>
@@ -57,11 +112,19 @@
                 <br>
                 <span id="inputter">
                         <input type="submit" value="예약">
-                        <input type="reset" value="취소">
-                        <button id="newProject">New Project</button>
+                        <input type="reset" value="취소" id="cancel">
+                        <button id="newProject" sec:authorize="hasAnyAuthority('d')" type="button">New Project</button>
                 </span>
 
             </form>
+
+            <script>
+                const $cancel = document.getElementById('cancel');
+                $cancel.addEventListener('click',e=>{
+                    patientNo.textContent="";
+                    patientPhone.textContent="";
+                })
+            </script>
 
         </div>
         <div class="box3">
@@ -143,7 +206,8 @@
         <div class="box4">
             <div class="title2">Today Menu</div>
             <br>
-            <div id="menuouter">
+            <span id="todayCalendar"></span>
+            <div id="menuouter" style="width: 100%">
                 <button id="leftButton"><i class="fa-solid fa-caret-left" style="color: black"></i></button>
                 <div id="todayMenu">
                 </div>
@@ -153,29 +217,47 @@
         </div>
 
         <script>
+            const left = document.getElementById('leftButton');
+            const right = document.getElementById('rightButton');
+            const todayCalendar = document.getElementById('todayCalendar');
             fetch("/todayMenu")
                 .then(res=>res.json())
                 .then(data=>{
                     console.table(data);
-                    const counter = document.getElementById('menuouter');
-                    const left = document.getElementById('leftButton');
-                    const right = document.getElementById('rightButton');
-
-
-
-                    let dayNo = data.dayNo;
-
-
-                    
-
-                    const todayMenu = document.getElementById('todayMenu');
-                    const menu = data.menuName.split(",");
-                    menu.forEach(m=>{
-                        const $p= document.createElement('p');
-                        $p.textContent = m;
-                        todayMenu.appendChild($p);
-                    })
+                    todayCalendar.textContent=data.date
+                    makeMenu(data.menuDTO.menuName);
                 })
+
+            left.addEventListener('click',e=>{
+                fetch("/minusday")
+                    .then(res=>res.json())
+                    .then(data=>{
+                        todayCalendar.textContent=data.date
+                        const menuName = data.menuDTO.menuName;
+                        makeMenu(menuName);
+                    })
+
+            })
+            right.addEventListener('click',e=>{
+                fetch("/plusday")
+                    .then(res=>res.json())
+                    .then(data=>{
+                        todayCalendar.textContent=data.date;
+                        const menuName = data.menuDTO.menuName;
+                        makeMenu(menuName);
+                    })
+            })
+
+            function makeMenu(menuNames){
+                const todayMenu = document.getElementById('todayMenu');
+                todayMenu.textContent="";
+                const menu = menuNames.split(",");
+                menu.forEach(m=>{
+                    const $p = document.createElement('p');
+                    $p.textContent = m;
+                    todayMenu.appendChild($p);
+                })
+            }
 
         </script>
         <div class="box5">
@@ -203,5 +285,7 @@
     </div>
 </div>
 </body>
+
 <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
+
 </html>

@@ -1,5 +1,6 @@
 package com.javaclass.psmc.user.model.dao;
 
+import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
@@ -56,9 +57,11 @@ public interface UserMapper {
 
    List<ProjectsDTO> mediToday(Map<String, Object> sender);
 
-    MenuDTO menu(String date);
+    TodayMenuDTO menu(int date);
 
     int findDayNo(String today);
 
     List<TheraProjectDTO> theraToday(Map<String, Object> sender);
+
+    List<MyPatientDTO> myPatient(Map<String,Object> sender);
 }
