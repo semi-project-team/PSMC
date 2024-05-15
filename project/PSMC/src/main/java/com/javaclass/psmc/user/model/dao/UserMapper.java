@@ -78,4 +78,8 @@ public interface UserMapper {
     List<TodayAllTheraDTO> checkTheraByStartAndEnd(Map<String, Object> sender);
 
     List<TodayAllMediDTO> todayMediByPRNo(Map<String, Object> sender);
+
+    List<TodayAllTheraDTO> checkTheraByTheraCode(Map<String, Object> sender);
+
+    int theraInfoupdate(Map<String, Object> sender);
 }

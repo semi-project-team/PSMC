@@ -747,9 +747,48 @@
         and
             s.project_no = #{projectNo}
         and
-            m.medi_code in
+            m.time_code in
         <foreach collection="code" item="coding" open="(" separator="," close=")">
             #{coding}
         </foreach>
     </select>
+
+    <select id="checkTheraByTheraCode" resultMap="TodayAllTheraMap" parameterType="hashmap">
+        select
+            t.thera_code,
+            t.start,
+            t.end
+        from
+            assign_project s
+        join
+            project a
+        on
+            a.project_no = s.project_no
+        join
+            thera_info t
+        on
+            t.project_no = a.project_no
+        where
+            s.pm_code = #{pmCode}
+        and
+            project_status ='Y'
+        and
+            thera_status ='Y'
+        and
+            t.thera_date = #{date}
+        and
+            t.thera_code not in (#{theraCode})
+        and
+            <![CDATA[
+            t.start < #{end}
+            and
+            t.end > #{start}]]>
+    </select>
+
+    <update id="theraInfoupdate" parameterType="hashmap">
+        update
+            thera_info
+        set
+
+    </update>
 </mapper>

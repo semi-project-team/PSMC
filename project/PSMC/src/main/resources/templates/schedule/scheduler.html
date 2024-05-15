@@ -11,8 +11,21 @@
 <script>
     const message = '[[${message}]]';
     if(message){
+        console.log("이놈 아닌데")
         alert(message);
     }
+
+    const theraFail = `[[${failUpdateMessage}]]`;
+    console.log(theraFail);
+    if(theraFail!="") {
+        const m = theraFail.split(",");
+        if(m.length>0){
+            console.log('경고창 여기 아닌가');
+            alert(m.join("\n"));
+        }
+    }
+
+
 </script>
 <body>
     <th:block th:insert="~{/common/nav}"></th:block>
@@ -179,7 +192,7 @@
                             </select>
                         </div>
                         <div class="mb-4 d-flex" sec:authorize="hasAnyAuthority('t')">
-                            <input type="time" class="form-control" id="timeInput1" name="start" step="60">~<input type="time" class="form-control" id="timeInput2" name="end" step="60">
+                            <input type="time" class="form-control" id="timeInput1" name="start" step="60" min="06:00" max="22:00">~<input type="time" class="form-control" id="timeInput2" name="end" step="60" min="06:00" max="22:00">
                         </div>
                         <div sec:authorize="hasAnyAuthority('t')" id="warnningbox">
                             <ul id="warningText"></ul>

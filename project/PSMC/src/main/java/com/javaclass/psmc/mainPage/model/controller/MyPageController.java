@@ -126,9 +126,14 @@ public class MyPageController {
 
             List<Integer> timecode = findTimeCode.CantTimeCode(start,end);
 
-            sender.put("code",timecode);
-            sender.put("projectNo",parameters.get("projectNo"));
-            List<TodayAllMediDTO> todayMedi = userService.todayMediByPRNo(sender);
+            List<TodayAllMediDTO> todayMedi = new ArrayList<>();
+            if(!timecode.isEmpty()){
+                sender.put("code",timecode);
+                sender.put("projectNo",parameters.get("projectNo"));
+                todayMedi = userService.todayMediByPRNo(sender);
+            }
+
+
 
 
 
@@ -142,6 +147,12 @@ public class MyPageController {
                 theraInfoDTO.setStart(LocalTime.parse(parameters.get("start")));
                 theraInfoDTO.setEnd(LocalTime.parse(parameters.get("end")));
                 result = userService.makeTheraInfo(theraInfoDTO);
+                if(result>0){
+                    message="예약 등록했습니다";
+
+                }else{
+                    message="예약등록에 실패했습니다";
+                }
             }else{
 
                 StringBuilder words = new StringBuilder();
