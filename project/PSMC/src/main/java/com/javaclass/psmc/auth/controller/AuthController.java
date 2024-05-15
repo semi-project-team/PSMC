@@ -120,9 +120,14 @@ public class AuthController {
         System.out.println("mypatients = " + mypatients);
 
         String message = (String) session.getAttribute("reservationMessage");
+        StringBuilder messages = (StringBuilder) session.getAttribute("messages");
+        session.removeAttribute("messages");
         session.removeAttribute("reservationMessage");
 
         model.addAttribute("reservationMessage",message);
+        if(messages!=null) {
+            model.addAttribute("reservationMessages", messages);
+        }
 
         return "/auth/login";
     }

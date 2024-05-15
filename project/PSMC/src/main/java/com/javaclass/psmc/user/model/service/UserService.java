@@ -6,6 +6,7 @@ import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.common.model.dto.MediInfoDTO;
 import com.javaclass.psmc.common.model.dto.MenuDTO;
+import com.javaclass.psmc.common.model.dto.TheraInfoDTO;
 import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.user.model.dao.UserMapper;
 
@@ -154,6 +155,30 @@ public class UserService {
     public int makeMediInfo(MediInfoDTO mediInfoDTO) {
 
         return userMapper.makeMediInfo(mediInfoDTO);
+    }
+
+    public int makeTheraInfo(TheraInfoDTO theraInfoDTO) {
+
+        return userMapper.makeTheraInfo(theraInfoDTO);
+    }
+
+    public List<TodayAllMediDTO> todayAllMedi(Map<String, String> parameter) {
+        return userMapper.todayAllMedi(parameter);
+    }
+
+    public List<TodayAllTheraDTO> todayTheraByPRNo(TheraJSONDTO theraJSONDTO) {
+        return userMapper.todayTheraByPRNo(theraJSONDTO);
+    }
+
+
+    public List<TodayAllTheraDTO> checkTheraByStartAndEnd(Map<String, Object> sender) {
+
+        return userMapper.checkTheraByStartAndEnd(sender);
+    }
+
+    public List<TodayAllMediDTO> todayMediByPRNo(Map<String, Object> sender) {
+
+        return userMapper.todayMediByPRNo(sender);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {

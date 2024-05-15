@@ -1,31 +1,44 @@
 package com.javaclass.psmc.mainPage.model.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.common.model.dto.MediInfoDTO;
 import com.javaclass.psmc.common.model.dto.MenuDTO;
+import com.javaclass.psmc.common.model.dto.TheraInfoDTO;
+import com.javaclass.psmc.common.model.method.FindTimeCode;
 import com.javaclass.psmc.common.model.method.MenuHandling;
-import com.javaclass.psmc.mainPage.model.dto.TodayMenuDTO;
+import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class MyPageController {
 
     private MenuHandling menuHandling = new MenuHandling();
+    private ObjectMapper objectMapper;
+    private FindTimeCode findTimeCode = new FindTimeCode();
 
     private final UserService userService;
     @Autowired
-    public MyPageController(UserService userService){
+    public MyPageController(UserService userService,ObjectMapper objectMapper){
         this.userService=userService;
+        this.objectMapper=objectMapper;
     }
 
     @GetMapping("/mypage/mypage")
@@ -85,24 +98,118 @@ public class MyPageController {
 
             result = userService.makeMediInfo(mediInfoDTO);
 
+            if(result>0){
+                message="예약 등록 했습니다";
+            }
+            else{
+                message="예약 등록에 실패했습니다";
+            }
+
 
         }else{
+            System.out.println(parameters.get("projectNo"));
+            System.out.println(parameters.get("date"));
+            System.out.println(parameters.get("contents"));
+            System.out.println(parameters.get("start"));
+            System.out.println(parameters.get("end"));
+
+            LocalTime start = LocalTime.parse(parameters.get("start"));
+            LocalTime end = LocalTime.parse(parameters.get("end"));
+
+
+            Map<String,Object> sender = new HashMap<>();
+            sender.put("pmCode",pmCode);
+            sender.put("date",parameters.get("date"));
+            sender.put("start",parameters.get("start"));
+            sender.put("end",parameters.get("end"));
+            List<TodayAllTheraDTO> todayThera = userService.checkTheraByStartAndEnd(sender);
+
+            List<Integer> timecode = findTimeCode.CantTimeCode(start,end);
+
+            sender.put("code",timecode);
+            sender.put("projectNo",parameters.get("projectNo"));
+            List<TodayAllMediDTO> todayMedi = userService.todayMediByPRNo(sender);
+
+
+
+            if(todayThera.isEmpty() && todayMedi.isEmpty()){
+
+                TheraInfoDTO theraInfoDTO = new TheraInfoDTO();
+                theraInfoDTO.setTheraDate(Date.valueOf(parameters.get("date")));
+                theraInfoDTO.setProjectNo(Integer.parseInt(parameters.get("projectNo")));
+                theraInfoDTO.setTheraRegDate(LocalDateTime.now());
+                System.out.println("이젠 시간 맞지?"+LocalTime.parse(parameters.get("start")));
+                theraInfoDTO.setStart(LocalTime.parse(parameters.get("start")));
+                theraInfoDTO.setEnd(LocalTime.parse(parameters.get("end")));
+                result = userService.makeTheraInfo(theraInfoDTO);
+            }else{
+
+                StringBuilder words = new StringBuilder();
+                if(!todayThera.isEmpty()){
+                    words.append("겹치는 재활일정 : \n");
+                    for(TodayAllTheraDTO t : todayThera){
+                    String timeRange = t.getStart() +" ~ " + t.getEnd();
+                    words.append(timeRange+",");
+                    }
+                }
+                if(!todayMedi.isEmpty()){
+                    words.append("겹치는 치료일정 : \n");
+                    for(TodayAllMediDTO m : todayMedi){
+                        String timeRange = findTimeCode.startCode(m.getTimeCode()) +" ~ " +findTimeCode.endCode(m.getTimeCode()) ;
+                        words.append(timeRange+",");
+                    }
+                }
+                System.out.println("words = " + words);
+                session.setAttribute("messages",words);
+
+            }
 
 
 
         }
 
-        if(result>0){
-            message="예약 등록 했습니다";
-        }
-        else{
-            message="예약 등록에 실패했습니다";
-        }
 
         session.setAttribute("reservationMessage",message);
 
 
         return "redirect:/auth/mainPage";
+    }
+
+    @PostMapping(value = "/sendAllMedi",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<TodayAllMediDTO> checkTimeCode(@RequestBody String selectDate, HttpSession session) throws JsonProcessingException {
+        System.out.println("selectDate = " + selectDate);
+        JsonNode jsonNode =objectMapper.readTree(selectDate);
+        String date = jsonNode.get("selectDate").asText();
+        System.out.println("date 날짜 변환되었나= " + date);
+        Map<String,String> parameter = new HashMap<>();
+        parameter.put("date",date);
+        String pmCode = ((LoginUserDTO)session.getAttribute("auth")).getPmCode();
+        parameter.put("pmCode",pmCode);
+        List<TodayAllMediDTO> todayAllMedi = userService.todayAllMedi(parameter);
+
+        for (TodayAllMediDTO today : todayAllMedi){
+            System.out.println("today 오늘 mediInfo 다 = " + today);
+        }
+        return todayAllMedi;
+    }
+    @PostMapping(value = "/sendThera",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<TodayAllTheraDTO> checkTimeCodeByThera(@RequestBody TheraJSONDTO theraJSONDTO,HttpSession session){
+        System.out.println("시간바궜냐 그만 바꿔라"+theraJSONDTO);
+
+        LoginUserDTO loginUserDTO = ((LoginUserDTO) session.getAttribute("auth"));
+        String pmCode = loginUserDTO.getPmCode();
+        theraJSONDTO.setPmCode(pmCode);
+
+        List<TodayAllTheraDTO> todayTheraByPRNo = userService.todayTheraByPRNo(theraJSONDTO);
+
+        for(TodayAllTheraDTO t : todayTheraByPRNo){
+            List<Integer> code = findTimeCode.CantTimeCode(t.getStart(),t.getEnd());
+            System.out.println("code = " + code);
+            t.setCode(code);
+        }
+        return todayTheraByPRNo;
     }
 
 

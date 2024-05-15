@@ -2,12 +2,13 @@ package com.javaclass.psmc.auth.model.dto;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class TheraProjectDTO {
 
     private String theraCode;
-    private Time start;
-    private Time end;
+    private LocalTime start;
+    private LocalTime end;
     private String patientName;
     private int projectNo;
     private String injuryName;
@@ -15,7 +16,7 @@ public class TheraProjectDTO {
 
     public TheraProjectDTO(){}
 
-    public TheraProjectDTO(String theraCode, Time start, Time end, String patientName, int projectNo, String injuryName, Date theraDate) {
+    public TheraProjectDTO(String theraCode, LocalTime start, LocalTime end, String patientName, int projectNo, String injuryName, Date theraDate) {
         this.theraCode = theraCode;
         this.start = start;
         this.end = end;
@@ -33,19 +34,19 @@ public class TheraProjectDTO {
         this.theraCode = theraCode;
     }
 
-    public Time getStart() {
+    public LocalTime getStart() {
         return start;
     }
 
-    public void setStart(Time start) {
+    public void setStart(LocalTime start) {
         this.start = start;
     }
 
-    public Time getEnd() {
+    public LocalTime getEnd() {
         return end;
     }
 
-    public void setEnd(Time end) {
+    public void setEnd(LocalTime end) {
         this.end = end;
     }
 
