@@ -181,6 +181,16 @@ public class UserService {
         return userMapper.todayMediByPRNo(sender);
     }
 
+    public List<TodayAllTheraDTO> checkTheraByTheraCode(Map<String, Object> sender) {
+
+        return userMapper.checkTheraByTheraCode(sender);
+    }
+
+    public int theraInfoupdate(Map<String, Object> sender) {
+
+        return userMapper.theraInfoupdate(sender);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }

@@ -124,7 +124,7 @@
                         <th:block sec:authorize="hasAnyAuthority('t')">
                             <br>
                             <label for="start">시간 : </label>
-                            <input type="time" id="start" name="start" step="60"> ~ <input type="time" id="end" name="end" step="60">
+                            <input type="time" id="start" name="start" step="60" min="06:00" max="22:00"> ~ <input type="time" id="end" name="end" step="60" min="06:00" max="22:00">
                         </th:block>
                         <br>
                         <script>
