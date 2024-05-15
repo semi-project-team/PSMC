@@ -15,6 +15,13 @@
         if(message){
             alert(message);
         }
+
+        const messages = `[[${reservationMessages}]]`;
+        if(messages.length>0){
+            const m = messages.split(",");
+            alert(m.join("\n"));
+
+        }
     </script>
 
 
@@ -82,6 +89,7 @@
                                 patientPhone.textContent=p.phone;
                             }
                         })
+
                     })
                 </script>
 
@@ -89,29 +97,128 @@
                     <br>
                     <fieldset class="timeslot" >
                         <legend>TimeSlot</legend>
-                        <label>날짜 및 시간 :</label>
-                        <input type="date" name="date" >
-                        <select name="timeCode" id="time" sec:authorize="hasAnyAuthority('d')">
-                            <option selected disabled>시간을 선택하세요</option>
-                            <option value="1">09:00~09:30</option>
-                            <option value="2">09:30~10:00</option>
-                            <option value="3">10:00~10:30</option>
-                            <option value="4">10:30~11:00</option>
-                            <option value="5">11:00~11:30</option>
-                            <option value="6">11:30~12:00</option>
-                            <option value="7">13:00~13:30</option>
-                            <option value="8">13:30~14:00</option>
-                            <option value="9">14:00~14:30</option>
-                            <option value="10">14:30~15:00</option>
-                            <option value="11">15:00~15:30</option>
-                            <option value="12">15:30~16:00</option>
-                            <option value="13">16:00~16:30</option>
-                            <option value="14">16:30~17:00</option>
-                            <option value="15">17:00~17:30</option>
-                            <option value="16">17:30~18:00</option>
-                        </select>
+                        <label sec:authorize="hasAnyAuthority('d')" for="date">날짜 및 시간 :</label>
+                        <label for="date" sec:authorize="hasAnyAuthority('t')">날짜 : </label>
+                        <input type="date" name="date" id="date">
+                        <th:block sec:authorize="hasAnyAuthority('d')">
+                            <select name="timeCode" id="time">
+                                <option selected disabled value="none">시간을 선택하세요</option>
+                                <option value="1">09:00~09:30</option>
+                                <option value="2">09:30~10:00</option>
+                                <option value="3">10:00~10:30</option>
+                                <option value="4">10:30~11:00</option>
+                                <option value="5">11:00~11:30</option>
+                                <option value="6">11:30~12:00</option>
+                                <option value="7">13:00~13:30</option>
+                                <option value="8">13:30~14:00</option>
+                                <option value="9">14:00~14:30</option>
+                                <option value="10">14:30~15:00</option>
+                                <option value="11">15:00~15:30</option>
+                                <option value="12">15:30~16:00</option>
+                                <option value="13">16:00~16:30</option>
+                                <option value="14">16:30~17:00</option>
+                                <option value="15">17:00~17:30</option>
+                                <option value="16">17:30~18:00</option>
+                            </select>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyAuthority('t')">
+                            <br>
+                            <label for="start">시간 : </label>
+                            <input type="time" id="start" name="start" step="60"> ~ <input type="time" id="end" name="end" step="60">
+                        </th:block>
                         <br>
-                        <label for="position">증상 및 진단 정보:  </label>
+                        <script>
+                            const $inputDate = document.getElementById('date');
+                            const role = `[[${role}]]`;
+                            if(role=='d') {
+                                resetSelect();
+
+                                patientSelect.addEventListener('change',e=>{
+                                    resetSelect();
+                                    if($inputDate.value!==""){
+                                        checkByPRNo();
+                                        checkAllMedi();
+                                    }
+                                })
+                            }
+                            $inputDate.addEventListener('change',e=>{
+
+                                if(role == 'd'){
+                                    resetSelect();
+                                    checkAllMedi();
+                                }
+                            })
+
+                            function checkByPRNo(){
+                                const dateValue = $inputDate.value;
+                                if(dateValue!=null) {
+                                    fetch("/sendThera", {
+                                        method: "POST",
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            projectNo : patientSelect.value,
+                                            date : dateValue
+                                        })
+
+                                    })
+                                        .then(res=>res.json())
+                                        .then(data=>{
+                                            console.table(data);
+                                            if(data!=null){
+                                                data.forEach(thera=>{
+                                                    if(thera.code!=null){
+                                                        thera.code.forEach(c=>{
+                                                          const $timeTable = document.getElementById('time');
+                                                          $timeTable.querySelector(`option[value="${c}"]`).disabled=true;
+                                                        })
+                                                    }
+                                                })
+                                            }
+
+                                        })
+                                }
+                            }
+
+                            function resetSelect(){
+                                const $timeTable = document.getElementById('time');
+                                const $option = $timeTable.querySelectorAll('option');
+                                $option.forEach(option => {
+                                    option.disabled = false;
+                                })
+                                $option[0].disabled = true;
+                            }
+
+                            function checkAllMedi(){
+                                const $timeTable = document.getElementById('time');
+                                const dateValue = $inputDate.value;
+                                fetch("/sendAllMedi",{
+                                    method: "POST",
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        selectDate: dateValue
+                                    })
+                                }).then(res=>res.json())
+                                    .then(data=>{
+                                        console.table(data);
+                                        if(data!=null){
+                                            data.forEach(m=>{
+                                                const timeCode = m.timeCode;
+                                                $timeTable.querySelector(`option[value="${timeCode}"]`).disabled=true;
+                                            })
+                                        }
+                                    })
+                                const projectNo = patientSelect.value;
+                                if(projectNo!==""){
+                                    checkByPRNo();
+                                }
+
+                            }
+                        </script>
+                        <label for="position">증상 및 진단 정보: </label>
                         <textarea name="contents" cols="30" row="60" id="position"></textarea>
                     </fieldset>
                 </div>
@@ -122,6 +229,7 @@
                         <button id="newProject" sec:authorize="hasAnyAuthority('d')" type="button">New Project</button>
                 </span>
 
+
             </form>
 
             <script>
@@ -129,6 +237,14 @@
                 $cancel.addEventListener('click',e=>{
                     patientNo.textContent="";
                     patientPhone.textContent="";
+                    if(role=='d'){
+                        const $timeTable = document.getElementById('time');
+                        const $option = $timeTable.querySelectorAll('option');
+                        $option.forEach(option => {
+                            option.disabled = false;
+                        })
+                        $option[0].disabled = true;
+                    }
                 })
             </script>
 

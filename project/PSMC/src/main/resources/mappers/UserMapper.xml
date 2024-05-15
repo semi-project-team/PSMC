@@ -633,4 +633,123 @@
         insert into medi_info(medi_date,project_no,time_code,medi_reg_date,medi_status)
         values (#{mediDate},#{projectNo},#{timeCode},#{mediRegDate},'Y')
     </insert>
+
+    <insert id="makeTheraInfo" parameterType="com.javaclass.psmc.common.model.dto.TheraInfoDTO">
+        insert into thera_info(thera_date,project_no,thera_reg_date,thera_status,start,end)
+        values (#{theraDate},#{projectNo},#{theraRegDate},'Y',#{start},#{end})
+    </insert>
+    <resultMap id="todayAllMediMap" type="com.javaclass.psmc.mainPage.model.dto.TodayAllMediDTO">
+        <id property="mediCode" column="medi_code"/>
+        <result property="timeCode" column="time_code"/>
+    </resultMap>
+
+    <select id="todayAllMedi" resultMap="todayAllMediMap" parameterType="hashmap">
+        select
+            m.medi_code,
+            m.time_code
+        from
+            create_project c
+        join
+            project a
+        on
+            a.project_no = c.project_no
+        join
+            medi_info m
+        on
+            m.project_no = a.project_no
+        where
+            m.medi_date = #{date}
+        and
+            c.pm_code = #{pmCode}
+        and
+            m.medi_status='Y'
+        and
+            a.project_status='Y'
+    </select>
+
+    <resultMap id="TodayAllTheraMap" type="com.javaclass.psmc.mainPage.model.dto.TodayAllTheraDTO">
+        <id property="theraCode" column="thera_code"/>
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+    </resultMap>
+    <select id="todayTheraByPRNo" resultMap="TodayAllTheraMap" parameterType="com.javaclass.psmc.mainPage.model.dto.TheraJSONDTO">
+        select
+            t.start,
+            t.end,
+            t.thera_code
+        from
+            create_project c
+        join
+            project a
+        on
+            c.project_no = a.project_no
+        join
+            thera_info t
+        on
+            t.project_no = a.project_no
+        where
+            t.thera_date = #{date}
+        and
+            c.pm_code = #{pmCode}
+        and
+            a.project_no = #{projectNo}
+    </select>
+
+    <select id="checkTheraByStartAndEnd" resultMap="TodayAllTheraMap" parameterType="hashmap">
+        select
+            t.start,
+            t.end,
+            t.thera_code
+        from
+            assign_project s
+        join
+            project a
+        on
+            s.project_no = a.project_no
+        join
+            thera_info t
+        on
+            a.project_no = t.project_no
+        where
+            s.pm_code =#{pmCode}
+        and
+            a.project_status = 'Y'
+        and
+            t.thera_status ='Y'
+        and
+            t.thera_date = #{date}
+        and
+            <![CDATA[
+            t.start <= #{end}
+            and
+            t.end >= #{start}]]>
+
+    </select>
+
+    <select id="todayMediByPRNo" resultMap="todayAllMediMap" parameterType="hashmap">
+        select
+            m.time_code,
+            m.medi_code
+        from
+            assign_project s
+        join
+            project a
+        on
+            a.project_no = s.project_no
+        join
+            medi_info m
+        on
+            m.project_no = a.project_no
+        where
+            s.pm_code = #{pmCode}
+        and
+            m.medi_date =#{date}
+        and
+            s.project_no = #{projectNo}
+        and
+            m.medi_code in
+        <foreach collection="code" item="coding" open="(" separator="," close=")">
+            #{coding}
+        </foreach>
+    </select>
 </mapper>

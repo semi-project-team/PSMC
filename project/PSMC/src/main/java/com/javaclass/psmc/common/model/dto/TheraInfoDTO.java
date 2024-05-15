@@ -5,6 +5,7 @@ import lombok.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 public class TheraInfoDTO {
@@ -14,12 +15,12 @@ public class TheraInfoDTO {
     private int projectNo;
     private LocalDateTime theraRegDate;
     private String theraStatus;
-    private Time start;
-    private Time end;
+    private LocalTime start;
+    private LocalTime end;
 
     public TheraInfoDTO(){}
 
-    public TheraInfoDTO(int theraCode, Date theraDate, int projectNo, LocalDateTime theraRegDate, String theraStatus, Time start, Time end) {
+    public TheraInfoDTO(int theraCode, Date theraDate, int projectNo, LocalDateTime theraRegDate, String theraStatus, LocalTime start, LocalTime end) {
         this.theraCode = theraCode;
         this.theraDate = theraDate;
         this.projectNo = projectNo;
@@ -69,19 +70,19 @@ public class TheraInfoDTO {
         this.theraStatus = theraStatus;
     }
 
-    public Time getStart() {
+    public LocalTime getStart() {
         return start;
     }
 
-    public void setStart(Time start) {
+    public void setStart(LocalTime start) {
         this.start = start;
     }
 
-    public Time getEnd() {
+    public LocalTime getEnd() {
         return end;
     }
 
-    public void setEnd(Time end) {
+    public void setEnd(LocalTime end) {
         this.end = end;
     }
 
