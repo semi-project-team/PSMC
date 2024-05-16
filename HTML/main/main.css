@@ -11,7 +11,7 @@ body,html{
     
 }
 
-.container{
+#containerouter{
     display: grid;
     grid-template-columns: 18% 40% 40%;
     grid-template-rows: minmax(65%,auto) minmax(33%,auto);
@@ -198,7 +198,7 @@ body,html{
 }
 
 fieldset {
-    border: 2px solid rgb(3, 61, 94);
+    border: 2px solid rgb(3, 61, 94)!important;
     font-family: 'Roboto', sans-serif;
     width:80%;
     position: relative;
@@ -398,3 +398,17 @@ fieldset.timeslot {
     cursor: pointer;
     
   }
+
+
+/* input numbers step 없애기 */
+
+input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }

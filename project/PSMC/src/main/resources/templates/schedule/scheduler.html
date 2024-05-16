@@ -148,12 +148,12 @@
 
 <!-- modal -->
 
-    <div class="modal fade" id="exampleModal"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal"  data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: rgb(3, 61, 94)">
+                <div class="modal-header" style="background-color: rgb(3, 61, 94)" data-bs-theme="dark">
                     <h1 class="modal-title custom-title" id="staticBackdropLabel" style="color: white">Medical Appointment</h1>
-                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close" style="color: white !important;"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body text-center">
@@ -194,9 +194,7 @@
                         <div class="mb-4 d-flex" sec:authorize="hasAnyAuthority('t')">
                             <input type="time" class="form-control" id="timeInput1" name="start" step="60" min="06:00" max="22:00">~<input type="time" class="form-control" id="timeInput2" name="end" step="60" min="06:00" max="22:00">
                         </div>
-                        <div sec:authorize="hasAnyAuthority('t')" id="warnningbox">
-                            <ul id="warningText"></ul>
-                        </div>
+
 
                     </form>
                 </div>

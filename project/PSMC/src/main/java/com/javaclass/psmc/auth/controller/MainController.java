@@ -19,5 +19,6 @@ public class MainController {
     @GetMapping("/common/signal")
     public void signal(Model model,HttpSession httpSession){
         model.addAttribute("message",httpSession.getAttribute("message"));
+        httpSession.removeAttribute("message");
     }
 }

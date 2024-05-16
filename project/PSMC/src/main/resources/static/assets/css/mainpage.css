@@ -11,7 +11,7 @@ body,html{
 
 }
 
-.container{
+.containerouter{
     display: grid;
     grid-template-columns: 18% 40% 40%;
     grid-template-rows: minmax(65%,auto) minmax(33%,auto);
@@ -181,26 +181,27 @@ body,html{
     grid-area: b;
     display: flex;
     flex-direction: column;
-    padding-top: 5%;
+
+
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow:auto;
-    /* justify-content: center; */
+
     position: relative;
 }
 
 fieldset {
-    border: 2px solid rgb(3, 61, 94);
+    border: 2px solid rgb(3, 61, 94)!important;
     font-family: 'Roboto', sans-serif;
-    width:80%;
+    width:90%;
     position: relative;
-    left: 5%;
-    top: 10%;
+    left:5%!important;
+    top: 5%!important;
 }
 
 legend {
-    font-weight: bold;
-    color:rgb(3, 61, 94);
-    ffont-family: 'Roboto', sans-serif;
+    font-weight: bold!important;
+    color:rgb(3, 61, 94)!important;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.2vw;
 
 }
@@ -210,6 +211,7 @@ legend {
 }
 .patientinfo td{
     border: none;
+
     border: 1px solid black;
     background-color: white;
     box-sizing: border-box;
@@ -263,12 +265,13 @@ textarea{
 }
 
 #inputter {
-    margin-top: 5%;
+
     margin-left:5%;
 }
 
 #newProject {
-    margin-left: 70%;
+    position: relative;
+    left: 52%;
     /* position: absolute;  */
     /* margin-top: -10%; */
 }
@@ -420,4 +423,16 @@ select:focus{
 
 option{
     text-align: center;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
 }
