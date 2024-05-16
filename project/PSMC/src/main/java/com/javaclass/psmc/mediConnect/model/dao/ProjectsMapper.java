@@ -17,4 +17,5 @@ public interface ProjectsMapper {
     int deleteBoard(Map<String,List<Integer>> postCheckbox);
 
     int deleteProjects(Map<String, List<Integer>> projectParam);
+
 }

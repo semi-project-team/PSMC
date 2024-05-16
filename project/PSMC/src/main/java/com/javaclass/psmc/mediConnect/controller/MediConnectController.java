@@ -60,6 +60,7 @@ public class MediConnectController {
         int result =mediConnectService.deleteBoard(paramPost);
 
         return "redirect:/doc/mediConnect/"+projectNo;
+
     }
 
 }

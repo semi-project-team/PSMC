@@ -79,6 +79,7 @@
             a.medi_status = 'Y';
     </select>
 
+
     <update id="deleteBoard" parameterType="hashmap">
         update
             medi_connect
