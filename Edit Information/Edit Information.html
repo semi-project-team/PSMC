@@ -4,137 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
-    <link rel="stylesheet" href="/main/main.css">
+    <link rel="stylesheet" href="./Edit Information.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <body>
-    
-
-    <!-- mainpage -->
-    <div class="mainPage">
-        <div class="main-title">
-            <div class="contents">
-                <img src="/common/img/nobackLogo.png" alt="PSMC Logo" class="logo">
-                &nbsp&nbsp
-                <span class="psmc">Pro Sports Medical Center</span>
-                <a class="docIcon" href="#" ><i class="fa-solid fa-user-doctor"></i></a>
+        <div id="mainbar">
+            <!-- 메인 바 내용 -->
+            <div id="mainNav">
+        
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-house-user fa-3x" >&nbsp;&nbsp;<a href="#" class="title hidden">Mainpage</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-house-user fa-3x">&nbsp;&nbsp;</i>
+                    <span>MAINPAGE</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-regular fa-calendar-days fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">  Schedule</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-regular fa-calendar-days fa-3x" >&nbsp;&nbsp;</i>
+                    <span>SCHEDULER</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-notes-medical fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">MediConnect</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-notes-medical fa-3x" >&nbsp;&nbsp;</i>
+                    <span>MEDICONNECT</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-hospital-user fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">TheraLink</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-hospital-user fa-3x" >&nbsp;&nbsp;</i>
+                    <span>THERALINK</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-hand-holding-medical fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">Therapy Log</a></i></div> -->
+                <!-- <div id="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-hand-holding-medical fa-3x" >&nbsp;&nbsp;<p class="title hidden">Therapy Log</p></i></a></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-user-group fa-3x" >&nbsp;&nbsp;</i>
+                    <span>STAFF</span></a></div>
+                <br><br>
+        
+                <div id="subNav" >
+                    <!-- <div style="font-size: 10px;"><i class="fa-solid fa-right-from-bracket fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">Log Out</a></i></div> -->
+        
+                    <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-right-from-bracket fa-3x" >&nbsp;&nbsp;</i>
+                        <span>LOG OUT</span></a>
+                    </div>
+                </div>
             </div>
-            <div class="line"></div>
-            <div class="mainpage">MAIN PAGE</div>
-            
+        </div>
+        <div class="mainPage">
+            <div class="main-title">
+                <div class="contents">
+                    <img src="/common/img/nobackLogo.png" alt="PSMC Logo" class="logo">
+                    &nbsp&nbsp
+                    <span class="psmc">Pro Sports Medical Center</span>
+                    <a class="docIcon" href="#" ><i class="fa-solid fa-user-doctor"></i></a>
+                </div>
+                <div class="line"></div>
+            </div>
+        </div>
+    <div class="container4">
+        <div class="box1-4">
+            <div>회원 정보 수정</div>
+        </div>
+            <div class="box2-4">
+                <br><br>
+                <input type="hidden" class="form-control" th:field="*{id}" th:readonly="readonly" >
+                <input type="hidden" class="form-control" th:field="*{role}" th:readonly="readonly" >
+    
+                <div class="mb-3">
+                    <label th:for="name">이름</label>
+                    <input type="text" class="form-control" th:field="*{name}" oninput="nicknameModify()">
+                    <span class="name_ok">사용 가능한 이름입니다.</span>
+                    <span class="name_already">누군가 이름을 사용하고 있습니다.</span>
+                </div>
+    
+                <label class="mb-3 form-label" for="birth">생년월일</label>
+                <div class="mb-3" id="birth" onchange="checkAgeModify()">
+                    <div class="row g-2">
+                        <div class="col">
+                            <select class="form-control" id="year" name="year">
+                                <option th:value="*{year}" th:text="*{year}" selected></option>
+                                <option value="">년(YY)</option>
+                                <th:block th:each="a: ${#numbers.sequence(2001,1900)}">
+                                    <option th:value="${a}" th:text="${a}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="month" name="month">
+                                <option th:value="*{month}" th:text="*{month}" selected></option>
+                                <option value="">월(mm)</option>
+                                <th:block th:each="month: ${#numbers.listFormatInteger(#numbers.sequence(1,12),2)}">
+                                    <option class="dropdown-item" th:value="${month}" th:text="${month}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="day" name="day">
+                                <option th:value="*{day}" th:text="*{day}" selected></option>
+                                <option value="">일(dd)</option>
+                                <th:block th:each="day: ${#numbers.listFormatInteger(#numbers.sequence(1,31),2)}">
+                                    <option class="dropdown-item" th:value="${day}" th:text="${day}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                    </div>
+                    <span id="birth_check_msg"></span>
+                </div>
+    
+                <div class="mb-3">
+                    <label th:for="gender">성별</label>
+                    <input type="text" class="form-control" id="gender" name="gender" th:value="*{gender.value}" hidden >
+                    <input type="text" class="form-control" th:value="*{gender.title}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label th:for="medical_code">사원 코드</label>
+                    <input type="text" class="form-control" th:field="*{medical_code}" th:readonly="readonly" >
+                </div>
+    
+                <div class="mb-3">
+                    <label th:for="position_name">포지션</label>
+                    <input type="text" class="form-control" th:field="*{position_name}" th:readonly="readonly" >
+                </div>
+    
+                <div class="mb-3">
+                    <label th:for="phone_number">폰 번호</label>
+                    <input type="text" class="form-control" th:field="*{phone_number}" >
+                </div>
+    
+                <div class="mb-3">
+                    <label th:for="company_email">회사 이메일</label>
+                    <input type="email" class="form-control" th:field="*{company_email}" >
+                </div>
+    
+    
+                <div class="mb-3">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" onclick="return modifyCheckAll()">수정</button>
+                </div>
+    
+                <div class="mb-3">
+                    <a type="button" style="color:white" class="w-100 btn btn-lg btn-secondary" onclick="window.history.back();">취소</a>
+                </div>
+    
+            </form>
+            <footer th:replace="fragments/common :: footer"></footer>
+            </div>
         </div>
         
-        <div class="container">
-            <div class="box1">
-                <div class="profile">
-                <i class="fas fa-user-circle profile"></i>
-            </div>
-                <div class="profile-details">
-                    <h2 id="profileName">김의사</h2>
-                    <p id="profilePosition">(D12345)</p>
-                    <p id="profilePosition">재활의학과</p>
-                    <p id="profileSpecialty">전문의</p>
-                    <p id="profilePhoneNumber">02-999-9999</p>
-                    <p id="profileEmail">doctor01@psmc.co.kr</p>
-                
-                </div>
-            </div>
-            
-            <div class="box2">
-                <div id="formouter">
-                <form method="get">
-                    <div>
-                        <fieldset class="patientinfo">
-                            <legend>Patient Info</legend>
-                            <label for="sub"> 환자 이름  :</label>
-                            <input type="text" name="person" id="sub"/><br>
-                            <label for="sub"> 환자 번호  :</label>
-                            <input type="text" name="person" id="sub"/><br>
-                            <label for="phone">휴대폰 번호 : </label>
-                            <input type="tel" name="tell" id="phone" placeholder="010-0000-0000" pattern="(01[0-9]{1}-[0-9]{3,4}-[0-9]{4})"/><br>
-                        </fieldset>
-                    </div>
-                    <br>
-                    <br>
-                    <div>
-                        <fieldset class="timeslot">
-                            <legend>TimeSlot</legend>
-                            <label for="sub">날짜 및 시간 :</label> 
-                            <input type="date" name="reservation_date"/>
-                            <input type="time" name="reservation_time" min="09:00" max="20:00"/>
-                            <br>
-                            <label for="position">증상 및 진단 정보:  </label>
-                            <textarea name="contents" cols="30" row="60"></textarea>
-                        </fieldset>
-                    </div>
-                    <br>
-                    <span id="inputter">
-                        <input type="submit" value="예약"></input>
-                        <input type="reset" value="취소"></input>
-                    </span>
-                    <div id="projectButton">
-                        <button id="newProject">New Project</button>
-                    </div>
-                </form>
-                </div>
-            </div>
-            <div class="box3">
-                <fieldset class="timeslot">
-                    <legend>Scheduler</legend>
-                <!-- <h2>Scheduler</h2> -->
-                <div class="schedule-item">
-                    <p>24.01.30 (목)</p>
-                </div>
-                <div class="schedule-item">
-                    <p>10:00 - 11:00</p>
-                    <p>김철수(30024)</p>
-                    <p>의료 이력: 수술 이력 있음</p>
-                </div>
-                <div class="schedule-item">
-                    <p>11:00 - 12:00</p>
-                    <p>이영희(34725)</p>
-                    <p>의료 이력: 골절 수술 이력 있음</p>
-                </div>
-                <div class="schedule-item">
-                    <p>13:00 - 14:00</p>
-                    <p>김진호(35225)</p>
-                    <p>의료 이력: 특이 사항 없음</p>
-                </div>
-                    <!-- 기타 스케줄 항목들을 추가할 수 있습니다 -->
-            </div>
-            </fieldset>
-            <div class="box4">
-                <div class="title">Today Menu</div>
-                <br>
-                <p>소고기 스테이크</p>
-                <p>그린 샐러드</p>
-                <p>멸치국수</p>
-                <p>치즈 케이크</p>
-                <p>요구르트</p>
-            </div>
-            <div class="box5">
-                <div class="mediconnect">
-                    <div class="title">mediconnect</div>
-                    <div class="button-bar">
-                        <button class="button-6">내역 1.김땡땡 오른쪽 무릎 </button><br>
-                        <button class="button-6">내역 2.조땡땡 왼쪽 발목 골절</button><br>
-                        <button class="button-6">내역 3.박땡땡  ~~~~</button><br>
-                        <button class="button-6">내역 4.이떙떙 ~~~~~</button>
-                    </div>
-                </div>
-            </div>
-            <div class="box6">
-                <div class="mediconnect">
-                    <div class="title">TheraLink</div>
-                    <div class="button-bar">
-                        <button class="button-6">김땡땡 (23423) 오른쪽 무릎 </button><br>
-                        <button class="button-6">조땡땡 (24142)왼쪽 발목 골절</button><br>
-                        <button class="button-6">박땡땡 (23424) ~~~~</button><br>
-                        <button class="button-6">이떙떙 (24164) ~~~~~</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
