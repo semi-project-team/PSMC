@@ -239,11 +239,11 @@
                         <button type="submit" class="btn btn-dark">검색</button>
                     </div>
                 </form>
-                <form action="">
-                    <div class="delete-btn" id="delete-btn">
-                        <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>
-                    </div>
-                </form>
+<!--                <form action="/doc/deleteBtn">-->
+<!--                    <div class="delete-btn" id="delete-btn">-->
+<!--                        <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>-->
+<!--                    </div>-->
+<!--                </form>-->
             </div>
         </div>
     </div>
@@ -251,40 +251,31 @@
     <!-- board list area -->
     <div id="board-list">
         <div class="container">
-            <table class="board-table">
-                <thead>
-                <tr>
-                    <th scope="col" class="checkbox-btn"></th>
-                    <th scope="col" class="th-num">번호</th>
-                    <th scope="col" class="th-title">제목</th>
-                    <th scope="col" class="th-date">등록일</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="board : ${boards}">
-                    <td><input type="checkbox" name="postCheckbox" onchange="toggleDeleteButton()"></td>
-                    <td th:text="${board.mediNo}"></td>
-                    <th>
-                        <a href="#!" th:text="${board.mediTitle}"></a>
-                    </th>
-                    <td th:text="${board.mediBoardDate}"></td>
-                </tr>
-
-<!--                <tr>-->
-<!--                    <td><input type="checkbox" name="postCheckbox" onchange="toggleDeleteButton()"></td>-->
-<!--                    <td>2</td>-->
-<!--                    <th><a href="#!">000 환자 치료 경과</a></th>-->
-<!--                    <td>2023.06.15</td>-->
-<!--                </tr>-->
-
-<!--                <tr>-->
-<!--                    <td><input type="checkbox" name="postCheckbox" onchange="toggleDeleteButton()"></td>-->
-<!--                    <td>1</td>-->
-<!--                    <th><a href="#!">[필독] 000 환자 수술 상세</a></th>-->
-<!--                    <td>2023.06.15</td>-->
-<!--                </tr>-->
-                </tbody>
-            </table>
+            <form action="/deleteBtn" method="post">
+                <table class="board-table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="checkbox-btn"></th>
+                        <th scope="col" class="th-num">번호</th>
+                        <th scope="col" class="th-title">제목</th>
+                        <th scope="col" class="th-date">등록일</th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                            <tr th:each="board : ${boards}">
+                                <td><input type="checkbox" name="postCheckbox" th:value="${board.mediNo}" onchange="toggleDeleteButton()"></td>
+                                <td th:text="${board.mediNo}"></td>
+                                <th>
+                                    <a href="#!" th:text="${board.mediTitle}"></a>
+                                </th>
+                                <td th:text="${board.mediBoardDate}"></td>
+                            </tr>
+                        </tbody>
+                </table>
+                <div class="delete-btn" id="delete-btn">
+                    <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -311,20 +302,6 @@
         }
     }
 
-    function deleteSelectedPosts() {
-        var checkboxes = document.getElementsByName("postCheckbox");
-        var rowsToDelete = [];
-
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                rowsToDelete.push(checkboxes[i].parentNode.parentNode);
-            }
-        }
-
-        for (var i = 0; i < rowsToDelete.length; i++) {
-            rowsToDelete[i].parentNode.removeChild(rowsToDelete[i]);
-        }
-    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

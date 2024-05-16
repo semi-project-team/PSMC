@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.service.annotation.PatchExchange;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,8 +40,26 @@ public class MediConnectController {
 
         List<ShowMediConnectDTO> boards = mediConnectService.showAllBoards(parameter);
 
+        session.setAttribute("projectNo",projectNo);
         model.addAttribute("boards", boards);
 
         return "/doc/mediConnect";
     }
+
+    @PostMapping("/deleteBtn")
+    public String deleteBoard(@RequestParam("postCheckbox") List<Integer> postCheckbox, HttpSession session) {
+
+        for(Integer i : postCheckbox){
+            System.out.println("i 값확실 : "+i);
+        }
+
+        Map<String,List<Integer>> paramPost = new HashMap<>();
+        paramPost.put("post", postCheckbox);
+
+        int projectNo = (int) session.getAttribute("projectNo");
+        int result =mediConnectService.deleteBoard(paramPost);
+
+        return "redirect:/doc/mediConnect/"+projectNo;
+    }
+
 }

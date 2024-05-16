@@ -22,4 +22,9 @@ public class MediConnectService {
 
         return projectMapper.showAllBoards(parameter);
     }
+
+    public int deleteBoard(Map<String,List<Integer>> postCheckbox) {
+
+        return projectMapper.deleteBoard(postCheckbox);
+    }
 }

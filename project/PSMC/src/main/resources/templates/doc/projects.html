@@ -72,37 +72,15 @@
 
     <th:block th:insert="~{/common/header}"></th:block>
 
-    <div class="header">
-        <div class="button">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#openDeleteModal">
-                Delete Projects
+    <form action="/deleteProjectBtn" method="post">
+        <div class="button" id="delete-btn">
+            <button type="submit" class="btn btn-primary" style="display: none;">
+                DELETE
             </button>
         </div>
-    </div>
 
-    <!--<div class="modal fade" id="openDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-    <!--    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">-->
-    <!--        <div class="modal-content">-->
-    <!--            <div class="modal-header">-->
-    <!--                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>-->
-    <!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--            </div>-->
-    <!--            <form action="/deleteProject" method="post">-->
-    <!--                <div class="modal-body">-->
-    <!--                    <select name="deleteInfo" id="deleteInfo">-->
-    <!--                        <option disabled>삭제할 프로젝트 선택</option>-->
-    <!--                    </select> <br>-->
-    <!--                </div>-->
-    <!--                <div class="modal-footer">-->
-    <!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-    <!--                    <button type="button" class="btn btn-primary">Delete</button>-->
-    <!--                </div>-->
-    <!--            </form>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
-
-    <div id="projectList"></div>
+        <div id="projectList"></div>
+    </form>
 
     <script>
 
@@ -118,6 +96,7 @@
                 projectDiv.classList.add('project-card');
                 projectDiv.href = `/doc/mediConnect/${project.projectNo}`;
                 projectDiv.innerHTML = `
+                    <input type="checkbox" name="projectCheckbox" value="${project.projectNo}" onchange="toggleDeleteButton()">
                     <h3><span id="nameSpan">${project.patientDTO.patientName}</span> <span id="nameValue">(만 ${project.patientDTO.age}세 ${project.patientDTO.gender})</span></h3>
                     <p>project no: ${project.projectNo}</p>
                     <p>patient code: ${project.patientDTO.patientNo}</p>
@@ -126,6 +105,27 @@
                 projectListDiv.appendChild(projectDiv);
             });
             return projectListDiv;
+        }
+
+        function toggleDeleteButton() {
+            var checkboxes = document.getElementsByName("projectCheckbox");
+            var deleteButton = document.querySelector("#delete-btn button ");
+            var atLeastOneChecked = false;
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    atLeastOneChecked = true;
+                    deleteButton.style.display='block';
+                    break;
+                }
+            }
+
+            if (atLeastOneChecked) {
+                deleteButton.style.display='block';
+            } else {
+                deleteButton.style.display='none';
+            }
+
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
