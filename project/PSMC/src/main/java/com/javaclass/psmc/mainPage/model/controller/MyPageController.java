@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.common.model.dto.MediInfoDTO;
-import com.javaclass.psmc.common.model.dto.MenuDTO;
 import com.javaclass.psmc.common.model.dto.TheraInfoDTO;
 import com.javaclass.psmc.common.model.method.FindTimeCode;
 import com.javaclass.psmc.common.model.method.MenuHandling;
@@ -12,14 +11,12 @@ import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -221,6 +218,20 @@ public class MyPageController {
             t.setCode(code);
         }
         return todayTheraByPRNo;
+    }
+
+    @PostMapping("/makeProject")
+    public String makeProject(@RequestParam Map<String,String> parameters){
+
+        System.out.println("프로젝트 생성 시작");
+        for (String key : parameters.keySet()) {
+            Object value = parameters.get(key);
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
+
+
+
+        return "redirect:/auth/mainPage";
     }
 
 

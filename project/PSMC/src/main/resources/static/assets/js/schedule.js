@@ -15,7 +15,7 @@ const day5 =document.getElementById('day5').firstElementChild;
 const day6 =document.getElementById('day6').firstElementChild;
 const day7 =document.getElementById('day7').firstElementChild;
 
-const $warningText = document.getElementById('warningText');
+
 
 fetch("/setSchedule")
     .then(res=>res.json())
@@ -123,9 +123,7 @@ fetch("/setSchedule")
 
                 const timeCode = b.classList;
                 const val = timeCode[1].split("-")[1];
-                if(val=='none'){
-                    $warningText.textContent="";
-                }
+
                 if(val!="none") {
 
                     $time.value = val;
@@ -235,11 +233,7 @@ function doDate(dating,projectNo){
                         const $option = $time.querySelector(`option[value="${time}"]`);
                         $option.disabled = true;
                     }
-                    else if(data.role == "thera"){
-                        const $li = document.createElement('li');
-                        $li.textContent= `${startTimeCode(time)} ~ ${endTimeCode(time)}`
-                        $warningText.appendChild($li);
-                    }
+
                 })
                 data.allThera.forEach(thera=>{
                     console.table(thera);
@@ -271,19 +265,7 @@ function doDate(dating,projectNo){
                             })
                         }
                     }
-                    else{
-                        thera.theraInfoDTOS.forEach(info=>{
-                            if(info.theraDate == dating){
-                                const startTime = info.start;
-                                const endTime = info.end;
-                                const $li = document.createElement('li');
-                                $li.textContent=`${startTime} ~ ${endTime}`;
-                                $warningText.appendChild($li);
-                            }
-                        })
 
-
-                    }
 
                 })
 

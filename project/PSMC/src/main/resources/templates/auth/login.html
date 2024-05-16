@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/mainpage.css">
 </head>
 <body>
@@ -26,7 +27,7 @@
 
 
     <th:block th:insert="~{/common/header}"></th:block>
-    <div class="container">
+    <div class="containerouter">
         <div class="box1">
             <div class="profile">
                 <img src="/common/img/profile.png">
@@ -44,14 +45,13 @@
 
         <div class="box2">
             <form action="/reservation" method="post" id="formmer">
-                <div>
-                    <fieldset class="patientinfo">
-                        <legend>Patient Info</legend>
+                <fieldset class="patientinfo p-2" >
+                    <legend class="float-none w-auto p-2">Patient Info</legend>
                         <table>
                             <tr>
                                 <th>환자 이름 : </th>
                                 <td>
-                                    <select style="border: none" id="patientSelect" name="projectNo">
+                                    <select style="border: none" id="patientSelect" name="projectNo" class="form-select form-select-sm" aria-label="smaill select example">
                                         <option selected disabled>환자를 선택하세요</option>
                                     </select>
                                 </td>
@@ -66,8 +66,6 @@
                             </tr>
                         </table>
                     </fieldset>
-                </div>
-
                 <script th:inline="javascript">
                     const patients = JSON.parse([[${patient}]]);
                     console.table(patients);
@@ -93,10 +91,11 @@
                     })
                 </script>
 
-                <div><br>
+                <div>
                     <br>
-                    <fieldset class="timeslot" >
-                        <legend>TimeSlot</legend>
+                    <br>
+                    <fieldset class="timeslot p-2" >
+                        <legend class="float-none w-auto p-2">TimeSlot</legend>
                         <label sec:authorize="hasAnyAuthority('d')" for="date">날짜 및 시간 :</label>
                         <label for="date" sec:authorize="hasAnyAuthority('t')">날짜 : </label>
                         <input type="date" name="date" id="date">
@@ -226,7 +225,7 @@
                 <span id="inputter">
                         <input type="submit" value="예약">
                         <input type="reset" value="취소" id="cancel">
-                        <button id="newProject" sec:authorize="hasAnyAuthority('d')" type="button">New Project</button>
+                        <button id="newProject" data-bs-toggle="modal" data-bs-target="#exampleModal" sec:authorize="hasAnyAuthority('d')" type="button" class="btn">New Project</button>
                 </span>
 
 
@@ -250,8 +249,8 @@
 
         </div>
         <div class="box3">
-            <fieldset class="timeslot" id="timeslot">
-                <legend>Scheduler</legend>
+            <fieldset class="timeslot p-2" id="timeslot">
+                <legend class="float-none w-auto p-2">Scheduler</legend>
                 <!-- <h2>Scheduler</h2> -->
                 <div class="schedule-item">
 <!--                    <p>24.01.30 (목)</p>-->
@@ -406,8 +405,140 @@
         </div>
     </div>
 </div>
+
+<!--patient modal-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 30vw;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(3, 61, 94)" data-bs-theme="dark">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white">New Patient Registration</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="makeProject">
+                    <div class="mb-4">
+                        <div class="form-floating" style="overflow: hidden;">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="name" autocomplete="off" name="patientName">
+                            <label for="floatingInput">Name</label>
+                        </div>
+                    </div>
+                    <div class="mb-4 row">
+                        <div class="col-md-2 ms-auto">
+                            <div class="input-group">
+                                <div class="form-floating" style="overflow: hidden;">
+                                    <input type="number" class="form-control" id="age" placeholder="age" min="0" name="age">
+                                    <label for="height">Age</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-5 ms-auto">
+                            <div class="input-group">
+                                <div class="form-floating" style="overflow: hidden;">
+                                    <input type="number" class="form-control" id="height" placeholder="height" min="0" name="height">
+                                    <label for="height">height</label>
+                                </div>
+                                <span class="input-group-text">cm</span>
+                            </div>
+                        </div>
+                        <div class="col-md-5 ms-auto">
+                            <div class="input-group">
+                                <div class="form-floating" style="overflow: hidden;">
+                                    <input type="number" class="form-control" id="weight" placeholder="weight" min="0" name="weight">
+                                    <label for="weight">weight</label>
+                                </div>
+                                <span class="input-group-text">kg</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="group radio">
+                            <div class="radiogroup col-12">
+                                <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check question" name="gender" id="Male" autocomplete="off" value="Male" required>
+                                    <label class="btn btn-outline-primary" for="Male">Male</label>
+                                    <input type="radio" class="btn-check question" name="gender" id="Female" autocomplete="off" value="Female" required>
+                                    <label class="btn btn-outline-primary" for="Female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4 row">
+                        <div class="col-md-5 ms-auto">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-phone" style="color:  rgb(3, 61, 94)"></i></span>
+                                <div class="form-floating" style="overflow: hidden;">
+                                    <input type="text" class="form-control" id="phone" placeholder="phone" autocomplete="off" name="phone">
+                                    <label for="phone" >Phone</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 ms-auto">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-envelope" style="color:  rgb(3, 61, 94)"></i></span>
+                                <div class="form-floating" style="overflow: hidden;">
+                                    <input type="text" class="form-control" id="email" placeholder="email" autocomplete="off" name="email">
+                                    <label for="email">E-mail</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="form-floating">
+                            <select class="form-select" id="injury" aria-label="Floating label select example" name="injuryCode">
+                                <option selected disabled>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <label for="injury">injury</label>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="form-floating" style="overflow: hidden;">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="details" style="height: 100px" name="comments"></textarea>
+                            <label for="details">Comments</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="form-floating" style="overflow: hidden;">
+                            <select class="form-select" id="therapy" aria-label="Floating label select example" name="theraPmCode">
+                                <option selected disabled>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <label for="therapy">Therapy</label>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="regist">Registration</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const $regist = document.getElementById('regist');
+    const $makeProject = document.getElementById('makeProject');
+    $regist.addEventListener('click',e=>{
+        console.log('클릭이벤트 들어왔나')
+        $makeProject.action='/makeProject';
+        $makeProject.submit();
+    })
+
+</script>
+
+<!--patient modal-->
 </body>
 
 <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

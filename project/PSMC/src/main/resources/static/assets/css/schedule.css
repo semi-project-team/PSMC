@@ -88,15 +88,5 @@ body{
     transform: translateY(0);
 }
 
-/* li */
-#warnningbox{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    color: red;
-    font-weight: bold;
-}
-#warnningbox>ul{
-    list-style-type: none;
-}
+
 
