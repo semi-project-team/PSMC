@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProjectsService {
@@ -20,6 +21,11 @@ public class ProjectsService {
     public List<ShowAllProjectsDTO> showAllProjects(String pmCode) {
 
         return projectsMapper.showAllProjects(pmCode);
+    }
+
+    public int deleteProject(Map<String, List<Integer>> projectParam) {
+
+        return projectsMapper.deleteProjects(projectParam);
     }
 
 //    service

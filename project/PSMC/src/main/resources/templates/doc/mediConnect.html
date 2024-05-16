@@ -251,7 +251,8 @@
     <!-- board list area -->
     <div id="board-list">
         <div class="container">
-            <form action="doc/deleteBtn" method="post">
+            <form action="/deleteBtn" method="post">
+
                 <table class="board-table">
                     <thead>
                     <tr>
@@ -270,11 +271,11 @@
                                 </th>
                                 <td th:text="${board.mediBoardDate}"></td>
                             </tr>
-                            <div class="delete-btn" id="delete-btn">
-                                <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>
-                            </div>
                         </tbody>
                 </table>
+                <div class="delete-btn" id="delete-btn">
+                    <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>
+                </div>
             </form>
         </div>
     </div>

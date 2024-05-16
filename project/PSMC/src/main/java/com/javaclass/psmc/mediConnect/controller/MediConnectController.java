@@ -40,17 +40,27 @@ public class MediConnectController {
 
         List<ShowMediConnectDTO> boards = mediConnectService.showAllBoards(parameter);
 
+        session.setAttribute("projectNo",projectNo);
         model.addAttribute("boards", boards);
 
         return "/doc/mediConnect";
     }
 
-    @PostMapping("/doc/delteBtn")
-    public String deleteBoard(@RequestParam List<Integer> no) {
+    @PostMapping("/deleteBtn")
+    public String deleteBoard(@RequestParam("postCheckbox") List<Integer> postCheckbox, HttpSession session) {
 
-        mediConnectService.deleteBoard(no);
+        for(Integer i : postCheckbox){
+            System.out.println("i 값확실 : "+i);
+        }
 
-        return "redirect:/doc/mediConnect";
+        Map<String,List<Integer>> paramPost = new HashMap<>();
+        paramPost.put("post", postCheckbox);
+
+        int projectNo = (int) session.getAttribute("projectNo");
+        int result =mediConnectService.deleteBoard(paramPost);
+
+        return "redirect:/doc/mediConnect/"+projectNo;
+
     }
 
 }

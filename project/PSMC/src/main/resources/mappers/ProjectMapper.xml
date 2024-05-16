@@ -79,14 +79,26 @@
             a.medi_status = 'Y';
     </select>
 
-    <update id="deleteBoard" parameterType="Integer">
+
+    <update id="deleteBoard" parameterType="hashmap">
         update
             medi_connect
         set
             medi_status = 'N'
         where medi_no in
-        <foreach item="no" collection="list" open="(" separator="," close=")">
-            #{no}
+        <foreach collection="post" item="postCheckbox" open="(" separator="," close=")">
+            #{postCheckbox}
+        </foreach>
+    </update>
+
+    <update id="deleteProjects" parameterType="hashmap">
+        update
+            project
+        set
+            project_status = 'N'
+        where project_no in
+        <foreach collection="project" item="projectParam" open="(" separator="," close=")">
+            #{projectParam}
         </foreach>
     </update>
 

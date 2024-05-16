@@ -3,6 +3,7 @@ package com.javaclass.psmc.mediConnect.model.dao;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -13,5 +14,8 @@ public interface ProjectsMapper {
 
     List<ShowMediConnectDTO> showAllBoards(Map<String, Object> parameter);
 
-    void deleteBoard(List<Integer> no);
+    int deleteBoard(Map<String,List<Integer>> postCheckbox);
+
+    int deleteProjects(Map<String, List<Integer>> projectParam);
+
 }
