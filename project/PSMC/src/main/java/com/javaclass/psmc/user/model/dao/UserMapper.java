@@ -3,10 +3,7 @@ package com.javaclass.psmc.user.model.dao;
 import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
-import com.javaclass.psmc.common.model.dto.EmployeeDTO;
-import com.javaclass.psmc.common.model.dto.MediInfoDTO;
-import com.javaclass.psmc.common.model.dto.MenuDTO;
-import com.javaclass.psmc.common.model.dto.TheraInfoDTO;
+import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.mainPage.model.dto.*;
 
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -82,4 +79,8 @@ public interface UserMapper {
     List<TodayAllTheraDTO> checkTheraByTheraCode(Map<String, Object> sender);
 
     int theraInfoupdate(Map<String, Object> sender);
+
+    List<InjuryDTO> findInjuryByFieldCode(int fieldCode);
+
+    List<EmployeeDTO> findEmployeeByInjuryCode(String injuryCode);
 }

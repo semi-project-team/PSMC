@@ -115,6 +115,7 @@
             a.office_num,
             a.email,
             b.field_name,
+            b.field_code,
             c.position_name
         from
             employee a
@@ -791,4 +792,34 @@
         set
 
     </update>
+
+
+    <select id="findInjuryByFieldCode" resultMap="injuryMap" parameterType="int">
+        select
+            *
+        from
+            injury
+        where
+            field_code = #{fieldCode}
+    </select>
+
+    <select id="findEmployeeByInjuryCode" resultMap="employeeMap" parameterType="string">
+        select
+            e.pm_code,
+            e.name
+        from
+            injury i
+        join
+            medical_field m
+        on
+            m.field_code = i.field_code
+        join
+            employee e
+        on
+            e.field_code = m.field_code
+        where
+            i.injury_code = #{injuryCode}
+        and
+            e.pm_code like 't%'
+    </select>
 </mapper>

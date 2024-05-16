@@ -7,6 +7,7 @@ import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.common.model.dto.InjuryDTO;
 import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 import com.javaclass.psmc.common.model.method.MenuHandling;
 import com.javaclass.psmc.common.model.method.TimePlus30;
@@ -74,6 +75,10 @@ public class AuthController {
         ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
         System.out.println(profileDTO);
         model.addAttribute("profile",profileDTO);
+
+        List<InjuryDTO> injuryDTOS = userService.findInjuryByFieldCode(profileDTO.getFieldCode());
+
+        model.addAttribute("injuryMap",injuryDTOS);
 
         LocalDate today = LocalDate.now();
         System.out.println("today = " + today);
