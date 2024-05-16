@@ -230,6 +230,8 @@ public class MyPageController {
             System.out.println("Key: " + key + ", Value: " + value);
         }
 
+        
+
 
 
         return "redirect:/auth/mainPage";

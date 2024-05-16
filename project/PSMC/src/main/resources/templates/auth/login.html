@@ -526,6 +526,7 @@
     const $regist = document.getElementById('regist');
     const $makeProject = document.getElementById('makeProject');
     const $therapy = document.getElementById('therapy');
+
     $regist.addEventListener('click',e=>{
         console.log('클릭이벤트 들어왔나')
         $makeProject.action='/makeProject';
@@ -570,23 +571,56 @@
     const $weight = document.getElementById('weight');
     const $phone = document.getElementById('phone');
     const $email = document.getElementById('email');
+    const $maleRadio = document.getElementById('Male');
+    const $femaleRadio = document.getElementById('Female');
+    const $comment = document.getElementById('details');
 
-    checkPositive($age);
-    checkPositive($height);
-    checkPositive($weight);
+    $comment.addEventListener('input',e=>{
+        if($comment.value){
+            $comment.classList.add('is-valid');
 
-    function checkPositive(element){
+        }else{
+            $comment.classList.remove('is-valid');
+        }
+    })
+
+    let buttonIndicator = [false,false,false,false,false,false,false,false]
+    const $privateInfo = [$height,$weight];
+    for(let i=0; i<$privateInfo.length;i++){
+        checkPositive(i,$privateInfo[i]);
+    }
+
+
+
+    function checkPositive(i,element){
         element.addEventListener('input', e=>{
             const numbers = element.value;
             if(numbers<=0){
                 element.classList.add('is-invalid');
                 element.classList.remove('is-valid');
+                buttonIndicator[i]=false;
             }
             else{
                 element.classList.remove('is-invalid');
                 element.classList.add('is-valid');
+                buttonIndicator[i]=true;
             }
+            checkIndicator();
         })
+    }
+
+    $maleRadio.addEventListener('click',validateGender);
+    $femaleRadio.addEventListener('click',validateGender);
+
+    function validateGender(){
+        if($maleRadio.checked || $femaleRadio.checked){
+            buttonIndicator[7]=true;
+        }
+        else{
+            buttonIndicator[7]=true;
+        }
+
+        checkIndicator()
     }
 
     $age.addEventListener('input',e=>{
@@ -594,10 +628,13 @@
         if(isValid){
             $age.classList.add('is-valid');
             $age.classList.remove('is-invalid');
+            buttonIndicator[2]=true;
         }else{
             $age.classList.remove('is-valid');
             $age.classList.add('is-invalid');
+            buttonIndicator[2]=false;
         }
+        checkIndicator();
     })
 
     $phone.addEventListener('input',e=>{
@@ -605,11 +642,14 @@
         if(isValid){
             $phone.classList.add('is-valid')
             $phone.classList.remove('is-invalid');
+            buttonIndicator[6]=true;
         }
         else{
             $phone.classList.add('is-invalid');
             $phone.classList.remove('is-valid');
+            buttonIndicator[6]=false;
         }
+        checkIndicator();
     })
 
 
@@ -617,11 +657,18 @@
         const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net)$/.test($email.value);
         if(isValid){
             $email.classList.remove('is-invalid');
-            $email.classList.add('is-valid')
+            $email.classList.add('is-valid');
+
         }
         else{
             $email.classList.add('is-invalid');
             $email.classList.remove('is-valid');
+
+        }
+
+        if(!$email.value){
+            $email.classList.remove('is-valid');
+            $email.classList.remove('is-invalid');
         }
     })
 
@@ -631,10 +678,14 @@
         if(isValid1||isValid2){
             $name.classList.add('is-valid');
             $name.classList.remove('is-invalid');
+            buttonIndicator[3]=true;
         }else{
             $name.classList.add('is-invalid');
             $name.classList.remove('is-valid');
+            buttonIndicator[3]=false;
         }
+
+        checkIndicator();
 
     })
 
@@ -642,21 +693,71 @@
         if($injury.value){
             $injury.classList.add('is-valid');
             $injury.classList.remove('is-invalid');
+            buttonIndicator[4]=true;
         }else{
             $injury.classList.add('is-invalid');
             $injury.classList.remove('is-valid');
+            buttonIndicator[4]=false;
         }
+
+        checkIndicator();
     })
     $therapy.addEventListener('change',e=>{
         if($therapy.value){
             $therapy.classList.add('is-valid');
             $therapy.classList.remove('is-invalid');
+            buttonIndicator[5]=true;
         }else{
             $therapy.classList.add('is-invalid');
             $therapy.classList.remove('is-valid');
+            buttonIndicator[5]=false;
         }
+        checkIndicator();
     })
 
+    function checkIndicator(){
+
+        console.log(buttonIndicator);
+        if(buttonIndicator.every(ele=>ele)){
+            $regist.style.pointerEvents='auto';
+            $regist.style.opacity=1;
+        }else{
+            $regist.style.pointerEvents='none';
+            $regist.style.opacity=0.55;
+        }
+    }
+
+
+    const exampleModal = document.getElementById('exampleModal');
+
+    exampleModal.addEventListener('hidden.bs.modal', function () {
+        // 입력 필드 초기화
+        $makeProject.reset();
+
+        // 각 입력 필드의 유효성 클래스 제거
+        const fields = [$name, $age, $height, $weight, $phone, $email,$injury,$therapy,$comment];
+        fields.forEach(field => {
+            field.classList.remove('is-valid', 'is-invalid');
+        });
+
+        // 성별 라디오 버튼 초기화
+        $maleRadio.checked = false;
+        $femaleRadio.checked = false;
+
+        // select 필드 초기화
+        $injury.selectedIndex = 0;
+        $therapy.selectedIndex = 0;
+
+        // 치료사 옵션 초기화
+        $therapy.innerHTML = '<option selected disabled>Open this select menu</option>';
+
+        // 유효성 검사 배열 초기화
+        buttonIndicator.fill(false);
+
+        // 등록 버튼 비활성화
+        $regist.style.pointerEvents = 'none';
+        $regist.style.opacity=0.55;
+    });
 </script>
 
 <!--patient modal-->
