@@ -409,7 +409,7 @@
 <!--patient modal-->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 30vw;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 40vw;">
         <div class="modal-content">
             <div class="modal-header" style="background-color: rgb(3, 61, 94)" data-bs-theme="dark">
                 <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white">New Patient Registration</h1>
@@ -419,12 +419,12 @@
                 <form method="post" id="makeProject">
                     <div class="mb-4">
                         <div class="form-floating" style="overflow: hidden;">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name" autocomplete="off" name="patientName">
-                            <label for="floatingInput">Name</label>
+                            <input type="text" class="form-control" id="patientName" placeholder="name" autocomplete="off" name="patientName">
+                            <label for="patientName">Name</label>
                         </div>
                     </div>
                     <div class="mb-4 row">
-                        <div class="col-md-2 ms-auto">
+                        <div class="col-lg-2 ms-auto">
                             <div class="input-group">
                                 <div class="form-floating" style="overflow: hidden;">
                                     <input type="number" class="form-control" id="age" placeholder="age" min="0" name="age">
@@ -433,19 +433,19 @@
 
                             </div>
                         </div>
-                        <div class="col-md-5 ms-auto">
+                        <div class="col-lg-5 ms-auto">
                             <div class="input-group">
                                 <div class="form-floating" style="overflow: hidden;">
-                                    <input type="number" class="form-control" id="height" placeholder="height" min="0" name="height">
+                                    <input type="number" class="form-control" id="height" placeholder="height" min="0" name="height" step="any">
                                     <label for="height">height</label>
                                 </div>
                                 <span class="input-group-text">cm</span>
                             </div>
                         </div>
-                        <div class="col-md-5 ms-auto">
+                        <div class="col-lg-5 ms-auto">
                             <div class="input-group">
                                 <div class="form-floating" style="overflow: hidden;">
-                                    <input type="number" class="form-control" id="weight" placeholder="weight" min="0" name="weight">
+                                    <input type="number" class="form-control" id="weight" placeholder="weight" min="0" name="weight" step="any">
                                     <label for="weight">weight</label>
                                 </div>
                                 <span class="input-group-text">kg</span>
@@ -465,16 +465,16 @@
                         </div>
                     </div>
                     <div class="mb-4 row">
-                        <div class="col-md-5 ms-auto">
+                        <div class="col-lg-5 ms-auto">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fa-solid fa-phone" style="color:  rgb(3, 61, 94)"></i></span>
                                 <div class="form-floating" style="overflow: hidden;">
-                                    <input type="text" class="form-control" id="phone" placeholder="phone" autocomplete="off" name="phone">
+                                    <input type="text" class="form-control" id="phone" placeholder="phone" autocomplete="off" name="phone" maxlength="11">
                                     <label for="phone" >Phone</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7 ms-auto">
+                        <div class="col-lg-7 ms-auto">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fa-solid fa-envelope" style="color:  rgb(3, 61, 94)"></i></span>
                                 <div class="form-floating" style="overflow: hidden;">
@@ -486,11 +486,11 @@
                     </div>
                     <div class="mb-4">
                         <div class="form-floating">
-                            <select class="form-select" id="injury" aria-label="Floating label select example" name="injuryCode">
+                            <select class="form-select" id="injury" aria-label="Floating label select example" name="injuryCode" >
                                 <option selected disabled>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <th:block th:each="injury : ${injuryMap}">
+                                    <option th:value="${injury.injuryCode}" th:text="${injury.injuryName}" style="font-weight: bold"></option>
+                                </th:block>
                             </select>
                             <label for="injury">injury</label>
                         </div>
@@ -506,9 +506,6 @@
                         <div class="form-floating" style="overflow: hidden;">
                             <select class="form-select" id="therapy" aria-label="Floating label select example" name="theraPmCode">
                                 <option selected disabled>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
                             </select>
                             <label for="therapy">Therapy</label>
                         </div>
@@ -528,10 +525,136 @@
 <script>
     const $regist = document.getElementById('regist');
     const $makeProject = document.getElementById('makeProject');
+    const $therapy = document.getElementById('therapy');
     $regist.addEventListener('click',e=>{
         console.log('클릭이벤트 들어왔나')
         $makeProject.action='/makeProject';
         $makeProject.submit();
+    })
+
+    const $injury = document.getElementById('injury');
+    $injury.addEventListener('change',e=>{
+
+        const injuryCode = $injury.value;
+
+        fetch("/findTherapyByInjuryCode",{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                injuryCode : injuryCode
+            })
+        }).then(res=>res.json())
+            .then(data=>{
+                console.log('치료사 이름 잘불러왔는가')
+                console.table(data);
+                data.forEach(e=>{
+                    const $option = document.createElement('option');
+                    $option.value = e.pmCode;
+                    $option.textContent=e.name;
+                    $therapy.appendChild($option)
+                })
+
+                const $option = document.createElement('option');
+                $option.value = 'none';
+                $option.textContent='재활 치료 필요 없음'
+
+                $therapy.appendChild($option);
+            })
+    })
+
+    const $name = document.getElementById('patientName');
+    const $age = document.getElementById('age');
+    const $height = document.getElementById('height');
+    const $weight = document.getElementById('weight');
+    const $phone = document.getElementById('phone');
+    const $email = document.getElementById('email');
+
+    checkPositive($age);
+    checkPositive($height);
+    checkPositive($weight);
+
+    function checkPositive(element){
+        element.addEventListener('input', e=>{
+            const numbers = element.value;
+            if(numbers<=0){
+                element.classList.add('is-invalid');
+                element.classList.remove('is-valid');
+            }
+            else{
+                element.classList.remove('is-invalid');
+                element.classList.add('is-valid');
+            }
+        })
+    }
+
+    $age.addEventListener('input',e=>{
+        const isValid = /^[1-9]\d*$/.test($age.value);
+        if(isValid){
+            $age.classList.add('is-valid');
+            $age.classList.remove('is-invalid');
+        }else{
+            $age.classList.remove('is-valid');
+            $age.classList.add('is-invalid');
+        }
+    })
+
+    $phone.addEventListener('input',e=>{
+        const isValid = /^\d{10,11}$/.test($phone.value);
+        if(isValid){
+            $phone.classList.add('is-valid')
+            $phone.classList.remove('is-invalid');
+        }
+        else{
+            $phone.classList.add('is-invalid');
+            $phone.classList.remove('is-valid');
+        }
+    })
+
+
+    $email.addEventListener('input',e=>{
+        const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net)$/.test($email.value);
+        if(isValid){
+            $email.classList.remove('is-invalid');
+            $email.classList.add('is-valid')
+        }
+        else{
+            $email.classList.add('is-invalid');
+            $email.classList.remove('is-valid');
+        }
+    })
+
+    $name.addEventListener('input',e=>{
+        const isValid1 = /^[가-힣]+$/.test($name.value);
+        const isValid2 = /^[a-zA-Z]+$/.test($name.value);
+        if(isValid1||isValid2){
+            $name.classList.add('is-valid');
+            $name.classList.remove('is-invalid');
+        }else{
+            $name.classList.add('is-invalid');
+            $name.classList.remove('is-valid');
+        }
+
+    })
+
+    $injury.addEventListener('change',e=>{
+        if($injury.value){
+            $injury.classList.add('is-valid');
+            $injury.classList.remove('is-invalid');
+        }else{
+            $injury.classList.add('is-invalid');
+            $injury.classList.remove('is-valid');
+        }
+    })
+    $therapy.addEventListener('change',e=>{
+        if($therapy.value){
+            $therapy.classList.add('is-valid');
+            $therapy.classList.remove('is-invalid');
+        }else{
+            $therapy.classList.add('is-invalid');
+            $therapy.classList.remove('is-valid');
+        }
     })
 
 </script>

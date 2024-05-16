@@ -3,6 +3,7 @@ package com.javaclass.psmc.mainPage.model.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.common.model.dto.MediInfoDTO;
 import com.javaclass.psmc.common.model.dto.TheraInfoDTO;
 import com.javaclass.psmc.common.model.method.FindTimeCode;
@@ -232,6 +233,19 @@ public class MyPageController {
 
 
         return "redirect:/auth/mainPage";
+    }
+
+    @PostMapping(value = "/findTherapyByInjuryCode",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<EmployeeDTO> findTherapyByInjuryCode(@RequestBody String parameter) throws JsonProcessingException {
+
+        JsonNode jsonNode = objectMapper.readTree(parameter);
+        String injuryCode = jsonNode.get("injuryCode").asText();
+        System.out.println("injuryCode = " + injuryCode);
+
+        List<EmployeeDTO> employeeDTOS = userService.findEmployeeByInjuryCode(injuryCode);
+
+        return employeeDTOS;
     }
 
 
