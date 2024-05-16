@@ -74,7 +74,20 @@
         where
             b.pm_code = #{pmCode}
             and
-            b.project_no = #{projectNo};
+            b.project_no = #{projectNo}
+            and
+            a.medi_status = 'Y';
     </select>
+
+    <update id="deleteBoard" parameterType="Integer">
+        update
+            medi_connect
+        set
+            medi_status = 'N'
+        where medi_no in
+        <foreach item="no" collection="list" open="(" separator="," close=")">
+            #{no}
+        </foreach>
+    </update>
 
 </mapper>
