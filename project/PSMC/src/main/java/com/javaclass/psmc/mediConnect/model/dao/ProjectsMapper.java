@@ -13,4 +13,5 @@ public interface ProjectsMapper {
 
     List<ShowMediConnectDTO> showAllBoards(Map<String, Object> parameter);
 
+    void deleteBoard(List<Integer> no);
 }

@@ -22,4 +22,9 @@ public class MediConnectService {
 
         return projectMapper.showAllBoards(parameter);
     }
+
+    public void deleteBoard(List<Integer> no) {
+
+        projectMapper.deleteBoard(no);
+    }
 }
