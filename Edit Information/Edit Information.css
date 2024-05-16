@@ -180,52 +180,59 @@ body {
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
     background-color: rgb(215, 214, 214);
+    
 } 
-.container {
+
+
+
+.container4 {
     
     /* width: 100vw;
     height: 100vh; */
     display: grid;
-    grid-template-columns: 20vw 29vw 29vw;
-    grid-template-rows: 7vh 35vh 35vh ;
+    /* grid-template-columns: 100vw 60vw; */
+    grid-template-rows: 6vh 70vh ;
     grid-gap :7rem;
     padding: 0 2rem;
     grid-row-gap: 10px;
     grid-column-gap: 20px;
     grid-template-areas:
-    '  a a a '
-    '  b c c '
-    '  b d e ';
+    '  a a  '
+    '  b b'
+    '  b b';
     margin-left: 15rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    
   }
 
 
 
-.box1 {
+.box1-4 {
     grid-area: a;
     border-radius: 5px;
     justify-content: center; 
     display: flex;
     background-color:rgb(3, 61, 94);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
-.box1 div {
+.box1-4 div {
     margin:0;
     margin-top: 0.7vw;
     color:white;
     font-size:2rem;
+    
 }
 
-.box2 {
+.box2-4 {
     grid-area: b;
     border-radius: 10px;
-    background-color:rgb(3, 61, 94);
+    background-color:#f5f5f5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.box2 h1 {
+.box2-4 h1 {
     font-family: Arial, sans-serif;
     text-align: center;
     color:white;
@@ -234,7 +241,7 @@ body {
     margin-top: -15px;
 }
 
-.box2 h3 {
+.box2-4 h3 {
     font-family: Arial, sans-serif;
     text-align: center;
     /* margin-right: 5%; */
@@ -243,135 +250,17 @@ body {
     margin-top: -10px;
 }
 
-.profile2 {
-    text-align: center;
-    font-size: 1000%;
-    height: auto;
-    margin-top: 50%;
+/* .box1-4, .box2-2 {
+    width: 50%;
+} */
+.box1-4 div {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
-
-.box3{
-    grid-area: c;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.form-control, .btn {
+    border-radius: 5px;
+}
+.birth {
     display: flex;
-    justify-content: center;
+    gap: 0.5rem;
 }
-
-.box4{
-    grid-area: d;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 100%;
-}
-
-/* .box4 h2 {
-    color:rgb(30, 33, 51);
-    margin-left: 3%;
-} */
-
-/* .box4 h4 {
-    color:rgb(30, 33, 51);
-    margin-left: 3%;
-    background-color: aqua;
-} */
-/* 
-.box4 span {
-    color:rgb(30, 33, 51);
-    margin-left: 3%;
-    margin-top: 32%;
-    bottom: auto;
-} */
-
-#icon1 {
-    color:black;
-    font-size: 2rem;
-    margin-left: 100px;
-    
-}
-
-.box5{
-
-    width: 100%;
-    height: 100%;
-    grid-area: e;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
-}
-
-.box5 h2,
-.box4 h2 {
-    color:rgb(30, 33, 51);
-    margin-left: 3%;
-}
-
-.box5 h4,
-.box4 h4 {
-    color:rgb(30, 33, 51);
-    margin-left: 3%;
-    
-}
-
-.box4 button,
-.box5 button {
-    color:rgb(30, 33, 51);
-    margin-left: 3%;
-    position: relative;
-    font-size: 1rem;
-    top: 180px;
-    border: none; 
-    background-color: transparent; 
-    /* border: 2px solid rgb(3, 61, 94); */
-    padding-top: 5px; /* 위의 내부 여백을 20px로 설정 */
-    padding-right: 10px;
-    
-}
-
-.icon2 img,
-.icon4 img {
-    font-size: 8rem; /* 아이콘 크기 조정 */
-    /* color:rgb(3, 61, 94); */
-    margin-left: 60%; 
-    margin-top: auto;
-    /* opacity: 0.8; */
-    color:rgb(30, 33, 51);
-}
-
-
-
-.info-column {
-    width: 40%; /* 칸을 세로로 두 개로 나누기 위해 너비 조정 */
-    margin-top: 80px; /* 각 열의 위쪽 여백 조정 */
-    /* margin-right: 20px;  */
-    font-size: 1.1rem; 
-}
-
-.info-row {
-    margin-bottom: 10px;
-}
-
-.label {
-    display: inline-block;
-    width: 150px; /* 라벨의 너비 조정 */
-    font-weight: bold; /* 라벨 텍스트 굵게 설정 */
-}
-
-.info {
-    margin-left: 10px; /* 정보와 라벨 사이의 간격 설정 */
-    color: rgb(30, 33, 51);
-}
-
-
-
-
-
-
-
-
-
-

@@ -19,7 +19,7 @@ body {
     '  a a a '
     '  b c c '
     '  b d e ';
-    margin-left: 15rem;
+    margin-left: 13rem;
     margin-top: -4rem;
 }
 
@@ -91,6 +91,11 @@ body {
     height: 100%;
 }
 
+.box4-1 a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: black; /* 링크 색상 변경 */
+}
+
 /* .box4 h2 {
     color:rgb(30, 33, 51);
     margin-left: 3%;
@@ -150,10 +155,12 @@ body {
     border: none;
     background-color: transparent;
     /* border: 2px solid rgb(3, 61, 94); */
-    padding-top: 5px; /* 위의 내부 여백을 20px로 설정 */
+    padding-top: -7%; /* 위의 내부 여백을 20px로 설정 */
     padding-right: 10px;
 
 }
+
+
 
 .icon2 img,
 .icon4 img {
@@ -188,6 +195,25 @@ body {
     margin-left: 10px; /* 정보와 라벨 사이의 간격 설정 */
     color: rgb(30, 33, 51);
 }
+
+.button-icon {
+    display: flex;
+    /*flex-direction: column;*/
+    margin-right: -10%;
+}
+
+.button-icon button {
+    margin-top: -43%; /* 원하는 만큼의 위쪽 마진 설정 */
+}
+
+.button-icon .icon2 {
+    margin-left: 15%; /* 아이콘을 오른쪽으로 이동 */
+}
+
+.button-icon .icon4 {
+    margin-left: 20%; /* 아이콘을 오른쪽으로 이동 */
+}
+
 
 
 
