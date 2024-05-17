@@ -1,0 +1,227 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(215, 214, 214);
+}
+
+
+#mainbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%; /* 너비 조정 */
+    height: 100%; /* 화면 전체 높이까지 확장 */
+    background-color: rgb(3, 61, 94); /* 배경색 지정 */
+    transition: width 0.5s ease; /* 너비 변화에 대한 애니메이션 효과 적용 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#mainNav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+
+
+}
+
+#mainNav>div{
+    margin-top: 40px;
+}
+
+#subNav {
+    display: flex;
+    position: absolute;
+    bottom: 10%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+
+#mainbar a {
+    color: white; /* 링크 색상 지정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    font-size: 15px ;
+}
+
+i{
+    color: white;
+}
+
+.title{
+
+    font-size: 15px;
+}
+.pack{
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pack p {
+    margin-left: 5px; /* 아이콘과 텍스트 사이의 간격을 조정하세요 */
+}
+
+#mainNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white;
+}
+
+#subNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white;
+
+}
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.contents{
+    display: flex;
+
+}
+.main-title{
+
+    width: 80vw;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.line {
+
+    width: 80vw; /* 선의 길이를 늘림 */
+    height: 1px; /* 선의 높이 */
+    border-radius: 0.5px;
+    background-color: rgb(3, 61, 94); /* 선의 색상 */
+
+    /* margin-bottom: 20%;  */
+    border: 1px solid rgb(3, 61, 94);
+}
+
+.psmc{
+
+    font-family: Arial, sans-serif;
+    font-size: 3vw;
+    font-weight: bold;
+    align-self: flex-end;
+
+    color:rgb(3, 61, 94);
+}
+.docIcon{
+    font-size: 2.5vw;
+    color:rgb(3, 61, 94);
+    position: absolute;
+    right: 3vw;
+    align-self: end;
+}
+.logo{
+    width: 7%;
+
+}
+
+body {
+    background-color: #f7f6f6
+}
+
+.card {
+    
+    border: none;
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    border-radius: 4px;
+}
+
+
+.dots{
+
+    height: 4px;
+    width: 4px;
+    margin-bottom: 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.badge{
+
+        padding: 7px;
+        padding-right: 9px;
+    padding-left: 16px;
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+}
+
+.user-img{
+
+    margin-top: 4px;
+}
+
+.check-icon{
+
+    font-size: 17px;
+    color: #c3bfbf;
+    top: 1px;
+    position: relative;
+    margin-left: 3px;
+}
+
+.form-check-input{
+    margin-top: 6px;
+    margin-left: -24px !important;
+    cursor: pointer;
+}
+
+
+.form-check-input:focus{
+    box-shadow: none;
+}
+
+
+.icons i{
+
+    margin-left: 8px;
+}
+.reply{
+
+    margin-left: 12px;
+}
+
+.reply small{
+
+    color: #b7b4b4;
+
+}
+
+
+.reply small:hover{
+
+    color: green;
+    cursor: pointer;
+
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 0.5%;
+}
+
+.container {
+    background-color: #b7b4b4;
+    padding: 5px;
+}

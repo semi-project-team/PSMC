@@ -57,7 +57,10 @@ public class ProjectsController {
 
         int result = projectsService.deleteProject(projectParam);
 
-        return "redirect:/doc/projects";
+        return "redirect:/MediConnect";
     }
+
+//    @GetMapping("/doc/projects")
+//    public void returnProjects() {}
 
 }
