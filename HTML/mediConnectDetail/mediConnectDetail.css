@@ -1,0 +1,269 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(215, 214, 214);
+}
+
+
+#mainbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%; /* 너비 조정 */
+    height: 100%; /* 화면 전체 높이까지 확장 */
+    background-color: rgb(3, 61, 94); /* 배경색 지정 */
+    transition: width 0.5s ease; /* 너비 변화에 대한 애니메이션 효과 적용 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#mainNav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+
+
+}
+
+#mainNav>div{
+    margin-top: 40px;
+}
+
+#subNav {
+    display: flex;
+    position: absolute;
+    bottom: 10%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+
+#mainbar a {
+    color: white; /* 링크 색상 지정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    font-size: 15px ;
+}
+
+i{
+    color: white;
+}
+
+.title{
+
+    font-size: 15px;
+}
+.pack{
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pack p {
+    margin-left: 5px; /* 아이콘과 텍스트 사이의 간격을 조정하세요 */
+}
+
+#mainNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white;
+}
+
+#subNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white;
+
+}
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.contents{
+    display: flex;
+
+}
+.main-title{
+
+    width: 80vw;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.line {
+
+    width: 80vw; /* 선의 길이를 늘림 */
+    height: 1px; /* 선의 높이 */
+    border-radius: 0.5px;
+    background-color: rgb(3, 61, 94); /* 선의 색상 */
+
+    /* margin-bottom: 20%;  */
+    border: 1px solid rgb(3, 61, 94);
+}
+
+.psmc{
+
+    font-family: Arial, sans-serif;
+    font-size: 3vw;
+    font-weight: bold;
+    align-self: flex-end;
+
+    color:rgb(3, 61, 94);
+}
+.docIcon{
+    font-size: 2.5vw;
+    color:rgb(3, 61, 94);
+    position: absolute;
+    right: 3vw;
+    align-self: end;
+}
+.logo{
+    width: 7%;
+
+}
+
+.containerSpace {
+    display: grid;
+    grid-template-areas: 'left-spacea headera right-asidea'
+                         'left-spacea maina right-asidea'
+                         'left-spacea commenta right-asidea';
+    width: 80vw;
+    margin-left: 17vw;
+    margin-top: 3%;
+    height: 77vh;
+    grid-gap: 13px;
+    grid-template-columns: 1fr 15fr 1fr;
+    grid-template-rows: 1fr 5fr 10fr;
+}
+.containerSpace > div{
+    background-color: skyblue;
+    padding: 20px;
+    border-radius: 10px;
+}
+.headerSpace {
+    grid-area: headera;
+}
+.left-spaceSpace {
+    grid-area: left-spacea;
+}
+.mainSpace {
+    grid-area: maina;
+}
+.commentSpace {
+    grid-area: commenta;
+}
+.right-asideSpace {
+    grid-area: right-asidea;
+}
+
+body{
+    background:#eee;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #FFFFFF;
+}
+a {
+    color: #82b440;
+    text-decoration: none;
+}
+.blog-comment::before,
+.blog-comment::after,
+.blog-comment-form::before,
+.blog-comment-form::after{
+    content: "";
+	display: table;
+	clear: both;
+}
+
+.blog-comment{
+    padding-left: 15%;
+	padding-right: 15%;
+}
+
+.blog-comment ul{
+	list-style-type: none;
+	padding: 0;
+}
+
+.blog-comment img{
+	opacity: 1;
+	filter: Alpha(opacity=100);
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+	  	 -o-border-radius: 4px;
+			border-radius: 4px;
+}
+
+.blog-comment img.avatar {
+	position: relative;
+	float: left;
+	margin-left: 0;
+	margin-top: 0;
+	width: 65px;
+	height: 65px;
+}
+
+.blog-comment .post-comments{
+	border: 1px solid #eee;
+    margin-bottom: 20px;
+    margin-left: 85px;
+	margin-right: 0px;
+    padding: 10px 20px;
+    position: relative;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+       	 -o-border-radius: 4px;
+    		border-radius: 4px;
+	background: #fff;
+	color: #6b6e80;
+	position: relative;
+}
+
+.blog-comment .meta {
+	font-size: 13px;
+	color: #aaaaaa;
+	padding-bottom: 8px;
+	margin-bottom: 10px !important;
+	border-bottom: 1px solid #eee;
+}
+
+.blog-comment ul.comments ul{
+	list-style-type: none;
+	padding: 0;
+	margin-left: 85px;
+}
+
+.blog-comment-form{
+	padding-left: 15%;
+	padding-right: 15%;
+	padding-top: 40px;
+}
+
+.blog-comment h3,
+.blog-comment-form h3{
+	margin-bottom: 40px;
+	font-size: 26px;
+	line-height: 30px;
+	font-weight: 800;
+}
+
+.blog-comment {
+    width: 50%;
+}
