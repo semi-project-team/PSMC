@@ -822,4 +822,30 @@
         and
             e.pm_code like 't%'
     </select>
+
+    <insert id="insertPatientAndGetPatientNo" parameterType="com.javaclass.psmc.common.model.dto.PatientDTO" useGeneratedKeys="true" keyProperty="patientNo">
+        insert into patient
+        <if test="email!=null">
+            (patient_name,age,gender,height,weight,phone,agree,email)
+            values (#{patientName},#{age},#{gender}#{height},#{weight},#{phone},'Y',#{email})
+        </if>
+        <if test="email==null">
+            (patient_name,age,gender,height,weight,phone,agree)
+            values (#{patientName},#{age},#{gender},#{height},#{weight},#{phone},'Y')
+        </if>
+
+    </insert>
+    <insert id="insertProjectGetProjectNo" parameterType="com.javaclass.psmc.common.model.dto.ProjectDTO" useGeneratedKeys="true" keyProperty="projectNo">
+        insert into project(patient_no,project_date,project_status,injury_code)
+        values (#{patientNo},#{projectDate},'Y',#{injuryCode})
+    </insert>
+    <insert id="createProject" parameterType="com.javaclass.psmc.common.model.dto.CreateProjectDTO">
+        insert into create_project(project_no,pm_code)
+        values(#{projectNo},#{pmCode})
+    </insert>
+
+    <insert id="assignProject" parameterType="com.javaclass.psmc.common.model.dto.AssignProjectDTO">
+        insert into assign_project(project_no,pm_code)
+        values (#{projectNo},#{pmCode})
+    </insert>
 </mapper>

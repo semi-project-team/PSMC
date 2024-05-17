@@ -3,9 +3,7 @@ package com.javaclass.psmc.mainPage.model.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javaclass.psmc.common.model.dto.EmployeeDTO;
-import com.javaclass.psmc.common.model.dto.MediInfoDTO;
-import com.javaclass.psmc.common.model.dto.TheraInfoDTO;
+import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.common.model.method.FindTimeCode;
 import com.javaclass.psmc.common.model.method.MenuHandling;
 import com.javaclass.psmc.mainPage.model.dto.*;
@@ -222,15 +220,80 @@ public class MyPageController {
     }
 
     @PostMapping("/makeProject")
-    public String makeProject(@RequestParam Map<String,String> parameters){
+    public String makeProject(@RequestParam Map<String,String> parameters,HttpSession session){
 
+        String message = "환자 등록에 실패했습니다";
+        LoginUserDTO loginUserDTO= (LoginUserDTO) session.getAttribute("auth");
+        String pmCode = loginUserDTO.getPmCode();
         System.out.println("프로젝트 생성 시작");
         for (String key : parameters.keySet()) {
             Object value = parameters.get(key);
             System.out.println("Key: " + key + ", Value: " + value);
         }
 
-        
+        PatientDTO projectPatientDTO = new PatientDTO();
+
+        projectPatientDTO.setPatientName(parameters.get("patientName"));
+        projectPatientDTO.setAge(Integer.parseInt(parameters.get("age")));
+        projectPatientDTO.setGender(parameters.get("gender"));
+        projectPatientDTO.setHeight(Double.parseDouble(parameters.get("height")));
+        projectPatientDTO.setWeight(Double.parseDouble(parameters.get("weight")));
+        projectPatientDTO.setPhone(parameters.get("phone"));
+        if(parameters.get("email")!=""){
+
+            projectPatientDTO.setEmail(parameters.get("email"));
+        }
+        int[] results1 = userService.insertPatientAndGetPatientNo(projectPatientDTO);
+
+        int result1 = results1[0];
+        int patientNo = results1[1];
+        System.out.println("patientNo = " + patientNo);
+
+        if(result1>0){
+            ProjectDTO newProject = new ProjectDTO();
+            newProject.setPatientNo(patientNo);
+            newProject.setProjectDate(LocalDateTime.now());
+            newProject.setInjuryCode(Integer.parseInt(parameters.get("injuryCode")));
+            int[] result2 = userService.insertProjectAndGetProjectNo(newProject);
+
+            System.out.println("프로젝트 등록 성고?"+result2[0]);
+            int projectNo = result2[1];
+            System.out.println("projectNo = " + projectNo);
+
+            if(result2[0]>0) {
+                CreateProjectDTO createProjectDTO = new CreateProjectDTO(projectNo, pmCode);
+
+                int result3 = userService.createProject(createProjectDTO);
+
+
+                if(result3>0) {
+
+                    System.out.println("createProject 등록 성공?");
+                    String theraPmCode = parameters.get("theraPmCode");
+                    int result4 = 0;
+                    if (!theraPmCode.equals("none")) {
+                        AssignProjectDTO assignProjectDTO = new AssignProjectDTO(projectNo, parameters.get("theraPmCode"));
+                        result4 = userService.assignProject(assignProjectDTO);
+
+                        if (result4 > 0) {
+                            message = parameters.get("patientName") + " 환자를 등록 했습니다";
+                        }
+
+
+                    }
+                    else{
+                        message = parameters.get("patientName") + " 환자를 등록 했습니다";
+                    }
+                }
+            }
+
+
+
+
+        }
+
+        session.setAttribute("reservationMessage",message);
+
 
 
 

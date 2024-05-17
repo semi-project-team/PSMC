@@ -197,6 +197,31 @@ public class UserService {
         return userMapper.findEmployeeByInjuryCode(injuryCode);
     }
 
+    public int[] insertPatientAndGetPatientNo(PatientDTO projectPatientDTO) {
+
+            int result = userMapper.insertPatientAndGetPatientNo(projectPatientDTO);
+            int patientNo = projectPatientDTO.getPatientNo();
+
+            int[] results= {result,patientNo};
+        return results;
+    }
+
+    public int[] insertProjectAndGetProjectNo(ProjectDTO newProject) {
+        int result = userMapper.insertProjectGetProjectNo(newProject);
+        int projectNo = newProject.getProjectNo();
+        return new int[] {result,projectNo};
+    }
+
+    public int createProject(CreateProjectDTO createProjectDTO) {
+
+        return userMapper.createProject(createProjectDTO);
+    }
+
+    public int assignProject(AssignProjectDTO assignProjectDTO) {
+
+        return userMapper.assignProject(assignProjectDTO);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }
