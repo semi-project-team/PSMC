@@ -627,6 +627,8 @@
 
         where
             c.pm_code= #{pmCode}
+        and
+            a.project_status = 'Y'
 
     </select>
 
@@ -827,7 +829,7 @@
         insert into patient
         <if test="email!=null">
             (patient_name,age,gender,height,weight,phone,agree,email)
-            values (#{patientName},#{age},#{gender}#{height},#{weight},#{phone},'Y',#{email})
+            values (#{patientName},#{age},#{gender},#{height},#{weight},#{phone},'Y',#{email})
         </if>
         <if test="email==null">
             (patient_name,age,gender,height,weight,phone,agree)

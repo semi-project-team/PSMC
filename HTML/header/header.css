@@ -11,7 +11,7 @@ body,html{
     
 }
 
-.container{
+/* .container{
     display: grid;
     grid-template-columns: 18% 40% 40%;
     grid-template-rows: minmax(65%,auto) minmax(33%,auto);
@@ -26,7 +26,7 @@ body,html{
     margin-right: 3vw;
     position: absolute;
     bottom: 40px;
-}
+} */
 
 
 /* mainPage title */
