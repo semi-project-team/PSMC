@@ -456,9 +456,9 @@
                         <div class="group radio">
                             <div class="radiogroup col-12">
                                 <div class="btn-group d-flex" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check question" name="gender" id="Male" autocomplete="off" value="Male" required>
+                                    <input type="radio" class="btn-check question" name="gender" id="Male" autocomplete="off" value="M" required>
                                     <label class="btn btn-outline-primary" for="Male">Male</label>
-                                    <input type="radio" class="btn-check question" name="gender" id="Female" autocomplete="off" value="Female" required>
+                                    <input type="radio" class="btn-check question" name="gender" id="Female" autocomplete="off" value="F" required>
                                     <label class="btn btn-outline-primary" for="Female">Female</label>
                                 </div>
                             </div>
@@ -537,7 +537,8 @@
     $injury.addEventListener('change',e=>{
 
         const injuryCode = $injury.value;
-
+        $therapy.textContent="";
+        $therapy.innerHTML = '<option selected disabled>Open this select menu</option>';
         fetch("/findTherapyByInjuryCode",{
             method: "POST",
             headers: {

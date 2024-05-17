@@ -83,4 +83,12 @@ public interface UserMapper {
     List<InjuryDTO> findInjuryByFieldCode(int fieldCode);
 
     List<EmployeeDTO> findEmployeeByInjuryCode(String injuryCode);
+
+    int insertPatientAndGetPatientNo(PatientDTO projectPatientDTO);
+
+    int insertProjectGetProjectNo(ProjectDTO newProject);
+
+    int createProject(CreateProjectDTO createProjectDTO);
+
+    int assignProject(AssignProjectDTO assignProjectDTO);
 }
