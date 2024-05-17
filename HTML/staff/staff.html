@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인페이지</title>
+    <link rel="stylesheet" href="./staff.css">
+    
+    
+</head>
+<script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<body>
+        <div id="mainbar">
+            <!-- 메인 바 내용 -->
+            <div id="mainNav">
+        
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-house-user fa-3x" >&nbsp;&nbsp;<a href="#" class="title hidden">Mainpage</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-house-user fa-3x">&nbsp;&nbsp;</i>
+                    <span>MAINPAGE</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-regular fa-calendar-days fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">  Schedule</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-regular fa-calendar-days fa-3x" >&nbsp;&nbsp;</i>
+                    <span>SCHEDULER</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-notes-medical fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">MediConnect</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-notes-medical fa-3x" >&nbsp;&nbsp;</i>
+                    <span>MEDICONNECT</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-hospital-user fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">TheraLink</a></i></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-hospital-user fa-3x" >&nbsp;&nbsp;</i>
+                    <span>THERALINK</span></a></div>
+                <br><br>
+                <!-- <div id="pack" style="font-size: 10px;"><i class="fa-solid fa-hand-holding-medical fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">Therapy Log</a></i></div> -->
+                <!-- <div id="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-hand-holding-medical fa-3x" >&nbsp;&nbsp;<p class="title hidden">Therapy Log</p></i></a></div> -->
+                <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-user-group fa-3x" >&nbsp;&nbsp;</i>
+                    <span>STAFF</span></a></div>
+                <br><br>
+        
+                <div id="subNav" >
+                    <!-- <div style="font-size: 10px;"><i class="fa-solid fa-right-from-bracket fa-3x">&nbsp;&nbsp;<a href="#" class="title hidden">Log Out</a></i></div> -->
+        
+                    <div class="pack"><a href="#" style="font-size: 10px;"><i class="fa-solid fa-right-from-bracket fa-3x" >&nbsp;&nbsp;</i>
+                        <span>LOG OUT</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mainPage">
+            <div class="main-title">
+                <div class="contents">
+                    <img src="/common/img/nobackLogo.png" alt="PSMC Logo" class="logo">
+                    &nbsp&nbsp
+                    <span class="psmc">Pro Sports Medical Center</span>
+                    <a class="docIcon" href="#" ><i class="fa-solid fa-user-doctor"></i></a>
+                </div>
+                <div class="line"></div>
+            </div>
+        </div>
+    <div class="container2">
+        <div class="box1-3">
+            <!-- <div class="center-element"> -->
+            <div>사원조회</div>
+        </div>
+        <div class="box2-3">
+            <br><br>
+            <form class="center-element" action="search" method="post">
+                <label> 이름 : </label><input type="text" name="search" required>&nbsp;
+                <!-- <label> 전공분야 : </label><input type="text" name="search" required>&nbsp; -->
+                <select name="전공분야">
+                    <option value="bone">정형외과</option>
+                    <option value="heart">신경외과</option>
+                </select>
+                <button type="submit">조회</button>
+            </form>
+        <br><br>
+            <h3>팀장정보</h3>
+            <div class="team-leader">
+                <ul class="horizontal-list">
+                    <li class ="name">이름 : </li>
+                    <li class ="email">E-mail : </li>
+                    <li class ="phone">핸드폰 번호 : </li>
+                    <li class ="office_num">연구실 번호 : </li>
+                </ul>
+                <ul class="horizontal-list">
+                    <li class ="name">이름 : </li>
+                    <li class ="email">E-mail : </li>
+                    <li class ="phone">핸드폰 번호 : </li>
+                    <li class ="office_num">연구실 번호 : </li>
+                </ul>
+                <ul class="horizontal-list">
+                    <li class ="name">이름 : </li>
+                    <li class ="email">E-mail : </li>
+                    <li class ="phone">핸드폰 번호 : </li>
+                    <li class ="office_num">연구실 번호 : </li>
+                </ul>
+                <ul class="horizontal-list">
+                    <li class ="name">이름 : </li>
+                    <li class ="email">E-mail : </li>
+                    <li class ="phone">핸드폰 번호 : </li>
+                    <li class ="office_num">연구실 번호 : </li>
+                </ul>
+                <ul class="horizontal-list">
+                    <li class ="name">이름 : </li>
+                    <li class ="email">E-mail : </li>
+                    <li class ="phone">핸드폰 번호 : </li>
+                    <li class ="office_num">연구실 번호 : </li>
+                </ul>
+
+            </div>
+            
+              
+        </div>
+        
+</body>
+</html>
