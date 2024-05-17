@@ -54,11 +54,15 @@ public class AuthController {
     @GetMapping("/mainPage")
     public String login(HttpSession session, Model model) throws JsonProcessingException {
 
+        /*권한 정보 불러오기*/
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AuthDetails authDetails = (AuthDetails) authentication.getPrincipal();
         System.out.println("authDetails = " + authDetails);
+
+        /*권한 정보 session 에 저장하기*/
         session.setAttribute("auth",authDetails.getLoginUserDTO());
 
+        /*d 와 t 권한 분리*/
         Map<String,Object> sender = new HashMap<>();
         String pmCode = authDetails.getLoginUserDTO().getPmCode();
         String role = String.valueOf(pmCode.charAt(0));
@@ -69,17 +73,20 @@ public class AuthController {
             System.out.println("d가 아니야?");
             sender.put("role","thera");
         }
-
         model.addAttribute("role",role);
         sender.put("pmCode",pmCode);
+
+        /*mainpage profile 정보 받아오기*/
         ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
         System.out.println(profileDTO);
         model.addAttribute("profile",profileDTO);
 
+        /*모달 페이지 용 injury db 불러오기*/
         List<InjuryDTO> injuryDTOS = userService.findInjuryByFieldCode(profileDTO.getFieldCode());
-
         model.addAttribute("injuryMap",injuryDTOS);
 
+
+        /*Today schedule 보여주기*/
         LocalDate today = LocalDate.now();
         System.out.println("today = " + today);
         sender.put("today",today);
@@ -89,11 +96,9 @@ public class AuthController {
         menuHandling.setDay(day);
         menuHandling.setDate(today);
 
-
         model.addAttribute("day",day);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy.MM.dd");
         String formattedDate = today.format(formatter);
-
 
         model.addAttribute("ModiToday",formattedDate);
 
