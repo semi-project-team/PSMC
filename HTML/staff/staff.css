@@ -1,0 +1,258 @@
+#mainbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%; /* 너비 조정 */
+    height: 100%; /* 화면 전체 높이까지 확장 */
+    background-color: rgb(3, 61, 94); /* 배경색 지정 */
+    transition: width 0.5s ease; /* 너비 변화에 대한 애니메이션 효과 적용 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+/* #mainbar:hover {
+    width: 14%;} /* 마우스를 가져다대면 너비가 늘어나도록 설정 */
+
+/* #mainbar:hover>#mainNav,#subNav{
+    align-items: flex-start;
+}  */
+/* #mainbar:hover>#subNav{
+    align-items: flex-start;
+} */
+
+.pack:hover i,
+.pack:hover span {
+    color: lightblue; /* 원하는 호버 색상으로 변경하세요 */
+}
+
+#mainNav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    
+    
+}
+
+#mainNav>div{
+    margin-top: 40px;
+}
+
+#subNav {
+    display: flex;
+    position: absolute;
+    bottom: 10%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+
+#mainbar a {
+    color: white; /* 링크 색상 지정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    font-size: 15px ;
+}
+
+
+/* #mainbar a:hover>i{
+    color: rgb(192, 242, 255);
+} */
+
+
+i{
+    color: white;
+}
+
+/* .hidden{
+    display: none;
+} */
+
+.title{
+    
+    font-size: 15px;
+}
+.pack{
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+
+.pack span {
+    margin-left: 5px; /* 아이콘과 텍스트 사이의 간격을 조정하세요 */
+    font-size: 14px; /* 원하는 크기로 조정하세요 */
+    font-family: Arial, sans-serif;
+}
+
+#mainNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white;
+}
+
+#subNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white; 
+    
+}
+
+/* 메인 */
+
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.contents{
+    display: flex;
+
+}
+.main-title{
+
+    width: 80vw;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.line {
+
+    width: 80vw; /* 선의 길이를 늘림 */
+    height: 1px; /* 선의 높이 */
+    border-radius: 0.5px;
+    background-color: rgb(3, 61, 94); /* 선의 색상 */
+
+    /* margin-bottom: 20%;  */
+    border: 1px solid rgb(3, 61, 94);
+}
+
+
+
+
+.psmc{
+
+    font-family: Arial, sans-serif;
+    font-size: 3vw;
+    font-weight: bold;
+    align-self: flex-end;
+
+    color:rgb(3, 61, 94);
+}
+.docIcon{
+    font-size: 2.5vw;
+    color:rgb(3, 61, 94);
+    position: absolute;
+    right: 3vw;
+    align-self: end;
+}
+
+.logo{
+    width: 7%;
+
+}
+
+/* 마이페이지*/
+
+
+/* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+} */
+
+/* .mypage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+} */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background-color: rgb(215, 214, 214);
+} 
+.container2 {
+    
+    /* width: 100vw;
+    height: 100vh; */
+    display: grid;
+    grid-template-columns: 20vw 29vw 29vw;
+    grid-template-rows: 7vh 35vh 35vh ;
+    grid-gap :7rem;
+    padding: 0 2rem;
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    grid-template-areas:
+    '  a a a '
+    '  b b b '
+    '  b b b ';
+    margin-left: 10rem;
+    margin-top: 1rem;
+  }
+
+
+
+.box1-3 {
+    grid-area: a;
+    border-radius: 5px;
+    justify-content: center; 
+    display: flex;
+    background-color:rgb(3, 61, 94);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box1-3 div {
+    margin:0;
+    margin-top: 0.7vw;
+    color:white;
+    font-size:1.5rem;
+}
+
+.box2-3 {
+    grid-area: b;
+    border-radius: 10px;
+    background-color:#f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.horizontal-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.horizontal-list li {
+    margin-right: 50px;
+}
+
+.center-element {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    /* height: 100vh */
+}
+
+.center-element label, .center-element select, .center-element button {
+    margin: 5px; /* 각 요소의 상하좌우 여백을 5px로 지정합니다. */
+}
+
+.center-element select {
+    width: 200px; /* <select> 요소의 너비를 200px로 설정합니다. */
+    height: 20px; /* <select> 요소의 높이를 20px로 설정합니다. */
+}
+
+.team-leader {
+    text-align: center; /* 내부 요소를 가운데 정렬 */
+}
