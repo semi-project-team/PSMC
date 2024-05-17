@@ -1,0 +1,266 @@
+#mainbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%; /* 너비 조정 */
+    height: 100%; /* 화면 전체 높이까지 확장 */
+    background-color: rgb(3, 61, 94); /* 배경색 지정 */
+    transition: width 0.5s ease; /* 너비 변화에 대한 애니메이션 효과 적용 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+/* #mainbar:hover {
+    width: 14%;} /* 마우스를 가져다대면 너비가 늘어나도록 설정 */
+
+/* #mainbar:hover>#mainNav,#subNav{
+    align-items: flex-start;
+}  */
+/* #mainbar:hover>#subNav{
+    align-items: flex-start;
+} */
+
+.pack:hover i,
+.pack:hover span {
+    color: lightblue; /* 원하는 호버 색상으로 변경하세요 */
+}
+
+#mainNav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    
+    
+}
+
+#mainNav>div{
+    margin-top: 40px;
+}
+
+#subNav {
+    display: flex;
+    position: absolute;
+    bottom: 10%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+
+#mainbar a {
+    color: white; /* 링크 색상 지정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    font-size: 15px ;
+}
+
+
+/* #mainbar a:hover>i{
+    color: rgb(192, 242, 255);
+} */
+
+
+i{
+    color: white;
+}
+
+/* .hidden{
+    display: none;
+} */
+
+.title{
+    
+    font-size: 15px;
+}
+.pack{
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+
+.pack span {
+    margin-left: 5px; /* 아이콘과 텍스트 사이의 간격을 조정하세요 */
+    font-size: 14px; /* 원하는 크기로 조정하세요 */
+    font-family: Arial, sans-serif;
+}
+
+#mainNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white;
+}
+
+#subNav p {
+    font-size: 15px; /* Adjust the font size as needed */
+    font-family: Arial, sans-serif;
+    color:white; 
+    
+}
+
+/* 메인 */
+
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.contents{
+    display: flex;
+
+}
+.main-title{
+
+    width: 80vw;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.line {
+
+    width: 80vw; /* 선의 길이를 늘림 */
+    height: 1px; /* 선의 높이 */
+    border-radius: 0.5px;
+    background-color: rgb(3, 61, 94); /* 선의 색상 */
+
+    /* margin-bottom: 20%;  */
+    border: 1px solid rgb(3, 61, 94);
+}
+
+
+
+
+.psmc{
+
+    font-family: Arial, sans-serif;
+    font-size: 3vw;
+    font-weight: bold;
+    align-self: flex-end;
+
+    color:rgb(3, 61, 94);
+}
+.docIcon{
+    font-size: 2.5vw;
+    color:rgb(3, 61, 94);
+    position: absolute;
+    right: 3vw;
+    align-self: end;
+}
+
+.logo{
+    width: 7%;
+
+}
+
+/* 마이페이지*/
+
+
+/* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+} */
+
+/* .mypage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+} */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background-color: rgb(215, 214, 214);
+    
+} 
+
+
+
+.container4 {
+    
+    /* width: 100vw;
+    height: 100vh; */
+    display: grid;
+    /* grid-template-columns: 100vw 60vw; */
+    grid-template-rows: 6vh 70vh ;
+    grid-gap :7rem;
+    padding: 0 2rem;
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    grid-template-areas:
+    '  a a  '
+    '  b b'
+    '  b b';
+    margin-left: 15rem;
+    margin-top: 1rem;
+    
+  }
+
+
+
+.box1-4 {
+    grid-area: a;
+    border-radius: 5px;
+    justify-content: center; 
+    display: flex;
+    background-color:rgb(3, 61, 94);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.box1-4 div {
+    margin:0;
+    margin-top: 0.7vw;
+    color:white;
+    font-size:2rem;
+    
+}
+
+.box2-4 {
+    grid-area: b;
+    border-radius: 10px;
+    background-color:#f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box2-4 h1 {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color:white;
+    margin-top: 0%;
+    font-weight: 100; 
+    margin-top: -15px;
+}
+
+.box2-4 h3 {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    /* margin-right: 5%; */
+    color:white;
+    font-weight: 100; 
+    margin-top: -10px;
+}
+
+/* .box1-4, .box2-2 {
+    width: 50%;
+} */
+.box1-4 div {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.form-control, .btn {
+    border-radius: 5px;
+}
+.birth {
+    display: flex;
+    gap: 0.5rem;
+}
