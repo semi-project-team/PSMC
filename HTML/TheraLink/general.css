@@ -1,8 +1,8 @@
 
-body {
-    background: #dcdcdc;
-    margin-top: 20px;
-  }
+.container-fluid{
+  width: 70%;
+   margin-left: 20%;
+}
   
   .widget-26 {
     color: #3c4142;
