@@ -9,18 +9,18 @@ public class TheraLinkDTO {
 
     private int projectNo;
     private int theraLinkNo;
-    private String title;
-    private String contents;
+    private String theraTitle;
+    private String theraContents;
     private String theraStatus;
     private LocalDateTime theraBoardDate;
 
     public TheraLinkDTO(){}
 
-    public TheraLinkDTO(int projectNo, int theraLinkNo, String title, String contents, String theraStatus, LocalDateTime theraBoardDate) {
+    public TheraLinkDTO(int projectNo, int theraLinkNo, String theraTitle, String theraContents, String theraStatus, LocalDateTime theraBoardDate) {
         this.projectNo = projectNo;
         this.theraLinkNo = theraLinkNo;
-        this.title = title;
-        this.contents = contents;
+        this.theraTitle = theraTitle;
+        this.theraContents = theraContents;
         this.theraStatus = theraStatus;
         this.theraBoardDate = theraBoardDate;
     }
@@ -41,20 +41,20 @@ public class TheraLinkDTO {
         this.theraLinkNo = theraLinkNo;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTheraTitle() {
+        return theraTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTheraTitle(String theraTitle) {
+        this.theraTitle = theraTitle;
     }
 
-    public String getContents() {
-        return contents;
+    public String getTheraContents() {
+        return theraContents;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setTheraContents(String theraContents) {
+        this.theraContents = theraContents;
     }
 
     public String getTheraStatus() {
@@ -78,8 +78,8 @@ public class TheraLinkDTO {
         return "TheraLinkDTO{" +
                 "projectNo=" + projectNo +
                 ", theraLinkNo=" + theraLinkNo +
-                ", title='" + title + '\'' +
-                ", contents='" + contents + '\'' +
+                ", theraTitle='" + theraTitle + '\'' +
+                ", theraContents='" + theraContents + '\'' +
                 ", theraStatus='" + theraStatus + '\'' +
                 ", theraBoardDate=" + theraBoardDate +
                 '}';

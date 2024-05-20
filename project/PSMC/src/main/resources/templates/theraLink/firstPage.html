@@ -23,13 +23,7 @@
                                     <div class="row no-gutters">
                                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                             <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>Location</option>
-                                                <option>London</option>
-                                                <option>Boston</option>
-                                                <option>Mumbai</option>
-                                                <option>New York</option>
-                                                <option>Toronto</option>
-                                                <option>Paris</option>
+                                                <option selected disabled>Injury</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-8 col-md-6 col-sm-12 p-0">
@@ -95,28 +89,33 @@
                                             <table class="table widget-26">
                                                 <tbody>
                                                 <!-- 한줄 시작-->
-                                                <tr>
+                                                <tr th:each="p : ${patients}">
                                                     <td>
-                                                        <div class="widget-26-job-emp-img">
-                                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="Company" />
-                                                        </div>
+                                                        <a th:href="@{|/theraLink/open/${p.projectNo}|}" class="widget-26-job-emp-img" th:text="${p.patientNo}">
+
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <div class="widget-26-job-title">
-                                                            <a href="/theraLink/open">환자이름</a>
+                                                            <a th:href="@{|/theraLink/open/${p.projectNo}|}" th:text="${p.patientName}"></a>
                                                             <p class="m-0">
-                                                                <a href="/theraLink/open" class="employer-name">patientNo</a>
-                                                                <span class="text-muted time">1 days ago</span></p>
+                                                                <a class="employer-name"></a>
+                                                                <span class="text-muted time" th:text="|${p.age} 세|"></span>
+                                                            </p>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="widget-26-job-info">
-                                                            <p class="type m-0">010-1111-1111</p>
-                                                            <p class="text-muted m-0">at <span class="location">dkdk@gmail.com</span></p>
+                                                            <p class="type m-0" th:text="${p.phone}"></p>
+                                                            <th:block th:if="${p.email!=null}">
+                                                                <p class="text-muted m-0">at
+                                                                    <span class="location" th:text="${p.email}"></span>
+                                                                </p>
+                                                            </th:block>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="widget-26-job-salary">부상정보</div>
+                                                        <div class="widget-26-job-salary" th:text="${p.injuryName}"></div>
                                                     </td>
                                                     <td>
                                                         <div class="widget-26-job-category bg-soft-base">
@@ -133,137 +132,7 @@
                                                 </tr>
                                                 <!-- 한줄 끝-->
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="widget-26-job-emp-img">
-                                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                                                 alt="Company" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-title">
-                                                            <a href="#">Senior Software Engineer / Developer</a>
-                                                            <p class="m-0"><a href="#" class="employer-name">Axiom
-                                                                Corp.</a> <span class="text-muted time">1 days
-                                                                        ago</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-info">
-                                                            <p class="type m-0">Full-Time</p>
-                                                            <p class="text-muted m-0">in <span
-                                                                    class="location">London, UK</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-salary">$ 50/hr</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-category bg-soft-base">
-                                                            <!-- <i class="indicator bg-base"></i> -->
-                                                            <span>new chat</span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="widget-26-job-emp-img">
-                                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                                                 alt="Company" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-title">
-                                                            <a href="#">Senior Software Engineer / Developer</a>
-                                                            <p class="m-0"><a href="#" class="employer-name">Axiom
-                                                                Corp.</a> <span class="text-muted time">1 days
-                                                                        ago</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-info">
-                                                            <p class="type m-0">Full-Time</p>
-                                                            <p class="text-muted m-0">in <span
-                                                                    class="location">London, UK</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-salary">$ 50/hr</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-category bg-soft-base">
-                                                            <i class="indicator bg-base"></i>
-                                                            <span>Software Development</span>
-                                                        </div>
-                                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="widget-26-job-emp-img">
-                                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                                                 alt="Company" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-title">
-                                                            <a href="#">Senior Software Engineer / Developer</a>
-                                                            <p class="m-0"><a href="#" class="employer-name">Axiom
-                                                                Corp.</a> <span class="text-muted time">1 days
-                                                                        ago</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-info">
-                                                            <p class="type m-0">Full-Time</p>
-                                                            <p class="text-muted m-0">in <span
-                                                                    class="location">London, UK</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-salary">$ 50/hr</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-category bg-soft-base">
-                                                            <i class="indicator bg-base"></i>
-                                                            <span>Software Development</span>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="widget-26-job-emp-img">
-                                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                                                 alt="Company" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-title">
-                                                            <a href="#">Senior Software Engineer / Developer</a>
-                                                            <p class="m-0"><a href="#" class="employer-name">Axiom
-                                                                Corp.</a> <span class="text-muted time">1 days
-                                                                        ago</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-info">
-                                                            <p class="type m-0">Full-Time</p>
-                                                            <p class="text-muted m-0">in <span
-                                                                    class="location">London, UK</span></p>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-salary">$ 50/hr</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="widget-26-job-category bg-soft-base">
-                                                            <i class="indicator bg-base"></i>
-                                                            <span>Software Development</span>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
 
                                                 </tbody>
                                             </table>
@@ -298,6 +167,7 @@
         </div>
     </div>
 
+    <script src="/assets/js/firstPage.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>

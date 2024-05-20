@@ -6,6 +6,7 @@ import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.mainPage.model.dto.*;
 
+import com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.dto.SignupDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -91,4 +92,6 @@ public interface UserMapper {
     int createProject(CreateProjectDTO createProjectDTO);
 
     int assignProject(AssignProjectDTO assignProjectDTO);
+
+    List<TheraLinkWithMonthDTO> findAllTheraLinkByProjectNo(int projectNo);
 }
