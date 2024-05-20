@@ -19,13 +19,12 @@ body,html{
     'a b c'
     'd e f';
     width: 80vw;
-
     grid-row-gap: 10px;
     grid-column-gap: 20px;
     height: 80vh;
     margin-right: 3vw;
     position: absolute;
-    bottom: 40px;
+    bottom: 62px;
 }
 /* box1  */
 
