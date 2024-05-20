@@ -86,7 +86,7 @@ i {
     height: auto; /* 비율을 유지 */
 }
 
-hr {
+.mainNav hr {
     border: none; /* 기본 테두리 제거 */
     background-color: white; /* 원하는 색상으로 설정 */
     height: 2px; /* 높이(두께)를 원하는 값으로 설정 */
