@@ -7,7 +7,7 @@ body {
 .container5 {
     display: grid;
     grid-template-columns: 40vw 40vw;
-    grid-template-rows: 5vh 50vh ;
+    grid-template-rows: 4vh 50vh ;
     grid-gap: 7rem;
     padding: 0 2rem;
     grid-row-gap: 10px;
@@ -17,7 +17,7 @@ body {
             '  b b  '
             '  b b  ';
     margin-left: 14.3%;
-    margin-top: -4rem;
+    margin-top: 3rem;
 }
 
 .box1-5 {
@@ -32,7 +32,7 @@ body {
 .box1-5 div {
     margin-top: 0.2vw;
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
 }
 
 .box2-5 {
