@@ -598,6 +598,9 @@
         <result property="patientName" column="patient_name"/>
         <result property="phone" column="phone"/>
         <result property="projectNo" column="project_no"/>
+        <result property="email" column="email"/>
+        <result property="age" column="age"/>
+        <result property="injuryName" column="injury_name"/>
     </resultMap>
 
     <select id="myPatient" resultMap="mypatientMap" parameterType="hashmap">
@@ -605,7 +608,10 @@
             p.patient_name,
             p.patient_no,
             p.phone,
-            a.project_no
+            p.email,
+            p.age,
+            a.project_no,
+            i.injury_name
         from
             patient p
         join
@@ -624,6 +630,10 @@
             on
                 c.project_no = a.project_no
         </if>
+        join
+            injury i
+        on
+            i.injury_code = a.injury_code
 
         where
             c.pm_code= #{pmCode}
@@ -850,4 +860,36 @@
         insert into assign_project(project_no,pm_code)
         values (#{projectNo},#{pmCode})
     </insert>
+
+    <resultMap id="theraLinkMapWithMonth" type="com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO">
+        <id property="theraLinkNo" column="theraLink_no"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="theraTitle" column="thera_title"/>
+        <result property="theraContents" column="thera_contents"/>
+        <result property="theraStatus" column="thera_status"/>
+        <result property="theraBoardDate" column="thera_board_date"/>
+        <result property="month" column="month"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+
+    <select id="findAllTheraLinkByProjectNo" resultMap="theraLinkMapWithMonth" parameterType="int">
+        select
+            a.*,
+            left(date_format(a.thera_board_date,'%M'),3) as month
+            ,LPAD(count(b.thera_chat_no),2,'0') as comment
+        from
+            thera_link a
+        left join
+            thera_chat b
+        on
+            a.theraLink_no = b.theraLink_no
+        where
+            project_no =#{projectNo}
+        group by
+            a.theraLink_no
+        order by
+            thera_board_date desc;
+
+
+    </select>
 </mapper>

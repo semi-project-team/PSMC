@@ -6,14 +6,20 @@ public class MyPatientDTO {
     private String patientName;
     private String phone;
     private int projectNo;
+    private String email;
+    private int age;
+    private String injuryName;
 
     public MyPatientDTO(){}
 
-    public MyPatientDTO(int patientNo, String patientName, String phone, int projectNo) {
+    public MyPatientDTO(int patientNo, String patientName, String phone, int projectNo, String email, int age, String injuryName) {
         this.patientNo = patientNo;
         this.patientName = patientName;
         this.phone = phone;
         this.projectNo = projectNo;
+        this.email = email;
+        this.age = age;
+        this.injuryName = injuryName;
     }
 
     public int getPatientNo() {
@@ -48,6 +54,30 @@ public class MyPatientDTO {
         this.projectNo = projectNo;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getInjuryName() {
+        return injuryName;
+    }
+
+    public void setInjuryName(String injuryName) {
+        this.injuryName = injuryName;
+    }
+
     @Override
     public String toString() {
         return "MyPatientDTO{" +
@@ -55,6 +85,9 @@ public class MyPatientDTO {
                 ", patientName='" + patientName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", projectNo=" + projectNo +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", injuryName='" + injuryName + '\'' +
                 '}';
     }
 }

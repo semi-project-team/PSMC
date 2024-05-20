@@ -11,115 +11,48 @@
     <title>Title</title>
 </head>
 <body>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+      integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+
     <th:block th:insert="~{/common/nav}"></th:block>
     <th:block th:insert="~{/common/header}"></th:block>
 
     <!-- 내용물 시작 -->
     <div class="container-fluid">
         <div class="row">
-
             <!-- blog1 -->
-            <div class="col-md-6">
-                <div class="media blog-media">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#theraDetail">
-                        <img class="d-flex" src="https://www.bootdey.com/image/350x380/6495ED/000000"
-                             alt="Generic placeholder image" width="100%" height="100%">
-                    </a>
-                    <div class="circle">
-                        <h5 class="day">14</h5>
-                        <span class="month">sep</span>
-                    </div>
-                    <div class="media-body">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#theraDetail">
-                            <h5 class="mt-0">Standard Blog Post</h5>
-                        </a>
-                        Sodales aliquid, in eget ac cupidatat velit autem numquam ullam ducimus occaecati placeat
-                        error.
-                        <a href="#" class="post-link" data-bs-toggle="modal" data-bs-target="#theraDetail">Read More</a>
-                        <ul>
-                            <li><input type="checkbox" class="delete-1"> delete</li>
-                            <li class="text-end"><a href="#" data-bs-toggle="modal" data-bs-target="#theraDetail">07
-                                comments</a></li>
-                        </ul>
+            <th:block th:each="thera : ${theraLink}">
+                <div class="col-lg-3 col-md-6 mt-4 pt-2" >
+                    <div class="blog-post rounded border">
+                        <div class="blog-img d-block overflow-hidden position-relative">
+                            <img src="https://www.bootdey.com/image/350x280/FF7F50/000000" class="img-fluid rounded-top" alt>
+                            <div class="overlay rounded-top bg-dark"></div>
+                            <div class="post-meta">
+                                <a href="javascript:void(0)" class="text-light d-block text-right like" data-bs-toggle="modal" data-bs-target="#theraDetail"></a>
+                                <a href="javascript:void(0)" class="text-light read-more" data-bs-toggle="modal" data-bs-target="#theraDetail">Read More <i
+                                    class="mdi mdi-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="content p-3">
+                            <small class="text-muted p float-right" th:text="${thera.theraBoardDate}"></small>
+                            <small><a href="javascript:void(0)" class="text-primary" th:text="|${thera.comment} comments|" data-bs-toggle="modal" data-bs-target="#theraDetail"></a></small>
+                            <h4 class="mt-2"><a href="javascript:void(0)" class="text-dark title" th:text="${thera.theraTitle}" data-bs-toggle="modal" data-bs-target="#theraDetail"></a></h4>
+                            <p class="text-muted mt-2" th:text="${thera.theraContents}"></p>
+                            <div class="pt-3 mt-3 border-top d-flex">
+                                <div class="author mt-2">
+                                    <h6 class="mb-0"><input type="checkbox"> Delete</h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
             <!-- blog1 -->
 
-            <!-- blog2 -->
-            <div class="col-md-6">
-                <div class="media blog-media">
-                    <a href="blog-post-left-sidebar.html"><img class="d-flex"
-                                                               src="https://www.bootdey.com/image/350x380/FFB6C1/000000"
-                                                               alt="Generic placeholder image"></a>
-                    <div class="circle">
-                        <h5 class="day">12</h5>
-                        <span class="month">sep</span>
-                    </div>
-                    <div class="media-body">
-                        <a href>
-                            <h5 class="mt-0">perferendis labore</h5>
-                        </a>
-                        Sodales aliquid, in eget ac cupidatat velit autem numquam ullam ducimus occaecati placeat
-                        error.
-                        <a href="blog-post-left-sidebar.html" class="post-link">Read More</a>
-                        <ul>
-                            <li><input type="checkbox" class="delete-2"> delete</li>
-                            <li class="text-right"><a href="blog-post-left-sidebar.html">04 comments</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
-            <!-- blog2 -->
-            <div class="col-md-6">
-                <div class="media blog-media">
-                    <a href="blog-post-left-sidebar.html"><img class="d-flex"
-                                                               src="https://www.bootdey.com/image/350x380/FF7F50/000000"
-                                                               alt="Generic placeholder image"></a>
-                    <div class="circle">
-                        <h5 class="day">09</h5>
-                        <span class="month">sep</span>
-                    </div>
-                    <div class="media-body">
-                        <a href>
-                            <h5 class="mt-0">deleniti incdunt magni</h5>
-                        </a>
-                        Sodales aliquid, in eget ac cupidatat velit autem numquam ullam ducimus occaecati placeat
-                        error.
-                        <a href="blog-post-left-sidebar.html" class="post-link">Read More</a>
-                        <ul>
-                            <li><input type="checkbox" class="delete-3"> delete</li>
-                            <li class="text-right"><a href="blog-post-left-sidebar.html">10 comments</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="media blog-media">
-                    <a href="blog-post-left-sidebar.html"><img class="d-flex"
-                                                               src="https://www.bootdey.com/image/350x380/008B8B/000000"
-                                                               alt="Generic placeholder image"></a>
-                    <div class="circle">
-                        <h5 class="day">04</h5>
-                        <span class="month">sep</span>
-                    </div>
-                    <div class="media-body">
-                        <a href>
-                            <h5 class="mt-0">Explicabo magnam </h5>
-                        </a>
-                        Sodales aliquid, in eget ac cupidatat velit autem numquam ullam ducimus occaecati placeat
-                        error.
-                        <a href="blog-post-left-sidebar.html" class="post-link">Read More</a>
-                        <ul>
-                            <li><input type="checkbox" class="delete-4"> delete</li>
-                            <li class="text-right"><a href="blog-post-left-sidebar.html">06 comments</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
-
         <!-- pagination -->
         <br>
         <nav class="d-flex justify-content-center">
@@ -169,7 +102,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 50vw;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">TheraLink 제목제목</h1>
+                    <h1 class="modal-title fs-5">TheraLink 제목제목</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -445,7 +378,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 50vw;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">TheraLink</h1>
+                    <h1 class="modal-title fs-5">TheraLink</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -484,7 +417,7 @@
 
 
 
-    <script src="/TheraLink/secondPage.js"></script>
+    <script src="/assets/js/secondPage.js"></script>
     <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="/assets/js/image-uploader.min.js"></script>

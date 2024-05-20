@@ -19,13 +19,7 @@ body{
     background-color: rgb(215, 214, 214);
 }
 
-/*.searchdate{*/
-/*    position: absolute;*/
-/*    margin-top: -10vh;*/
-/*    margin-left: 70vw;*/
-/*    display: flex;*/
-/*    gap: 10px;*/
-/*}*/
+
 
 .searchdate{
     width: 20%;

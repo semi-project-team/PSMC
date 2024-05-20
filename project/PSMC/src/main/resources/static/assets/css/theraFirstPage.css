@@ -15,6 +15,22 @@ body{
     border: 0;
 }
 
+.widget-26-job-emp-img{
+    display: flex;
+    text-align: center;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    color: inherit;
+
+}
+.widget-26-job-emp-img:hover{
+    color: #68CBD7;
+    text-decoration: none;
+
+}
+
+
 .widget-26 .widget-26-job-emp-img img {
     width: 35px;
     height: 35px;
