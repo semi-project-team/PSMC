@@ -3,6 +3,7 @@ body {
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
     background-color: rgb(215, 214, 214);
+    margin: 0;
 }
 .container1 {
 
