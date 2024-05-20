@@ -45,6 +45,7 @@
             background-color: rgb(3, 61, 94);
             display: flex;
             flex-direction: column;
+            /*border-radius: 10px;*/
         }
 
         #search{
@@ -61,7 +62,9 @@
         #deleteButton{
             align-self: flex-end;
             margin-right: 1.5%;
-
+            margin-bottom: 1%;
+            margin-top: 1%;
+            border-radius: 10px;
         }
 
         #board-search .search-window .search-wrap {
@@ -71,6 +74,8 @@
             width: 80%;
             max-width: 564px;
             flex-direction: row;
+            border-radius: 10px;
+            margin-bottom: 3px;
         }
 
         #board-search .search-window .search-wrap input {
@@ -201,8 +206,10 @@
         }
         .container {
             width: 1100px;
-            margin: 0 auto;
+            border-radius: 10px;
+            background-color: white;
         }
+
         .blind {
             position: absolute;
             overflow: hidden;
@@ -222,11 +229,11 @@
 <th:block th:insert="~{/common/header}"></th:block>
 
 <section class="notice">
-    <div class="page-title">
-        <div class="container">
-            <h3>MediConnect</h3>
-        </div>
-    </div>
+<!--    <div class="page-title">-->
+<!--        <div class="container">-->
+<!--            <h3>MediConnect</h3>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- board seach area -->
     <div id="board-search">
@@ -239,11 +246,11 @@
                         <button type="submit" class="btn btn-dark">검색</button>
                     </div>
                 </form>
-<!--                <form action="/doc/deleteBtn">-->
-<!--                    <div class="delete-btn" id="delete-btn">-->
-<!--                        <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>-->
-<!--                    </div>-->
-<!--                </form>-->
+                <!--                <form action="/doc/deleteBtn">-->
+                <!--                    <div class="delete-btn" id="delete-btn">-->
+                <!--                        <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>-->
+                <!--                    </div>-->
+                <!--                </form>-->
             </div>
         </div>
     </div>
@@ -262,16 +269,16 @@
                         <th scope="col" class="th-date">등록일</th>
                     </tr>
                     </thead>
-                        <tbody>
-                            <tr th:each="board : ${boards}">
-                                <td><input type="checkbox" name="postCheckbox" th:value="${board.mediNo}" onchange="toggleDeleteButton()"></td>
-                                <td th:text="${board.mediNo}"></td>
-                                <th>
-                                    <a href="#!" th:text="${board.mediTitle}"></a>
-                                </th>
-                                <td th:text="${board.mediBoardDate}"></td>
-                            </tr>
-                        </tbody>
+                    <tbody>
+                    <tr th:each="board : ${boards}">
+                        <td><input type="checkbox" name="postCheckbox" th:value="${board.mediNo}" onchange="toggleDeleteButton()"></td>
+                        <td th:text="${board.mediNo}"></td>
+                        <th>
+                            <a href="#!" th:text="${board.mediTitle}"></a>
+                        </th>
+                        <td th:text="${board.mediBoardDate}"></td>
+                    </tr>
+                    </tbody>
                 </table>
                 <div class="delete-btn" id="delete-btn">
                     <button id="deleteButton" class="btn btn-dark" style="display: none;" onclick="deleteSelectedPosts()">Delete</button>
