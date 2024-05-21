@@ -6,6 +6,7 @@ import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.mainPage.model.dto.*;
 
+import com.javaclass.psmc.theraLink.model.dto.MessageDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -99,4 +100,6 @@ public interface UserMapper {
     int deleteTheraLink(Map<String, List<Integer>> theraNos);
 
     TheraLinkForChatDTO getTheraChatByTheraNo(String theraNum);
+
+    int makeTheraChat(MessageDTO messageDTO);
 }
