@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b96c7576-899c-4e9c-9658-34bf7178af5a" name="Changes" comment="" />
+    <list default="true" id="b96c7576-899c-4e9c-9658-34bf7178af5a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/HTML/mediConnectDetail/mediConnectDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/HTML/mediConnectDetail/mediConnectDetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/mediConnectDetail/mediConnectDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/HTML/mediConnectDetail/mediConnectDetail.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,43 +13,39 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "tmddbs9313"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tmddbs9313&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/semi-project-team/PSMC.git",
-    "accountId": "38bbb198-3783-4caf-98b8-111840f6eb6b"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/semi-project-team/PSMC.git&quot;,
+    &quot;accountId&quot;: &quot;38bbb198-3783-4caf-98b8-111840f6eb6b&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2gDnU0Gq1QHHX8mMeXrt3eeYthF" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "css/mediConnectDetail",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/seungyoun-cho/Desktop/psmc",
+    "last_opened_file_path": "C:/SemiProject/psmc-semi-project/project",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715241027320</updated>
       <workItem from="1715241028286" duration="4000" />
+      <workItem from="1716269167021" duration="24000" />
     </task>
     <servers />
   </component>

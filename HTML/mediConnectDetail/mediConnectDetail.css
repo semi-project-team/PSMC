@@ -189,7 +189,7 @@ i{
 
 .commentSpace {
     grid-area: commenta;
-    background-color: rgb(3, 61, 94);
+    background-color: rgb(3, 61, 94);o
 }
 .right-asideSpace {
     grid-area: right-asidea;
@@ -246,15 +246,26 @@ i{
     max-height: 25vh; /* 최대 높이 지정 */
 }
 
+.list-one {
+    display: flex;
+}
+
+.list-one input {
+    margin-right: 0.5rem;
+}
+
 .list-group-item {
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 8px 8px 8px 8px;
     margin-bottom: 1px;
     padding: 3px;
     transition: background-color 0.3s;
     display: flex;
-    align-items: center;}
+    align-items: center;
+    border-bottom-left-radius: 10px; /* 원하는 값으로 조정 */
+    border-bottom-right-radius: 10px; /* 원하는 값으로 조정 */
+}
 
 
 
@@ -298,17 +309,18 @@ i{
     margin-left: auto;
 }
 
-.list-group-item input[type="checkbox"] {
-    margin-left: 2rem; /* 새로운 간격 추가 */
-}
+/* .list-group-item input[type="checkbox"] {
+    margin-left: 2rem; 
+} */
 
 .chat-container { 
-    max-width: 600px; 
-    margin: 50px auto; 
+    max-width: 500px; 
+    margin: 0px auto; 
     background-color: #fff; 
     border-radius: 8px; 
     overflow: hidden; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
 } 
 
 .message-container { 
@@ -317,10 +329,10 @@ i{
 } 
 
 .message { 
-    padding: 10px; 
+    /* padding: 10px 20px;  */
     margin: 10px; 
-    border-radius: 5px; 
-    max-width: 80%; 
+    border-radius: 10px; 
+    
     word-wrap: break-word; 
     display: flex; 
     align-items: center; 
@@ -329,24 +341,43 @@ i{
 .plusDate {
     display: flex;
     align-items: center;
+    justify-content: center;
+    max-width: 80%; 
 }
 
 .message-text {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
 }
 
 .dateTime{
-    font-size: 0.4rem;
+    display: flex;
+    font-size: 0.5em;
+    align-items: center;
 }
 
 .sender-messages { 
-    
+    /* display: flex;
+    align-items: center; */
     align-self: flex-start; 
 } 
 
 .sender-message {
     background-color: #e0e0e0; 
     color: #000; 
+    padding: 5px 16px 5px 5px;
+}
+
+.receiver-message {
+    padding: 5px 7px 5px 16px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    padding: 0;
 }
 
 .profile .senderName {
@@ -354,9 +385,15 @@ i{
     background-color: #22b0b5;
     font-size: 0.4rem;
     padding: 5px;
-    margin-right: 15px;
+    margin-right: 8px;
     /* font-weight: bold; */
     color: white;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .receiver-messages {
@@ -364,28 +401,47 @@ i{
 }
 
 .receiver-message { 
-    background-color: #4CAF50; 
+    background-color: #2974f4; 
     color: #fff; 
 } 
 
 .messageInput {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2%;
 }
 
-/* .message input { 
-    width: calc(100% - 20px); 
-    padding: 8px; 
-    margin: 10px; 
-    border: 1px solid #ddd; 
+.messageInput input{
+    width: 80%;
+    padding: 0.5%;
     border-radius: 5px; 
-}  */
+    border: 0.5px solid #7f8787;
+    outline: none;
+    font-size: 0.8rem;
+}
 
-.message button { 
-    padding: 8px; 
+.messageInput input:focus {
+    border: 0.5px solid #7f8787; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 5px rgba(174, 180, 184, 0.5); /* 포커스 시 그림자 추가 */
+}
+
+.messageInput button { 
+    padding: 6px; 
     margin: 10px; 
-    background-color: #4CAF50; 
+    background-color: #2974f4; 
     color: #fff; 
     border: none; 
     border-radius: 5px; 
     cursor: pointer; 
+    font-size: 0.7rem;
 } 
+
+.delete-btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: 2%;
+    margin-right: 0.1%;
+}
