@@ -302,3 +302,90 @@ i{
     margin-left: 2rem; /* 새로운 간격 추가 */
 }
 
+.chat-container { 
+    max-width: 600px; 
+    margin: 50px auto; 
+    background-color: #fff; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+} 
+
+.message-container { 
+    display: flex; 
+    flex-direction: column; 
+} 
+
+.message { 
+    padding: 10px; 
+    margin: 10px; 
+    border-radius: 5px; 
+    max-width: 80%; 
+    word-wrap: break-word; 
+    display: flex; 
+    align-items: center; 
+} 
+
+.plusDate {
+    display: flex;
+    align-items: center;
+}
+
+.message-text {
+    font-size: 0.5rem;
+}
+
+.dateTime{
+    font-size: 0.4rem;
+}
+
+.sender-messages { 
+    
+    align-self: flex-start; 
+} 
+
+.sender-message {
+    background-color: #e0e0e0; 
+    color: #000; 
+}
+
+.profile .senderName {
+    border-radius: 50%;
+    background-color: #22b0b5;
+    font-size: 0.4rem;
+    padding: 5px;
+    margin-right: 15px;
+    /* font-weight: bold; */
+    color: white;
+}
+
+.receiver-messages {
+    align-self: flex-end;
+}
+
+.receiver-message { 
+    background-color: #4CAF50; 
+    color: #fff; 
+} 
+
+.messageInput {
+    width: 100%;
+}
+
+/* .message input { 
+    width: calc(100% - 20px); 
+    padding: 8px; 
+    margin: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+}  */
+
+.message button { 
+    padding: 8px; 
+    margin: 10px; 
+    background-color: #4CAF50; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+} 
