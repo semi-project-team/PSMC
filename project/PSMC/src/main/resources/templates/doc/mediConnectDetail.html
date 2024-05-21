@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body{
+            font-family: 'Poppins', sans-serif;
+            background-color: rgb(215, 214, 214);
+        }
+
+        .containerSpace {
+            display: grid;
+            grid-template-areas: 'left-spacea headera right-asidea'
+                         'left-spacea maina right-asidea'
+                         'left-spacea commenta right-asidea';
+            width: 90vw;
+            margin-left: 12vw;
+            margin-top: 1%;
+            height: 77vh;
+            grid-gap: 8px;
+            grid-template-columns: 1fr 18fr 1fr;
+            grid-template-rows: 1fr 8fr 8fr;
+        }
+        .containerSpace > div{
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .headerSpace {
+            background-color: rgb(3, 61, 94);
+            grid-area: headera;
+            height: 9vh;
+            text-align: center;
+            color: white;
+        }
+
+        .headerSpace h5 {
+            font-size: 1.1rem;
+        }
+
+        .headerSpace p {
+            font-size: 0.5rem;
+        }
+
+        .left-spaceSpace {
+            /*background-color: white;*/
+            grid-area: left-spacea;
+        }
+        .mainSpace {
+            margin-bottom: 0.1%;
+            grid-area: maina;
+            background-color: rgb(3, 61, 94);
+        }
+
+        .mainSpace .card {
+            height: 25vh;
+        }
+
+        .mainSpace .card-body p {
+            font-size: 0.9rem;
+        }
+
+        .commentSpace {
+            grid-area: commenta;
+            background-color: rgb(3, 61, 94);
+        }
+
+        .right-asideSpace {
+            grid-area: right-asidea;
+            /*background-color: white;*/
+        }
+
+        .containerSpace {
+            padding: 20px;
+            /*background-color: white;*/
+            border-radius: 8px;
+        }
+
+        .media {
+            /*background-color: white;*/
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .media img {
+            margin-right: 10px;
+        }
+
+        .media-body {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .commentSpace {
+            /* margin-top: 1%; */
+            margin-bottom: 5%;
+        }
+
+        .commentSpace h6 {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.1px;
+        }
+
+        .commentSpace hr {
+            margin: 10px 0;
+        }
+
+        .commentCards {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .list-group {
+            overflow: auto; /* 내용이 넘칠 때 스크롤바를 표시함 */
+            max-height: 25vh; /* 최대 높이 지정 */
+        }
+
+        .list-one {
+            display: flex;
+        }
+
+        .list-one input {
+            margin-right: 0.5rem;
+        }
+
+        .list-group-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px 8px 8px 8px;
+            margin-bottom: 1px;
+            padding: 3px;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            border-bottom-left-radius: 10px; /* 원하는 값으로 조정 */
+            border-bottom-right-radius: 10px; /* 원하는 값으로 조정 */
+        }
+
+
+
+        .list-group-item h5 {
+            font-size: 0.7rem;
+            margin-bottom: 5px;
+            color: black;
+        }
+
+        .list-group-item p {
+            font-size: 0.6rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .list-group-item small {
+            color: #999;
+            font-size: 0.5rem;
+        }
+
+
+        .comment-checkbox {
+            margin-right: 10px;
+            align-self: center;
+        }
+
+        .d-flex {
+            align-items: center;
+        }
+
+
+        .text-body-secondary {
+            color: #666;
+            margin-left: 1px;
+        }
+
+        .text-body-secondary svg {
+            margin-left: 5px;
+        }
+
+        .commentCard small {
+            margin-left: auto;
+        }
+
+        /* .list-group-item input[type="checkbox"] {
+            margin-left: 2rem;
+        } */
+
+        .chat-container {
+            max-width: 500px;
+            margin: 0px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            /* padding: 10px 20px;  */
+            margin: 10px;
+            border-radius: 10px;
+
+            word-wrap: break-word;
+            display: flex;
+            align-items: center;
+        }
+
+        .plusDate {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 80%;
+        }
+
+        .message-text {
+            font-size: 0.7rem;
+        }
+
+        .dateTime{
+            display: flex;
+            font-size: 0.5em;
+            align-items: center;
+        }
+
+        .sender-messages {
+            /* display: flex;
+            align-items: center; */
+            align-self: flex-start;
+        }
+
+        .sender-message {
+            background-color: #e0e0e0;
+            color: #000;
+            padding: 5px 16px 5px 5px;
+        }
+
+        .receiver-message {
+            padding: 5px 7px 5px 16px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: auto;
+            padding: 0;
+        }
+
+        .profile .senderName {
+            border-radius: 50%;
+            background-color: #22b0b5;
+            font-size: 0.4rem;
+            padding: 5px;
+            margin-right: 8px;
+            /* font-weight: bold; */
+            color: white;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .receiver-messages {
+            align-self: flex-end;
+        }
+
+        .receiver-message {
+            background-color: #2974f4;
+            color: #fff;
+        }
+
+        .messageInput {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 2%;
+        }
+
+        .messageInput input{
+            width: 80%;
+            padding: 0.5%;
+            border-radius: 5px;
+            border: 0.5px solid #7f8787;
+            outline: none;
+            font-size: 0.8rem;
+        }
+
+        .messageInput input:focus {
+            border: 0.5px solid #7f8787; /* 포커스 시 테두리 색상 변경 */
+            box-shadow: 0 0 5px rgba(174, 180, 184, 0.5); /* 포커스 시 그림자 추가 */
+        }
+
+        .messageInput button {
+            padding: 6px;
+            margin: 10px;
+            background-color: #2974f4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        .delete-btn {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            margin-top: 2%;
+            margin-right: 0.1%;
+        }
+
+    </style>
+</head>
+<body>
+    <th:block th:insert="~{/common/nav}"></th:block>
+
+    <th:block th:insert="~{/common/header}"></th:block>
+
+    <div class="containerSpace">
+        <div class="headerSpace">
+            <h5><b>무릎인대치료내용 </b></h5><span>
+                <p>2024.05.01 작성자: 홍길동</p>
+            </span>
+        </div>
+        <div class="left-spaceSpace"></div>
+        <div class="mainSpace">
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"
+                         height="32"> @홍길동
+                </div>
+                <div class="card-body">
+                    <p class="card-text">수술을 통한 무릎인대 치료, 물리 치료: 근력과 안정성 향상을 위한 운동요법</p>
+                </div>
+            </div>
+        </div>
+        <div class="commentSpace">
+            <h6>comments <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                              class="bi bi-chat-right-dots" viewBox="0 0 16 16">
+                <path
+                        d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
+                <path
+                        d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+            </svg></h6>
+            <hr style="color: rgb(71, 149, 78); border-width: 6px; margin: 10px 0;">
+            <div class="commentCards">
+                <div class="list-group">
+                    <div class="list-one">
+                        <input type="checkbox">
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
+                           data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div class="commentCard">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
+                                    <small class="text-body-secondary"><b>Reply(3)</b>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
+                                            <path
+                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
+                                        </svg>
+                                    </small>
+                                    <small class="text-body-secondary">2024.05.10</small>
+                                </div>
+                                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="list-one">
+                        <input type="checkbox">
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
+                           data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div class="commentCard">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
+                                    <small class="text-body-secondary"><b>Reply(3)</b>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
+                                            <path
+                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
+                                        </svg>
+                                    </small>
+                                    <small class="text-body-secondary">2024.05.10</small>
+                                </div>
+                                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="list-one">
+                        <input type="checkbox">
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
+                           data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div class="commentCard">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
+                                    <small class="text-body-secondary"><b>Reply(3)</b>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
+                                            <path
+                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
+                                        </svg>
+                                    </small>
+                                    <small class="text-body-secondary">2024.05.10</small>
+                                </div>
+                                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="list-one">
+                        <input type="checkbox">
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
+                           data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div class="commentCard">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
+                                    <small class="text-body-secondary"><b>Reply(3)</b>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
+                                            <path
+                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
+                                        </svg>
+                                    </small>
+                                    <small class="text-body-secondary">2024.05.10</small>
+                                </div>
+                                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="delete-btn">
+                <button type="button" id="delete-btn" class="btn btn-outline-light">Delete</button>
+            </div>
+        </div>
+
+        <!-- 모달창 --->
+        <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reply</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="chat-container">
+                            <div class="message-container">
+                                <div class="plusDate sender-messages">
+                                    <div class="message sender-message">
+                                        <div class="profile">
+                                            <div class="senderName">정민</div>
+                                        </div>
+                                        <div class="message-text">치료 ~~ 부분 더 신경쓰면 될까요?</div>
+                                    </div>
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                </div>
+                                <div class="plusDate receiver-messages">
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                    <div class="message receiver-message">
+                                        <div class="message-text">네! 맞습니다 다른 특이사항은 없나요?</div>
+                                    </div>
+                                </div>
+                                <div class="plusDate sender-messages">
+                                    <div class="message sender-message">
+                                        <div class="profile">
+                                            <div class="senderName">민지</div>
+                                        </div>
+                                        <div class="message-text">생기면 바로 말씀 드리겠습니다. </div>
+                                    </div>
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                </div>
+                                <div class="plusDate receiver-messages">
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                    <div class="message receiver-message">
+                                        <div class="message-text"> 감사합니다~</div>
+                                    </div>
+                                </div>
+                                <div class="plusDate receiver-messages">
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                    <div class="message receiver-message">
+                                        <div class="message-text"> 감사합니다~</div>
+                                    </div>
+                                </div>
+                                <div class="plusDate sender-messages">
+                                    <div class="message sender-message">
+                                        <div class="profile">
+                                            <div class="senderName">민지</div>
+                                        </div>
+                                        <div class="message-text">생기면 바로 말씀 드리겠습니다. </div>
+                                    </div>
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                </div>
+                                <div class="plusDate receiver-messages">
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                    <div class="message receiver-message">
+                                        <div class="message-text"> 감사합니다~</div>
+                                    </div>
+                                </div>
+                                <div class="plusDate receiver-messages">
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                    <div class="message receiver-message">
+                                        <div class="message-text"> 감사합니다~</div>
+                                    </div>
+                                </div>
+                                <div class="plusDate receiver-messages">
+                                    <div class="dateTime">
+                                        <P>2024.05.02<br>10:00</P>
+                                    </div>
+                                    <div class="message receiver-message">
+                                        <div class="message-text"> 감사합니다~</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="messageInput">
+                        <input type="text" placeholder="Type your message..." autofocus>
+                        <button>Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

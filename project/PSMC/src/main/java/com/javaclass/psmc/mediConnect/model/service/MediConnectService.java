@@ -28,4 +28,9 @@ public class MediConnectService {
         return projectMapper.deleteBoard(postCheckbox);
 
     }
+
+    public List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter) {
+
+        return projectMapper.showBoardDetail(parameter);
+    }
 }
