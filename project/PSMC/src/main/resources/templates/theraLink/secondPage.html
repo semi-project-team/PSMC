@@ -24,7 +24,7 @@
         <div class="row">
             <!-- blog1 -->
             <th:block th:each="thera : ${theraLink}">
-                <div class="col-lg-3 col-md-6 mt-4 pt-2" >
+                <div class="col-lg-3 col-md-6 mt-4 pt-2 blogPage">
                     <div class="blog-post rounded border">
                         <div class="blog-img d-block overflow-hidden position-relative">
                             <img src="https://www.bootdey.com/image/350x280/FF7F50/000000" class="img-fluid rounded-top" alt>
@@ -41,8 +41,8 @@
                             <h4 class="mt-2"><a href="javascript:void(0)" class="text-dark title" th:text="${thera.theraTitle}" data-bs-toggle="modal" data-bs-target="#theraDetail"></a></h4>
                             <p class="text-muted mt-2" th:text="${thera.theraContents}"></p>
                             <div class="pt-3 mt-3 border-top d-flex">
-                                <div class="author mt-2">
-                                    <h6 class="mb-0"><input type="checkbox"> Delete</h6>
+                                <div class="author mt-9">
+                                    <h6 class="mb-0"><input type="checkbox" th:class="|delete-${thera.theraLinkNo}|"> Delete</h6>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
     </div>
 
     <!-- floating button -->
-    <div class="floating-container">
+    <div class="floating-container" sec:authorize="hasAnyAuthority('t')">
         <div class="floating-button">+</div>
         <div class="element-container">
 
@@ -88,10 +88,12 @@
                 <i class="material-icons">chat</i>
             </span>
 
-            <span class="float-element" style="cursor: pointer;" id="deleteButton">
-                <i class="material-icons">delete</i>
-            </span>
+                <span class="float-element" style="cursor: pointer;" id="deleteButton">
+                    <i class="material-icons">delete</i>
+                </span>
+
         </div>
+        <form method="get" id="killTheraLink"></form>
     </div>
     <!-- floating button -->
 
@@ -102,7 +104,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 50vw;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5">TheraLink 제목제목</h1>
+                    <h1 class="modal-title fs-5" id="theraLinkTitle">TheraLink 제목제목</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -122,6 +124,7 @@
                                         <!-- 왼쪽 내용물 -->
 
 
+                                        <!--사진공간-->
                                         <div id="carouselExampleDark" class="carousel carousel-dark slide" style="min-height: 40vh; width: 100%;">
                                             <div class="carousel-indicators">
                                                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
@@ -161,10 +164,14 @@
                                                 <span class="visually-hidden">Next</span>
                                             </button>
                                         </div>
+                                        <!--사진공간-->
 
-                                        <div class="theraLink-contents">
-                                            글자 들어가는 공간이다
+                                        <!--글자공간-->
+                                        <div class="theraLink-contents" id="theraLinkContents">
+
                                         </div>
+
+                                        <!--글자공간-->
                                         <!-- 왼쪽 내용물 -->
                                         <hr class="d-block d-lg-none mt-1 mb-0">
                                     </div>
@@ -173,187 +180,42 @@
 
                                     <!-- 오른쪽 채팅공간 -->
                                     <div class="col-12 col-lg-6 col-xl-6">
+                                        <!--수정 삭제 버튼-->
                                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                                             <div class="d-flex align-items-center py-1">
                                                 <div class="position-relative">
-                                                    <!-- <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40"> -->
+
                                                 </div>
                                                 <div class="flex-grow-1 pl-3">
-                                                    <!-- <strong>Sharon Lessman</strong>
-                                                    <div class="text-muted small"><em>Typing...</em></div> -->
+
                                                 </div>
+
+
                                                 <div>
-                                                    <button class="btn btn-primary btn-lg mr-1 px-3" data-bs-toggle="modal" data-bs-target="#makeTheraLink">
+                                                    <button class="btn btn-primary btn-lg mr-1 px-3" data-bs-toggle="modal" data-bs-target="#makeTheraLink" sec:authorize="hasAnyAuthority('t')">
                                                         <i class="fa-solid fa-pen-nib"></i>
                                                     </button>
                                                     <button class="btn btn-danger btn-lg mr-1 px-3 d-none d-md-inline-block">
                                                         <i class="fa-solid fa-eraser"></i>
                                                     </button>
-                                                    <!-- <button class="btn btn-light border btn-lg px-3"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-more-horizontal feather-lg">
-                                                            <circle cx="12" cy="12" r="1"></circle>
-                                                            <circle cx="19" cy="12" r="1"></circle>
-                                                            <circle cx="5" cy="12" r="1"></circle>
-                                                        </svg></button> -->
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="position-relative">
-                                            <div class="chat-messages p-4">
-                                                <div class="chat-message-right pb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:33 am</div>
-                                                        <input type="checkbox" class="chatDelete">
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                        <div class="font-weight-bold mb-1" style="font-weight: bolder;">You</div>
-                                                        Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-left pb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                             class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:34 am</div>
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                        <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                        Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-right mb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:35 am</div>
-                                                        <input type="checkbox" class="chatDelete">
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                        <div class="font-weight-bold mb-1">You</div>
-                                                        Cum ea graeci tractatos.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-left pb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                             class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:36 am</div>
+                                        <!--수정 삭제 버튼-->
 
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                        <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                        Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae
-                                                        commodo lectus mauris et velit.
-                                                        Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-left pb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                             class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:37 am</div>
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                        <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                        Cras pulvinar, sapien id vehicula aliquet, diam velit elementum orci.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-right mb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:38 am</div>
-                                                        <input type="checkbox" class="chatDelete">
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                        <div class="font-weight-bold mb-1">You</div>
-                                                        Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-left pb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                             class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:39 am</div>
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                        <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                        Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-right mb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:40 am</div>
-                                                        <input type="checkbox" class="chatDelete">
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                        <div class="font-weight-bold mb-1">You</div>
-                                                        Cum ea graeci tractatos.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-right mb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:41 am</div>
-                                                        <input type="checkbox" class="chatDelete">
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                        <div class="font-weight-bold mb-1">You</div>
-                                                        Morbi finibus, lorem id placerat ullamcorper, nunc enim ultrices massa, id
-                                                        dignissim metus urna eget purus.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-left pb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                             class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:42 am</div>
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                        <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                        Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae
-                                                        commodo lectus mauris et velit.
-                                                        Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-right mb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:43 am</div>
-                                                        <input type="checkbox" class="chatDelete">
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                        <div class="font-weight-bold mb-1">You</div>
-                                                        Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
-                                                    </div>
-                                                </div>
-                                                <div class="chat-message-left pb-4">
-                                                    <div>
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                             class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">2:44 am</div>
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                        <div class="font-weight-bold mb-1">Sharon Lessman</div>
-                                                        Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
-                                                    </div>
-                                                </div>
+
+                                        <div class="position-relative">
+                                            <div class="chat-messages p-4" id="chattingarea">
+                                                <!--chatting 공간-->
+
+                                                <!--chatting 공간-->
                                             </div>
                                         </div>
                                         <div class="flex-grow-0 py-3 px-4 border-top">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Type your message">
-                                                <button class="btn btn-primary">Send</button>
+                                                <input type="text" class="form-control" placeholder="Type your message" id="inputMessage">
+                                                <button class="btn btn-primary" type="button" id="sendingMessage">Send</button>
                                             </div>
                                         </div>
                                     </div>

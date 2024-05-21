@@ -10,7 +10,11 @@ spring:
   security:
     headers:
       content-security-policy: "script-src 'self' http://ajax.googleapis.com"
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+    mvc:
+      static-path-pattern: /static/**
 mybatis:
   mapper-locations: mappers/*.xml
 
