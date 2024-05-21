@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 
+import com.javaclass.psmc.theraLink.model.dto.MessageDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,5 +118,21 @@ public class TheraLinkController {
 
         return theraChat;
 
+    }
+
+    @PostMapping(value = "/theraLink/addMessage",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public TheraLinkForChatDTO makeChat(@RequestBody MessageDTO messageDTO,HttpSession session){
+        System.out.println("messageDTO = " + messageDTO);
+
+        messageDTO.setPmCode(((LoginUserDTO)session.getAttribute("auth")).getPmCode());
+        messageDTO.setTheraChatDate(LocalDateTime.now());
+        int result = userService.makeTheraChat(messageDTO);
+
+            TheraLinkForChatDTO theraLinkForChatDTO=userService.getTheraChatBytheraNo(messageDTO.getTheraNum());
+            theraLinkForChatDTO.setMe(messageDTO.getPmCode());
+
+
+            return theraLinkForChatDTO;
     }
 }

@@ -943,8 +943,15 @@
             e.pm_code = c.pm_code
         where
             l.theraLink_no = #{theraNum}
+        and
+            c.thera_chat_status='Y'
         order by
             c.thera_chat_board_date
 
     </select>
+
+    <insert id="makeTheraChat" parameterType="com.javaclass.psmc.theraLink.model.dto.MessageDTO">
+        insert thera_chat(theraLink_no,pm_code,thera_chat_content,thera_chat_board_date,thera_chat_status)
+        values(#{theraNum},#{pmCode},#{theraChatContent},#{theraChatDate},'Y')
+    </insert>
 </mapper>
