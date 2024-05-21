@@ -274,7 +274,7 @@
                         <td><input type="checkbox" name="postCheckbox" th:value="${board.mediNo}" onchange="toggleDeleteButton()"></td>
                         <td th:text="${board.mediNo}"></td>
                         <th>
-                            <a href="#!" th:text="${board.mediTitle}"></a>
+                            <a th:href="@{/doc/mediConnectDetail/{mediNo}(mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a>
                         </th>
                         <td th:text="${board.mediBoardDate}"></td>
                     </tr>

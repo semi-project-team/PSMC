@@ -63,4 +63,21 @@ public class MediConnectController {
 
     }
 
+    @GetMapping("/doc/mediConnectDetail/{mediNo}")
+    public String showBoardDetail(@PathVariable int mediNo, Model model, HttpSession session) {
+
+
+        LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
+        String pmCode = loginUserDTO.getPmCode();
+
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("pmCode",pmCode);
+        parameter.put("mediNo", mediNo);
+
+        List<ShowMediConnectDTO> boardDetail = mediConnectService.showBoardDetail(parameter);
+        model.addAttribute("boardDetail", boardDetail);
+
+        return "/doc/mediConnectDetail";
+    }
+
 }

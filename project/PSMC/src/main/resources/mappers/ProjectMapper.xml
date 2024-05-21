@@ -79,6 +79,26 @@
             a.medi_status = 'Y';
     </select>
 
+    <select id="showBoardDetail" resultMap="showMediConnectsResultMap" parameterType="hashmap">
+        select
+            a.medi_no,
+            a.medi_title,
+            a.medi_content,
+            a.medi_board_date,
+            b.pm_code
+        from
+            medi_connect a
+        join
+            create_project b on a.project_no = b.project_no
+        where
+            b.pm_code = #{pmCode}
+            and
+            a.medi_no = #{mediNo}
+            and
+            a.medi_status = 'Y';
+
+    </select>
+
 
     <update id="deleteBoard" parameterType="hashmap">
         update
