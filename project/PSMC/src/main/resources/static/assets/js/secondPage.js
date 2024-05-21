@@ -4,36 +4,39 @@ console.table(checkDelete);
 
 const deleteButton = document.getElementById('deleteButton');
 const param = new URLSearchParams();
-deleteButton.addEventListener('click',e=>{
-    const checkbox = [];
-    if(checkDelete.length>0) {
-        checkDelete.forEach(d => {
-            if (d.checked) {
-                param.append("theraNo", d.className.split('-')[1]);
 
-            }
-        })
+if(deleteButton!=null) {
+    deleteButton.addEventListener('click', e => {
+        const checkbox = [];
+        if (checkDelete.length > 0) {
+            checkDelete.forEach(d => {
+                if (d.checked) {
+                    param.append("theraNo", d.className.split('-')[1]);
 
-        const queryString = param.toString();
+                }
+            })
 
-        console.log(queryString);
+            const queryString = param.toString();
 
-
-        const nowPage = window.location.href;
-
+            console.log(queryString);
 
 
-        window.location.replace(`${nowPage}/deleteTheraLink?${queryString}`);
-    }
-})
+            const nowPage = window.location.href;
 
-const $blog = document.querySelectorAll('.blogPage');
+
+            window.location.replace(`${nowPage}/deleteTheraLink?${queryString}`);
+        }
+    })
+}
+
+const $blog = document.getElementsByClassName('blogPage');
+const $bloglist = [...$blog];
 const $sendingMessage =document.getElementById('sendingMessage');
 const $inputMessage = document.getElementById('inputMessage');
-$blog.forEach(b=>{
+$bloglist.forEach(b=>{
 
     b.addEventListener('click',e=>{
-        const theraLinkNo = b.querySelector('[class^=delete-]').classList.toString().split("-")[1];
+        const theraLinkNo = e.currentTarget.querySelector('[class^=delete-]').classList.toString().split("-")[1];
 
         console.log("theraLinkNo 잘 왔는가"+theraLinkNo);
 
@@ -51,42 +54,65 @@ $blog.forEach(b=>{
                 console.table(data);
 
 
-                makeChatting(data);
+                makeChatting(data,theraLinkNo);
 
 
+                console.log('theraLinkNo 바꼈겠지'+theraLinkNo);
 
 
 
             })
 
 
-        $sendingMessage.addEventListener('click',e=>{
-            if($inputMessage.value){
-                const message =$inputMessage.value;
-                fetch("/theraLink/addMessage",{
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        theraNum: theraLinkNo,
-                        theraChatContent: message
-
-                    })
-                }).then(res=>res.json())
-                    .then(data=>{
-                        console.log('업데이트 잘됬는가?')
-                        console.table(data);
-                        makeChatting(data);
-                    })
-            }
-        })
 
 
     })
 })
 
-function makeChatting(data){
+$sendingMessage.addEventListener('click',e=>{
+
+    console.log('메세지 보낼거냐')
+    if($inputMessage.value){
+        console.log('인풋값이 있네');
+        const theraNumber = $sendingMessage.value;
+        sendingMessage(theraNumber);
+    }
+})
+
+function sendingMessage(theraLinkNo){
+
+
+
+            console.log("theraLinkNo 이 안넘오오나"+theraLinkNo)
+            const message =$inputMessage.value;
+            fetch("/theraLink/addMessage",{
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    theraNum: theraLinkNo,
+                    theraChatContent: message
+
+                })
+            }).then(res=>res.json())
+                .then(data=>{
+                    console.log('업데이트 잘됬는가?')
+                    console.table(data);
+                    makeChatting(data,theraLinkNo);
+
+                });
+
+            $inputMessage.value='';
+
+
+
+
+
+
+}
+
+function makeChatting(data,theraLinkNo){
 
     const $theraLinkTitle = document.getElementById('theraLinkTitle');
     const $theraLinkContents = document.getElementById('theraLinkContents');
@@ -97,16 +123,20 @@ function makeChatting(data){
     $theraLinkContents.textContent=data.theraContents;
 
 
-    data.theraChatForBlogDTOS.forEach(t=>{
-        if(t.pmCode===pmCode){
-            console.log('나다');
+    $sendingMessage.value='';
+    $sendingMessage.value = theraLinkNo;
+    if(data.theraChatForBlogDTOS!=null) {
+        data.theraChatForBlogDTOS.forEach(t => {
             const date = t.theraChatBoardDate.toString().split("T")
             const day = date[0];
             const time = date[1];
-
             const $chat = document.createElement('div');
-            $chat.classList.add('chat-message-right','pb-4');
-            $chat.innerHTML=`<div>
+            if (t.pmCode === pmCode) {
+                console.log('나다');
+
+
+                $chat.classList.add('chat-message-right', 'pb-4');
+                $chat.innerHTML = `<div>
                                              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                              <input type="checkbox" class="chatDelete">
@@ -115,17 +145,17 @@ function makeChatting(data){
                                               <div class="font-weight-bold mb-1" style="font-weight: bolder;">You</div>
                                                   ${t.theraChatContent}
                                           </div>`
-            $chattingarea.appendChild($chat);
 
-        }else{
-            console.log('나 아니다');
-            const date = t.theraChatBoardDate.toString().split("T")
-            const day = date[0];
-            const time = date[1];
 
-            const $chat =document.createElement('div');
-            $chat.classList.add('chat-message-left','pb-4');
-            $chat.innerHTML=`<div>
+            } else {
+                console.log('나 아니다');
+                const date = t.theraChatBoardDate.toString().split("T")
+                const day = date[0];
+                const time = date[1];
+
+
+                $chat.classList.add('chat-message-left', 'pb-4');
+                $chat.innerHTML = `<div>
                                             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                          </div>
@@ -134,8 +164,12 @@ function makeChatting(data){
                                                 ${t.theraChatContent}
                                          </div>`
 
+
+            }
             $chattingarea.appendChild($chat);
-        }
-    })
+        })
+    }
+
+
 
 }
