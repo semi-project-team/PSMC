@@ -189,8 +189,9 @@ i{
 
 .commentSpace {
     grid-area: commenta;
-    background-color: rgb(3, 61, 94);o
+    background-color: rgb(3, 61, 94);
 }
+
 .right-asideSpace {
     grid-area: right-asidea;
     background-color: white;
