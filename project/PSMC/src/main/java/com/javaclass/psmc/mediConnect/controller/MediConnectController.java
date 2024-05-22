@@ -1,5 +1,6 @@
 package com.javaclass.psmc.mediConnect.controller;
 
+import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
 import com.javaclass.psmc.mediConnect.model.service.MediConnectService;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -28,7 +29,7 @@ public class MediConnectController {
         this.mediConnectService = mediConnectService;
     }
 
-    @GetMapping("/doc/mediConnect/{projectNo}")
+    @GetMapping("/medi/mediConnect/{projectNo}")
     public String mediConnectPage(@PathVariable int projectNo, Model model, HttpSession session) {
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
@@ -43,7 +44,7 @@ public class MediConnectController {
         session.setAttribute("projectNo",projectNo);
         model.addAttribute("boards", boards);
 
-        return "/doc/mediConnect";
+        return "/medi/mediConnect";
     }
 
     @PostMapping("/deleteBtn")
@@ -59,25 +60,30 @@ public class MediConnectController {
         int projectNo = (int) session.getAttribute("projectNo");
         int result =mediConnectService.deleteBoard(paramPost);
 
-        return "redirect:/doc/mediConnect/"+projectNo;
+        return "redirect:/medi/mediConnect/"+projectNo;
 
     }
 
-    @GetMapping("/doc/mediConnectDetail/{mediNo}")
+    @GetMapping("/medi/mediConnectDetail/{mediNo}")
     public String showBoardDetail(@PathVariable int mediNo, Model model, HttpSession session) {
 
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
 
+        int projectNo = (int) session.getAttribute("projectNo");
+
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("pmCode",pmCode);
         parameter.put("mediNo", mediNo);
+        parameter.put("projectNo", projectNo);
 
-        List<ShowMediConnectDTO> boardDetail = mediConnectService.showBoardDetail(parameter);
-        model.addAttribute("boardDetail", boardDetail);
+        List<ShowMediConnectDTO> mediConnect = mediConnectService.showBoardDetail(parameter);
+        List<ShowAllProjectsDTO> patient = mediConnectService.showPatientDetail(parameter);
+        model.addAttribute("boardDetail", mediConnect);
+        model.addAttribute("patientDetail", patient);
 
-        return "/doc/mediConnectDetail";
+        return "/medi/mediConnectDetail";
     }
 
 }
