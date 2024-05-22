@@ -63,11 +63,10 @@
         </div>
 
         <section class="notice">
-            <div class="page-title">
-                <div class="container">
-                    <h3>MediConnect</h3>
-                </div>
-            </div>
+            <!-- <div class="page-title">
+                 <div class="container">
+                </div> -->
+            </div> 
         
             <!-- board seach area -->
             <div id="board-search">
@@ -75,10 +74,12 @@
                     <div class="search-window">
                         <form action="">
                             <div class="search-wrap d-flex">
-                                <label for="search" class="blind">게시판 내용 검색</label>
                                 <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
                                 <button type="submit" class="btn btn-dark">검색</button>
                             </div>
+                            <div class="form-container">
+                                <button type="button" class="btn btn-light">작성하기</button>
+                              </div>
                         </form>
                         <form action="">
                             <div class="delete-btn" id="delete-btn">
@@ -92,6 +93,7 @@
             <!-- board list area -->
             <div id="board-list">
                 <div class="container">
+                    <div class="boxxx">
                     <table class="board-table">
                         <thead>
                         <tr>
@@ -126,6 +128,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         

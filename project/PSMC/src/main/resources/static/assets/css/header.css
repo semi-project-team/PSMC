@@ -23,7 +23,7 @@
 #headerline {
 
     width: 80vw; /* 선의 길이를 늘림 */
-    height: 1.5px; /* 선의 높이 */
+    /*height: 0.px; */
     border-radius: 0.5px;
     background-color: rgb(3, 61, 94);
 
