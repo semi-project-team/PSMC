@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class TheraLinkController {
@@ -112,10 +113,13 @@ public class TheraLinkController {
         TheraLinkForChatDTO theraChat = userService.getTheraChatBytheraNo(theraNo);
 
 
-        String pmCode = ((LoginUserDTO)session.getAttribute("auth")).getPmCode();
-        theraChat.setMe(pmCode);
-        System.out.println("theraChat = " + theraChat);
+        System.out.println(theraChat.getTheraTitle());
+        if(!Objects.isNull(theraChat)) {
+            String pmCode = ((LoginUserDTO) session.getAttribute("auth")).getPmCode();
+            theraChat.setMe(pmCode);
+            System.out.println("theraChat = " + theraChat);
 
+        }
         return theraChat;
 
     }
@@ -132,6 +136,7 @@ public class TheraLinkController {
             TheraLinkForChatDTO theraLinkForChatDTO=userService.getTheraChatBytheraNo(messageDTO.getTheraNum());
             theraLinkForChatDTO.setMe(messageDTO.getPmCode());
 
+        System.out.println("theraLinkForChatDTO 왜 두개가 나오지 = " + theraLinkForChatDTO);
 
             return theraLinkForChatDTO;
     }
