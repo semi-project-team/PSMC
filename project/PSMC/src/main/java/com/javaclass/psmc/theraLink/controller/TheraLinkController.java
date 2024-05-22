@@ -17,9 +17,11 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -137,7 +139,7 @@ public class TheraLinkController {
             TheraLinkForChatDTO theraLinkForChatDTO=userService.getTheraChatBytheraNo(messageDTO.getTheraNum());
             theraLinkForChatDTO.setMe(messageDTO.getPmCode());
 
-        System.out.println("theraLinkForChatDTO 왜 두개가 나오지 = " + theraLinkForChatDTO);
+
 
             return theraLinkForChatDTO;
     }
@@ -164,4 +166,19 @@ public class TheraLinkController {
 
         return theraLinkForChatDTO;
     }
+
+
+    @PostMapping("/theraLink/theraUpload")
+    public String fileUpload(@RequestParam List<MultipartFile> images,@RequestParam String title,@RequestParam String theraLinkContent){
+        for(MultipartFile i : images){
+            System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
+        }
+
+
+        System.out.println("title = " + title);
+
+        System.out.println("theraLinkContent = " + theraLinkContent);
+        return "redirect:/theraLink";
+    }
+
 }

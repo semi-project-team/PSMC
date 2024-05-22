@@ -238,6 +238,7 @@
     <!-- theraLink 생성용 모달 -->
     <div class="modal fade" id="makeTheraLink" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 50vw;">
+
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5">TheraLink</h1>
@@ -247,27 +248,30 @@
                     <form method="post" name="form-example-2" id="form-example-2" enctype="multipart/form-data">
 
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control" id="title" placeholder="title">
+                            <input type="text" class="form-control" id="title" placeholder="title" name="title">
                             <label for="title">Title</label>
                         </div>
 
                         <div class="form-floating mb-4">
-                            <textarea class="form-control" placeholder="Contents" id="TheraLink-contents" style="min-height: 30vh;"></textarea>
+                            <textarea class="form-control" placeholder="Contents" id="TheraLink-contents" style="min-height: 30vh;" name="theraLinkContent"></textarea>
                             <label for="theraLink-contents">Contents</label>
                         </div>
 
                         <!-- 파일업로드 -->
                         <div class="input-field mb-4">
                             <label class="active">Photos</label>
-                            <div class="input-images-2" style="padding-top: .5rem;"></div>
+                            <div class="input-images" style="padding-top: .5rem;"></div>
                         </div>
                         <!-- 파일업로드 -->
+                        <div class="text-end">
+                            <button class="btn btn-primary">Upload</button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Upload</button>
-                </div>
+
+
             </div>
+
         </div>
     </div>
     <!-- theraLink용 모달 -->
@@ -285,46 +289,102 @@
     <script src="/assets/js/image-uploader.min.js"></script>
     <script>
         $(function () {
-            let preloaded = [];
 
-            $('.input-images-2').imageUploader({
-                imagesInputName: 'photos',
-                maxSize: 2 * 1024 * 1024, // 2mb
-                maxFiles: 10              // 10ea
-            });
 
+            $('.input-images').imageUploader();
+
+            const $submitButton = document.getElementById('uploadButton');
             $('form').on('submit', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
 
-                let $form = $(this)
-                // ,$modal = $('.modal');
+                let formData = new FormData(document.getElementById('form-example-2'));
 
-                // $modal.find('#display-name span').text($form.find('input[id^="name"]').val());
-                // $modal.find('#display-description span').text($form.find('input[id^="description"]').val());
+                formData.append('title',$('#title').val());
+                formData.append('contetns',$('#TheraLink-contents').val())
+                let inputElements = document.querySelectorAll('.image-uploader input[type="file"]');
+                inputElements.forEach(inputElements=>{
+                    let files = inputElements.files;
+                    for(let i = 0;i<files.length;i++){
+                        formData.append('images',files[i]);
+                    }
+                })
 
+                $.ajax({
+                    url: '/theraLink/theraUpload',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log('성공이요');
+
+                        const nowPage = window.location.href;
+                        window.location.href=nowPage;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('실패요');
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+                // Get some vars
+                let $form = $(this),
+                    $modal = $('.modal');
+
+                // Set name and description
+                $modal.find('#display-name span').text($form.find('input[id^="name"]').val());
+                $modal.find('#display-description span').text($form.find('input[id^="description"]').val());
+
+                // Get the input file
                 let $inputImages = $form.find('input[name^="images"]');
                 if (!$inputImages.length) {
-                    $inputImages = $form.find('input[name^="photos"]');
+                    $inputImages = $form.find('input[name^="photos"]')
                 }
 
+
+
+                // Get the new files names
                 let $fileNames = $('<ul>');
                 for (let file of $inputImages.prop('files')) {
                     $('<li>', {text: file.name}).appendTo($fileNames);
                 }
 
-                // $modal.find('#display-new-images').html($fileNames.html());
+                // Set the new files names
+                $modal.find('#display-new-images').html($fileNames.html());
 
+                // Get the preloaded inputs
                 let $inputPreloaded = $form.find('input[name^="old"]');
                 if ($inputPreloaded.length) {
+
+                    // Get the ids
                     let $preloadedIds = $('<ul>');
                     for (let iP of $inputPreloaded) {
                         $('<li>', {text: '#' + iP.value}).appendTo($preloadedIds);
                     }
-                    // $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
+
+                    // Show the preloadede info and set the list of ids
+                    $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
+
                 } else {
-                    // $modal.find('#display-preloaded-images').hide();
+
+                    // Hide the preloaded info
+                    $modal.find('#display-preloaded-images').hide();
+
                 }
+
+                // Show the modal
+                $modal.css('visibility', 'visible');
 
                 // $modal.css('visibility', 'visible');
             });
