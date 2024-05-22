@@ -953,4 +953,17 @@
         insert thera_chat(theraLink_no,pm_code,thera_chat_content,thera_chat_board_date,thera_chat_status)
         values(#{theraNum},#{pmCode},#{theraChatContent},#{theraChatDate},'Y')
     </insert>
+
+
+    <update id="deleteChat" parameterType="com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO">
+        update
+            thera_chat
+        set
+            thera_chat_status = 'N'
+        where
+            thera_chat_no in
+        <foreach collection="deleteNum" item="theraNum" open="(" separator="," close=")">
+            #{theraNum}
+        </foreach>
+    </update>
 </mapper>
