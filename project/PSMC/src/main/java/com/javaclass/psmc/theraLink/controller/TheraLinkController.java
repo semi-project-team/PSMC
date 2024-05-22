@@ -1,33 +1,43 @@
 package com.javaclass.psmc.theraLink.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 
+import com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO;
+import com.javaclass.psmc.theraLink.model.dto.MessageDTO;
+import com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class TheraLinkController {
 
     private final UserService userService;
+    private final ObjectMapper objectMapper;
 
     private MakePhoneNumber makePhoneNumber=new MakePhoneNumber();
     @Autowired
-    public TheraLinkController(UserService userService){
+    public TheraLinkController(UserService userService,ObjectMapper objectMapper){
 
+        this.objectMapper=objectMapper;
         this.userService = userService;
     }
 
@@ -75,5 +85,83 @@ public class TheraLinkController {
         model.addAttribute("theraLink",theraLinkWithMonthDTOS);
 
         return "/theraLink/secondPage";
+    }
+
+
+    @GetMapping("/theraLink/open/{projectNo}/deleteTheraLink")
+    public String deleteTheraLink(@RequestParam List<Integer> theraNo,@PathVariable int projectNo){
+
+
+        System.out.println("왜 여기로 안오지");
+        System.out.println("theraNo = " + theraNo);
+
+        Map<String,List<Integer>> theraNos = new HashMap<>();
+        theraNos.put("thera",theraNo);
+        int result = userService.deleteThearLink(theraNos);
+
+        return "redirect:/theraLink/open/"+projectNo;
+    }
+
+    @PostMapping(value = "/theraLink/blog",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public TheraLinkForChatDTO showblog(@RequestBody String theraNum,HttpSession session) throws JsonProcessingException {
+        System.out.println("theraNum = " + theraNum);
+
+        JsonNode jsonNode = objectMapper.readTree(theraNum);
+        String theraNo = jsonNode.get("theraNum").asText();
+
+
+        TheraLinkForChatDTO theraChat = userService.getTheraChatBytheraNo(theraNo);
+
+
+        System.out.println(theraChat.getTheraTitle());
+        if(!Objects.isNull(theraChat)) {
+            String pmCode = ((LoginUserDTO) session.getAttribute("auth")).getPmCode();
+            theraChat.setMe(pmCode);
+            System.out.println("theraChat = " + theraChat);
+
+        }
+        return theraChat;
+
+    }
+
+    @PostMapping(value = "/theraLink/addMessage",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public TheraLinkForChatDTO makeChat(@RequestBody MessageDTO messageDTO,HttpSession session){
+        System.out.println("messageDTO = " + messageDTO);
+
+        messageDTO.setPmCode(((LoginUserDTO)session.getAttribute("auth")).getPmCode());
+        messageDTO.setTheraChatDate(LocalDateTime.now());
+        int result = userService.makeTheraChat(messageDTO);
+
+            TheraLinkForChatDTO theraLinkForChatDTO=userService.getTheraChatBytheraNo(messageDTO.getTheraNum());
+            theraLinkForChatDTO.setMe(messageDTO.getPmCode());
+
+        System.out.println("theraLinkForChatDTO 왜 두개가 나오지 = " + theraLinkForChatDTO);
+
+            return theraLinkForChatDTO;
+    }
+
+    @PostMapping(value = "/theraLink/deleteChating",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public TheraLinkForChatDTO deleteChat(@RequestBody ChatDeleteDTO chatDeleteDTO,HttpSession session){
+
+        System.out.println("chatDeleteDTO = " + chatDeleteDTO);
+
+        int result = userService.deleteChat(chatDeleteDTO);
+
+        TheraLinkForChatDTO theraLinkForChatDTO = userService.getTheraChatBytheraNo(chatDeleteDTO.getTheraNum());
+
+        if(!Objects.isNull(theraLinkForChatDTO)) {
+            String pmCode = ((LoginUserDTO) session.getAttribute("auth")).getPmCode();
+            theraLinkForChatDTO.setMe(pmCode);
+            System.out.println("theraChat = " + theraLinkForChatDTO);
+
+        }
+
+
+
+
+        return theraLinkForChatDTO;
     }
 }

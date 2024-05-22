@@ -5,6 +5,9 @@ import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
 import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
 import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.mainPage.model.dto.*;
+import com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO;
+import com.javaclass.psmc.theraLink.model.dto.MessageDTO;
+import com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO;
 import com.javaclass.psmc.user.model.dao.UserMapper;
 
@@ -226,6 +229,26 @@ public class UserService {
     public List<TheraLinkWithMonthDTO> findAllTheraLinkByProjectNo(int projectNo) {
 
         return userMapper.findAllTheraLinkByProjectNo(projectNo);
+    }
+
+    public int deleteThearLink(Map<String, List<Integer>> theraNos) {
+
+        return userMapper.deleteTheraLink(theraNos);
+    }
+
+    public TheraLinkForChatDTO getTheraChatBytheraNo(String theraNum) {
+
+        return userMapper.getTheraChatByTheraNo(theraNum);
+    }
+
+    public int makeTheraChat(MessageDTO messageDTO) {
+
+        return userMapper.makeTheraChat(messageDTO);
+    }
+
+    public int deleteChat(ChatDeleteDTO chatDeleteDTO) {
+
+        return userMapper.deleteChat(chatDeleteDTO);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
