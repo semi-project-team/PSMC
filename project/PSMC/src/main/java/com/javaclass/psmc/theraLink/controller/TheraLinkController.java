@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
 import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 
+import com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO;
 import com.javaclass.psmc.theraLink.model.dto.MessageDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO;
 import com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO;
@@ -139,5 +140,28 @@ public class TheraLinkController {
         System.out.println("theraLinkForChatDTO 왜 두개가 나오지 = " + theraLinkForChatDTO);
 
             return theraLinkForChatDTO;
+    }
+
+    @PostMapping(value = "/theraLink/deleteChating",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public TheraLinkForChatDTO deleteChat(@RequestBody ChatDeleteDTO chatDeleteDTO,HttpSession session){
+
+        System.out.println("chatDeleteDTO = " + chatDeleteDTO);
+
+        int result = userService.deleteChat(chatDeleteDTO);
+
+        TheraLinkForChatDTO theraLinkForChatDTO = userService.getTheraChatBytheraNo(chatDeleteDTO.getTheraNum());
+
+        if(!Objects.isNull(theraLinkForChatDTO)) {
+            String pmCode = ((LoginUserDTO) session.getAttribute("auth")).getPmCode();
+            theraLinkForChatDTO.setMe(pmCode);
+            System.out.println("theraChat = " + theraLinkForChatDTO);
+
+        }
+
+
+
+
+        return theraLinkForChatDTO;
     }
 }

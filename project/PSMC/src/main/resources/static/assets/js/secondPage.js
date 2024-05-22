@@ -7,7 +7,7 @@ const param = new URLSearchParams();
 
 if(deleteButton!=null) {
     deleteButton.addEventListener('click', e => {
-        const checkbox = [];
+
         if (checkDelete.length > 0) {
             checkDelete.forEach(d => {
                 if (d.checked) {
@@ -53,6 +53,8 @@ $bloglist.forEach(b=>{
                 console.log('잘받았습니다')
                 console.table(data);
 
+                $chatDeleteButton.value="";
+                $chatDeleteButton.value = theraLinkNo;
 
                 makeChatting(data,theraLinkNo);
 
@@ -127,19 +129,20 @@ function makeChatting(data,theraLinkNo){
     $sendingMessage.value = theraLinkNo;
     if(data.theraChatForBlogDTOS!=null) {
         data.theraChatForBlogDTOS.forEach(t => {
-            const date = t.theraChatBoardDate.toString().split("T")
-            const day = date[0];
-            const time = date[1];
-            const $chat = document.createElement('div');
-            if (t.pmCode === pmCode) {
-                console.log('나다');
+            if(t.theraChatStatus==='Y') {
+                const date = t.theraChatBoardDate.toString().split("T")
+                const day = date[0];
+                const time = date[1];
+                const $chat = document.createElement('div');
+                if (t.pmCode === pmCode) {
+                    console.log('나다');
 
 
-                $chat.classList.add('chat-message-right', 'pb-4');
-                $chat.innerHTML = `<div>
+                    $chat.classList.add('chat-message-right', 'pb-4');
+                    $chat.innerHTML = `<div>
                                              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
-                                             <input type="checkbox" class="chatDelete">
+                                             <input type="checkbox" class="chatDelete" value="${t.theraChatNo}">
                                           </div>
                                           <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                               <div class="font-weight-bold mb-1" style="font-weight: bolder;">You</div>
@@ -147,15 +150,15 @@ function makeChatting(data,theraLinkNo){
                                           </div>`
 
 
-            } else {
-                console.log('나 아니다');
-                const date = t.theraChatBoardDate.toString().split("T")
-                const day = date[0];
-                const time = date[1];
+                } else {
+                    console.log('나 아니다');
+                    const date = t.theraChatBoardDate.toString().split("T")
+                    const day = date[0];
+                    const time = date[1];
 
 
-                $chat.classList.add('chat-message-left', 'pb-4');
-                $chat.innerHTML = `<div>
+                    $chat.classList.add('chat-message-left', 'pb-4');
+                    $chat.innerHTML = `<div>
                                             <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                          </div>
@@ -165,11 +168,49 @@ function makeChatting(data,theraLinkNo){
                                          </div>`
 
 
+                }
+                $chattingarea.appendChild($chat);
             }
-            $chattingarea.appendChild($chat);
         })
+
+        $chattingarea.scrollTop=$chattingarea.scrollHeight;
     }
 
 
 
+
 }
+
+
+const $chatDeleteButton = document.getElementById('chatDeleteButton');
+
+$chatDeleteButton.addEventListener('click',e=>{
+    const chatDelete = document.querySelectorAll('.chatDelete');
+    const param = [];
+    chatDelete.forEach(d=>{
+        if(d.checked){
+            param.push(d.value);
+        }
+
+
+
+    })
+
+    const theraNum =$chatDeleteButton.value;
+    console.log(param);
+
+    fetch("/theraLink/deleteChating",{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            theraNum: theraNum,
+            deleteNum: param
+        })
+    }).then(res=>res.json())
+        .then(data=>{
+            console.table(data);
+            makeChatting(data,theraNum)
+        })
+})
