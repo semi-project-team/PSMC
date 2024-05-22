@@ -887,6 +887,7 @@
             a.project_no =#{projectNo}
         and
             a.thera_status ='Y'
+
         group by
             a.theraLink_no
         order by
@@ -955,15 +956,13 @@
     </insert>
 
 
-    <update id="deleteChat" parameterType="com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO">
-        update
+    <delete id="deleteChat" parameterType="com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO">
+        delete from
             thera_chat
-        set
-            thera_chat_status = 'N'
         where
             thera_chat_no in
         <foreach collection="deleteNum" item="theraNum" open="(" separator="," close=")">
             #{theraNum}
         </foreach>
-    </update>
+    </delete>
 </mapper>
