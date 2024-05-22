@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b96c7576-899c-4e9c-9658-34bf7178af5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/PSMC/src/main/resources/static/assets/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/PSMC/src/main/resources/static/assets/css/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/PSMC/src/main/resources/static/assets/css/mypage.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/PSMC/src/main/resources/static/assets/css/mypage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/PSMC/src/main/resources/static/assets/css/nav.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/PSMC/src/main/resources/static/assets/css/nav.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/PSMC/src/main/resources/templates/common/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/PSMC/src/main/resources/templates/common/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/PSMC/src/main/resources/templates/common/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/PSMC/src/main/resources/templates/common/nav.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,20 +34,20 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "#150 on css/allllll",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/seungyoun-cho/Desktop/psmc",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/seungyoun-cho/Desktop/psmc&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -72,6 +67,8 @@
       <workItem from="1715241028286" duration="4000" />
       <workItem from="1716171257656" duration="267000" />
       <workItem from="1716184637715" duration="620000" />
+      <workItem from="1716273519557" duration="154000" />
+      <workItem from="1716274668760" duration="4000" />
     </task>
     <servers />
   </component>
