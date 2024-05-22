@@ -1,6 +1,7 @@
 package com.javaclass.psmc.mediConnect.model.service;
 
 import com.javaclass.psmc.mediConnect.model.dao.ProjectsMapper;
+import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class MediConnectService {
     public List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter) {
 
         return projectMapper.showBoardDetail(parameter);
+    }
+
+    public List<ShowAllProjectsDTO> showPatientDetail(Map<String, Object> parameter) {
+
+        return projectMapper.showPatientDetail(parameter);
     }
 }

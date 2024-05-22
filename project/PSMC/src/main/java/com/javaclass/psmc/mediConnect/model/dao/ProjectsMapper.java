@@ -19,4 +19,8 @@ public interface ProjectsMapper {
     int deleteProjects(Map<String, List<Integer>> projectParam);
 
     List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
+
+    List<ShowAllProjectsDTO> showPatientDetail(Map<String, Object> parameter);
+
+//    List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
 }

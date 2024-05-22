@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.javaclass.psmc.mediConnect.model.dao.ProjectsMapper">
+
     <resultMap id="patientResultMap" type="com.javaclass.psmc.common.model.dto.PatientDTO">
         <id property="patientNo" column="patient_no"/>
         <result property="patientName" column="patient_name"/>
@@ -27,6 +28,33 @@
         <association property="patientDTO" resultMap="patientResultMap"/>
         <association property="createProjectDTO" resultMap="createProjectResultMap"/>
     </resultMap>
+
+    <resultMap id="memberRegistResultMap" type="com.javaclass.psmc.common.model.dto.MemberRegistDTO">
+        <id property="registNo" column="regist_no"/>
+        <result property="id" column="id"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="birth" column="birth"/>
+        <result property="employeeStatus" column="employee_status"/>
+        <result property="role" column="role"/>
+        <result property="pmCode" column="pm_code"/>
+    </resultMap>
+
+    <resultMap id="employeeResultMap" type="com.javaclass.psmc.common.model.dto.EmployeeDTO">
+        <id property="pmCode" column="pm_code"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="positionCode" column="position_code"/>
+        <result property="gender" column="gender"/>
+        <result property="officeNum" column="office_num"/>
+        <result property="fieldCode" column="field_code"/>
+        <result property="picture" column="picture"/>
+    </resultMap>
+
 
     <select id="showAllProjects" resultMap="showAllProjectsResultMap" parameterType="string">
         select
@@ -79,27 +107,6 @@
             a.medi_status = 'Y';
     </select>
 
-    <select id="showBoardDetail" resultMap="showMediConnectsResultMap" parameterType="hashmap">
-        select
-            a.medi_no,
-            a.medi_title,
-            a.medi_content,
-            a.medi_board_date,
-            b.pm_code
-        from
-            medi_connect a
-        join
-            create_project b on a.project_no = b.project_no
-        where
-            b.pm_code = #{pmCode}
-            and
-            a.medi_no = #{mediNo}
-            and
-            a.medi_status = 'Y';
-
-    </select>
-
-
     <update id="deleteBoard" parameterType="hashmap">
         update
             medi_connect
@@ -121,5 +128,30 @@
             #{projectParam}
         </foreach>
     </update>
+
+    <select id="showBoardDetail" resultMap="showMediConnectsResultMap" parameterType="hashmap">
+        select
+            medi_title,
+            medi_content,
+            medi_board_date
+        from
+            medi_connect
+        where
+            medi_no = #{mediNo}
+    </select>
+    
+    <select id="showPatientDetail" resultMap="showAllProjectsResultMap" parameterType="hashmap">
+        select
+            a.patient_no,
+            a.patient_name,
+            a.age,
+            a.gender
+        from
+            patient a
+        join
+            project b on a.patient_no = b.patient_no
+        where
+            b.project_no = #{projectNo}
+    </select>
 
 </mapper>

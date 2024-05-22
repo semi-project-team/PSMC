@@ -9,20 +9,18 @@ public class TheraChatDTO {
 
     private int theraChatNo;
     private int theraLinkNo;
-    private String pmCode;
+    private int projectNo;
     private String theraChatContent;
     private LocalDateTime theraChatBoardDate;
-    private String theraChatStatus;
 
     public TheraChatDTO(){}
 
-    public TheraChatDTO(int theraChatNo, int theraLinkNo, String pmCode, String theraChatContent, LocalDateTime theraChatBoardDate, String theraChatStatus) {
+    public TheraChatDTO(int theraChatNo, int theraLinkNo, int projectNo, String theraChatContent, LocalDateTime theraChatBoardDate) {
         this.theraChatNo = theraChatNo;
         this.theraLinkNo = theraLinkNo;
-        this.pmCode = pmCode;
+        this.projectNo = projectNo;
         this.theraChatContent = theraChatContent;
         this.theraChatBoardDate = theraChatBoardDate;
-        this.theraChatStatus = theraChatStatus;
     }
 
     public int getTheraChatNo() {
@@ -41,12 +39,12 @@ public class TheraChatDTO {
         this.theraLinkNo = theraLinkNo;
     }
 
-    public String getPmCode() {
-        return pmCode;
+    public int getProjectNo() {
+        return projectNo;
     }
 
-    public void setPmCode(String pmCode) {
-        this.pmCode = pmCode;
+    public void setProjectNo(int projectNo) {
+        this.projectNo = projectNo;
     }
 
     public String getTheraChatContent() {
@@ -65,23 +63,14 @@ public class TheraChatDTO {
         this.theraChatBoardDate = theraChatBoardDate;
     }
 
-    public String getTheraChatStatus() {
-        return theraChatStatus;
-    }
-
-    public void setTheraChatStatus(String theraChatStatus) {
-        this.theraChatStatus = theraChatStatus;
-    }
-
     @Override
     public String toString() {
         return "TheraChatDTO{" +
                 "theraChatNo=" + theraChatNo +
                 ", theraLinkNo=" + theraLinkNo +
-                ", pmCode='" + pmCode + '\'' +
+                ", projectNo=" + projectNo +
                 ", theraChatContent='" + theraChatContent + '\'' +
                 ", theraChatBoardDate=" + theraChatBoardDate +
-                ", theraChatStatus='" + theraChatStatus + '\'' +
                 '}';
     }
 }

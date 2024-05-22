@@ -35,7 +35,7 @@ public class ProjectsController {
         List<ShowAllProjectsDTO> projects = projectsService.showAllProjects(pmCode);
         session.setAttribute("projectList", projects);
 
-        return "/doc/projects";
+        return "/medi/projects";
     }
 
     @GetMapping(value = "/requestProject", produces = "application/json; charset=UTF-8")

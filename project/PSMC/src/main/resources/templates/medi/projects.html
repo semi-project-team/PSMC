@@ -90,11 +90,16 @@
         })
 
         function displayProjects(data) {
+            console.log("확인")
+            console.table(data);
             const projectListDiv = document.getElementById("projectList");
             data.forEach(project => {
+
+
+                console.log(project.patientDTO.patientName);
                 const projectDiv = document.createElement('a');
                 projectDiv.classList.add('project-card');
-                projectDiv.href = `/doc/mediConnect/${project.projectNo}`;
+                projectDiv.href = `/medi/mediConnect/${project.projectNo}`;
                 projectDiv.innerHTML = `
                     <input type="checkbox" name="projectCheckbox" value="${project.projectNo}" onchange="toggleDeleteButton()">
                     <h3><span id="nameSpan">${project.patientDTO.patientName}</span> <span id="nameValue">(만 ${project.patientDTO.age}세 ${project.patientDTO.gender})</span></h3>
