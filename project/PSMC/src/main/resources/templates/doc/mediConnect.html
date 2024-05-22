@@ -57,7 +57,8 @@
                         <td><input type="checkbox" name="postCheckbox" onchange="toggleDeleteButton()"></td>
                         <td>3</td>
                         <th>
-                            <a href="#!">[공지]000 환자 치료 시 주의할 점</a>
+                            <a th:href="@{/doc/mediConnectDetail/{mediNo}(mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a>
+
                         </th>
                         <td>2023.07.13</td>
                     </tr>
@@ -97,6 +98,9 @@
                 </div>
             </div>
         </div>
+        
+
+
     </div>
 </section>
 <script src="/assets/js/mediConnect.js"></script>
