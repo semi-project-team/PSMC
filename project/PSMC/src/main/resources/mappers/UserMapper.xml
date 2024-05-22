@@ -884,12 +884,86 @@
         on
             a.theraLink_no = b.theraLink_no
         where
-            project_no =#{projectNo}
+            a.project_no =#{projectNo}
+        and
+            a.thera_status ='Y'
         group by
             a.theraLink_no
         order by
-            thera_board_date desc;
+            thera_board_date desc
 
 
     </select>
+
+    <update id="deleteTheraLink" parameterType="hashmap">
+        update
+            thera_link
+        set
+            thera_status = 'N'
+        where
+            theraLink_no in
+        <foreach collection="thera" item="thera" open="(" separator="," close=")">
+            #{thera}
+        </foreach>
+
+    </update>
+
+
+    <resultMap id="theraChatForBlogMap" type="com.javaclass.psmc.theraLink.model.dto.TheraChatForBlogDTO">
+        <id property="theraChatNo" column="thera_chat_no"/>
+        <result property="theraLinkNo" column="theraLink_no"/>
+        <result property="pmCode" column="pm_code"/>
+        <result property="theraChatContent" column="thera_chat_content"/>
+        <result property="theraChatBoardDate" column="thera_chat_board_date"/>
+        <result property="theraChatStatus" column="thera_chat_status"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <resultMap id="theraChatByTheraLink" type="com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO">
+        <id property="theraLinkNo" column="theraLink_no"/>
+        <result  property="theraTitle" column="thera_title"/>
+        <result property="theraContents" column="thera_contents"/>
+        <collection property="theraChatForBlogDTOS" resultMap="theraChatForBlogMap"/>
+
+    </resultMap>
+    <select id="getTheraChatByTheraNo" resultMap="theraChatByTheraLink" parameterType="string">
+        select
+            c.*,
+            l.thera_title,
+            l.thera_contents,
+            l.theraLink_no,
+            e.name
+        from
+            thera_link l
+        left outer join
+            thera_chat c
+        on
+            l.theraLink_no = c.theraLink_no
+        left outer join
+            employee e
+        on
+            e.pm_code = c.pm_code
+        where
+            l.theraLink_no = #{theraNum}
+        order by
+            c.thera_chat_board_date
+
+    </select>
+
+    <insert id="makeTheraChat" parameterType="com.javaclass.psmc.theraLink.model.dto.MessageDTO">
+        insert thera_chat(theraLink_no,pm_code,thera_chat_content,thera_chat_board_date,thera_chat_status)
+        values(#{theraNum},#{pmCode},#{theraChatContent},#{theraChatDate},'Y')
+    </insert>
+
+
+    <update id="deleteChat" parameterType="com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO">
+        update
+            thera_chat
+        set
+            thera_chat_status = 'N'
+        where
+            thera_chat_no in
+        <foreach collection="deleteNum" item="theraNum" open="(" separator="," close=")">
+            #{theraNum}
+        </foreach>
+    </update>
 </mapper>

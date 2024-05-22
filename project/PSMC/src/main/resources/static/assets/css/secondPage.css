@@ -38,7 +38,7 @@ body{
 }
 
 .blog-post .blog-img .post-meta .read-more:hover {
-    color: #6dc77a !important;
+    color: blue!important;
 }
 
 .blog-post .content h1,
@@ -55,11 +55,11 @@ body{
 }
 
 .blog-post .content .title:hover {
-    color: #6dc77a !important;
+    color: blue !important;
 }
 
 .blog-post .content .author .name:hover {
-    color: #6dc77a !important;
+    color: blue !important;
 }
 
 .blog-post:hover {
