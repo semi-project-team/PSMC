@@ -12,15 +12,17 @@ public class TheraLinkForChatDTO {
     private String theraTitle;
     private String theraContents;
     private List<TheraChatForBlogDTO> theraChatForBlogDTOS;
+    private List<TheraLinkPhotoDTO> theraLinkPhotoDTOS;
 
     public  TheraLinkForChatDTO(){}
 
-    public TheraLinkForChatDTO(String me, int theraLinkNo, String theraTitle, String theraContents, List<TheraChatForBlogDTO> theraChatForBlogDTOS) {
+    public TheraLinkForChatDTO(String me, int theraLinkNo, String theraTitle, String theraContents, List<TheraChatForBlogDTO> theraChatForBlogDTOS, List<TheraLinkPhotoDTO> theraLinkPhotoDTOS) {
         this.me = me;
         this.theraLinkNo = theraLinkNo;
         this.theraTitle = theraTitle;
         this.theraContents = theraContents;
         this.theraChatForBlogDTOS = theraChatForBlogDTOS;
+        this.theraLinkPhotoDTOS = theraLinkPhotoDTOS;
     }
 
     public String getMe() {
@@ -63,6 +65,14 @@ public class TheraLinkForChatDTO {
         this.theraChatForBlogDTOS = theraChatForBlogDTOS;
     }
 
+    public List<TheraLinkPhotoDTO> getTheraLinkPhotoDTOS() {
+        return theraLinkPhotoDTOS;
+    }
+
+    public void setTheraLinkPhotoDTOS(List<TheraLinkPhotoDTO> theraLinkPhotoDTOS) {
+        this.theraLinkPhotoDTOS = theraLinkPhotoDTOS;
+    }
+
     @Override
     public String toString() {
         return "TheraLinkForChatDTO{" +
@@ -71,6 +81,7 @@ public class TheraLinkForChatDTO {
                 ", theraTitle='" + theraTitle + '\'' +
                 ", theraContents='" + theraContents + '\'' +
                 ", theraChatForBlogDTOS=" + theraChatForBlogDTOS +
+                ", theraLinkPhotoDTOS=" + theraLinkPhotoDTOS +
                 '}';
     }
 }
