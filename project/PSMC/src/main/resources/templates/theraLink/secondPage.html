@@ -47,7 +47,7 @@
                             <p class="text-muted mt-2" th:text="${thera.theraContents}"></p>
                             <div class="pt-3 mt-3 border-top d-flex">
                                 <div class="author mt-9">
-                                    <h6 class="mb-0"><input type="checkbox" th:class="|delete-${thera.theraLinkNo}|"> Delete</h6>
+                                    <h6 class="mb-0"><input type="checkbox" th:class="|delete-${thera.theraLinkNo}|" sec:authorize="hasAnyAuthority('t')" th:text="| DELETE|"></h6>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
         <div class="element-container">
 
 
-            <span class="float-element tooltip-left" data-bs-toggle="modal" data-bs-target="#makeTheraLink" style="cursor: pointer;">
+            <span class="float-element tooltip-left" data-bs-toggle="modal" data-bs-target="#makeTheraLink" style="cursor: pointer;" id="createTheraLink">
                 <i class="material-icons">chat</i>
             </span>
 
@@ -130,45 +130,20 @@
 
 
                                         <!--사진공간-->
-                                        <div id="carouselExampleDark" class="carousel carousel-dark slide" style="min-height: 40vh; width: 100%;">
-                                            <div class="carousel-indicators">
-                                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
-                                                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                                                        aria-label="Slide 2"></button>
-                                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                                                        aria-label="Slide 3"></button>
+                                        <div id="carouselExample" class="carousel slide" style="min-height: 40vh; width: 100%;" >
+                                            <div class="carousel-inner" id="picturearea">
+
                                             </div>
-                                            <div class="carousel-inner">
-                                                <div class="carousel-item active" data-bs-interval="10000" style="max-height: 40vh;">
-                                                    <img src="https://www.bootdey.com/image/350x380/6495ED/000000" class="d-block w-100" alt="...">
-                                                </div>
-                                                <div class="carousel-item" data-bs-interval="2000">
-                                                    <img src="https://www.bootdey.com/image/350x380/6495ED/000000" class="d-block w-100" alt="...">
-                                                    <div class="carousel-caption d-none d-md-block">
-                                                        <h5>Second slide label</h5>
-                                                        <p>Some representative placeholder content for the second slide.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="https://www.bootdey.com/image/350x380/6495ED/000000" class="d-block w-100" alt="...">
-                                                    <div class="carousel-caption d-none d-md-block">
-                                                        <h5>Third slide label</h5>
-                                                        <p>Some representative placeholder content for the third slide.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                                                    data-bs-slide="prev">
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Previous</span>
                                             </button>
-                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                                                    data-bs-slide="next">
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Next</span>
                                             </button>
                                         </div>
+
                                         <!--사진공간-->
 
                                         <!--글자공간-->
@@ -197,7 +172,7 @@
 
 
                                                 <div>
-                                                    <button class="btn btn-primary btn-lg mr-1 px-3" data-bs-toggle="modal" data-bs-target="#makeTheraLink" sec:authorize="hasAnyAuthority('t')">
+                                                    <button class="btn btn-primary btn-lg mr-1 px-3" data-bs-toggle="modal" data-bs-target="#makeTheraLink" sec:authorize="hasAnyAuthority('t')" id="modifyTheraLink">
                                                         <i class="fa-solid fa-pen-nib"></i>
                                                     </button>
                                                     <button class="btn btn-danger btn-lg mr-1 px-3 d-none d-md-inline-block" id="chatDeleteButton">
@@ -305,15 +280,19 @@
 
                 let formData = new FormData(document.getElementById('form-example-2'));
 
-                formData.append('title',$('#title').val());
-                formData.append('contetns',$('#TheraLink-contents').val())
+                formData.append('theraTitle',$('#title').val());
+                formData.append('contents',$('#TheraLink-contents').val())
                 let inputElements = document.querySelectorAll('.image-uploader input[type="file"]');
-                inputElements.forEach(inputElements=>{
-                    let files = inputElements.files;
-                    for(let i = 0;i<files.length;i++){
-                        formData.append('images',files[i]);
-                    }
-                })
+
+                    inputElements.forEach(inputElements => {
+                        let files = inputElements.files;
+                        if(files.length>0) {
+                            for (let i = 0; i < files.length; i++) {
+                                formData.append('images', files[i]);
+                            }
+                        }
+                    })
+
 
                 const nowPage = window.location.href;
                 const projectNo = nowPage.split("/")[5];

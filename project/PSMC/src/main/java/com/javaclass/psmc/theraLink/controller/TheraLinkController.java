@@ -174,28 +174,35 @@ public class TheraLinkController {
 
 
     @PostMapping("/theraLink/theraUpload/{projectNo}")
-    public ResponseEntity<Map<String, String>> fileUpload(@RequestParam List<MultipartFile> images, @RequestParam String title, @RequestParam String theraLinkContent, @PathVariable int projectNo) throws IOException {
-        for(MultipartFile i : images){
-            System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
+    public ResponseEntity<Map<String, String>> fileUpload(@ModelAttribute RecieveDTO recieveDTO, @PathVariable int projectNo) throws IOException {
+
+        List<MultipartFile> images = recieveDTO.getImages();
+        if(Objects.isNull(recieveDTO.getImages())) {
+
+
+
+            for (MultipartFile i : images) {
+                System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
+            }
         }
 
 
-        System.out.println("title = " + title);
+        System.out.println("title = " + recieveDTO.getTheraTitle());
 
-        System.out.println("theraLinkContent = " + theraLinkContent);
+        System.out.println("theraLinkContent = " + recieveDTO.getContents());
 
         TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
 
         theraLinkDTO.setProjectNo(projectNo);
-        theraLinkDTO.setTheraTitle(title);
-        theraLinkDTO.setTheraContents(theraLinkContent);
+        theraLinkDTO.setTheraTitle(recieveDTO.getTheraTitle());
+        theraLinkDTO.setTheraContents(recieveDTO.getContents());
         theraLinkDTO.setTheraBoardDate(LocalDateTime.now());
 
         int[] results = userService.makeTheraLink(theraLinkDTO);
 
         int theraLinkNo = results[1];
 
-        if(!Objects.isNull(images)){
+        if(!Objects.isNull(recieveDTO.getImages())){
             Resource resource = resourceLoader.getResource("classpath:static/common/postimg");
             String filepath = null;
             if(!resource.exists()){

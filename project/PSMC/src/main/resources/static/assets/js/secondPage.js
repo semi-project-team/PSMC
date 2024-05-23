@@ -1,13 +1,13 @@
-const checkDelete = document.querySelectorAll('[class^=delete-]:checked');
 
-console.table(checkDelete);
 
 const deleteButton = document.getElementById('deleteButton');
-const param = new URLSearchParams();
+
 
 if(deleteButton!=null) {
     deleteButton.addEventListener('click', e => {
 
+        const checkDelete = Array.from(document.querySelectorAll('[class^=delete-]:checked'));
+        const param = new URLSearchParams();
         if (checkDelete.length > 0) {
             checkDelete.forEach(d => {
                 if (d.checked) {
@@ -36,7 +36,7 @@ const $inputMessage = document.getElementById('inputMessage');
 $bloglist.forEach(b=>{
 
     b.addEventListener('click',e=>{
-        const theraLinkNo = e.currentTarget.querySelector('[class^=delete-]').classList.toString().split("-")[1];
+        const theraLinkNo = b.querySelector('[class^=delete-]').classList.toString().split("-")[1];
 
         console.log("theraLinkNo 잘 왔는가"+theraLinkNo);
 
@@ -60,6 +60,17 @@ $bloglist.forEach(b=>{
 
 
                 console.log('theraLinkNo 바꼈겠지'+theraLinkNo);
+
+
+                const $modifyTheraLink  = document.getElementById('modifyTheraLink');
+                $modifyTheraLink.addEventListener('click',e=>{
+                    const $title = document.getElementById('title');
+                    $title.value=data.theraTitle;
+                    const $contents = document.getElementById('TheraLink-contents');
+                    $contents.value=data.theraContents;
+
+                })
+
 
 
 
@@ -124,6 +135,9 @@ function makeChatting(data,theraLinkNo){
     $theraLinkTitle.textContent=data.theraTitle;
     $theraLinkContents.textContent=data.theraContents;
 
+    const pictureArea = document.getElementById('picturearea');
+
+    pictureArea.textContent="";
 
     $sendingMessage.value='';
     $sendingMessage.value = theraLinkNo;
@@ -134,6 +148,8 @@ function makeChatting(data,theraLinkNo){
                 const day = date[0];
                 const time = date[1];
                 const $chat = document.createElement('div');
+
+
                 if (t.pmCode === pmCode) {
                     console.log('나다');
 
@@ -173,8 +189,68 @@ function makeChatting(data,theraLinkNo){
             }
         })
 
-        $chattingarea.scrollTop=$chattingarea.scrollHeight;
+
+
+
     }
+    if(data.theraLinkPhotoDTOS[0].theralinkSavedName!=null){
+        console.log('들어 왔나');
+
+            data.theraLinkPhotoDTOS.forEach(p=>{
+
+                console.log('하나라도 있으면 들어와야')
+
+                const $div = document.createElement('div');
+                $div.classList.add('carousel-item','active');
+                const $img = document.createElement('img');
+                $img.classList.add('d-block','w-100');
+                $img.src=`/static/common/postimg/${p.theralinkSavedName}`;
+                $div.appendChild($img)
+
+                pictureArea.appendChild($div);
+            })
+
+
+
+
+
+
+
+
+            // pictureArea.insertAdjacentHTML('afterend',buttonHtml)
+
+    }
+    // if(data.theraLinkPhotoDTOS!=null){
+    //     const pictureArea = document.getElementById('pictureArea');
+    //     const arrowArea = document.getElementById('arrowArea');
+    //     for(let i =0; i<data.theraLinkPhotoDTOS.size;i++){
+    //         arrowArea.insertAdjacentHTML('afterend',`<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="${i}"
+    //                                                     class="active" aria-current="true" aria-label="Slide ${i+1}"></button>`);
+    //
+    //     }
+    //     pictureArea.appendChild(arrowArea);
+    //
+    //     const innerPicture = document.getElementById('innerPicture');
+    //     data.theraLinkPhotoDTOS.forEach(p=>{
+    //
+    //         innerPicture.insertAdjacentHTML('afterend',`<div class="carousel-item active" data-bs-interval="10000" style="max-height: 40vh;">
+    //                                                 <img th:src="|/static/common/postimg/${p.theralinkSavedName}|" class="d-block w-100" alt="...">
+    //                                             </div>`)
+    //     })
+    //
+    //     pictureArea.appendChild(innerPicture);
+    //     const buttonHtml = `<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    //     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    //     <span class="visually-hidden">Previous</span>
+    // </button>
+    // <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    //     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    //     <span class="visually-hidden">Next</span>
+    // </button>`
+    //     pictureArea.insertAdjacentHTML('afterend',buttonHtml)
+    // }
+
+    $chattingarea.scrollTop=$chattingarea.scrollHeight;
 
 
 
@@ -213,4 +289,12 @@ $chatDeleteButton.addEventListener('click',e=>{
             console.table(data);
             makeChatting(data,theraNum)
         })
+})
+
+const createTheraLink = document.getElementById('createTheraLink');
+createTheraLink.addEventListener('click',e=>{
+    const title = document.getElementById('title');
+    title.value="";
+    const contents = document.getElementById('TheraLink-contents');
+    contents.value="";
 })

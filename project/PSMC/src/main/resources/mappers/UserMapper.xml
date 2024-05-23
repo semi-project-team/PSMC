@@ -941,15 +941,17 @@
         <result  property="theraTitle" column="thera_title"/>
         <result property="theraContents" column="thera_contents"/>
         <collection property="theraChatForBlogDTOS" resultMap="theraChatForBlogMap"/>
-
+        <collection property="theraLinkPhotoDTOS" resultMap="theralinkPhotoMap"/>
     </resultMap>
     <select id="getTheraChatByTheraNo" resultMap="theraChatByTheraLink" parameterType="string">
         select
+            DISTINCT l.theraLink_no,
             c.*,
             l.thera_title,
             l.thera_contents,
             l.theraLink_no,
-            e.name
+            e.name,
+            d.*
         from
             thera_link l
         left outer join
@@ -960,10 +962,15 @@
             employee e
         on
             e.pm_code = c.pm_code
+        left outer join
+            theralink_photo d
+        on
+            d.theraLink_no = l.theraLink_no
         where
             l.theraLink_no = #{theraNum}
         order by
             c.thera_chat_board_date
+
 
     </select>
 
