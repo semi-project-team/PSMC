@@ -4,43 +4,42 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
+import com.javaclass.psmc.common.model.dto.TheraLinkDTO;
 import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 
-import com.javaclass.psmc.theraLink.model.dto.ChatDeleteDTO;
-import com.javaclass.psmc.theraLink.model.dto.MessageDTO;
-import com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO;
-import com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO;
+import com.javaclass.psmc.theraLink.model.dto.*;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Controller
 public class TheraLinkController {
 
     private final UserService userService;
     private final ObjectMapper objectMapper;
+    private final ResourceLoader resourceLoader;
 
     private MakePhoneNumber makePhoneNumber=new MakePhoneNumber();
     @Autowired
-    public TheraLinkController(UserService userService,ObjectMapper objectMapper){
+    public TheraLinkController(UserService userService,ObjectMapper objectMapper,ResourceLoader resourceLoader){
 
         this.objectMapper=objectMapper;
         this.userService = userService;
+        this.resourceLoader=resourceLoader;
     }
 
     @GetMapping("/theraLink")
@@ -168,8 +167,8 @@ public class TheraLinkController {
     }
 
 
-    @PostMapping("/theraLink/theraUpload")
-    public String fileUpload(@RequestParam List<MultipartFile> images,@RequestParam String title,@RequestParam String theraLinkContent){
+    @PostMapping("/theraLink/theraUpload/{projectNo}")
+    public String fileUpload(@RequestParam List<MultipartFile> images,@RequestParam String title,@RequestParam String theraLinkContent,@PathVariable int projectNo) throws IOException {
         for(MultipartFile i : images){
             System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
         }
@@ -178,6 +177,51 @@ public class TheraLinkController {
         System.out.println("title = " + title);
 
         System.out.println("theraLinkContent = " + theraLinkContent);
+
+        TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
+
+        theraLinkDTO.setProjectNo(projectNo);
+        theraLinkDTO.setTheraTitle(title);
+        theraLinkDTO.setTheraContents(theraLinkContent);
+        theraLinkDTO.setTheraBoardDate(LocalDateTime.now());
+
+        int[] results = userService.makeTheraLink(theraLinkDTO);
+
+        int theraLinkNo = results[1];
+
+        if(!Objects.isNull(images)){
+            Resource resource = resourceLoader.getResource("classpath:static/common/postimg");
+            String filepath = null;
+            if(!resource.exists()){
+                String root ="src/main/resources/static/common/postimg";
+                File file = new File(root);
+                file.mkdirs();
+                filepath=file.getAbsolutePath();
+            }else{
+                filepath=resourceLoader.getResource("classpath:static/common/postimg").getFile().getAbsolutePath();
+            }
+
+            System.out.println("filepath = " + filepath);
+
+            List<TheraLinkPhotoDTO> theraLinkPhotoDTOS = new ArrayList<>();
+            List<String> saveFiles = new ArrayList<>();
+            for(MultipartFile im: images){
+                String oringFileName = im.getOriginalFilename();
+                String ext = oringFileName.substring(oringFileName.lastIndexOf("."));
+                String savedName = UUID.randomUUID().toString().replace("-","")+ext;
+
+                im.transferTo(new File(filepath+"/"+savedName));
+                saveFiles.add("static/common/postimg/" +savedName);
+
+                TheraLinkPhotoDTO newPhoto = new TheraLinkPhotoDTO();
+                newPhoto.setTheralinkOriginName(oringFileName);
+                newPhoto.setTheralinkSavedName(savedName);
+                newPhoto.setTheralinkFilepath(filepath);
+                newPhoto.setTheralinkNo(theraLinkNo);
+
+                int result = userService.insertTheraLinkPhoto(newPhoto);
+            }
+        }
         return "redirect:/theraLink";
     }
 

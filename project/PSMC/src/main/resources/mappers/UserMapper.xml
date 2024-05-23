@@ -965,4 +965,14 @@
             #{theraNum}
         </foreach>
     </delete>
+
+    <insert id="makeTheraLink" parameterType="com.javaclass.psmc.common.model.dto.TheraLinkDTO" useGeneratedKeys="true" keyProperty="theraLinkNo">
+        insert thera_link(project_no,thera_title,thera_contents,thera_status,thera_board_date)
+        values(#{projectNo},#{theraTitle},#{theraContents},'Y',#{theraBoardDate})
+    </insert>
+
+    <insert id="insertTheraLinkPhoto" parameterType="com.javaclass.psmc.theraLink.model.dto.TheraLinkPhotoDTO">
+        insert theralink_photo(theralink_origin_name,theralink_saved_name,theralink_filepath,theralink_no,theralink_photo_status)
+        values(#{theralinkOriginName},#{theralinkSavedName},#{theralinkFilepath},#{theralinkNo},'Y')
+    </insert>
 </mapper>
