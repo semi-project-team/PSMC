@@ -27,7 +27,12 @@
                 <div class="col-lg-3 col-md-6 mt-4 pt-2 blogPage">
                     <div class="blog-post rounded border">
                         <div class="blog-img d-block overflow-hidden position-relative">
-                            <img src="https://www.bootdey.com/image/350x280/FF7F50/000000" class="img-fluid rounded-top" alt>
+                            <th:block th:if="${thera.theraLinkPhotoDTOS[0].getTheralinkSavedName()!=null}">
+                                <img th:src="|/static/common/postimg/${thera.theraLinkPhotoDTOS[0].getTheralinkSavedName()}|" class="img-fluid rounded-top" alt>
+                            </th:block>
+                            <th:block th:unless="${thera.theraLinkPhotoDTOS[0].getTheralinkSavedName()!=null}">
+                                <img src="https://www.bootdey.com/image/350x280/FF7F50/000000" class="img-fluid rounded-top" alt>
+                            </th:block>
                             <div class="overlay rounded-top bg-dark"></div>
                             <div class="post-meta">
                                 <a href="javascript:void(0)" class="text-light d-block text-right like" data-bs-toggle="modal" data-bs-target="#theraDetail"></a>
@@ -321,10 +326,13 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        console.log('성공이요');
+                        if(response.redirectURL){
+                            console.log('성공이요');
+                            window.location.href=response.redirectURL;
+                        }
 
-                        const nowPage = window.location.href;
-                        // window.location.href=nowPage;
+
+
                     },
                     error: function(xhr, status, error) {
                         console.error('실패요');

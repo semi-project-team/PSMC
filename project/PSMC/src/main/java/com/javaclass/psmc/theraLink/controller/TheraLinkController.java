@@ -16,6 +16,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -81,6 +82,11 @@ public class TheraLinkController {
             System.out.println("theraLink data 확인중 = " + t);
             t.setDay(t.getTheraBoardDate().toString().split("-")[2]);
             System.out.println("t.getDay() = " + t.getDay());
+
+            int comment = t.getTheraChatDTOS().size();
+
+            t.setComment(comment);
+
         }
 
         model.addAttribute("theraLink",theraLinkWithMonthDTOS);
@@ -168,7 +174,7 @@ public class TheraLinkController {
 
 
     @PostMapping("/theraLink/theraUpload/{projectNo}")
-    public String fileUpload(@RequestParam List<MultipartFile> images,@RequestParam String title,@RequestParam String theraLinkContent,@PathVariable int projectNo) throws IOException {
+    public ResponseEntity<Map<String, String>> fileUpload(@RequestParam List<MultipartFile> images, @RequestParam String title, @RequestParam String theraLinkContent, @PathVariable int projectNo) throws IOException {
         for(MultipartFile i : images){
             System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
         }
@@ -222,7 +228,11 @@ public class TheraLinkController {
                 int result = userService.insertTheraLinkPhoto(newPhoto);
             }
         }
-        return "redirect:/theraLink";
+
+        Map<String,String> response = new HashMap<>();
+        response.put("redirectURL","/theraLink/open/"+projectNo);
+
+        return ResponseEntity.ok(response);
     }
 
 }
