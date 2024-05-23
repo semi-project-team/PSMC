@@ -91,3 +91,10 @@ body{
 /*    !*margin-right: 10px; *!*/
 /*    margin-left: 1%;*/
 /*}*/
+
+/* Optional: Add some styles to differentiate the active button */
+.btn.active {
+    background-color: #007bff;
+    color: white;
+}
+

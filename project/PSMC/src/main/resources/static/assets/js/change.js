@@ -14,3 +14,43 @@ document.getElementById("change-password-btn").addEventListener("click", functio
 document.getElementById("cancel-btn").addEventListener("click", function() {
     // 취소 동작 추가
 });
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const app = express();
+const port = 3000;
+
+// 데이터베이스 연결 설정
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'your_database_name'
+});
+
+db.connect((err) => {
+    if (err) throw err;
+    console.log('Connected to database');
+});
+
+// 미들웨어 설정
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+// 회원 정보 수정 라우트
+app.post('/update-member', (req, res) => {
+    const { id, name, year, month, day, gender, phone, email, position } = req.body;
+    const birth = `${year}-${month}-${day}`;
+
+    const sql = 'UPDATE members SET name = ?, birth = ?, gender = ?, phone = ?, email = ?, position = ? WHERE id = ?';
+    db.query(sql, [name, birth, gender, phone, email, position, id], (err, result) => {
+        if (err) throw err;
+        res.send('Member information updated');
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
