@@ -160,4 +160,14 @@
             b.project_no = #{projectNo}
     </select>
 
+    <select id="showEmployee" resultMap="employeeResultMap" parameterType="hashmap">
+        select
+            name
+        from
+            employee
+        where
+            pm_code = #{pmCode}
+
+    </select>
+
 </mapper>

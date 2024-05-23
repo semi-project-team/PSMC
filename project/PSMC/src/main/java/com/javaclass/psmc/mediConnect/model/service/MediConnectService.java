@@ -1,5 +1,6 @@
 package com.javaclass.psmc.mediConnect.model.service;
 
+import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.mediConnect.model.dao.ProjectsMapper;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
@@ -30,13 +31,19 @@ public class MediConnectService {
 
     }
 
-    public List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter) {
+
+    public ShowAllProjectsDTO showPatientDetail(Map<String, Object> parameter) {
+
+        return projectMapper.showPatientDetail(parameter);
+    }
+
+    public ShowMediConnectDTO showBoardDetail(Map<String, Object> parameter) {
 
         return projectMapper.showBoardDetail(parameter);
     }
 
-    public List<ShowAllProjectsDTO> showPatientDetail(Map<String, Object> parameter) {
+    public EmployeeDTO showEmployee(Map<String, Object> parameter) {
 
-        return projectMapper.showPatientDetail(parameter);
+        return projectMapper.showEmployee(parameter);
     }
 }

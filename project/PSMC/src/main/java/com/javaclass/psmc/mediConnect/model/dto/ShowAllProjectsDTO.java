@@ -1,9 +1,6 @@
 package com.javaclass.psmc.mediConnect.model.dto;
 
-import com.javaclass.psmc.common.model.dto.AssignProjectDTO;
-import com.javaclass.psmc.common.model.dto.CreateProjectDTO;
-import com.javaclass.psmc.common.model.dto.InjuryDTO;
-import com.javaclass.psmc.common.model.dto.PatientDTO;
+import com.javaclass.psmc.common.model.dto.*;
 import lombok.*;
 
 import java.util.List;

@@ -43,11 +43,12 @@
         }
 
         .headerSpace h5 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
         .headerSpace p {
-            font-size: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .left-spaceSpace {
@@ -336,20 +337,20 @@
     <th:block th:insert="~{/common/header}"></th:block>
 
     <div class="containerSpace">
-        <div th:each="meid : ${}" class="headerSpace">
-            <h5 th:text="${boardDetail.mediTitle}></h5>
-                <h5>제목제목</h5>
-                <p>No.1 김민지 환자 (만 30세, F)</p>
+        <div class="headerSpace">
+            <h5 th:text="${boardDetail.mediTitle} + ' ' + '(' + ${boardDetail.mediBoardDate} + ')'"></h5>
+                <p th:text="'No.' + ${patientDetail.patientDTO.patientNo} + ' ' + ${patientDetail.patientDTO.patientName} + ' 환자'
+                + ' (만 ' + ${patientDetail.patientDTO.age} + '세, ' + ${patientDetail.patientDTO.gender} + ')'"></p>
         </div>
         <div class="left-spaceSpace"></div>
         <div class="mainSpace">
             <div class="card">
                 <div class="card-header">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"
-                         height="32"> @홍길동
+                         height="32"> <p th:text="'@' + ${employeeDetail.name}"></p>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">수술을 통한 무릎인대 치료, 물리 치료: 근력과 안정성 향상을 위한 운동요법</p>
+                    <p class="card-text" th:text="${boardDetail.mediContent}"></p>
                 </div>
             </div>
         </div>
