@@ -21,12 +21,18 @@
         <result property="pmCode" column="pm_code"/>
     </resultMap>
 
+    <resultMap id="assignProjectResultMap" type="com.javaclass.psmc.common.model.dto.AssignProjectDTO">
+        <id property="projectNo" column="project_no"/>
+        <result property="pmCode" column="pm_code"/>
+    </resultMap>
+
     <resultMap id="showAllProjectsResultMap" type="com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO">
         <id property="projectNo" column="project_no"/>
         <result property="patientNo" column="patient_no"/>
         <association property="injuryDTO" resultMap="injuryResultMap"/>
         <association property="patientDTO" resultMap="patientResultMap"/>
         <association property="createProjectDTO" resultMap="createProjectResultMap"/>
+        <association property="assignProjectDTO" resultMap="assignProjectResultMap"/>
     </resultMap>
 
     <resultMap id="memberRegistResultMap" type="com.javaclass.psmc.common.model.dto.MemberRegistDTO">
@@ -139,7 +145,7 @@
         where
             medi_no = #{mediNo}
     </select>
-    
+
     <select id="showPatientDetail" resultMap="showAllProjectsResultMap" parameterType="hashmap">
         select
             a.patient_no,

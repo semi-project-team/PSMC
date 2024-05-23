@@ -336,8 +336,8 @@
     <th:block th:insert="~{/common/header}"></th:block>
 
     <div class="containerSpace">
-        <div class="headerSpace">
-            <h5 th:text="${boardDetail.mediTitle}</h5>
+        <div th:each="meid : ${}" class="headerSpace">
+            <h5 th:text="${boardDetail.mediTitle}></h5>
                 <h5>제목제목</h5>
                 <p>No.1 김민지 환자 (만 30세, F)</p>
         </div>
