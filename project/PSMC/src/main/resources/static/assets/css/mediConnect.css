@@ -1,3 +1,8 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 
 
@@ -9,6 +14,11 @@
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(215, 214, 214);
 }
 
 section {
@@ -281,6 +291,12 @@ section.notice {
     justify-content: center;
     border-bottom-left-radius: 20px; /* 아래쪽 왼쪽 모서리 둥글게 */
     border-bottom-right-radius: 20px; /* 아래쪽 오른쪽 모서리 둥글게 */
+}
+
+.boxxx > * {
+    flex: 1 1 100%; /* 모든 자식 요소들이 부모 요소의 가로 길이에 맞춰짐 */
+    margin: 10px; /* 요소 간 간격 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 설정 */
 }
 
 .parent-container {

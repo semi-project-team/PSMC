@@ -7,7 +7,7 @@ body {
 .container5 {
     display: grid;
     grid-template-columns: 40vw 40vw;
-    grid-template-rows: 4vh 50vh ;
+    grid-template-rows: 4vh 40vh ;
     grid-gap: 7rem;
     padding: 0 2rem;
     grid-row-gap: 10px;
