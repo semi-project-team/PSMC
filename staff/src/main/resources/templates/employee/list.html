@@ -5,6 +5,37 @@
     <title>Title</title>
 </head>
 <body>
+    <form class="center-element" action="/employee/search" method="get">
+        <label> 이름 : </label><input type="text" name="name">
+    <select name="fieldCode">
+        <option value="1">정형외과수술</option>
+        <option value="2">관절치료</option>
+        <option value="3">척추치료</option>
+        <option value="4">신경외과</option>
+        <option value="5">신경외과</option>
+        <option value="6">신경외과</option>
+    </select>
+    <button type="submit">조회</button>
+    </form>
+    <br></br>
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>전화번호</th>
+            <th>연구실번호</th>
+            <th>전공분야</th>
+            <th>직급</th>
+        </tr>
+        <tr th:each="employee : ${employeeList}">
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.phone}"></td>
+            <td th:text="${employee.officeNum}"></td>
+            <td th:text="${employee.medicalFieldDTO.field_name}"></td>
+            <td th:text="${employee.positionDTO.position_name}"></td>
+        </tr>
+    </table>
 
 </body>
 </html>

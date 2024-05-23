@@ -13,10 +13,12 @@ public class EmployeeDTO {
     private char gender;
     private String officeNum;
     private int fieldCode;
+    private MedicalFieldDTO medicalFieldDTO;
+    private PositionDTO positionDTO;
 
     public EmployeeDTO(){}
 
-    public EmployeeDTO(String pmCode, int empNo, String phone, String email, String name, int age, int positionCode, char gender, String officeNum, int fieldCode) {
+    public EmployeeDTO(String pmCode, int empNo, String phone, String email, String name, int age, int positionCode, char gender, String officeNum, int fieldCode, MedicalFieldDTO medicalFieldDTO, PositionDTO positionDTO) {
         this.pmCode = pmCode;
         this.empNo = empNo;
         this.phone = phone;
@@ -27,6 +29,8 @@ public class EmployeeDTO {
         this.gender = gender;
         this.officeNum = officeNum;
         this.fieldCode = fieldCode;
+        this.medicalFieldDTO = medicalFieldDTO;
+        this.positionDTO = positionDTO;
     }
 
     public String getPmCode() {
@@ -109,6 +113,22 @@ public class EmployeeDTO {
         this.fieldCode = fieldCode;
     }
 
+    public MedicalFieldDTO getMedicalFieldDTO() {
+        return medicalFieldDTO;
+    }
+
+    public void setMedicalFieldDTO(MedicalFieldDTO medicalFieldDTO) {
+        this.medicalFieldDTO = medicalFieldDTO;
+    }
+
+    public PositionDTO getPositionDTO() {
+        return positionDTO;
+    }
+
+    public void setPositionDTO(PositionDTO positionDTO) {
+        this.positionDTO = positionDTO;
+    }
+
     @Override
     public String toString() {
         return "EmployeeDTO{" +
@@ -122,6 +142,8 @@ public class EmployeeDTO {
                 ", gender=" + gender +
                 ", officeNum='" + officeNum + '\'' +
                 ", fieldCode=" + fieldCode +
+                ", medicalFieldDTO=" + medicalFieldDTO +
+                ", positionDTO=" + positionDTO +
                 '}';
     }
 }

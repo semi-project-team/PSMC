@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>직원조회</h2>
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>전화번호</th>
+            <th>연구실번호</th>
+            <th>전공분야</th>
+            <th>직급</th>
+        </tr>
+        <tr th:each="list : ${employeeList}">
+            <td th:text="${list.name}"></td>
+            <td th:text="${list.email}"></td>
+            <td th:text="${list.phone}"></td>
+            <td th:text="${list.officeNum}"></td>
+            <td th:text="${list.medicalFieldDTO.fieldName}"></td>
+            <td th:text="${list.positionDTO.positionName}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
