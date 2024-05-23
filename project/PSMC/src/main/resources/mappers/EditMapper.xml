@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaclass.psmc.mypage.model.dao.EditMapper">
+    <resultMap id="memberRegistresultMap" type="com.javaclass.psmc.common.model.dto.MemberRegistDTO">
+        <id property="registNo" column="regist_no"/>
+        <result property="id" column="id"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="birth" column="birth"/>
+        <result property="employeeStatus" column="employee_status"/>
+        <result property="role" column="role"/>
+        <result property="pmCode" column="pm_code"/>
+    </resultMap>
+    <resultMap id="employeeMap" type="com.javaclass.psmc.common.model.dto.EmployeeDTO">
+        <id property="pmCode" column="pm_code"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="positionCode" column="position_code"/>
+        <result property="gender" column="gender"/>
+        <result property="officeNum" column="office_num"/>
+        <result property="fieldCode" column="field_code"/>
+    </resultMap>
+
+    <resultMap id="profileForEditMap" type="com.javaclass.psmc.mypage.model.dto.ProfileFroEditDTO">
+        <association property="employeeDTO" resultMap="employeeMap"/>
+        <association property="memberRegistDTO" resultMap="memberRegistresultMap"/>
+    </resultMap>
+
+    <resultMap id="EditMap" type="com.javaclass.psmc.mypage.model.dto.EditDTO">
+        <id property="pmCode" column="pm_code"/>
+        <result property="phone" column="phone"/>
+        <result property="companyEmail" column="email"/>
+        <result property="name" column="name"/>
+        <result property="officeNum" column="office_num"/>
+    </resultMap>
+
+    <update id="updateEmployee" parameterType="com.javaclass.psmc.mypage.model.dto.EditDTO">
+        update
+            employee
+        <set>
+
+            <if test ="name != null">name=#{name},</if>
+            <if test="companyEmail != null">email=#{companyEmail},</if>
+            <if test="phone !=null">phone=#{phone},</if>
+            <if test="officeNum != null">office_num=#{officeNum}</if>
+        </set>
+    </update>
+
+    <update id="updateRegist" parameterType="com.javaclass.psmc.mypage.model.dto.EditDTO">
+        update
+            member_regist
+        <set>
+
+            <if test ="id != null">id=#{id},</if>
+            <if test="email != null">email=#{email}</if>
+        </set>
+    </update>
+    
+    <select id="employeeDetail" parameterType="hashmap" resultMap="EditMap">
+        SELECT * from employee
+        where pm_code = #{pmCode}
+    </select>
+
+    <select id="memberRegistDetail" parameterType="hashmap" resultMap="memberRegistresultMap">
+        SELECT * from member_regist
+        where pm_code = #{pmCode}
+    </select>
+
+    <select id="findInfoForEdit" resultMap="profileForEditMap" parameterType="string">
+        select
+        a.*,
+        b.*
+        from
+        employee a
+        join
+        member_regist b
+        on
+        a.pm_code =b.pm_code
+        where
+        a.pm_code =#{pmCode};
+    </select>
+</mapper>

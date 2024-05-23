@@ -15,14 +15,20 @@
     <div>Edit Member Information</div>
   </div>
   <div class="box2-4">
-    <input type="hidden" class="form-control" id="id" value="*{id}" readonly>
-    <input type="hidden" class="form-control" id="role" value="*{role}" readonly>
+    <form action="/memberUpdate" method="post">
+<!--    <input type="hidden" class="form-control" id="id" value="*{id}" readonly>-->
+<!--    <input type="hidden" class="form-control" id="role" value="*{role}" readonly>-->
 
     <div class="mb-3 px-2">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" oninput="nameModify()">
+      <input name="name" type="text" class="form-control" id="name" oninput="nameModify()">
       <span class="name_ok">사용 가능한 이름입니다.</span>
     </div>
+
+      <div class="mb-3 px-2">
+        <label for="id">Id</label>
+        <input name="id" type="text" class="form-control" id="id" th:placeholder="${employee.name}">
+      </div>
 
     <div class="mb-3 px-2">
     <label class="form-label" for="birth">Birth</label>
@@ -62,32 +68,44 @@
 
     <div class="mb-3 px-2">
       <label>성별</label><br>
-      <div class="btn-group" role="group" aria-label="Default button group">
-        <button type="button" class="btn btn-outline-primary" id="maleBtn" onclick="toggleGender('male')">Male</button>
-        <button type="button" class="btn btn-outline-primary" id="femaleBtn" onclick="toggleGender('female')">Female</button>
-      </div>
+        <div class="btn-group" role="group" aria-label="Default button group">
+            <button value="M" name="gender" type="button" class="btn btn-outline-primary" id="maleBtn" onclick="toggleGender('M')">Male</button>
+            <button value="F" name="gender" type="button" class="btn btn-outline-primary" id="femaleBtn" onclick="toggleGender('F')">Female</button>
+        </div>
     </div>
 
 
-    <div class="mb-3 px-2">
-      <label for="pm_code">Employee Code</label>
-      <input type="text" class="form-control" id="pm_code" value="" readonly>
+    <div class="row mb-3 px-2">
+      <div class="col">
+        <label for="email">Email</label>
+        <input name="email" type="email" class="form-control" id="email" value="">
+      </div>
+      <div class="col">
+        <label for="companyEmail">Company Email</label>
+        <input name="companyEmail" type="email" class="form-control" id="companyEmail" value="">
+      </div>
     </div>
 
     <div class="row mb-3 px-2">
       <div class="col">
       <label for="phone">Phone Number</label>
-      <input type="text" class="form-control" id="phone" value="">
+      <input name="phone"  type="text" class="form-control" id="phone" value="">
     </div>
     <div class="col">
-      <label for="email">Company Email</label>
-      <input type="email" class="form-control" id="email" value="">
+      <label for="officeNum">Office Number</label>
+      <input name="officeNum" type="text" class="form-control" id="officeNum" value="">
     </div>
     </div>
 
-    <div class="mb-3 px-2">
+    <div class="row mb-3 px-2">
+      <div class="col">
+        <label for="pm_code">Employee Code</label>
+        <input name="employeeCode" type="text" class="form-control" id="pm_code" value="" readonly>
+      </div>
+      <div class="col">
       <label for="position">Position</label>
-      <input type="text" class="form-control" id="position" value="" readonly>
+      <input name="position" type="text" class="form-control" id="position" value="" readonly>
+      </div>
     </div>
 
     <div class="mb-3 px-2">
@@ -97,6 +115,7 @@
     <div class="mb-3 px-2">
       <a type="button" style="color:white" class="w-100 btn btn-lg btn-secondary" onclick="window.history.back();">취소</a>
     </div>
+    </form>
   </div>
 </div>
 <script src="/assets/js/edit.js"></script>
