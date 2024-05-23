@@ -860,6 +860,18 @@
         insert into assign_project(project_no,pm_code)
         values (#{projectNo},#{pmCode})
     </insert>
+    <resultMap id="theraChatMap" type="com.javaclass.psmc.common.model.dto.TheraChatDTO">
+        <id property="theraChatNo" column="thera_chat_no"/>
+    </resultMap>
+    <resultMap id="theralinkPhotoMap" type="com.javaclass.psmc.theraLink.model.dto.TheraLinkPhotoDTO">
+        <id property="theralinkPhotoNo" column="theralink_photo_no"/>
+        <result property="theralinkOriginName" column="theralink_origin_name"/>
+        <result property="theralinkSavedName" column="theralink_saved_name"/>
+        <result property="theralinkFilepath" column="theralink_filepath"/>
+        <result property="theralinkNo" column="theraLink_no"/>
+        <result property="theralinkPhotoStatus" column="theralink_photo_status"/>
+
+    </resultMap>
 
     <resultMap id="theraLinkMapWithMonth" type="com.javaclass.psmc.theraLink.model.dto.TheraLinkWithMonthDTO">
         <id property="theraLinkNo" column="theraLink_no"/>
@@ -870,29 +882,34 @@
         <result property="theraBoardDate" column="thera_board_date"/>
         <result property="month" column="month"/>
         <result property="comment" column="comment"/>
+        <collection property="theraChatDTOS" resultMap="theraChatMap"/>
+        <collection property="theraLinkPhotoDTOS" resultMap="theralinkPhotoMap"/>
     </resultMap>
 
     <select id="findAllTheraLinkByProjectNo" resultMap="theraLinkMapWithMonth" parameterType="int">
         select
             a.*,
-            left(date_format(a.thera_board_date,'%M'),3) as month
-            ,LPAD(count(b.thera_chat_no),2,'0') as comment
+            left(date_format(a.thera_board_date,'%M'),3) as month,
+            b.thera_chat_no,
+            c.*
         from
             thera_link a
         left join
             thera_chat b
         on
             a.theraLink_no = b.theraLink_no
+        left join
+            theralink_photo c
+        on
+            c.theraLink_no = a.theraLink_no
         where
             a.project_no =#{projectNo}
         and
             a.thera_status ='Y'
-
-        group by
-            a.theraLink_no
         order by
             thera_board_date desc
-
+        ,
+            c.theralink_photo_no
 
     </select>
 
