@@ -29,8 +29,10 @@ body {
 .box1-1 {
     grid-area: a;
     border-radius: 5px;
-    justify-content: center;
+
     display: flex;
+    justify-content: center;
+    align-items: center;
     background-color:rgb(3, 61, 94);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-wrap: nowrap;
@@ -39,7 +41,7 @@ body {
 
 .box1-1 div {
     margin:0;
-    margin-top: 0.5vw;
+
     color:white;
     font-size:1.3rem;
 }

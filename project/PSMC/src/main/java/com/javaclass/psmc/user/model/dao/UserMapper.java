@@ -108,4 +108,6 @@ public interface UserMapper {
     int insertTheraLinkPhoto(TheraLinkPhotoDTO newPhoto);
 
     List<BlogDTO> findAllBlogByProjectNo(Map<String, Integer> sender);
+
+    int updatePassword(LoginUserDTO loginUserDTO);
 }
