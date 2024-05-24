@@ -635,10 +635,22 @@
         on
             i.injury_code = a.injury_code
 
-        where
+        <where>
             c.pm_code= #{pmCode}
         and
             a.project_status = 'Y'
+            <if test="injuryCode !=null">
+                and
+                a.injury_code = #{injuryCode}
+            </if>
+            <if test="patientName !='' and patientName!=null">
+                and
+                p.patient_name = #{patientName}
+            </if>
+        </where>
+        <if test="pageNo !=null">
+            limit #{pageNo},5
+        </if>
 
     </select>
 
@@ -886,7 +898,7 @@
         <collection property="theraLinkPhotoDTOS" resultMap="theralinkPhotoMap"/>
     </resultMap>
 
-    <select id="findAllTheraLinkByProjectNo" resultMap="theraLinkMapWithMonth" parameterType="int">
+    <select id="findAllTheraLinkByProjectNo" resultMap="theraLinkMapWithMonth" parameterType="hashmap">
         select
             a.*,
             left(date_format(a.thera_board_date,'%M'),3) as month,
@@ -910,6 +922,9 @@
             thera_board_date desc
         ,
             c.theralink_photo_no
+        <if test="pageNo !=null">
+            limit #{pageNo},4
+        </if>
 
     </select>
 
@@ -999,4 +1014,65 @@
         insert theralink_photo(theralink_origin_name,theralink_saved_name,theralink_filepath,theralink_no,theralink_photo_status)
         values(#{theralinkOriginName},#{theralinkSavedName},#{theralinkFilepath},#{theralinkNo},'Y')
     </insert>
+
+
+    <resultMap id="blogMap" type="com.javaclass.psmc.theraLink.model.dto.BlogDTO">
+        <id property="theraLinkNo" column="theraLink_no"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="theraTitle" column="thera_title"/>
+        <result property="theraContents" column="thera_contents"/>
+        <result property="theraStatus" column="thera_status"/>
+        <result property="theraBoardDate" column="thera_board_date"/>
+        <result property="savedName" column="theralink_saved_name"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    <select id="findAllBlogByProjectNo" resultMap="blogMap" parameterType="hashmap">
+        select
+            a.*,
+            b.*,
+            c.comment
+        from
+            thera_link a
+        left join
+            (select
+                theraLink_no,
+                min(theralink_saved_name)
+            from
+                theralink_photo
+            group by
+                theraLink_no
+            ) as b
+        on
+            a.theraLink_no = b.theraLink_no
+        left join
+        (select
+        a.theraLink_no,
+
+        LPAD(count(b.thera_chat_no),2,'0') as comment
+        from
+        thera_link a
+        left join
+        thera_chat b
+        on
+        a.theraLink_no = b.theraLink_no
+        where
+        a.project_no =1
+        and
+        a.thera_status ='Y'
+
+        group by
+        a.theraLink_no) as c
+        on c.theraLink_no = a.theraLink_no
+        where
+            a.project_no = #{projectNo}
+        and
+            a.thera_status ='Y'
+        order by
+        a.theraLink_no desc
+        <if test="pageNo!=null">
+            limit #{pageNo},4
+        </if>
+        ;
+
+    </select>
 </mapper>

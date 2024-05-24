@@ -22,6 +22,7 @@ if(deleteButton!=null) {
 
 
             const nowPage = window.location.href;
+            console.log(nowPage);
 
 
             window.location.replace(`${nowPage}/deleteTheraLink?${queryString}`);
@@ -267,28 +268,28 @@ $chatDeleteButton.addEventListener('click',e=>{
         if(d.checked){
             param.push(d.value);
         }
-
-
-
     })
 
-    const theraNum =$chatDeleteButton.value;
-    console.log(param);
+    if(param.length>0) {
 
-    fetch("/theraLink/deleteChating",{
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            theraNum: theraNum,
-            deleteNum: param
-        })
-    }).then(res=>res.json())
-        .then(data=>{
-            console.table(data);
-            makeChatting(data,theraNum)
-        })
+        const theraNum = $chatDeleteButton.value;
+        console.log(param);
+
+        fetch("/theraLink/deleteChating", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                theraNum: theraNum,
+                deleteNum: param
+            })
+        }).then(res => res.json())
+            .then(data => {
+                console.table(data);
+                makeChatting(data, theraNum)
+            })
+    }
 })
 
 const createTheraLink = document.getElementById('createTheraLink');
