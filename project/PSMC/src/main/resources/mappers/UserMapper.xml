@@ -1038,7 +1038,7 @@
         left join
             (select
                 theraLink_no,
-                min(theralink_saved_name)
+                min(theralink_saved_name) as theralink_saved_name
             from
                 theralink_photo
             group by

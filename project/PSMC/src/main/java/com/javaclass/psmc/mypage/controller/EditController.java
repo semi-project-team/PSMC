@@ -37,6 +37,7 @@ public class EditController {
 
         ProfileFroEditDTO profileFroEditDTO = editService.findInfoForEdit(pmCode);
 
+
         model.addAttribute("profile",profileFroEditDTO);
 
         System.out.println("profileFroEditDTO = " + profileFroEditDTO);
