@@ -310,12 +310,14 @@
                 formData.append('theraTitle',$('#title').val());
                 formData.append('contents',$('#TheraLink-contents').val())
                 let inputElements = document.querySelectorAll('.image-uploader input[type="file"]');
+                let filesAdded = false;
 
                     inputElements.forEach(inputElements => {
                         let files = inputElements.files;
                         if(files.length>0) {
                             for (let i = 0; i < files.length; i++) {
                                 formData.append('images', files[i]);
+                                filesAdded=true;
                             }
                         }
                     })
@@ -341,7 +343,12 @@
 
                     },
                     error: function(xhr, status, error) {
-                        console.error('실패요');
+                        console.log('실패요');
+                        let response = JSON.parse(xhr.responseText);
+
+
+
+                        window.location.href=`/theraLink/open/${projectNo}/1`;
                     }
                 });
 

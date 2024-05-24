@@ -133,6 +133,10 @@ public class TheraLinkController {
 
         List<BlogDTO> blogDTOS = userService.findAllBlogByProjectNo(sender);
 
+        
+        for(BlogDTO blogDTO : blogDTOS){
+            System.out.println("blogDTO = " + blogDTO);
+        }
 //        int totalData = theraLinkWithMonthDTOS.size();
         int totalData = blogDTOS.size();
 //        int totalPage = (int) Math.ceil(totalData/4.0);
@@ -250,7 +254,7 @@ public class TheraLinkController {
     public ResponseEntity<Map<String, String>> fileUpload(@ModelAttribute RecieveDTO recieveDTO, @PathVariable int projectNo) throws IOException {
 
         List<MultipartFile> images = recieveDTO.getImages();
-        if(Objects.isNull(recieveDTO.getImages())) {
+        if(!Objects.isNull(recieveDTO.getImages())) {
 
 
 
@@ -275,7 +279,7 @@ public class TheraLinkController {
 
         int theraLinkNo = results[1];
 
-        if(!Objects.isNull(recieveDTO.getImages())){
+        if(!Objects.isNull(images)){
             Resource resource = resourceLoader.getResource("classpath:static/common/postimg");
             String filepath = null;
             if(!resource.exists()){
@@ -304,13 +308,14 @@ public class TheraLinkController {
                 newPhoto.setTheralinkSavedName(savedName);
                 newPhoto.setTheralinkFilepath(filepath);
                 newPhoto.setTheralinkNo(theraLinkNo);
-
+                theraLinkPhotoDTOS.add(newPhoto);
                 int result = userService.insertTheraLinkPhoto(newPhoto);
             }
         }
 
         Map<String,String> response = new HashMap<>();
-        response.put("redirectURL","/theraLink/open/"+projectNo+"/"+1);
+        String url = "/theraLink/open/"+projectNo+"/1";
+        response.put("redirectURL",url);
 
         return ResponseEntity.ok(response);
     }
