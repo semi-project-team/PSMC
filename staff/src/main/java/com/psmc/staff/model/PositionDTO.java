@@ -2,38 +2,38 @@ package com.psmc.staff.model;
 
 public class PositionDTO {
 
-    private int position_code;
-    private String position_name;
+    private int positionCode;
+    private String positionName;
 
     public PositionDTO() {
     }
 
-    public PositionDTO(int position_code, String position_name) {
-        this.position_code = position_code;
-        this.position_name = position_name;
+    public PositionDTO(int positionCode, String positionName) {
+        this.positionCode = positionCode;
+        this.positionName = positionName;
     }
 
-    public int getPosition_code() {
-        return position_code;
+    public int getPositionCode() {
+        return positionCode;
     }
 
-    public void setPosition_code(int position_code) {
-        this.position_code = position_code;
+    public void setPositionCode(int positionCode) {
+        this.positionCode = positionCode;
     }
 
-    public String getPosition_name() {
-        return position_name;
+    public String getPositionName() {
+        return positionName;
     }
 
-    public void setPosition_name(String position_name) {
-        this.position_name = position_name;
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 
     @Override
     public String toString() {
-        return "positionDTO{" +
-                "position_code=" + position_code +
-                ", position_name='" + position_name + '\'' +
+        return "PositionDTO{" +
+                "positionCode=" + positionCode +
+                ", positionName='" + positionName + '\'' +
                 '}';
     }
 }

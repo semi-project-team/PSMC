@@ -2,38 +2,38 @@ package com.psmc.staff.model;
 
 public class MedicalFieldDTO {
 
-    private int field_code;
-    private String field_name;
+    private int fieldCode;
+    private String fieldName;
 
     public MedicalFieldDTO() {
     }
 
-    public MedicalFieldDTO(int field_code, String field_name) {
-        this.field_code = field_code;
-        this.field_name = field_name;
+    public MedicalFieldDTO(int fieldCode, String fieldName) {
+        this.fieldCode = fieldCode;
+        this.fieldName = fieldName;
     }
 
-    public int getField_code() {
-        return field_code;
+    public int getFieldCode() {
+        return fieldCode;
     }
 
-    public void setField_code(int field_code) {
-        this.field_code = field_code;
+    public void setFieldCode(int fieldCode) {
+        this.fieldCode = fieldCode;
     }
 
-    public String getField_name() {
-        return field_name;
+    public String getFieldName() {
+        return fieldName;
     }
 
-    public void setField_name(String field_name) {
-        this.field_name = field_name;
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
     }
 
     @Override
     public String toString() {
-        return "medical_fieldDTO{" +
-                "field_code=" + field_code +
-                ", field_name='" + field_name + '\'' +
+        return "MedicalFieldDTO{" +
+                "fieldCode=" + fieldCode +
+                ", fieldName='" + fieldName + '\'' +
                 '}';
     }
 }
