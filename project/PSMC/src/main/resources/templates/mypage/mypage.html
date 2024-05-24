@@ -6,12 +6,18 @@
     <title>my page</title>
   <link rel="stylesheet" href="/assets/css/mypage.css">
 </head>
+<script>
+  const message = `[[${message}]]`;
+  if(message){
+    alert(message);
+  }
+</script>
 <body>
 <th:block th:insert="~{/common/nav}"></th:block>
 <th:block th:insert="~{/common/header}"></th:block>
 <div class="container1">
-  <div class="box1-1">
-    <div>My Page</div>
+  <div class="box1-1" style="display: flex">
+    <div >My Page</div>
   </div>
   <div class="box2-1">
     <div class="profile2">
@@ -20,7 +26,7 @@
     <br><br>
     <div class="profile2-1">
       <h1>안녕하세요</h1>
-      <h3>김땡땡님</h3>
+      <h3 th:text="${profile.name}"></h3>
     </div>
 
   </div>
@@ -28,25 +34,29 @@
     <div class="info-column">
       <div class="info-row">
         <span class="label">Name :</span>
-        <span class="info">김땡땡</span>
+        <span class="info" th:text="${profile.name}"></span>
       </div>
       <div class="info-row">
         <span class="label">Medical Code :</span>
-        <span class="info">D123456</span>
+        <span class="info" th:text="${profile.pmCode}"></span>
       </div>
       <div class="info-row">
         <span class="label">Position :</span>
-        <span class="info">의사</span>
+        <span class="info" th:text="${profile.positionDTO.positionName}"></span>
       </div>
     </div>
     <div class="info-column">
       <div class="info-row">
         <span class="label">Phone Number :</span>
-        <span class="info">010-1234-5678</span>
+        <span class="info" th:text="${profile.phone}"></span>
       </div>
       <div class="info-row">
         <span class="label">Company Email :</span>
-        <span class="info">john.doe@example.com</span>
+        <span class="info" th:text="${profile.email}"></span>
+      </div>
+      <div class="info-row">
+        <span class="label">Field name :</span>
+        <span class="info" th:text="${profile.medicalFieldDTO.fieldName}"></span>
       </div>
     </div>
   </div>

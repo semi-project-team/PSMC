@@ -105,6 +105,7 @@
         <result property="positionCode" column="position_code"/>
         <result property="officeNum" column="office_num"/>
         <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
         <association property="positionDTO" resultMap="positionMap"/>
         <association property="medicalFieldDTO" resultMap="medicalFieldMap"/>
     </resultMap>
@@ -114,6 +115,7 @@
             a.name,
             a.office_num,
             a.email,
+            a.phone,
             b.field_name,
             b.field_code,
             c.position_name
@@ -1072,7 +1074,16 @@
         <if test="pageNo!=null">
             limit #{pageNo},4
         </if>
-        ;
+
 
     </select>
+
+    <update id="updatePassword" parameterType="com.javaclass.psmc.user.model.dto.LoginUserDTO">
+        update
+            member_regist
+        set
+            password = #{password}
+        where
+            pm_code = #{pmCode}
+    </update>
 </mapper>

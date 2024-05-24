@@ -5,13 +5,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.common.model.method.FindTimeCode;
+import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 import com.javaclass.psmc.common.model.method.MenuHandling;
 import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -30,6 +33,8 @@ public class MyPageController {
     private ObjectMapper objectMapper;
     private FindTimeCode findTimeCode = new FindTimeCode();
 
+    private MakePhoneNumber makePhoneNumber = new MakePhoneNumber();
+
     private final UserService userService;
     @Autowired
     public MyPageController(UserService userService,ObjectMapper objectMapper){
@@ -38,7 +43,23 @@ public class MyPageController {
     }
 
     @GetMapping("/mypage/mypage")
-    public void mypage(){}
+    public void mypage(HttpSession session, Model model){
+
+        String message = (String) session.getAttribute("message");
+        session.removeAttribute("message");
+        model.addAttribute("message",message);
+
+        LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
+
+        String pmCode = loginUserDTO.getPmCode();
+
+        ProfileDTO profile= userService.findEmployeeByPmCode(pmCode);
+
+        profile.setPhone(makePhoneNumber.formatPhoneNumber(profile.getPhone()));
+        System.out.println(profile);
+
+        model.addAttribute("profile",profile);
+    }
 
     @GetMapping(value = "/todayMenu",produces = "application/json; charset=UTF-8")
     @ResponseBody

@@ -266,6 +266,11 @@ public class UserService {
         return userMapper.findAllBlogByProjectNo(sender);
     }
 
+    public int updatePassword(LoginUserDTO loginUserDTO) {
+
+        return userMapper.updatePassword(loginUserDTO);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }
