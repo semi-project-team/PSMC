@@ -11,10 +11,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.annotation.PatchExchange;
 
 import java.util.HashMap;
@@ -85,13 +82,21 @@ public class MediConnectController {
         EmployeeDTO employee = mediConnectService.showEmployee(parameter);
         List<ShowAllMediChatDTO> chat = mediConnectService.showMediChatDetail(parameter);
 
+        session.setAttribute("mediChatDetail", chat);
 
+        model.addAttribute("pmCode", pmCode);
         model.addAttribute("boardDetail", mediConnect);
         model.addAttribute("patientDetail", patient);
         model.addAttribute("employeeDetail", employee);
         model.addAttribute("mediChatDetail", chat);
 
         return "/medi/mediConnectDetail";
+    }
+
+    @GetMapping(value = "/medi/responseChat", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<ShowAllMediChatDTO> responseChat(HttpSession session) {
+        return (List<ShowAllMediChatDTO>) session.getAttribute("mediChatDetail");
     }
 
 }
