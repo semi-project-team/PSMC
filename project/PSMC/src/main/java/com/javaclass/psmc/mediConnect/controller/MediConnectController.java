@@ -1,5 +1,7 @@
 package com.javaclass.psmc.mediConnect.controller;
 
+import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
 import com.javaclass.psmc.mediConnect.model.service.MediConnectService;
@@ -78,10 +80,16 @@ public class MediConnectController {
         parameter.put("mediNo", mediNo);
         parameter.put("projectNo", projectNo);
 
-        List<ShowMediConnectDTO> mediConnect = mediConnectService.showBoardDetail(parameter);
-        List<ShowAllProjectsDTO> patient = mediConnectService.showPatientDetail(parameter);
+        ShowMediConnectDTO mediConnect = mediConnectService.showBoardDetail(parameter);
+        ShowAllProjectsDTO patient = mediConnectService.showPatientDetail(parameter);
+        EmployeeDTO employee = mediConnectService.showEmployee(parameter);
+        List<ShowAllMediChatDTO> chat = mediConnectService.showMediChatDetail(parameter);
+
+
         model.addAttribute("boardDetail", mediConnect);
         model.addAttribute("patientDetail", patient);
+        model.addAttribute("employeeDetail", employee);
+        model.addAttribute("mediChatDetail", chat);
 
         return "/medi/mediConnectDetail";
     }

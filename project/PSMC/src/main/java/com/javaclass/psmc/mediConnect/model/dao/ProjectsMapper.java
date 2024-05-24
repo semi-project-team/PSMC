@@ -1,5 +1,7 @@
 package com.javaclass.psmc.mediConnect.model.dao;
 
+import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,9 +20,14 @@ public interface ProjectsMapper {
 
     int deleteProjects(Map<String, List<Integer>> projectParam);
 
-    List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
+    ShowAllProjectsDTO showPatientDetail(Map<String, Object> parameter);
 
-    List<ShowAllProjectsDTO> showPatientDetail(Map<String, Object> parameter);
+    ShowMediConnectDTO showBoardDetail(Map<String, Object> parameter);
+
+    EmployeeDTO showEmployee(Map<String, Object> parameter);
+
+    List<ShowAllMediChatDTO> showMediChatDetail(Map<String, Object> parameter);
+
 
 //    List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
 }
