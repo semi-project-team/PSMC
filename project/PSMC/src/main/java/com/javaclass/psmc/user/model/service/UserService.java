@@ -223,7 +223,7 @@ public class UserService {
         return userMapper.assignProject(assignProjectDTO);
     }
 
-    public List<TheraLinkWithMonthDTO> findAllTheraLinkByProjectNo(int projectNo) {
+    public List<TheraLinkWithMonthDTO> findAllTheraLinkByProjectNo(Map<String,Integer> projectNo) {
 
         return userMapper.findAllTheraLinkByProjectNo(projectNo);
     }
@@ -259,6 +259,11 @@ public class UserService {
     public int insertTheraLinkPhoto(TheraLinkPhotoDTO newPhoto) {
 
         return userMapper.insertTheraLinkPhoto(newPhoto);
+    }
+
+    public List<BlogDTO> findAllBlogByProjectNo(Map<String, Integer> sender) {
+
+        return userMapper.findAllBlogByProjectNo(sender);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {

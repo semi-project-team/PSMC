@@ -27,10 +27,10 @@
                 <div class="col-lg-3 col-md-6 mt-4 pt-2 blogPage">
                     <div class="blog-post rounded border">
                         <div class="blog-img d-block overflow-hidden position-relative">
-                            <th:block th:if="${thera.theraLinkPhotoDTOS[0].getTheralinkSavedName()!=null}">
-                                <img th:src="|/static/common/postimg/${thera.theraLinkPhotoDTOS[0].getTheralinkSavedName()}|" class="img-fluid rounded-top" alt>
+                            <th:block th:if="${thera.savedName!=null}">
+                                <img th:src="|/static/common/postimg/${thera.savedName}|" class="img-fluid rounded-top" alt>
                             </th:block>
-                            <th:block th:unless="${thera.theraLinkPhotoDTOS[0].getTheralinkSavedName()!=null}">
+                            <th:block th:unless="${thera.savedName!=null}">
                                 <img src="https://www.bootdey.com/image/350x280/FF7F50/000000" class="img-fluid rounded-top" alt>
                             </th:block>
                             <div class="overlay rounded-top bg-dark"></div>
@@ -62,22 +62,49 @@
         <br>
         <nav class="d-flex justify-content-center">
             <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
+                <th:block th:if="${pageNo}!=1">
                 <li class="page-item">
-                    <a class="page-link no-border" href="#">
+                    <a class="page-link no-border" th:href="@{|/theraLink/open/${projectNo}/${pageNo - 1}|}">
                         <span aria-hidden="true">«</span>
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
-                <li class="page-item active"><a class="page-link no-border" href="#">1</a></li>
-                <li class="page-item"><a class="page-link no-border" href="#">2</a></li>
-                <li class="page-item"><a class="page-link no-border" href="#">3</a></li>
-                <li class="page-item"><a class="page-link no-border" href="#">4</a></li>
+                </th:block>
+                <th:block th:if="${pageNo}==1">
+                    <li class="page-item disabled">
+                        <a class="page-link no-border">
+                            <span aria-hidden="true">«</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                </th:block>
+                <th:block th:with="start=1, last=${totalPage}">
+                    <th:block th:each="p : ${#numbers.sequence(start,last)}">
+                        <th:block th:if="${pageNo == p}">
+                            <li class="page-item active"><a class="page-link no-border" th:href="@{|/theraLink/open/${projectNo}/${p}|}" th:text="${p}"></a></li>
+                        </th:block>
+                        <th:block th:if="${pageNo != p}">
+                            <li class="page-item"><a class="page-link no-border" th:href="@{|/theraLink/open/${projectNo}/${p}|}" th:text="${p}"></a></li>
+                        </th:block>
+
+                    </th:block>
+                </th:block>
+                <th:block th:if="${totalPage!=pageNo}">
                 <li class="page-item">
-                    <a class="page-link no-border" href="#">
+                    <a class="page-link no-border" th:href="@{|/theraLink/open/${projectNo}/${pageNo + 1}|}">
                         <span aria-hidden="true">»</span>
                         <span class="sr-only">Next</span>
                     </a>
                 </li>
+                </th:block>
+                <th:block th:if="${totalPage==pageNo}">
+                    <li class="page-item disabled">
+                        <a class="page-link no-border">
+                            <span aria-hidden="true">»</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </th:block>
             </ul>
         </nav>
         <!-- pagination -->

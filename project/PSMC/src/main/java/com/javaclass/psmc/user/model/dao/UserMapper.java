@@ -93,7 +93,7 @@ public interface UserMapper {
 
     int assignProject(AssignProjectDTO assignProjectDTO);
 
-    List<TheraLinkWithMonthDTO> findAllTheraLinkByProjectNo(int projectNo);
+    List<TheraLinkWithMonthDTO> findAllTheraLinkByProjectNo(Map<String,Integer> projectNo);
 
     int deleteTheraLink(Map<String, List<Integer>> theraNos);
 
@@ -106,4 +106,6 @@ public interface UserMapper {
     int makeTheraLink(TheraLinkDTO theraLinkDTO);
 
     int insertTheraLinkPhoto(TheraLinkPhotoDTO newPhoto);
+
+    List<BlogDTO> findAllBlogByProjectNo(Map<String, Integer> sender);
 }
