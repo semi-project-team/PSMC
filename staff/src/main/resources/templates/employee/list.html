@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--    <link rel="stylesheet" href="/assets/css/list.css">-->
+    <title>list</title>
+    <style>
+        .center-element {
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            text-align: center;
+            /* height: 100vh */
+        }
+
+        .center-element label, .center-element select, .center-element button {
+            margin: 5px; /* 각 요소의 상하좌우 여백을 5px로 지정합니다. */
+        }
+
+        .center-element select {
+            width: 200px; /* <select> 요소의 너비를 200px로 설정합니다. */
+            height: 20px; /* <select> 요소의 높이를 20px로 설정합니다. */
+        }
+    </style>
+</head>
+
+<body>
+    <form class="center-element" action="/employee/search" method="get">
+        <label> 이름 : </label><input type="text" name="name">
+    <select name="fieldCode">
+        <option value="1">정형외과수술</option>
+        <option value="2">관절치료</option>
+        <option value="3">척추치료</option>
+        <option value="4">근육 및 인대치료</option>
+        <option value="5">신경과</option>
+        <option value="6">심리치료</option>
+    </select>
+    <button type="submit">조회</button>
+    </form>
+    <br></br>
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>전화번호</th>
+            <th>연구실번호</th>
+            <th>전공분야</th>
+            <th>직급</th>
+        </tr>
+        <tr th:each="employee : ${employeeList}">
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.phone}"></td>
+            <td th:text="${employee.officeNum}"></td>
+            <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
+            <td th:text="${employee.positionDTO.positionName}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

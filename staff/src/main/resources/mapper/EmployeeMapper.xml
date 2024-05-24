@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psmc.staff.model.EmployeeMapper">
+
+    <resultMap id="employeeResultMap" type="com.psmc.staff.model.EmployeeDTO">
+        <id property="pmCode" column="pm_Code"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="positionCode" column="position_code"/>
+        <result property="gender" column="gender"/>
+        <result property="officeNum" column="office_num"/>
+        <result property="fieldCode" column="field_code"/>
+        <association property="medicalFieldDTO" resultMap="medicalFieldResultMap"/>
+        <association property="positionDTO" resultMap="positionResultMap"/>
+    </resultMap>
+    <resultMap id="medicalFieldResultMap" type="com.psmc.staff.model.MedicalFieldDTO">
+        <id property="fieldCode" column="field_code"/>
+        <result property="fieldName" column="field_name"/>
+    </resultMap>
+    <resultMap id="positionResultMap" type="com.psmc.staff.model.PositionDTO">
+        <id property="positionCode" column="position_code"/>
+        <result property="positionName" column="position_name"/>
+    </resultMap>
+
+    <select id="findAllEmployee" resultMap="employeeResultMap">
+        SELECT
+            a.name,
+            a.email,
+            a.phone,
+            a.office_num,
+            b.field_name,
+            c.position_name
+
+        FROM employee a
+
+        JOIN medical_field b ON a.field_code = b.field_code
+
+        JOIN position c ON a.position_code = c.position_code
+
+        WHERE a.position_code = 4
+
+    </select>
+
+    <select id="searchByParam" resultMap="employeeResultMap">
+        SELECT
+        a.name,
+        a.email,
+        a.phone,
+        a.office_num,
+        b.field_name,
+        c.position_name
+
+        FROM employee a
+
+        JOIN medical_field b ON a.field_code = b.field_code
+
+        JOIN position c ON a.position_code = c.position_code
+
+        WHERE
+        <if test="name != null">
+            AND name = #{ name }
+        </if>
+        <if test="fieldName != null">
+            AND field_name = #{ fieldName }
+        </if>
+
+    </select>
+
+    <resultMap id="employeeAndMedicalMap" type="com.psmc.staff.model.EmployeeToMedicalFieldDTO">
+        <id property="pmCode" column="pmCode"/>
+        <result property="empNo" column="emp_no"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="positionCode" column="position_code"/>
+        <result property="gender" column="gender"/>
+        <result property="officeNum" column="office_num"/>
+        <result property="fieldCode" column="field_code"/>
+        <association property="medicalFieldDTO" resultMap="medicalFieldResultMap"/>
+        <association property="positionDTO" resultMap="positionResultMap"/>
+    </resultMap>
+
+    <select id="findMemberByFieldCode" resultMap="employeeAndMedicalMap" parameterType="hashmap">
+        select
+            a.*,
+            b.field_name,
+            c.position_name
+        from
+            employee a
+        join
+            medical_field b
+        on
+            a.field_code = b.field_code
+        join
+            position c
+        on
+            c.position_code= a.position_code
+
+        <where>
+            <if test="name !=null">
+                a.name = #{name}
+            </if>
+            <if test="fieldCode!=null">
+                and
+                a.field_code = #{fieldCode}
+            </if>
+        </where>
+    </select>
+
+</mapper>
