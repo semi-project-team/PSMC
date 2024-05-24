@@ -29,9 +29,9 @@ public class EmployeeController {
     @GetMapping("/list")
     public String findEmployeeList(Model model){
 
-        List<EmployeeDTO> EmployeeList = employeeService.findAllEmployee();
+        List<EmployeeDTO> employeeList = employeeService.findAllEmployee();
 
-        model.addAttribute("employeeList", EmployeeList);
+        model.addAttribute("employeeList", employeeList);
 
         return "/employee/list";
     }

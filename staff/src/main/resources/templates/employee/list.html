@@ -2,8 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+<!--    <link rel="stylesheet" href="/assets/css/list.css">-->
+    <title>list</title>
+    <style>
+        .center-element {
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            text-align: center;
+            /* height: 100vh */
+        }
+
+        .center-element label, .center-element select, .center-element button {
+            margin: 5px; /* 각 요소의 상하좌우 여백을 5px로 지정합니다. */
+        }
+
+        .center-element select {
+            width: 200px; /* <select> 요소의 너비를 200px로 설정합니다. */
+            height: 20px; /* <select> 요소의 높이를 20px로 설정합니다. */
+        }
+    </style>
 </head>
+
 <body>
     <form class="center-element" action="/employee/search" method="get">
         <label> 이름 : </label><input type="text" name="name">
@@ -32,8 +52,8 @@
             <td th:text="${employee.email}"></td>
             <td th:text="${employee.phone}"></td>
             <td th:text="${employee.officeNum}"></td>
-            <td th:text="${employee.medicalFieldDTO.field_name}"></td>
-            <td th:text="${employee.positionDTO.position_name}"></td>
+            <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
+            <td th:text="${employee.positionDTO.positionName}"></td>
         </tr>
     </table>
 

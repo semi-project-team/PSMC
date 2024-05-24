@@ -42,7 +42,7 @@
 
         JOIN position c ON a.position_code = c.position_code
 
-        WHERE a.position_code = 3
+        WHERE a.position_code = 4
 
     </select>
 

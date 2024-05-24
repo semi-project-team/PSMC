@@ -1,0 +1,16 @@
+.center-element {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    /* height: 100vh */
+}
+
+.center-element label, .center-element select, .center-element button {
+    margin: 5px; /* 각 요소의 상하좌우 여백을 5px로 지정합니다. */
+}
+
+.center-element select {
+    width: 200px; /* <select> 요소의 너비를 200px로 설정합니다. */
+    height: 20px; /* <select> 요소의 높이를 20px로 설정합니다. */
+}
