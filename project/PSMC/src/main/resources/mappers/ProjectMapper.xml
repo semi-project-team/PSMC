@@ -167,7 +167,40 @@
             employee
         where
             pm_code = #{pmCode}
+    </select>
 
+    <resultMap id="showMediChatDetailResultMap" type="com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO">
+        <id property="chatNo" column="chat_no"/>
+        <result property="contents" column="contents"/>
+        <result property="mediNo" column="medi_no"/>
+        <result property="pmCode" column="pm_code"/>
+        <result property="mediChatBoardDate" column="medi_chat_board_date"/>
+        <result property="mediChatStatus" column="medi_chat_status"/>
+        <association property="employeeDTO" resultMap="employeeResultMap"/>
+        <association property="memberRegistDTO" resultMap="memberRegistResultMap"/>
+    </resultMap>
+
+    <select id="showMediChatDetail" resultMap="showMediChatDetailResultMap" parameterType="hashmap">
+        select
+            b.name,
+            c.id,
+            a.pm_code,
+            a.chat_no,
+            a.medi_no,
+            a.contents,
+            a.medi_chat_board_date
+        from
+            medi_chat a
+        join
+            employee b on a.pm_code = b.pm_code
+        join
+            member_regist c on a.pm_code = c.pm_code
+        where
+            a.medi_no = #{mediNo}
+        and
+            a.medi_chat_status = 'Y'
+        order by
+            medi_chat_board_date;
     </select>
 
 </mapper>

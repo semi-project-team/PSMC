@@ -142,7 +142,7 @@
             border: 1px solid #ddd;
             border-radius: 8px 8px 8px 8px;
             margin-bottom: 1px;
-            padding: 3px;
+            padding: 1rem;
             transition: background-color 0.3s;
             display: flex;
             align-items: center;
@@ -153,19 +153,19 @@
 
 
         .list-group-item h5 {
-            font-size: 0.7rem;
+            font-size: 0.9rem;
             margin-bottom: 5px;
             color: black;
         }
 
         .list-group-item p {
-            font-size: 0.6rem;
+            font-size: 0.8rem;
             margin-bottom: 0.25rem;
         }
 
         .list-group-item small {
             color: #999;
-            font-size: 0.5rem;
+            font-size: 0.6rem;
         }
 
 
@@ -365,86 +365,86 @@
             <hr style="color: rgb(71, 149, 78); border-width: 6px; margin: 10px 0;">
             <div class="commentCards">
                 <div class="list-group">
-                    <div class="list-one">
+                    <div class="list-one" th:each="chat : ${mediChatDetail}">
                         <input type="checkbox">
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true"
                            data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <div class="commentCard">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
-                                    <small class="text-body-secondary"><b>Reply(3)</b>
+                                    <h5 class="mb-1" th:text="${chat.employeeDTO.name} + ' 치료사 (' + ${chat.memberRegistDTO.id} + ')'"></h5>
+<!--                                    <small class="text-body-secondary"><b>Reply(3)</b>-->
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
                                             <path
                                                     d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
                                         </svg>
                                     </small>
-                                    <small class="text-body-secondary">2024.05.10</small>
+                                    <small class="text-body-secondary" th:text="${chat.mediChatBoardDate}"></small>
                                 </div>
-                                <p class="mb-1">Some placeholder content in a paragraph.</p>
+                                <p class="mb-1" th:text="${{chat.contents}}"></p>
                             </div>
                         </a>
                     </div>
-                    <div class="list-one">
-                        <input type="checkbox">
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
-                           data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="commentCard">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
-                                    <small class="text-body-secondary"><b>Reply(3)</b>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
-                                            <path
-                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
-                                        </svg>
-                                    </small>
-                                    <small class="text-body-secondary">2024.05.10</small>
-                                </div>
-                                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="list-one">
-                        <input type="checkbox">
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
-                           data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="commentCard">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
-                                    <small class="text-body-secondary"><b>Reply(3)</b>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
-                                            <path
-                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
-                                        </svg>
-                                    </small>
-                                    <small class="text-body-secondary">2024.05.10</small>
-                                </div>
-                                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="list-one">
-                        <input type="checkbox">
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
-                           data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="commentCard">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>
-                                    <small class="text-body-secondary"><b>Reply(3)</b>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
-                                            <path
-                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
-                                        </svg>
-                                    </small>
-                                    <small class="text-body-secondary">2024.05.10</small>
-                                </div>
-                                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                            </div>
-                        </a>
-                    </div>
+<!--                    <div class="list-one">-->
+<!--                        <input type="checkbox">-->
+<!--                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"-->
+<!--                           data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                            <div class="commentCard">-->
+<!--                                <div class="d-flex w-100 justify-content-between">-->
+<!--                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>-->
+<!--                                    <small class="text-body-secondary"><b>Reply(3)</b>-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"-->
+<!--                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">-->
+<!--                                            <path-->
+<!--                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />-->
+<!--                                        </svg>-->
+<!--                                    </small>-->
+<!--                                    <small class="text-body-secondary">2024.05.10</small>-->
+<!--                                </div>-->
+<!--                                <p class="mb-1">Some placeholder content in a paragraph.</p>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="list-one">-->
+<!--                        <input type="checkbox">-->
+<!--                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"-->
+<!--                           data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                            <div class="commentCard">-->
+<!--                                <div class="d-flex w-100 justify-content-between">-->
+<!--                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>-->
+<!--                                    <small class="text-body-secondary"><b>Reply(3)</b>-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"-->
+<!--                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">-->
+<!--                                            <path-->
+<!--                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />-->
+<!--                                        </svg>-->
+<!--                                    </small>-->
+<!--                                    <small class="text-body-secondary">2024.05.10</small>-->
+<!--                                </div>-->
+<!--                                <p class="mb-1">Some placeholder content in a paragraph.</p>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div class="list-one">-->
+<!--                        <input type="checkbox">-->
+<!--                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"-->
+<!--                           data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                            <div class="commentCard">-->
+<!--                                <div class="d-flex w-100 justify-content-between">-->
+<!--                                    <h5 class="mb-1"><b>서정민 치료사</b> (tjwjdals0803)</h5>-->
+<!--                                    <small class="text-body-secondary"><b>Reply(3)</b>-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"-->
+<!--                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">-->
+<!--                                            <path-->
+<!--                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />-->
+<!--                                        </svg>-->
+<!--                                    </small>-->
+<!--                                    <small class="text-body-secondary">2024.05.10</small>-->
+<!--                                </div>-->
+<!--                                <p class="mb-1">Some placeholder content in a paragraph.</p>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                    </div>-->
                 </div>
             </div>
             <div class="delete-btn">
