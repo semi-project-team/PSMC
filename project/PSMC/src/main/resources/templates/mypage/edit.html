@@ -1,124 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="/assets/css/edit.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Edit Member Information</title>
+    <link rel="stylesheet" href="/assets/css/edit.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-
 <body style="background-color: rgb(215, 214, 214);">
-<th:block th:insert="~{/common/nav}"></th:block>
-<th:block th:insert="~{/common/header}"></th:block>
+<div th:insert="~{/common/nav}"></div>
+<div th:insert="~{/common/header}"></div>
 <div class="container4">
-  <div class="box1-4">
-    <div>Edit Member Information</div>
-  </div>
-  <div class="box2-4">
-    <form action="/memberUpdate" method="post">
-<!--    <input type="hidden" class="form-control" id="id" value="*{id}" readonly>-->
-<!--    <input type="hidden" class="form-control" id="role" value="*{role}" readonly>-->
+    <div class="box1-4">
+        <div>Edit Member Information</div>
+    </div>
+    <div class="box2-4">
+        <form id="editForm" action="/memberUpdate" method="post">
+            <input type="hidden" name="pmCode" th:value="${profile.employeeDTO.pmCode}">
 
-    <div class="mb-3 px-2">
-      <label for="name">Name</label>
-      <input name="name" type="text" class="form-control" id="name" oninput="nameModify()">
-      <span class="name_ok">사용 가능한 이름입니다.</span>
-    </div>
+            <div class="mb-3 px-2">
+                <label for="name">Name</label>
+                <input name="name" type="text" class="form-control" id="name" th:value="${profile.employeeDTO.name}">
+            </div>
 
-      <div class="mb-3 px-2">
-        <label for="id">Id</label>
-        <input name="id" type="text" class="form-control" id="id" th:placeholder="${employee.name}">
-      </div>
+            <div class="mb-3 px-2">
+                <label for="id">ID</label>
+                <input name="id" type="text" class="form-control" id="id" th:value="${profile.memberRegistDTO.id}" readonly>
+            </div>
 
-    <div class="mb-3 px-2">
-    <label class="form-label" for="birth">Birth</label>
-    <div class="mb-3" id="birth" onchange="checkAgeModify()">
-      <div class="row g-2">
-        <div class="col">
-          <select class="form-control" id="year" name="year">
-            <option value="" selected>year</option>
-            <option value="">년(YY)</option>
-            <th:block th:each="a: ${#numbers.sequence(2024,1900)}">
-              <option th:value="${a}" th:text="${a}"></option>
-            </th:block>
-          </select>
-        </div>
-        <div class="col">
-          <select class="form-control" id="month" name="month">
-            <option value="" selected>month</option>
-            <option value="">월(mm)</option>
-            <th:block th:each="month: ${#numbers.listFormatInteger(#numbers.sequence(1,12),2)}">
-              <option th:value="${month}" th:text="${month}"></option>
-            </th:block>
-          </select>
-        </div>
-        <div class="col">
-          <select class="form-control" id="day" name="day">
-            <option value="" selected>day</option>
-            <option value="">일(dd)</option>
-            <th:block th:each="day: ${#numbers.listFormatInteger(#numbers.sequence(1,31),2)}">
-              <option th:value="${day}" th:text="${day}"></option>
-            </th:block>
-          </select>
-        </div>
-      </div>
-    </div>
-      <span id="birth_check_msg"></span>
-    </div>
+            <div class="mb-3 px-2">
+                <label for="birth">Birth</label>
+                <input name="birth" type="text" class="form-control" id="birth" th:value="${profile.memberRegistDTO.birth}" readonly>
+            </div>
 
-    <div class="mb-3 px-2">
-      <label>성별</label><br>
-        <div class="btn-group" role="group" aria-label="Default button group">
-            <button value="M" name="gender" type="button" class="btn btn-outline-primary" id="maleBtn" onclick="toggleGender('M')">Male</button>
-            <button value="F" name="gender" type="button" class="btn btn-outline-primary" id="femaleBtn" onclick="toggleGender('F')">Female</button>
-        </div>
-    </div>
+            <div class="mb-3 px-2">
+                <label for="gender">Gender</label>
+                <input name="gender" type="text" class="form-control" id="gender" th:value="${profile.employeeDTO.gender}" readonly>
+            </div>
 
+            <div class="mb-3 px-2">
+                <label for="position">Position</label>
+                <input name="position" type="text" class="form-control" id="position" th:value="${profile.employeeDTO.positionCode}" readonly>
+            </div>
 
-    <div class="row mb-3 px-2">
-      <div class="col">
-        <label for="email">Email</label>
-        <input name="email" type="email" class="form-control" id="email" value="">
-      </div>
-      <div class="col">
-        <label for="companyEmail">Company Email</label>
-        <input name="companyEmail" type="email" class="form-control" id="companyEmail" value="">
-      </div>
-    </div>
+            <div class="mb-3 px-2 row">
+                <div class="col">
+                    <label for="companyEmail">Company Email</label>
+                    <input name="companyEmail" type="email" class="form-control" id="companyEmail" th:value="${profile.employeeDTO.email}">
+                </div>
+                <div class="col">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" class="form-control" id="email" th:value="${profile.memberRegistDTO.email}">
+                </div>
+            </div>
 
-    <div class="row mb-3 px-2">
-      <div class="col">
-      <label for="phone">Phone Number</label>
-      <input name="phone"  type="text" class="form-control" id="phone" value="">
-    </div>
-    <div class="col">
-      <label for="officeNum">Office Number</label>
-      <input name="officeNum" type="text" class="form-control" id="officeNum" value="">
-    </div>
-    </div>
+            <div class="mb-3 px-2 row">
+                <div class="col">
+                    <label for="phone">Phone</label>
+                    <input name="phone" type="text" class="form-control" id="phone" th:value="${profile.employeeDTO.phone}">
+                </div>
+                <div class="col">
+                    <label for="officeNum">Office Number</label>
+                    <input name="officeNum" type="text" class="form-control" id="officeNum" th:value="${profile.employeeDTO.officeNum}">
+                </div>
+            </div>
 
-    <div class="row mb-3 px-2">
-      <div class="col">
-        <label for="pm_code">Employee Code</label>
-        <input name="employeeCode" type="text" class="form-control" id="pm_code" value="" readonly>
-      </div>
-      <div class="col">
-      <label for="position">Position</label>
-      <input name="position" type="text" class="form-control" id="position" value="" readonly>
-      </div>
+<!--            <button type="submit" class="btn btn-primary">Update</button>-->
+            <div class="mb-3 px-2 row">
+                <div class="col">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" onclick="return modifyCheckAll()">수정</button>
+                </div>
+                <div class="col">
+                    <a type="button" style="color:white" class="w-100 btn btn-lg btn-secondary" onclick="window.history.back();">취소</a>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <div class="mb-3 px-2">
-      <button class="w-100 btn btn-lg btn-primary" type="submit" onclick="return modifyCheckAll()">수정</button>
-    </div>
-
-    <div class="mb-3 px-2">
-      <a type="button" style="color:white" class="w-100 btn btn-lg btn-secondary" onclick="window.history.back();">취소</a>
-    </div>
-    </form>
-  </div>
 </div>
-<script src="/assets/js/edit.js"></script>
-
+<script>
+    document.getElementById("editForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // 폼 제출 기본 동작 막기
+        // 폼 데이터를 서버로 전송하는 비동기 요청
+        fetch("/memberUpdate", {
+            method: "POST",
+            body: new FormData(document.getElementById("editForm"))
+        })
+            .then(response => {
+                if (response.ok) {
+                    // 성공적으로 수정되면 팝업 창 표시
+                    alert("수정이 완료되었습니다.");
+                    // 팝업 창 확인 후 마이페이지로 이동
+                    window.location.href = "/mypage";
+                } else {
+                    // 서버 오류 등의 이유로 수정에 실패한 경우
+                    alert("수정에 실패했습니다. 다시 시도해주세요.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("수정에 실패했습니다. 다시 시도해주세요.");
+            });
+    });
+</script>
 </body>
 </html>

@@ -14,6 +14,7 @@
         <result property="role" column="role"/>
         <result property="pmCode" column="pm_code"/>
     </resultMap>
+
     <resultMap id="employeeMap" type="com.javaclass.psmc.common.model.dto.EmployeeDTO">
         <id property="pmCode" column="pm_code"/>
         <result property="empNo" column="emp_no"/>
@@ -42,26 +43,25 @@
 
     <update id="updateEmployee" parameterType="com.javaclass.psmc.mypage.model.dto.EditDTO">
         update
-            employee
+        employee
         <set>
-
-            <if test ="name != null">name=#{name},</if>
+            <if test="name != null">name=#{name},</if>
             <if test="companyEmail != null">email=#{companyEmail},</if>
-            <if test="phone !=null">phone=#{phone},</if>
+            <if test="phone != null">phone=#{phone},</if>
             <if test="officeNum != null">office_num=#{officeNum}</if>
         </set>
+        where pm_code = #{pmCode}
     </update>
 
     <update id="updateRegist" parameterType="com.javaclass.psmc.mypage.model.dto.EditDTO">
         update
-            member_regist
+        member_regist
         <set>
-
-            <if test ="id != null">id=#{id},</if>
             <if test="email != null">email=#{email}</if>
         </set>
+        where pm_code = #{pmCode}
     </update>
-    
+
     <select id="employeeDetail" parameterType="hashmap" resultMap="EditMap">
         SELECT * from employee
         where pm_code = #{pmCode}

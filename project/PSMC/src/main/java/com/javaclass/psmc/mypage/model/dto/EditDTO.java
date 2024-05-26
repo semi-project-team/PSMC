@@ -1,7 +1,6 @@
 package com.javaclass.psmc.mypage.model.dto;
 
 public class EditDTO {
-
     private String name;
     private String id;
     private String email;
