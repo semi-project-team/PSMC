@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -30,7 +30,12 @@
     <div class="containerouter">
         <div class="box1">
             <div class="profile">
-                <img src="/common/img/profile.png">
+                <th:block th:if="${profile.getEmployeePhotoDTO().getEmployeeSavedName()!=null}">
+                    <img th:src="@{|/common/employeeimg/${profile.getEmployeePhotoDTO().getEmployeeSavedName()}|}" alt="/common/img/profile.png" class="circle-image">
+                </th:block>
+                <th:block th:if="${profile.employeePhotoDTO.employeeSavedName==null}">
+                    <img src="/common/img/profile.png">
+                </th:block>
             </div>
             <div class="profile-details">
                 <h2 id="profileName" th:text="${profile.name}"></h2>

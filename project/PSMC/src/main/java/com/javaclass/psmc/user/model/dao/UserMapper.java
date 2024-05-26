@@ -116,4 +116,8 @@ public interface UserMapper {
     LoginUserDTO findId(FindIdDTO findIdDTO);
 
     LoginUserDTO findMemberForPassword(FindPasswordDTO findPasswordDTO);
+
+    int updateEmployeePhoto(EmployeePhotoDTO savePhoto);
+
+    int insertEmployeePhoto(EmployeePhotoDTO savePhoto);
 }

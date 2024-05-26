@@ -16,10 +16,11 @@ public class ProfileDTO {
     private String phone;
     private PositionDTO positionDTO;
     private MedicalFieldDTO medicalFieldDTO;
+    private EmployeePhotoDTO employeePhotoDTO;
 
     public ProfileDTO(){}
 
-    public ProfileDTO(String pmCode, String name, int fieldCode, int positionCode, String officeNum, String email, String phone, PositionDTO positionDTO, MedicalFieldDTO medicalFieldDTO) {
+    public ProfileDTO(String pmCode, String name, int fieldCode, int positionCode, String officeNum, String email, String phone, PositionDTO positionDTO, MedicalFieldDTO medicalFieldDTO, EmployeePhotoDTO employeePhotoDTO) {
         this.pmCode = pmCode;
         this.name = name;
         this.fieldCode = fieldCode;
@@ -29,6 +30,7 @@ public class ProfileDTO {
         this.phone = phone;
         this.positionDTO = positionDTO;
         this.medicalFieldDTO = medicalFieldDTO;
+        this.employeePhotoDTO = employeePhotoDTO;
     }
 
     public String getPmCode() {
@@ -103,6 +105,13 @@ public class ProfileDTO {
         this.medicalFieldDTO = medicalFieldDTO;
     }
 
+    public EmployeePhotoDTO getEmployeePhotoDTO() {
+        return employeePhotoDTO;
+    }
+
+    public void setEmployeePhotoDTO(EmployeePhotoDTO employeePhotoDTO) {
+        this.employeePhotoDTO = employeePhotoDTO;
+    }
 
     @Override
     public String toString() {
@@ -116,6 +125,7 @@ public class ProfileDTO {
                 ", phone='" + phone + '\'' +
                 ", positionDTO=" + positionDTO +
                 ", medicalFieldDTO=" + medicalFieldDTO +
+                ", employeePhotoDTO=" + employeePhotoDTO +
                 '}';
     }
 }

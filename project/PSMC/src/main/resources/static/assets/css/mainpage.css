@@ -63,6 +63,11 @@ body,html{
     display: block;
 }
 
+.circle-image{
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .profile-details {
     flex: 1; /* 남은 공간 모두 차지 */
     color: white;

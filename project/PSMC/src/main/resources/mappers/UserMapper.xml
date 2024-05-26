@@ -98,6 +98,13 @@
         <result property="fieldName" column="field_name"/>
     </resultMap>
 
+    <resultMap id="employeePhotoMap" type="com.javaclass.psmc.mainPage.model.dto.EmployeePhotoDTO">
+        <id property="employeePhotoNo" column="employee_photo_no"/>
+        <result property="employeeOriginName" column="employee_origin_name"/>
+        <result property="employeeSavedName" column="employee_saved_name"/>
+        <result property="employee_filepath" column="employeeFilepath"/>
+        <result property="pmCode" column="pm_code"/>
+    </resultMap>
     <resultMap id="profileMap" type="com.javaclass.psmc.mainPage.model.dto.ProfileDTO">
         <id property="pmCode" column="pm_code"/>
         <result property="name" column="name"/>
@@ -108,6 +115,7 @@
         <result property="phone" column="phone"/>
         <association property="positionDTO" resultMap="positionMap"/>
         <association property="medicalFieldDTO" resultMap="medicalFieldMap"/>
+        <association property="employeePhotoDTO" resultMap="employeePhotoMap"/>
     </resultMap>
     <select id="findEmployeeByPmCode" parameterType="string" resultMap="profileMap">
         select
@@ -118,13 +126,18 @@
             a.phone,
             b.field_name,
             b.field_code,
-            c.position_name
+            c.position_name,
+            p.*
         from
             employee a
         join
             medical_field b on a.field_code = b.field_code
         join
             position c on a.position_code = c.position_code
+        left join
+            employee_photo p
+        on
+            p.pm_code = a.pm_code
         where
             a.pm_code = #{pmCode}
     </select>
@@ -1137,5 +1150,19 @@
         and
             e.email = #{email}
     </select>
+    <update id="updateEmployeePhoto" parameterType="com.javaclass.psmc.mainPage.model.dto.EmployeePhotoDTO">
+        update
+            employee_photo
+        set
+            employee_origin_name = #{employeeOriginName},
+            employee_saved_name = #{employeeSavedName},
+            employee_filepath = #{employeeFilepath}
+        where
+            pm_code = #{pmCode}
+    </update>
+    <insert id="insertEmployeePhoto" parameterType="com.javaclass.psmc.mainPage.model.dto.EmployeePhotoDTO">
+        insert employee_photo(employee_origin_name,employee_saved_name,employee_filepath,employee_photo_status,pm_code)
+        values(#{employeeOriginName},#{employeeSavedName},#{employeeFilepath},'Y',#{pmCode})
+    </insert>
 
 </mapper>

@@ -133,9 +133,10 @@
                     <h1 class="modal-title fs-5" >Find Password</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form action="/sendEmail" method="post" style="width: 100%">
                 <div class="modal-body">
 
-                    <form action="/sendEmail" method="post">
+
                     <div class="mb-4">
                         <div class="form-floating" style="overflow: hidden;">
                             <input type="text" class="form-control" id="pmCode1" placeholder="name" autocomplete="off" name="pmCode" required>
@@ -164,9 +165,9 @@
                         </div>
                     </div>
                         <button type="submit" class="btn btn-primary" id="findPasswordModal">Send</button>
-                    </form>
-                </div>
 
+                </div>
+                </form>
             </div>
         </div>
     </div>

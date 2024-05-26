@@ -73,7 +73,7 @@ public class MainController {
     @PostMapping(value = "/sendEmail")
     public String findPassword(@ModelAttribute FindPasswordDTO findPasswordDTO,HttpSession session){
 
-        System.out.println("이메일 발송");
+
         LoginUserDTO log = new LoginUserDTO();
         log = userService.findMemberForPassword(findPasswordDTO);
         String message = null;

@@ -290,6 +290,14 @@ public class UserService {
         return userMapper.findMemberForPassword(findPasswordDTO);
     }
 
+    public int updateEmployeePhoto(EmployeePhotoDTO savePhoto) {
+        return userMapper.updateEmployeePhoto(savePhoto);
+    }
+
+    public int insertEmployeePhoto(EmployeePhotoDTO savePhoto) {
+        return userMapper.insertEmployeePhoto(savePhoto);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }

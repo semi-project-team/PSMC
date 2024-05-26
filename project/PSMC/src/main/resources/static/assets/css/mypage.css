@@ -81,6 +81,7 @@ body {
     margin-top: 45%;
     /* opacity: 0.8; */
     color:rgb(30, 33, 51);
+    cursor: pointer;
 }
 
 .profile2-1 {
@@ -88,10 +89,13 @@ body {
     width: 100%;
 }
 
-.profile2 img{
+#imagePreview{
     width: 60%;
     height: 60%;
-
+}
+#imagePreview img{
+    width: 100%;
+    height: 100%;
 }
 
 .box3-1 {
@@ -270,7 +274,10 @@ body {
 
 
 
-
+.circle-image{
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 
 
