@@ -13,18 +13,21 @@ import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MyPageController {
@@ -32,14 +35,15 @@ public class MyPageController {
     private MenuHandling menuHandling = new MenuHandling();
     private ObjectMapper objectMapper;
     private FindTimeCode findTimeCode = new FindTimeCode();
-
+    private final ResourceLoader resourceLoader;
     private MakePhoneNumber makePhoneNumber = new MakePhoneNumber();
 
     private final UserService userService;
     @Autowired
-    public MyPageController(UserService userService,ObjectMapper objectMapper){
+    public MyPageController(UserService userService,ObjectMapper objectMapper,ResourceLoader resourceLoader){
         this.userService=userService;
         this.objectMapper=objectMapper;
+        this.resourceLoader=resourceLoader;
     }
 
     @GetMapping("/mypage/mypage")
@@ -332,6 +336,53 @@ public class MyPageController {
         List<EmployeeDTO> employeeDTOS = userService.findEmployeeByInjuryCode(injuryCode);
 
         return employeeDTOS;
+    }
+
+    @PostMapping(value = "/uploadProfileImage",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ResponseEntity uploadfileimage(@RequestParam MultipartFile file,HttpSession session) throws IOException {
+        System.out.println("들어온 이미지 이름"+file.getOriginalFilename());
+
+        LoginUserDTO log = ((LoginUserDTO) session.getAttribute("auth"));
+        String pmCode = log.getPmCode();
+        Resource resource =resourceLoader.getResource("classpath:static/common/employeeimg");
+        String filepath=null;
+
+        if(!resource.exists()){
+            String root = "src/main/resources/static/common/employeeimg";
+            File file1 = new File(root);
+            file1.mkdirs();
+
+            filepath=file1.getAbsolutePath();
+        }else{
+            filepath=resourceLoader.getResource("classpath:static/common/employeeimg").getFile().getAbsolutePath();
+        }
+
+        String originName = file.getOriginalFilename();
+
+        String ext = originName.substring(originName.lastIndexOf("."));
+        String savedName = UUID.randomUUID().toString().replace("-","")+ext;
+
+        file.transferTo(new File(filepath+"/"+savedName));
+
+        EmployeePhotoDTO savePhoto = new EmployeePhotoDTO();
+
+        savePhoto.setPmCode(pmCode);
+        savePhoto.setEmployeeSavedName(savedName);
+        savePhoto.setEmployeeFilepath(filepath);
+        savePhoto.setEmployeeOriginName(originName);
+
+        ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
+        if(profileDTO.getEmployeePhotoDTO().getEmployeeSavedName()!=null){
+            int result1 = userService.updateEmployeePhoto(savePhoto);
+        }else{
+            int result2 = userService.insertEmployeePhoto(savePhoto);
+        }
+
+
+
+
+        return ResponseEntity.ok(savePhoto);
     }
 
 

@@ -20,8 +20,19 @@
     <div >My Page</div>
   </div>
   <div class="box2-1">
-    <div class="profile2">
-      <img src="/common/img/프로필.png"></i>
+    <div class="profile2"  id="profileImage">
+      <form action="/updateProfileImage" enctype="multipart/form-data" method="post">
+        <input type="file" accept="image/*" style="display: none" id="inputImages">
+      </form>
+      <div id="imagePreview">
+        <th:block th:if="${profile.employeePhotoDTO.employeeSavedName==null}">
+          <img src="/common/img/employeeProfile.png"></i>
+        </th:block>
+        <th:block th:if="${profile.employeePhotoDTO.employeeSavedName!=null}">
+          <img th:src="@{|/common/employeeimg/${profile.employeePhotoDTO.employeeSavedName}|}" class="circle-image">
+        </th:block>
+
+      </div>
     </div>
     <br><br>
     <div class="profile2-1">
@@ -83,5 +94,7 @@
     </div>
   </div>
 </div>
+
+  <script src="/assets/js/mypage.js"></script>
 </body>
 </html>

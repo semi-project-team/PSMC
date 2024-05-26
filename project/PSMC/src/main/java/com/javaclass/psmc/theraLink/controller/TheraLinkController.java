@@ -132,9 +132,7 @@ public class TheraLinkController {
         List<BlogDTO> blogDTOS = userService.findAllBlogByProjectNo(sender);
 
         
-        for(BlogDTO blogDTO : blogDTOS){
-            System.out.println("blogDTO = " + blogDTO);
-        }
+
 //        int totalData = theraLinkWithMonthDTOS.size();
         int totalData = blogDTOS.size();
 //        int totalPage = (int) Math.ceil(totalData/4.0);
@@ -336,6 +334,7 @@ public class TheraLinkController {
         int result1 = userService.killAllpictureByTheralinkNo(recieveDTO.getTheralinkNo());
 
 
+        System.out.println("theralinkNo"+recieveDTO.getTheralinkNo());
         TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
 
         theraLinkDTO.setTheraLinkNo(recieveDTO.getTheralinkNo());

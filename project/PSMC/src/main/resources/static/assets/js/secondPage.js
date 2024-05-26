@@ -34,7 +34,11 @@ const $blog = document.getElementsByClassName('blogPage');
 const $bloglist = [...$blog];
 const $sendingMessage =document.getElementById('sendingMessage');
 const $inputMessage = document.getElementById('inputMessage');
+
+
+
 $bloglist.forEach(b=>{
+
 
     b.addEventListener('click',e=>{
         const theraLinkNo = b.id;
@@ -66,20 +70,29 @@ $bloglist.forEach(b=>{
 
 
                 const $modifyTheraLink  = document.getElementById('modifyTheraLink');
-                console.log('순서체크1')
+
                 if($modifyTheraLink) {
-                    console.log('왜 안오지')
+
                     $modifyTheraLink.addEventListener('click', e => {
-                        console.log('클릭이벤트')
+
+
                         const $title = document.getElementById('title1');
                         $title.value = data.theraTitle;
                         const $contents = document.getElementById('TheraLink-contents1');
                         $contents.value = data.theraContents;
 
-                        $(function () {
 
+                        $(document).ready(function () {
 
+                            const inputPicture = document.getElementById('modifyPicture')
+                            inputPicture.textContent="";
+                            if(!$('.input-images1').data('initialized')){
                                 $('.input-images1').imageUploader();
+                                $('.input-images1').data('intialized',true);
+                            }
+
+
+
 
 
 
@@ -210,9 +223,18 @@ $bloglist.forEach(b=>{
 
                     })
 
+                    $('#updateTheraLink').on('hidden.bs.modal', function () {
+                        const $inputImages = $('.input-images1');
+                        if ($inputImages.data('imageUploader')) {
+                            $inputImages.data('imageUploader', false);
+                            $inputImages.find('.uploaded').remove();  // Remove uploaded images
+                            $inputImages.find('input[type="file"]').val('');  // Clear file input
+                        }
+                    });
+
                 }
 
-                console.log('순서체크2')
+
 
 
 
@@ -448,3 +470,4 @@ if(createTheraLink) {
 
     })
 }
+
