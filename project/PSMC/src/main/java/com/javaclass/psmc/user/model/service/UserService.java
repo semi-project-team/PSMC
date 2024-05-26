@@ -271,6 +271,17 @@ public class UserService {
         return userMapper.updatePassword(loginUserDTO);
     }
 
+    public int killAllpictureByTheralinkNo(int theralinkNo) {
+
+        return userMapper.killAllpictureByTheralinkNo(theralinkNo);
+
+    }
+
+    public int updateTheraLink(TheraLinkDTO theraLinkDTO) {
+
+        return userMapper.updateTheraLink(theraLinkDTO);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }

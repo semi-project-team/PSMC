@@ -1086,4 +1086,20 @@
         where
             pm_code = #{pmCode}
     </update>
+    <delete id="killAllpictureByTheralinkNo" parameterType="int">
+        delete from theralink_photo
+        where
+        theraLink_no = #{theralinkNo}
+    </delete>
+
+    <update id="updateTheraLink" parameterType="com.javaclass.psmc.common.model.dto.TheraLinkDTO">
+        update
+            thera_link
+        set
+            thera_title =#{theraTitle},
+            thera_contents = #{theraContents}
+        where
+            theraLink_no = ${theraLinkNo}
+    </update>
+
 </mapper>

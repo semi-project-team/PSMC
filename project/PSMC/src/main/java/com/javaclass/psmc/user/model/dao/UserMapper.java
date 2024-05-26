@@ -110,4 +110,8 @@ public interface UserMapper {
     List<BlogDTO> findAllBlogByProjectNo(Map<String, Integer> sender);
 
     int updatePassword(LoginUserDTO loginUserDTO);
+
+    int killAllpictureByTheralinkNo(int theralinkNo);
+
+    int updateTheraLink(TheraLinkDTO theraLinkDTO);
 }

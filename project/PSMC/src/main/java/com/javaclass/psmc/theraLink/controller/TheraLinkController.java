@@ -85,9 +85,7 @@ public class TheraLinkController {
 
         List<MyPatientDTO> myPatientLimit = userService.myPatient(sender);
 
-        for (MyPatientDTO p : myPatientLimit){
-            System.out.println("환자자자자 = " + p);
-        }
+
 
         /*번호 원하는 형태로 format*/
         for(MyPatientDTO p : myPatientLimit){
@@ -176,8 +174,7 @@ public class TheraLinkController {
     public String deleteTheraLink(@RequestParam List<Integer> theraNo,@PathVariable int projectNo,@PathVariable int pageNo){
 
 
-        System.out.println("왜 여기로 안오지");
-        System.out.println("theraNo = " + theraNo);
+
 
         Map<String,List<Integer>> theraNos = new HashMap<>();
         theraNos.put("thera",theraNo);
@@ -253,6 +250,7 @@ public class TheraLinkController {
     @PostMapping("/theraLink/theraUpload/{projectNo}")
     public ResponseEntity<Map<String, String>> fileUpload(@ModelAttribute RecieveDTO recieveDTO, @PathVariable int projectNo) throws IOException {
 
+        System.out.println("업로드로 들어옴");
         List<MultipartFile> images = recieveDTO.getImages();
         if(!Objects.isNull(recieveDTO.getImages())) {
 
@@ -320,6 +318,74 @@ public class TheraLinkController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/theraLink/theraModi/{projectNo}")
+    public ResponseEntity<Map<String,String>> modifyBlog(@ModelAttribute RecieveDTO recieveDTO,@PathVariable int projectNo) throws IOException {
+
+
+        System.out.println("수정으로 들어옴");
+
+
+        List<MultipartFile> images = recieveDTO.getImages();
+        if(!Objects.isNull(recieveDTO.getImages())) {
+
+            for (MultipartFile i : images) {
+                System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
+            }
+        }
+
+        int result1 = userService.killAllpictureByTheralinkNo(recieveDTO.getTheralinkNo());
+
+
+        TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
+
+        theraLinkDTO.setTheraLinkNo(recieveDTO.getTheralinkNo());
+        theraLinkDTO.setTheraTitle(recieveDTO.getTheraTitle());
+        theraLinkDTO.setTheraContents(recieveDTO.getContents());
+
+        int result = userService.updateTheraLink(theraLinkDTO);
+
+        if(!Objects.isNull(images)){
+            Resource resource = resourceLoader.getResource("classpath:static/common/postimg");
+            String filepath = null;
+            if(!resource.exists()){
+                String root ="src/main/resources/static/common/postimg";
+                File file = new File(root);
+                file.mkdirs();
+                filepath=file.getAbsolutePath();
+            }else{
+                filepath=resourceLoader.getResource("classpath:static/common/postimg").getFile().getAbsolutePath();
+            }
+
+
+
+            List<TheraLinkPhotoDTO> theraLinkPhotoDTOS = new ArrayList<>();
+            List<String> saveFiles = new ArrayList<>();
+            for(MultipartFile im: images){
+                String oringFileName = im.getOriginalFilename();
+                String ext = oringFileName.substring(oringFileName.lastIndexOf("."));
+                String savedName = UUID.randomUUID().toString().replace("-","")+ext;
+
+                im.transferTo(new File(filepath+"/"+savedName));
+                saveFiles.add("static/common/postimg/" +savedName);
+
+                TheraLinkPhotoDTO newPhoto = new TheraLinkPhotoDTO();
+                newPhoto.setTheralinkOriginName(oringFileName);
+                newPhoto.setTheralinkSavedName(savedName);
+                newPhoto.setTheralinkFilepath(filepath);
+                newPhoto.setTheralinkNo(recieveDTO.getTheralinkNo());
+                theraLinkPhotoDTOS.add(newPhoto);
+                int result2 = userService.insertTheraLinkPhoto(newPhoto);
+            }
+        }
+
+
+
+        Map<String,String> response = new HashMap<>();
+        String url = "/theraLink/open/"+projectNo+"/1";
+        response.put("redirectURL",url);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/theraLink/patientSearch")
     public String patientSearch(@RequestParam Map<String,String> parameters,HttpServletRequest request){
 
@@ -331,5 +397,7 @@ public class TheraLinkController {
 
         return "forward:/theraLink/"+1;
     }
+
+
 
 }

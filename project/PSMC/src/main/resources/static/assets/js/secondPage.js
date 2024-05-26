@@ -37,7 +37,7 @@ const $inputMessage = document.getElementById('inputMessage');
 $bloglist.forEach(b=>{
 
     b.addEventListener('click',e=>{
-        const theraLinkNo = b.querySelector('[class^=delete-]').classList.toString().split("-")[1];
+        const theraLinkNo = b.id;
 
         console.log("theraLinkNo 잘 왔는가"+theraLinkNo);
 
@@ -60,17 +60,159 @@ $bloglist.forEach(b=>{
                 makeChatting(data,theraLinkNo);
 
 
+                console.table(data);
                 console.log('theraLinkNo 바꼈겠지'+theraLinkNo);
 
 
-                const $modifyTheraLink  = document.getElementById('modifyTheraLink');
-                $modifyTheraLink.addEventListener('click',e=>{
-                    const $title = document.getElementById('title');
-                    $title.value=data.theraTitle;
-                    const $contents = document.getElementById('TheraLink-contents');
-                    $contents.value=data.theraContents;
 
-                })
+                const $modifyTheraLink  = document.getElementById('modifyTheraLink');
+                console.log('순서체크1')
+                if($modifyTheraLink) {
+                    console.log('왜 안오지')
+                    $modifyTheraLink.addEventListener('click', e => {
+                        console.log('클릭이벤트')
+                        const $title = document.getElementById('title1');
+                        $title.value = data.theraTitle;
+                        const $contents = document.getElementById('TheraLink-contents1');
+                        $contents.value = data.theraContents;
+
+                        $(function () {
+
+
+                                $('.input-images1').imageUploader();
+
+
+
+
+                            $('#form-example-1').on('submit', function (event) {
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                                let formData = new FormData(document.getElementById('form-example-1'));
+
+                                formData.append('theraTitle',$('#title1').val());
+                                formData.append('contents',$('#TheraLink-contents1').val())
+                                formData.append('theralinkNo',theraLinkNo);
+                                let inputElements = document.querySelectorAll('.image-uploader1 input[type="file"]');
+
+
+                                inputElements.forEach(inputElements => {
+                                    let files = inputElements.files;
+                                    if(files.length>0) {
+                                        console.log('미리보기 파일 있나')
+                                        for (let i = 0; i < files.length; i++) {
+                                            formData.append('images', files[i]);
+
+                                        }
+                                    }
+                                })
+
+
+                                const nowPage = window.location.href;
+                                const projectNo = nowPage.split("/")[5];
+                                console.log('projectNo'+projectNo);
+
+                                $.ajax({
+                                    url: `/theraLink/theraModi/${projectNo}`,
+                                    type: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                        if(response.redirectURL){
+                                            console.log('성공이요');
+                                            window.location.href=response.redirectURL;
+                                        }
+
+
+
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.log('실패요');
+                                        let response = JSON.parse(xhr.responseText);
+
+
+
+                                        window.location.href=`/theraLink/open/${projectNo}/1`;
+                                    }
+                                });
+
+
+                                // Get the input file
+                                let $inputImages = $form.find('input[name^="images"]');
+                                if (!$inputImages.length) {
+                                    $inputImages = $form.find('input[name^="photos"]')
+                                }
+
+
+
+                                // Get the new files names
+                                let $fileNames = $('<ul>');
+                                for (let file of $inputImages.prop('files')) {
+                                    $('<li>', {text: file.name}).appendTo($fileNames);
+                                }
+
+                                // Set the new files names
+                                $modal.find('#display-new-images').html($fileNames.html());
+
+                                // Get the preloaded inputs
+                                let $inputPreloaded = $form.find('input[name^="old"]');
+                                if ($inputPreloaded.length) {
+
+                                    // Get the ids
+                                    let $preloadedIds = $('<ul>');
+                                    for (let iP of $inputPreloaded) {
+                                        $('<li>', {text: '#' + iP.value}).appendTo($preloadedIds);
+                                    }
+
+                                    // Show the preloadede info and set the list of ids
+                                    // $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
+
+                                } else {
+
+                                    // Hide the preloaded info
+                                    // $modal.find('#display-preloaded-images').hide();
+
+                                }
+
+                                // Show the modal
+                                // $modal.css('visibility', 'visible');
+
+                                // $modal.css('visibility', 'visible');
+                            });
+
+                            $('input').on('focus', function () {
+                                $(this).parent().find('label').addClass('active');
+                            }).on('blur', function () {
+                                if ($(this).val() == '') {
+                                    $(this).parent().find('label').removeClass('active');
+                                }
+                            });
+
+                            let $nav = $('nav'),
+                                $header = $('header'),
+                                offset = 4 * parseFloat($('body').css('font-size')),
+                                scrollTop = $(this).scrollTop();
+
+                            $(window).on('scroll', function () {
+                                scrollTop = $(this).scrollTop();
+                                setNav();
+                            });
+
+                            function setNav() {
+                                if (scrollTop > $header.outerHeight()) {
+                                    $nav.css({position: 'fixed', 'top': offset});
+                                } else {
+                                    $nav.css({position: '', 'top': ''});
+                                }
+                            }
+                        });
+
+                    })
+
+                }
+
+                console.log('순서체크2')
 
 
 
@@ -256,6 +398,7 @@ function makeChatting(data,theraLinkNo){
 
 
 
+
 }
 
 
@@ -293,9 +436,15 @@ $chatDeleteButton.addEventListener('click',e=>{
 })
 
 const createTheraLink = document.getElementById('createTheraLink');
-createTheraLink.addEventListener('click',e=>{
-    const title = document.getElementById('title');
-    title.value="";
-    const contents = document.getElementById('TheraLink-contents');
-    contents.value="";
-})
+
+if(createTheraLink) {
+    createTheraLink.addEventListener('click', e => {
+        const title = document.getElementById('title');
+        title.value = "";
+        const contents = document.getElementById('TheraLink-contents');
+        contents.value = "";
+
+        const imaging = document.getElementById('imaging');
+
+    })
+}
