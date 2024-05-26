@@ -1102,4 +1102,40 @@
             theraLink_no = ${theraLinkNo}
     </update>
 
+    <select id="findId" resultMap="memberMap" parameterType="com.javaclass.psmc.auth.model.dto.FindIdDTO">
+        select
+            a.id
+        from
+            member_regist a
+        join
+            employee e
+        on
+            e.pm_code = a.pm_code
+        where
+            a.pm_code = #{pmCode}
+        and
+            e.emp_no = #{empNo}
+        and
+            e.name = #{name}
+    </select>
+
+    <select id="findMemberForPassword" resultMap="memberMap" parameterType="com.javaclass.psmc.auth.model.dto.FindPasswordDTO">
+        select
+            a.*
+        from
+            member_regist a
+        join
+            employee e
+        on
+            e.pm_code = a.pm_code
+        where
+            a.pm_code = #{pmCode}
+        and
+            e.emp_no = #{empNo}
+        and
+            a.id = #{userId}
+        and
+            e.email = #{email}
+    </select>
+
 </mapper>

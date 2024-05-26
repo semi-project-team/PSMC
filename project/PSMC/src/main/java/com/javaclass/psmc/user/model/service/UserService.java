@@ -1,8 +1,6 @@
 package com.javaclass.psmc.user.model.service;
 
-import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
-import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
-import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
+import com.javaclass.psmc.auth.model.dto.*;
 import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.mainPage.model.dto.*;
 import com.javaclass.psmc.theraLink.model.dto.*;
@@ -280,6 +278,16 @@ public class UserService {
     public int updateTheraLink(TheraLinkDTO theraLinkDTO) {
 
         return userMapper.updateTheraLink(theraLinkDTO);
+    }
+
+    public LoginUserDTO findId(FindIdDTO findIdDTO) {
+
+        return userMapper.findId(findIdDTO);
+    }
+
+    public LoginUserDTO findMemberForPassword(FindPasswordDTO findPasswordDTO) {
+
+        return userMapper.findMemberForPassword(findPasswordDTO);
     }
 
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {

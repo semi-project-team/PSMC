@@ -17,6 +17,17 @@ spring:
       max-request-size: 2MB
   mvc:
     static-path-pattern: /static/**
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 222hojun2@gmail.com
+    password: umwj pogh qbna htty
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 mybatis:
   mapper-locations: mappers/*.xml
 
