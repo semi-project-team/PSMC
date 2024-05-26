@@ -1,8 +1,6 @@
 package com.javaclass.psmc.user.model.dao;
 
-import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
-import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
-import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
+import com.javaclass.psmc.auth.model.dto.*;
 import com.javaclass.psmc.common.model.dto.*;
 import com.javaclass.psmc.mainPage.model.dto.*;
 
@@ -110,4 +108,12 @@ public interface UserMapper {
     List<BlogDTO> findAllBlogByProjectNo(Map<String, Integer> sender);
 
     int updatePassword(LoginUserDTO loginUserDTO);
+
+    int killAllpictureByTheralinkNo(int theralinkNo);
+
+    int updateTheraLink(TheraLinkDTO theraLinkDTO);
+
+    LoginUserDTO findId(FindIdDTO findIdDTO);
+
+    LoginUserDTO findMemberForPassword(FindPasswordDTO findPasswordDTO);
 }

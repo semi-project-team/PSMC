@@ -24,7 +24,7 @@
         <div class="row">
             <!-- blog1 -->
             <th:block th:each="thera : ${theraLink}">
-                <div class="col-lg-3 col-md-6 mt-4 pt-2 blogPage">
+                <div class="col-lg-3 col-md-6 mt-4 pt-2 blogPage" th:id="${thera.theraLinkNo}">
                     <div class="blog-post rounded border">
                         <div class="blog-img d-block overflow-hidden position-relative">
                             <th:block th:if="${thera.savedName!=null}">
@@ -199,7 +199,7 @@
 
 
                                                 <div>
-                                                    <button class="btn btn-primary btn-lg mr-1 px-3" data-bs-toggle="modal" data-bs-target="#makeTheraLink" sec:authorize="hasAnyAuthority('t')" id="modifyTheraLink">
+                                                    <button class="btn btn-primary btn-lg mr-1 px-3" data-bs-toggle="modal" data-bs-target="#updateTheraLink" sec:authorize="hasAnyAuthority('t')" id="modifyTheraLink">
                                                         <i class="fa-solid fa-pen-nib"></i>
                                                     </button>
                                                     <button class="btn btn-danger btn-lg mr-1 px-3 d-none d-md-inline-block" id="chatDeleteButton">
@@ -255,19 +255,19 @@
                     <form method="post" name="form-example-2" id="form-example-2" enctype="multipart/form-data">
 
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control" id="title" placeholder="title" name="title">
+                            <input type="text" class="form-control" id="title" placeholder="title" name="title" required>
                             <label for="title">Title</label>
                         </div>
 
                         <div class="form-floating mb-4">
-                            <textarea class="form-control" placeholder="Contents" id="TheraLink-contents" style="min-height: 30vh;" name="theraLinkContent"></textarea>
+                            <textarea class="form-control" placeholder="Contents" id="TheraLink-contents" style="min-height: 30vh;" name="theraLinkContent" required></textarea>
                             <label for="theraLink-contents">Contents</label>
                         </div>
 
                         <!-- 파일업로드 -->
                         <div class="input-field mb-4">
                             <label class="active">Photos</label>
-                            <div class="input-images" style="padding-top: .5rem;"></div>
+                            <div class="input-images" style="padding-top: .5rem;" id="imaging"></div>
                         </div>
                         <!-- 파일업로드 -->
                         <div class="text-end">
@@ -283,6 +283,48 @@
     </div>
     <!-- theraLink용 모달 -->
 
+    <!--theralink 수정 모달-->
+
+<div class="modal fade" id="updateTheraLink" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 50vw;">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">TheraLink Modification</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" name="form-example-2" id="form-example-1" enctype="multipart/form-data">
+
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="title1" placeholder="title" name="title">
+                        <label for="title">Title</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <textarea class="form-control" placeholder="Contents" id="TheraLink-contents1" style="min-height: 30vh;" name="theraLinkContent"></textarea>
+                        <label for="theraLink-contents">Contents</label>
+                    </div>
+
+                    <!-- 파일업로드 -->
+                    <div class="input-field mb-4">
+                        <label class="active">Photos</label>
+                        <div class="input-images1" style="padding-top: .5rem;"></div>
+                    </div>
+                    <!-- 파일업로드 -->
+                    <div class="text-end">
+                        <button class="btn btn-primary">Modify</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+    <!--theralink 수정 모달-->
+
     <!-- 내용물 끝 -->
 
 
@@ -290,18 +332,20 @@
 
 
 
-    <script src="/assets/js/secondPage.js"></script>
+
     <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="/assets/js/image-uploader.min.js"></script>
+    <script src="/assets/js/secondPage.js"></script>
     <script>
+
         $(function () {
 
 
             $('.input-images').imageUploader();
 
-            const $submitButton = document.getElementById('uploadButton');
-            $('form').on('submit', function (event) {
+
+            $('#form-example-2').on('submit', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
 
@@ -353,24 +397,6 @@
                 });
 
 
-
-
-
-
-
-
-
-
-
-
-                // Get some vars
-                let $form = $(this),
-                    $modal = $('.modal');
-
-                // Set name and description
-                $modal.find('#display-name span').text($form.find('input[id^="name"]').val());
-                $modal.find('#display-description span').text($form.find('input[id^="description"]').val());
-
                 // Get the input file
                 let $inputImages = $form.find('input[name^="images"]');
                 if (!$inputImages.length) {
@@ -399,17 +425,17 @@
                     }
 
                     // Show the preloadede info and set the list of ids
-                    $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
+                    // $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
 
                 } else {
 
                     // Hide the preloaded info
-                    $modal.find('#display-preloaded-images').hide();
+                    // $modal.find('#display-preloaded-images').hide();
 
                 }
 
                 // Show the modal
-                $modal.css('visibility', 'visible');
+                // $modal.css('visibility', 'visible');
 
                 // $modal.css('visibility', 'visible');
             });
@@ -440,7 +466,12 @@
                 }
             }
         });
+
+
+        // theralink 수정
+
     </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

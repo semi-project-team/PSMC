@@ -8,6 +8,8 @@ import java.util.List;
 public class RecieveDTO {
 
     private List<MultipartFile> images;
+    private List<MultipartFile> old;
     private String theraTitle;
     private String contents;
+    private int theralinkNo;
 }
