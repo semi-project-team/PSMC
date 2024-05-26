@@ -48,3 +48,5 @@ function toggleGender(selectedGender) {
 
 // Initialize button states on page load
 document.addEventListener('DOMContentLoaded', initializeGenderButtons);
+
+
