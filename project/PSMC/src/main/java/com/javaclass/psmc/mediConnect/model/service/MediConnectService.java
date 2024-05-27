@@ -52,4 +52,14 @@ public class MediConnectService {
 
         return projectMapper.showMediChatDetail(parameter);
     }
+
+    public int registNewMessage(ShowAllMediChatDTO showAllMediChatDTO) {
+
+        return projectMapper.registNewMessage(showAllMediChatDTO);
+    }
+
+    public int deleteChat(Map<String, List<Integer>> param) {
+
+        return projectMapper.deleteChat(param);
+    }
 }

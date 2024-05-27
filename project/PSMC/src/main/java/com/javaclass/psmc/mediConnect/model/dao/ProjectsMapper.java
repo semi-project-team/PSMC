@@ -28,6 +28,10 @@ public interface ProjectsMapper {
 
     List<ShowAllMediChatDTO> showMediChatDetail(Map<String, Object> parameter);
 
+    int registNewMessage(ShowAllMediChatDTO showAllMediChatDTO);
+
+    int deleteChat(Map<String, List<Integer>> param);
+
 
 //    List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
 }
