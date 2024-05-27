@@ -965,12 +965,12 @@
         <result property="theraChatBoardDate" column="thera_chat_board_date"/>
         <result property="theraChatStatus" column="thera_chat_status"/>
         <result property="name" column="name"/>
+        <result property="employeeSavedName" column="employee_saved_name"/>
     </resultMap>
     <resultMap id="theraChatByTheraLink" type="com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO">
         <id property="theraLinkNo" column="theraLink_no"/>
         <result  property="theraTitle" column="thera_title"/>
         <result property="theraContents" column="thera_contents"/>
-        <result property="employeeSavedName" column="employee_saved_name"/>
         <collection property="theraChatForBlogDTOS" resultMap="theraChatForBlogMap"/>
         <collection property="theraLinkPhotoDTOS" resultMap="theralinkPhotoMap"/>
     </resultMap>

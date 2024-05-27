@@ -13,8 +13,20 @@ public class TheraChatForBlogDTO {
     private LocalDateTime theraChatBoardDate;
     private String theraChatStatus;
     private String name;
+    private String employeeSavedName;
 
     public TheraChatForBlogDTO(){}
+
+    public TheraChatForBlogDTO(int theraChatNo, int theraLinkNo, String pmCode, String theraChatContent, LocalDateTime theraChatBoardDate, String theraChatStatus, String name, String employeeSavedName) {
+        this.theraChatNo = theraChatNo;
+        this.theraLinkNo = theraLinkNo;
+        this.pmCode = pmCode;
+        this.theraChatContent = theraChatContent;
+        this.theraChatBoardDate = theraChatBoardDate;
+        this.theraChatStatus = theraChatStatus;
+        this.name = name;
+        this.employeeSavedName = employeeSavedName;
+    }
 
     public int getTheraChatNo() {
         return theraChatNo;
@@ -72,6 +84,14 @@ public class TheraChatForBlogDTO {
         this.name = name;
     }
 
+    public String getEmployeeSavedName() {
+        return employeeSavedName;
+    }
+
+    public void setEmployeeSavedName(String employeeSavedName) {
+        this.employeeSavedName = employeeSavedName;
+    }
+
     @Override
     public String toString() {
         return "TheraChatForBlogDTO{" +
@@ -82,6 +102,7 @@ public class TheraChatForBlogDTO {
                 ", theraChatBoardDate=" + theraChatBoardDate +
                 ", theraChatStatus='" + theraChatStatus + '\'' +
                 ", name='" + name + '\'' +
+                ", employeeSavedName='" + employeeSavedName + '\'' +
                 '}';
     }
 }
