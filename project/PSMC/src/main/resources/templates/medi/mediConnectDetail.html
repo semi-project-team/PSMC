@@ -367,28 +367,36 @@
                         d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
             </svg></h6>
             <hr style="color: rgb(71, 149, 78); border-width: 6px; margin: 10px 0;">
-            <div class="commentCards">
-                <div class="list-group">
-                    <div class="list-one" th:each="chat : ${mediChatDetail}">
-                        <input type="checkbox">
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true"
-                           data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="commentCard">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1" th:text="${chat.employeeDTO.name} + ' 치료사 (' + ${chat.memberRegistDTO.id} + ')'"></h5>
-                                    <small class="text-body-secondary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
-                                            <path
-                                                    d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
-                                        </svg>
-                                    </small>
-                                    <small class="text-body-secondary" th:text="${chat.mediChatBoardDate}"></small>
+            <form action="/deleteChatBtn" method="post">
+                <div class="commentCards">
+                    <div class="list-group">
+                        <div class="list-one" th:each="chat : ${mediChatDetail}">
+                            <input type="checkbox" name="postCheckbox" th:value="${chat.chatNo}" onchange="toggleDeleteButton()">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div class="commentCard">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1" th:text="${chat.employeeDTO.name} + ' 치료사 (' + ${chat.memberRegistDTO.id} + ')'"></h5>
+                                        <small class="text-body-secondary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
+                                                <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
+                                            </svg>
+                                        </small>
+                                        <small class="text-body-secondary" th:text="${chat.mediChatBoardDate}"></small>
+                                    </div>
+                                    <p class="mb-1" th:text="${{chat.contents}}"></p>
                                 </div>
-                                <p class="mb-1" th:text="${{chat.contents}}"></p>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
+                </div>
+                <div class="delete-btn" id="delete-btn">
+                    <button type="submit" id="deleteButton" class="btn btn-dark" style="display: none;">Delete</button>
+                </div>
+            </form>
+        </div>
+
 
         <!-- 모달창 --->
         <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -401,78 +409,16 @@
                     <div class="modal-body">
                         <div class="chat-container">
                             <div class="message-container">
-<!--                                <div class="plusDate sender-messages">-->
-<!--                                    <div class="message sender-message">-->
-<!--                                        <div class="profile">-->
-<!--                                            <div class="senderName">정민</div>-->
-<!--                                        </div>-->
-<!--                                        <div class="message-text">치료 ~~ 부분 더 신경쓰면 될까요?</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="dateTime">-->
-<!--                                        <P>2024.05.02<br>10:00</P>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="plusDate receiver-messages">-->
-<!--                                    <div class="dateTime">-->
-<!--                                        <P>2024.05.02<br>10:00</P>-->
-<!--                                    </div>-->
-<!--                                    <div class="message receiver-message">-->
-<!--                                        <div class="message-text">네! 맞습니다 다른 특이사항은 없나요?</div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="plusDate sender-messages">-->
-<!--                                    <div class="message sender-message">-->
-<!--                                        <div class="profile">-->
-<!--                                            <div class="senderName">민지</div>-->
-<!--                                        </div>-->
-<!--                                        <div class="message-text">생기면 바로 말씀 드리겠습니다. </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="dateTime">-->
-<!--                                        <P>2024.05.02<br>10:00</P>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="plusDate receiver-messages">-->
-<!--                                    <div class="dateTime">-->
-<!--                                        <P>2024.05.02<br>10:00</P>-->
-<!--                                    </div>-->
-<!--                                    <div class="message receiver-message">-->
-<!--                                        <div class="message-text"> 감사합니다~</div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="plusDate receiver-messages">-->
-<!--                                    <div class="dateTime">-->
-<!--                                        <P>2024.05.02<br>10:00</P>-->
-<!--                                    </div>-->
-<!--                                    <div class="message receiver-message">-->
-<!--                                        <div class="message-text"> 감사합니다~</div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="plusDate sender-messages">-->
-<!--                                    <div class="message sender-message">-->
-<!--                                        <div class="profile">-->
-<!--                                            <div class="senderName">민지</div>-->
-<!--                                        </div>-->
-<!--                                        <div class="message-text">생기면 바로 말씀 드리겠습니다. </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="dateTime">-->
-<!--                                        <P>2024.05.02<br>10:00</P>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="plusDate receiver-messages">-->
-<!--                                    <div class="dateTime">-->
-<!--                                        <P>2024.05.02<br>10:00</P>-->
-<!--                                    </div>-->
-<!--                                    <div class="message receiver-message">-->
-<!--                                        <div class="message-text"> 감사합니다~</div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <!-- 채팅 추가 -->
                             </div>
                         </div>
                     </div>
-                    <div class="messageInput">
-                        <input type="text" placeholder="Type your message..." autofocus>
-                        <button>Send</button>
-                    </div>
+                    <form action="/medi/registNewMessage" method="post">
+                        <div class="messageInput">
+                            <input name="newMessage" type="text" placeholder="Type your message..." autofocus>
+                            <button>Send</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -538,6 +484,42 @@
                 $messageContainer.appendChild($chat);
             })
         }
+
+        function toggleDeleteButton() {
+            var checkboxes = document.getElementsByName("postCheckbox");
+            var deleteButton = document.querySelector("#delete-btn button");
+            var atLeastOneChecked = false;
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    atLeastOneChecked = true;
+                    deleteButton.style.display='block';
+                    break;
+                }
+            }
+
+            if (atLeastOneChecked) {
+                deleteButton.style.display='block';
+            } else {
+                deleteButton.style.display='none';
+            }
+        }
+
+        // function deleteSelectedPosts() {
+        //     var checkboxes = document.getElementsByName("postCheckbox");
+        //     var rowsToDelete = [];
+        //
+        //     for (var i = 0; i < checkboxes.length; i++) {
+        //         if (checkboxes[i].checked) {
+        //             rowsToDelete.push(checkboxes[i].parentNode.parentNode);
+        //         }
+        //     }
+        //
+        //     for (var i = 0; i < rowsToDelete.length; i++) {
+        //         rowsToDelete[i].parentNode.removeChild(rowsToDelete[i]);
+        //     }
+        // }
+
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

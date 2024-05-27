@@ -18,21 +18,6 @@ function toggleDeleteButton() {
     }
 }
 
-function deleteSelectedPosts() {
-    var checkboxes = document.getElementsByName("postCheckbox");
-    var rowsToDelete = [];
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            rowsToDelete.push(checkboxes[i].parentNode.parentNode);
-        }
-    }
-
-    for (var i = 0; i < rowsToDelete.length; i++) {
-        rowsToDelete[i].parentNode.removeChild(rowsToDelete[i]);
-    }
-}
-
 // 모달 객체 가져오기
 var modal = document.getElementById("myModal");
 

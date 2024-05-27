@@ -63,7 +63,7 @@
 
 
     <select id="showAllProjects" resultMap="showAllProjectsResultMap" parameterType="string">
-        select
+        select distinct
             a.patient_name,
             a.age,
             a.gender,
@@ -78,7 +78,9 @@
         join
             injury c on b.injury_code = c.injury_code
         join
-            create_project d on b.project_no = d.project_no
+            medi_connect e on b.project_no = e.project_no
+        join
+            medi_chat d on e.medi_no = d.medi_no
         where
             b.project_status = 'Y'
             and
@@ -119,8 +121,8 @@
         set
             medi_status = 'N'
         where medi_no in
-        <foreach collection="post" item="postCheckbox" open="(" separator="," close=")">
-            #{postCheckbox}
+        <foreach collection="post" item="paramPost" open="(" separator="," close=")">
+            #{paramPost}
         </foreach>
     </update>
 
@@ -132,6 +134,17 @@
         where project_no in
         <foreach collection="project" item="projectParam" open="(" separator="," close=")">
             #{projectParam}
+        </foreach>
+    </update>
+    
+    <update id="deleteChat" parameterType="hashmap">
+        update
+            medi_chat
+        set
+            medi_chat_status = 'N'
+        where chat_no in
+        <foreach collection="chatNo" item="param" open="(" separator="," close=")">
+                #{param}
         </foreach>
     </update>
 
@@ -202,5 +215,12 @@
         order by
             medi_chat_board_date;
     </select>
+
+    <insert id="registNewMessage" parameterType="com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO"
+            useGeneratedKeys="true" keyProperty="chatNo">
+        INSERT INTO `medi_chat`(`medi_no`,`pm_code`,`contents`,`medi_chat_board_date`,`medi_chat_status`)
+        VALUES
+        (#{mediNo},#{pmCode},#{contents},#{mediChatBoardDate},#{mediChatStatus});
+    </insert>
 
 </mapper>

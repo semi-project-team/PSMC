@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.annotation.PatchExchange;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +60,24 @@ public class MediConnectController {
         int projectNo = (int) session.getAttribute("projectNo");
         int result =mediConnectService.deleteBoard(paramPost);
 
-        return "redirect:/medi/mediConnect/"+projectNo;
+        return "redirect:/medi/mediConnect/" + projectNo;
 
+    }
+
+    @PostMapping("/deleteChatBtn")
+    public String deleteChat(@RequestParam("postCheckbox") List<Integer> postCheckbox, HttpSession session) {
+
+        for(Integer i : postCheckbox) {
+            System.out.println("i 값 확인 :" + i);
+        }
+
+        Map<String, List<Integer>> param = new HashMap<>();
+        param.put("chatNo", postCheckbox);
+
+        int mediNo = (int) session.getAttribute("mediNo");
+        int result = mediConnectService.deleteChat(param);
+
+        return "redirect:/medi/mediConnectDetail/" + mediNo;
     }
 
     @GetMapping("/medi/mediConnectDetail/{mediNo}")
@@ -83,6 +100,7 @@ public class MediConnectController {
         List<ShowAllMediChatDTO> chat = mediConnectService.showMediChatDetail(parameter);
 
         session.setAttribute("mediChatDetail", chat);
+        session.setAttribute("mediNo", mediNo);
 
         model.addAttribute("pmCode", pmCode);
         model.addAttribute("boardDetail", mediConnect);
@@ -97,6 +115,26 @@ public class MediConnectController {
     @ResponseBody
     public List<ShowAllMediChatDTO> responseChat(HttpSession session) {
         return (List<ShowAllMediChatDTO>) session.getAttribute("mediChatDetail");
+    }
+
+    @PostMapping( value = "/medi/registNewMessage", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ShowAllMediChatDTO newMessgae(@RequestBody String newMessage, HttpSession session, ShowAllMediChatDTO showAllMediChatDTO) {
+
+        LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
+        String pmCode = loginUserDTO.getPmCode();
+
+        String status = "Y";
+
+        showAllMediChatDTO.setMediChatBoardDate(LocalDateTime.now());
+        showAllMediChatDTO.setPmCode(pmCode);
+        showAllMediChatDTO.setMediNo((int)session.getAttribute("mediNo"));
+        showAllMediChatDTO.setContents(newMessage);
+        showAllMediChatDTO.setMediChatStatus(status);
+
+        int result = mediConnectService.registNewMessage(showAllMediChatDTO);
+
+        return showAllMediChatDTO;
     }
 
 }
