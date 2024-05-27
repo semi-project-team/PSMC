@@ -194,6 +194,7 @@ public class TheraLinkController {
 
 
         System.out.println(theraChat.getTheraTitle());
+
         if(!Objects.isNull(theraChat)) {
             String pmCode = ((LoginUserDTO) session.getAttribute("auth")).getPmCode();
             theraChat.setMe(pmCode);

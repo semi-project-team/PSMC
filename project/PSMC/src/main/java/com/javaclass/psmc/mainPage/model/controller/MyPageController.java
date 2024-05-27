@@ -355,6 +355,7 @@ public class MyPageController {
 
             System.out.println("valid = " + valid);
 
+
             filepath=file1.getAbsolutePath();
         }else{
             filepath=resourceLoader.getResource("classpath:static/common/employeeimg").getFile().getAbsolutePath();

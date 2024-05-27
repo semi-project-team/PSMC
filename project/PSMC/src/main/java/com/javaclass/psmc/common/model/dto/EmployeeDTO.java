@@ -8,7 +8,7 @@ public class EmployeeDTO {
     private String pmCode;
     private int empNo;
     private String phone;
-    private String email;
+    private String companyEmail;
     private String name;
     private int age;
     private int positionCode;
@@ -18,11 +18,11 @@ public class EmployeeDTO {
 
     public EmployeeDTO(){}
 
-    public EmployeeDTO(String pmCode, int empNo, String phone, String email, String name, int age, int positionCode, char gender, String officeNum, int fieldCode) {
+    public EmployeeDTO(String pmCode, int empNo, String phone, String companyEmail, String name, int age, int positionCode, char gender, String officeNum, int fieldCode) {
         this.pmCode = pmCode;
         this.empNo = empNo;
         this.phone = phone;
-        this.email = email;
+        this.companyEmail = companyEmail;
         this.name = name;
         this.age = age;
         this.positionCode = positionCode;
@@ -55,12 +55,12 @@ public class EmployeeDTO {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCompanyEmail() {
+        return companyEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail = companyEmail;
     }
 
     public String getName() {
@@ -117,7 +117,7 @@ public class EmployeeDTO {
                 "pmCode='" + pmCode + '\'' +
                 ", empNo=" + empNo +
                 ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
+                ", companyEmail='" + companyEmail + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", positionCode=" + positionCode +

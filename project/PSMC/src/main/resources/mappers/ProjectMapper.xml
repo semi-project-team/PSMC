@@ -51,7 +51,7 @@
         <id property="pmCode" column="pm_code"/>
         <result property="empNo" column="emp_no"/>
         <result property="phone" column="phone"/>
-        <result property="email" column="email"/>
+        <result property="companyEmail" column="company_email"/>
         <result property="name" column="name"/>
         <result property="age" column="age"/>
         <result property="positionCode" column="position_code"/>
