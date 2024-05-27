@@ -351,7 +351,9 @@ public class MyPageController {
         if(!resource.exists()){
             String root = "src/main/resources/static/common/employeeimg";
             File file1 = new File(root);
-            file1.mkdirs();
+            boolean valid=file1.mkdirs();
+
+            System.out.println("valid = " + valid);
 
             filepath=file1.getAbsolutePath();
         }else{

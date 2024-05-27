@@ -27,4 +27,5 @@ public class EditService {
     public int updateRegist(EditDTO editDTO) {
         return editMapper.updateRegist(editDTO);
     }
+
 }
