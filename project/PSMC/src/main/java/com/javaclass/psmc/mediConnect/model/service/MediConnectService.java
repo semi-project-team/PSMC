@@ -67,4 +67,10 @@ public class MediConnectService {
 
         return projectMapper.showNewChat(mediNo);
     }
+
+
+    public List<ShowMediConnectDTO> searchByBoardTitle(Map<String, Object> parameter) {
+
+        return projectMapper.searchByBoardTitle(parameter);
+    }
 }

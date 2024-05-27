@@ -16,15 +16,15 @@
         <div id="board-search">
             <div class="container">
                 <div class="search-window">
-                    <form action="">
+                    <form action="/searchByTitle" method="post">
                         <div class="search-wrap d-flex">
-                            <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
-                            <button type="submit" class="btn btn-dark">검색</button>
+                            <input id="search" type="text" name="titleSearch" placeholder="검색어를 입력해주세요.">
+                            <button id="searchButton" type="submit" class="btn btn-dark">검색</button>
                         </div>
-                        <div class="form-container">
-                            <button type="button" class="btn btn-light">작성하기</button>
-                     </div>
                     </form>
+                    <div class="form-container">
+                        <button type="button" class="btn btn-light">작성하기</button>
+                     </div>
                 </div>
             </div>
         </div>
@@ -41,6 +41,7 @@
                             <th scope="col" class="checkbox-btn"></th>
                             <th scope="col" class="th-num">번호</th>
                             <th scope="col" class="th-title">제목</th>
+                            <th scope="col" class="th-name">작성자</th>
                             <th scope="col" class="th-date">등록일</th>
                         </tr>
                         </thead>
@@ -51,7 +52,8 @@
                             <th>
                                 <a th:href="@{/medi/mediConnectDetail/{mediNo}(mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a>
                             </th>
-                            <td th:text="${board.mediBoardDate}"></td>
+                            <td th:text="${board.employeeDTO.name}"></td>
+                            <td class="mediBoardDate" th:text="${board.mediBoardDate}"></td>
                         </tr>
                         </tbody>
                     </table>

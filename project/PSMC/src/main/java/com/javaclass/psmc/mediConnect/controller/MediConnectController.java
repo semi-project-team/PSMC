@@ -29,6 +29,26 @@ public class MediConnectController {
         this.mediConnectService = mediConnectService;
     }
 
+    @PostMapping("/searchByTitle")
+    public String searchByTitle(@RequestParam("titleSearch") String mediTitle, Model model, HttpSession session) {
+
+        LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
+        String pmCode = loginUserDTO.getPmCode();
+
+        int projectNo = (int) session.getAttribute("projectNo");
+
+        Map<String,Object> parameter = new HashMap<>();
+        parameter.put("pmCode",pmCode);
+        parameter.put("projectNo",projectNo);
+        parameter.put("mediTitle", mediTitle);
+
+        List<ShowMediConnectDTO> boards = mediConnectService.searchByBoardTitle(parameter);
+
+        model.addAttribute("boards", boards);
+
+        return "redirect:/medi/mediConnect/" + projectNo;
+    }
+
     @GetMapping("/medi/mediConnect/{projectNo}")
     public String mediConnectPage(@PathVariable int projectNo, Model model, HttpSession session) {
 

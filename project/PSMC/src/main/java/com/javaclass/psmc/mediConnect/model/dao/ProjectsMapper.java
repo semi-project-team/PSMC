@@ -34,6 +34,8 @@ public interface ProjectsMapper {
 
     ShowAllMediChatDTO showNewChat(int mediNo);
 
+    List<ShowMediConnectDTO> searchByBoardTitle(Map<String, Object> parameter);
+
 
 //    List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
 }

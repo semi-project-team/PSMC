@@ -94,6 +94,7 @@
         <result property="mediBoardDate" column="medi_board_date"/>
         <result property="projectNo" column="project_no"/>
         <association property="createProjectDTO" resultMap="createProjectResultMap"/>
+        <association property="employeeDTO" resultMap="employeeResultMap"/>
     </resultMap>
 
     <select id="showAllBoards" resultMap="showMediConnectsResultMap" parameterType="hashmap">
@@ -102,17 +103,42 @@
             a.medi_title,
             a.medi_content,
             a.medi_board_date,
-            b.pm_code
+            b.pm_code,
+            c.name
         from
             medi_connect a
         join
             create_project b on a.project_no = b.project_no
+        join
+            employee c on b.pm_code = c.pm_code
         where
-            b.pm_code = #{pmCode}
-            and
+<!--            b.pm_code = #{pmCode}-->
+<!--            and-->
             b.project_no = #{projectNo}
             and
             a.medi_status = 'Y';
+    </select>
+
+    <select id="searchByBoardTitle" resultMap="showMediConnectsResultMap" parameterType="hashmap">
+        select
+            a.medi_no,
+            a.medi_title,
+            a.medi_content,
+            a.medi_board_date,
+            b.pm_code,
+            c.name
+        from
+            medi_connect a
+        join
+            create_project b on a.project_no = b.project_no
+        join
+            employee c on b.pm_code = c.pm_code
+        where
+            b.project_no = #{projectNo}
+            and
+            a.medi_status = 'Y'
+            and
+            a.medi_title like '%' || #{mediTitle} || '%'
     </select>
 
     <update id="deleteBoard" parameterType="hashmap">

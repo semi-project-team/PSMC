@@ -342,7 +342,7 @@
 
     <div class="containerSpace">
         <div class="headerSpace">
-            <h5 th:text="${boardDetail.mediTitle} + ' ' + '(' + ${boardDetail.mediBoardDate} + ')'"></h5>
+            <h5 class="mediBoardDate" th:text="${boardDetail.mediTitle} + ' ' + '(' + ${boardDetail.mediBoardDate} + ')'"></h5>
                 <p th:text="'No.' + ${patientDetail.patientDTO.patientNo} + ' ' + ${patientDetail.patientDTO.patientName} + ' 환자'
                 + ' (만 ' + ${patientDetail.patientDTO.age} + '세, ' + ${patientDetail.patientDTO.gender} + ')'"></p>
         </div>
@@ -383,7 +383,7 @@
                                                 <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
                                             </svg>
                                         </small>
-                                        <small class="text-body-secondary" th:text="${chat.mediChatBoardDate}"></small>
+                                        <small class="text-body-secondary mediChatBoardDate" th:text="${chat.mediChatBoardDate}"></small>
                                     </div>
                                     <p class="mb-1" th:text="${{chat.contents}}"></p>
                                 </div>
@@ -425,6 +425,18 @@
     </div>
 
     <script>
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateElements = document.querySelectorAll('.mediBoardDate, .mediChatBoardDate');
+            dateElements.forEach(el => {
+                let dateStr = el.textContent;
+                if (dateStr.includes('T')) {
+                    el.textContent = dateStr.replace('T', ' ');
+                }
+            });
+        });
+
         document.addEventListener("DOMContentLoaded", function (){
 
 
