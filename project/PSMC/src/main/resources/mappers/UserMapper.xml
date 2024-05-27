@@ -7,7 +7,7 @@
         <id property="pmCode" column="pm_code"/>
         <result property="empNo" column="emp_no"/>
         <result property="phone" column="phone"/>
-        <result property="email" column="email"/>
+        <result property="companyEmail" column="company_email"/>
         <result property="name" column="name"/>
         <result property="age" column="age"/>
         <result property="positionCode" column="position_code"/>
@@ -111,7 +111,7 @@
         <result property="fieldCode" column="field_code"/>
         <result property="positionCode" column="position_code"/>
         <result property="officeNum" column="office_num"/>
-        <result property="email" column="email"/>
+        <result property="email" column="company_email"/>
         <result property="phone" column="phone"/>
         <association property="positionDTO" resultMap="positionMap"/>
         <association property="medicalFieldDTO" resultMap="medicalFieldMap"/>
@@ -122,7 +122,7 @@
             a.pm_code,
             a.name,
             a.office_num,
-            a.email,
+            a.company_email,
             a.phone,
             b.field_name,
             b.field_code,
@@ -970,6 +970,7 @@
         <id property="theraLinkNo" column="theraLink_no"/>
         <result  property="theraTitle" column="thera_title"/>
         <result property="theraContents" column="thera_contents"/>
+        <result property="employeeSavedName" column="employee_saved_name"/>
         <collection property="theraChatForBlogDTOS" resultMap="theraChatForBlogMap"/>
         <collection property="theraLinkPhotoDTOS" resultMap="theralinkPhotoMap"/>
     </resultMap>
@@ -981,7 +982,9 @@
             l.thera_contents,
             l.theraLink_no,
             e.name,
-            d.*
+            d.*,
+            f.employee_saved_name
+
         from
             thera_link l
         left outer join
@@ -992,6 +995,10 @@
             employee e
         on
             e.pm_code = c.pm_code
+        left join
+            employee_photo f
+        on
+            f.pm_code = e.pm_code
         left outer join
             theralink_photo d
         on
@@ -1148,7 +1155,7 @@
         and
             a.id = #{userId}
         and
-            e.email = #{email}
+            e.company_email = #{email}
     </select>
     <update id="updateEmployeePhoto" parameterType="com.javaclass.psmc.mainPage.model.dto.EmployeePhotoDTO">
         update

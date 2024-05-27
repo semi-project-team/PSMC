@@ -19,7 +19,7 @@
         <id property="pmCode" column="pm_code"/>
         <result property="empNo" column="emp_no"/>
         <result property="phone" column="phone"/>
-        <result property="email" column="email"/>
+        <result property="companyEmail" column="company_email"/>
         <result property="name" column="name"/>
         <result property="age" column="age"/>
         <result property="positionCode" column="position_code"/>
@@ -36,7 +36,7 @@
     <resultMap id="EditMap" type="com.javaclass.psmc.mypage.model.dto.EditDTO">
         <id property="pmCode" column="pm_code"/>
         <result property="phone" column="phone"/>
-        <result property="companyEmail" column="email"/>
+        <result property="companyEmail" column="company_email"/>
         <result property="name" column="name"/>
         <result property="officeNum" column="office_num"/>
     </resultMap>
@@ -46,7 +46,7 @@
         employee
         <set>
             <if test="name != null">name=#{name},</if>
-            <if test="companyEmail != null">email=#{companyEmail},</if>
+            <if test="companyEmail != null">company_email=#{companyEmail},</if>
             <if test="phone != null">phone=#{phone},</if>
             <if test="officeNum != null">office_num=#{officeNum}</if>
         </set>

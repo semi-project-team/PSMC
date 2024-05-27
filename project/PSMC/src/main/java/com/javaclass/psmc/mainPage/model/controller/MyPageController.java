@@ -353,6 +353,7 @@ public class MyPageController {
             File file1 = new File(root);
             file1.mkdirs();
 
+
             filepath=file1.getAbsolutePath();
         }else{
             filepath=resourceLoader.getResource("classpath:static/common/employeeimg").getFile().getAbsolutePath();

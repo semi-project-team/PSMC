@@ -32,7 +32,6 @@ public class SecurityConfig {
                 /*static 폴더 하위에 assets 파일또한 제외 시키기 위한 방법*/
                 .requestMatchers(new AntPathRequestMatcher("/assets/**"))
                 .requestMatchers(new AntPathRequestMatcher("/common/**"))
-                .requestMatchers(new AntPathRequestMatcher("/postimg/**"))
                 .requestMatchers(new AntPathRequestMatcher("/fonts/**"));
 
     }

@@ -319,6 +319,7 @@ function makeChatting(data,theraLinkNo){
                     console.log('나다');
 
 
+
                     $chat.classList.add('chat-message-right', 'pb-4');
                     $chat.innerHTML = `<div>
                                              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">

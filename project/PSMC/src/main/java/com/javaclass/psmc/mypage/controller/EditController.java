@@ -36,7 +36,7 @@ public class EditController {
         editService.updateEmployee(editDTO);
         editService.updateRegist(editDTO);
         // 수정이 완료되었을 때 이전 페이지로 리다이렉트
-        return "redirect:/editPage";
+        return "redirect:/mypage/mypage";
     }
 
 }
