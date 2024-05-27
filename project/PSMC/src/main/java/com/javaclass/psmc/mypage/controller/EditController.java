@@ -32,11 +32,21 @@ public class EditController {
     }
 
     @PostMapping("/memberUpdate")
-    public String memberUpdate(@ModelAttribute EditDTO editDTO) {
-        editService.updateEmployee(editDTO);
-        editService.updateRegist(editDTO);
+    public String memberUpdate(@ModelAttribute EditDTO editDTO,HttpSession session) {
+        int result1 = editService.updateEmployee(editDTO);
+        int result2 = editService.updateRegist(editDTO);
+
+        String message = null;
+
+        if (result1 > 0 && result2 > 0) {
+            message = "수정을 완료하였습니다.";
+        }else {
+            message = "수정에 실패하였습니다.";
+        }
+        session.setAttribute("message", message);
+
         // 수정이 완료되었을 때 이전 페이지로 리다이렉트
-        return "redirect:/editPage";
+        return "redirect:/mypage/mypage";
     }
 
 }
