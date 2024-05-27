@@ -320,9 +320,10 @@ function makeChatting(data,theraLinkNo){
 
 
 
-                    $chat.classList.add('chat-message-right', 'pb-4');
-                    $chat.innerHTML = `<div>
-                                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                    if(t.employeeSavedName==null) {
+                        $chat.classList.add('chat-message-right', 'pb-4');
+                        $chat.innerHTML = `<div>
+                                             <img src="/common/img/no-profile.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                              <input type="checkbox" class="chatDelete" value="${t.theraChatNo}">
                                           </div>
@@ -330,6 +331,18 @@ function makeChatting(data,theraLinkNo){
                                               <div class="font-weight-bold mb-1" style="font-weight: bolder;">You</div>
                                                   ${t.theraChatContent}
                                           </div>`
+                    }else{
+                        $chat.classList.add('chat-message-right', 'pb-4');
+                        $chat.innerHTML = `<div>
+                                             <img src="/common/employeeimg/${t.employeeSavedName}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                             <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
+                                             <input type="checkbox" class="chatDelete" value="${t.theraChatNo}">
+                                          </div>
+                                          <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                              <div class="font-weight-bold mb-1" style="font-weight: bolder;">You</div>
+                                                  ${t.theraChatContent}
+                                          </div>`
+                    }
 
 
                 } else {
@@ -339,15 +352,28 @@ function makeChatting(data,theraLinkNo){
                     const time = date[1];
 
 
-                    $chat.classList.add('chat-message-left', 'pb-4');
-                    $chat.innerHTML = `<div>
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                    if(t.employeeSavedName==null) {
+                        $chat.classList.add('chat-message-left', 'pb-4');
+                        $chat.innerHTML = `<div>
+                                            <img src="/common/img/no-profile.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                          </div>
                                          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                                            <div class="font-weight-bold mb-1">${t.name}</div>
                                                 ${t.theraChatContent}
                                          </div>`
+                    }
+                    else{
+                        $chat.classList.add('chat-message-left', 'pb-4');
+                        $chat.innerHTML = `<div>
+                                            <img src="/common/employeeimg/${t.employeeSavedName}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                             <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
+                                         </div>
+                                         <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                           <div class="font-weight-bold mb-1">${t.name}</div>
+                                                ${t.theraChatContent}
+                                         </div>`
+                    }
 
 
                 }
