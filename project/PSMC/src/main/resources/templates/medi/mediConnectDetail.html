@@ -413,9 +413,9 @@
                             </div>
                         </div>
                     </div>
-                    <form action="/medi/registNewMessage" method="post">
+                    <form id="messageForm" method="post">
                         <div class="messageInput">
-                            <input name="newMessage" type="text" placeholder="Type your message..." autofocus>
+                            <input id="inputMessage" name="contents" type="text" placeholder="Type your message..." autofocus>
                             <button>Send</button>
                         </div>
                     </form>
@@ -485,6 +485,50 @@
             })
         }
 
+
+
+        document.getElementById("messageForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const message = document.getElementById('inputMessage').value;
+
+
+            const $messageContainer = document.querySelector(".message-container");
+
+            fetch("/registNewMessage", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contents: message
+                })
+            })
+
+                .then(response => response.json())
+                .then(chat => {
+                    const date = chat.mediChatBoardDate.toString().split("T")
+                    const day = date[0];
+                    const time = date[1];
+                    const $chat = document.createElement("div");
+                    $chat.classList.add('plusDate', 'receiver-messages');
+                    $chat.innerHTML = `<div class="plusDate receiver-messages">
+                        <div class="dateTime">
+                            <P>${day}<br>${time}</P>
+                        </div>
+                        <div class="message receiver-message">
+                            <div class="message-text">${chat.contents}</div>
+                        </div>
+                    </div>`
+                    $messageContainer.appendChild($chat);
+                })
+
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        })
+
         function toggleDeleteButton() {
             var checkboxes = document.getElementsByName("postCheckbox");
             var deleteButton = document.querySelector("#delete-btn button");
@@ -505,20 +549,7 @@
             }
         }
 
-        // function deleteSelectedPosts() {
-        //     var checkboxes = document.getElementsByName("postCheckbox");
-        //     var rowsToDelete = [];
-        //
-        //     for (var i = 0; i < checkboxes.length; i++) {
-        //         if (checkboxes[i].checked) {
-        //             rowsToDelete.push(checkboxes[i].parentNode.parentNode);
-        //         }
-        //     }
-        //
-        //     for (var i = 0; i < rowsToDelete.length; i++) {
-        //         rowsToDelete[i].parentNode.removeChild(rowsToDelete[i]);
-        //     }
-        // }
+
 
 
     </script>

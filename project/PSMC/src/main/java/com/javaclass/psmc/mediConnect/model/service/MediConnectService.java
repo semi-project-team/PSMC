@@ -62,4 +62,9 @@ public class MediConnectService {
 
         return projectMapper.deleteChat(param);
     }
+
+    public ShowAllMediChatDTO showNewChat(int mediNo) {
+
+        return projectMapper.showNewChat(mediNo);
+    }
 }

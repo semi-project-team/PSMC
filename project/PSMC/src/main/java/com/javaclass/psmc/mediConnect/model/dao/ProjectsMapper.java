@@ -32,6 +32,8 @@ public interface ProjectsMapper {
 
     int deleteChat(Map<String, List<Integer>> param);
 
+    ShowAllMediChatDTO showNewChat(int mediNo);
+
 
 //    List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
 }

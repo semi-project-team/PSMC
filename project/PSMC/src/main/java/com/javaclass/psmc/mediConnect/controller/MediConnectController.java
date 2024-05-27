@@ -117,24 +117,24 @@ public class MediConnectController {
         return (List<ShowAllMediChatDTO>) session.getAttribute("mediChatDetail");
     }
 
-    @PostMapping( value = "/medi/registNewMessage", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/registNewMessage", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ShowAllMediChatDTO newMessgae(@RequestBody String newMessage, HttpSession session, ShowAllMediChatDTO showAllMediChatDTO) {
+    public ShowAllMediChatDTO newMessgae(@RequestBody ShowAllMediChatDTO showAllMediChatDTO, HttpSession session) {
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
 
-        String status = "Y";
-
         showAllMediChatDTO.setMediChatBoardDate(LocalDateTime.now());
         showAllMediChatDTO.setPmCode(pmCode);
         showAllMediChatDTO.setMediNo((int)session.getAttribute("mediNo"));
-        showAllMediChatDTO.setContents(newMessage);
-        showAllMediChatDTO.setMediChatStatus(status);
+
+        int mediNo = (int)session.getAttribute("mediNo");
 
         int result = mediConnectService.registNewMessage(showAllMediChatDTO);
 
-        return showAllMediChatDTO;
+        ShowAllMediChatDTO showNewChat = mediConnectService.showNewChat(mediNo);
+
+        return showNewChat;
     }
 
 }
