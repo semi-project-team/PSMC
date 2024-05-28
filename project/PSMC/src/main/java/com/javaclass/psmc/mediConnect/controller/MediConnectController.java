@@ -1,6 +1,7 @@
 package com.javaclass.psmc.mediConnect.controller;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.common.model.dto.MediConnectDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
@@ -155,6 +156,27 @@ public class MediConnectController {
         ShowAllMediChatDTO showNewChat = mediConnectService.showNewChat(mediNo);
 
         return showNewChat;
+    }
+
+    @PostMapping("/registNewMedi")
+    public String registNewMedi(@ModelAttribute MediConnectDTO mediConnectDTO, HttpSession session) {
+
+        int projectNo = (int)session.getAttribute("projectNo");
+        String pmCode = (String) session.getAttribute("pmCode");
+        String mediContent = (String) mediConnectDTO.getMediContent();
+        String mediTitle = (String) mediConnectDTO.getMediTitle();
+        LocalDateTime mediBoardDate = LocalDateTime.now();
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("projectNo", projectNo);
+        param.put("pmCode", pmCode);
+        param.put("mediContent", mediContent);
+        param.put("mediTitle", mediTitle);
+        param.put("mediBoardDate", mediBoardDate);
+
+        int registMedi = mediConnectService.registNewMedi(param);
+
+        return "redirect:/medi/mediConnect/" + projectNo;
     }
 
 //    @PostMapping
