@@ -102,7 +102,7 @@
         <id property="employeePhotoNo" column="employee_photo_no"/>
         <result property="employeeOriginName" column="employee_origin_name"/>
         <result property="employeeSavedName" column="employee_saved_name"/>
-        <result property="employee_filepath" column="employeeFilepath"/>
+        <result property="employeeFilepath" column="employee_filepath"/>
         <result property="pmCode" column="pm_code"/>
     </resultMap>
     <resultMap id="profileMap" type="com.javaclass.psmc.mainPage.model.dto.ProfileDTO">
@@ -965,7 +965,7 @@
         <result property="theraChatBoardDate" column="thera_chat_board_date"/>
         <result property="theraChatStatus" column="thera_chat_status"/>
         <result property="name" column="name"/>
-        <result property="employeeSavedName" column="employee_saved_name"/>
+        <result property="employeeFilepath" column="employee_filepath"/>
     </resultMap>
     <resultMap id="theraChatByTheraLink" type="com.javaclass.psmc.theraLink.model.dto.TheraLinkForChatDTO">
         <id property="theraLinkNo" column="theraLink_no"/>
@@ -983,7 +983,7 @@
             l.theraLink_no,
             e.name,
             d.*,
-            f.employee_saved_name
+            f.employee_filepath
 
         from
             thera_link l
@@ -1046,6 +1046,7 @@
         <result property="theraStatus" column="thera_status"/>
         <result property="theraBoardDate" column="thera_board_date"/>
         <result property="savedName" column="theralink_saved_name"/>
+        <result property="filepath" column="theralink_filepath"/>
         <result property="comment" column="comment"/>
     </resultMap>
     <select id="findAllBlogByProjectNo" resultMap="blogMap" parameterType="hashmap">
@@ -1058,7 +1059,8 @@
         left join
             (select
                 theraLink_no,
-                min(theralink_saved_name) as theralink_saved_name
+                min(theralink_saved_name) as theralink_saved_name,
+                min(theralink_filepath) as theralink_filepath
             from
                 theralink_photo
             group by

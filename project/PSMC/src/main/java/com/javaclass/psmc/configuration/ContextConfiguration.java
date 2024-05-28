@@ -13,4 +13,6 @@ public class ContextConfiguration {
     MappingJackson2JsonView jasonView(){
         return new MappingJackson2JsonView();
     }
+
+
 }

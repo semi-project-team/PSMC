@@ -13,11 +13,11 @@ public class TheraChatForBlogDTO {
     private LocalDateTime theraChatBoardDate;
     private String theraChatStatus;
     private String name;
-    private String employeeSavedName;
+    private String employeeFilepath;
 
     public TheraChatForBlogDTO(){}
 
-    public TheraChatForBlogDTO(int theraChatNo, int theraLinkNo, String pmCode, String theraChatContent, LocalDateTime theraChatBoardDate, String theraChatStatus, String name, String employeeSavedName) {
+    public TheraChatForBlogDTO(int theraChatNo, int theraLinkNo, String pmCode, String theraChatContent, LocalDateTime theraChatBoardDate, String theraChatStatus, String name, String employeeFilepath) {
         this.theraChatNo = theraChatNo;
         this.theraLinkNo = theraLinkNo;
         this.pmCode = pmCode;
@@ -25,7 +25,7 @@ public class TheraChatForBlogDTO {
         this.theraChatBoardDate = theraChatBoardDate;
         this.theraChatStatus = theraChatStatus;
         this.name = name;
-        this.employeeSavedName = employeeSavedName;
+        this.employeeFilepath = employeeFilepath;
     }
 
     public int getTheraChatNo() {
@@ -84,12 +84,12 @@ public class TheraChatForBlogDTO {
         this.name = name;
     }
 
-    public String getEmployeeSavedName() {
-        return employeeSavedName;
+    public String getEmployeeFilepath() {
+        return employeeFilepath;
     }
 
-    public void setEmployeeSavedName(String employeeSavedName) {
-        this.employeeSavedName = employeeSavedName;
+    public void setEmployeeFilepath(String employeeFilepath) {
+        this.employeeFilepath = employeeFilepath;
     }
 
     @Override
@@ -102,7 +102,7 @@ public class TheraChatForBlogDTO {
                 ", theraChatBoardDate=" + theraChatBoardDate +
                 ", theraChatStatus='" + theraChatStatus + '\'' +
                 ", name='" + name + '\'' +
-                ", employeeSavedName='" + employeeSavedName + '\'' +
+                ", employeeFilepath='" + employeeFilepath + '\'' +
                 '}';
     }
 }

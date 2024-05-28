@@ -59,7 +59,7 @@ body,html{
 }
 .profile img{
     width: 80%;
-    height: auto;
+    aspect-ratio: 1/1;
     display: block;
 }
 

@@ -34,7 +34,7 @@ public class ChangeController {
         String message = (String) session.getAttribute("message");
         session.removeAttribute("message");
         model.addAttribute("message",message);
-        return "/mypage/change";
+        return "mypage/change";
     }
 
 

@@ -320,7 +320,7 @@ function makeChatting(data,theraLinkNo){
 
 
 
-                    if(t.employeeSavedName==null) {
+                    if(t.employeeFilepath==null) {
                         $chat.classList.add('chat-message-right', 'pb-4');
                         $chat.innerHTML = `<div>
                                              <img src="/common/img/no-profile.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
@@ -334,7 +334,7 @@ function makeChatting(data,theraLinkNo){
                     }else{
                         $chat.classList.add('chat-message-right', 'pb-4');
                         $chat.innerHTML = `<div>
-                                             <img src="/common/employeeimg/${t.employeeSavedName}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                             <img src="${t.employeeFilepath}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                              <input type="checkbox" class="chatDelete" value="${t.theraChatNo}">
                                           </div>
@@ -352,7 +352,7 @@ function makeChatting(data,theraLinkNo){
                     const time = date[1];
 
 
-                    if(t.employeeSavedName==null) {
+                    if(t.employeeFilepath==null) {
                         $chat.classList.add('chat-message-left', 'pb-4');
                         $chat.innerHTML = `<div>
                                             <img src="/common/img/no-profile.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
@@ -366,7 +366,7 @@ function makeChatting(data,theraLinkNo){
                     else{
                         $chat.classList.add('chat-message-left', 'pb-4');
                         $chat.innerHTML = `<div>
-                                            <img src="/common/employeeimg/${t.employeeSavedName}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <img src="t.employeeFilepath" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                          </div>
                                          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
@@ -396,7 +396,7 @@ function makeChatting(data,theraLinkNo){
                 $div.classList.add('carousel-item','active');
                 const $img = document.createElement('img');
                 $img.classList.add('d-block','w-100');
-                $img.src=`/static/common/postimg/${p.theralinkSavedName}`;
+                $img.src=`${p.theralinkFilepath}`;
                 $div.appendChild($img)
 
                 pictureArea.appendChild($div);
@@ -410,6 +410,17 @@ function makeChatting(data,theraLinkNo){
 
 
             // pictureArea.insertAdjacentHTML('afterend',buttonHtml)
+
+    }else{
+
+        const $div = document.createElement('div');
+        $div.classList.add('carousel-item','active');
+        const $img = document.createElement('img');
+        $img.classList.add('d-block','w-100');
+        $img.src='/common/img/no-image.png';
+        $div.appendChild($img)
+
+        pictureArea.appendChild($div);
 
     }
     // if(data.theraLinkPhotoDTOS!=null){

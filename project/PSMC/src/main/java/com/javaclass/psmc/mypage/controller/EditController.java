@@ -28,7 +28,7 @@ public class EditController {
         String pmCode = loginUserDTO.getPmCode();
         ProfileFroEditDTO profileFroEditDTO = editService.findInfoForEdit(pmCode);
         model.addAttribute("profile", profileFroEditDTO);
-        return "/mypage/edit";
+        return "mypage/edit";
     }
 
     @PostMapping("/memberUpdate")
