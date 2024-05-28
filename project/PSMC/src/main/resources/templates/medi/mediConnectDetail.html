@@ -234,6 +234,7 @@
 
         .message-text {
             font-size: 0.7rem;
+            white-space: nowrap; /* 개행 제거 */
         }
 
         .dateTime{
@@ -270,8 +271,8 @@
         .profile .senderName {
             border-radius: 50%;
             background-color: #22b0b5;
-            font-size: 0.4rem;
-            padding: 5px;
+            font-size: 0.5rem;
+            padding: 4px;
             margin-right: 8px;
             /* font-weight: bold; */
             color: white;
@@ -458,43 +459,51 @@
 
             const $messageContainer = document.querySelector(".message-container");
             $messageContainer.textContent="";
+            const maxLength = 26; // 예시로 50자로 설정
             data.forEach(chat => {
-                const date = chat.mediChatBoardDate.toString().split("T")
+                const date = chat.mediChatBoardDate.toString().split("T");
                 const day = date[0];
                 const time = date[1];
+                let messageText = chat.contents;
+                if (messageText.length > maxLength) {
+                    const firstLine = messageText.substring(0, maxLength);
+                    const remainingLines = messageText.substring(maxLength);
+                    messageText = firstLine + "<br>" + remainingLines;
+                }
                 const $chat = document.createElement("div");
                 if (chat.pmCode === $pmCode) {
-
+                    // 수신 메시지 스타일
                     $chat.classList.add('plusDate', 'receiver-messages');
-                    $chat.innerHTML = `<div class="plusDate receiver-messages">
-                        <div class="dateTime">
-                            <P>${day}<br>${time}</P>
-                        </div>
-                        <div class="message receiver-message">
-                            <div class="message-text">${chat.contents}</div>
-                        </div>
-                    </div>`
-
+                    $chat.innerHTML = `
+            <div class="plusDate receiver-messages">
+                <div class="dateTime">
+                    <p>${day}<br>${time}</p>
+                </div>
+                <div class="message receiver-message">
+                    <div class="message-text">${messageText}</div>
+                </div>
+            </div>`;
                 } else {
-
-                    console.log('오른쪽');
-
+                    // 발신 메시지 스타일
                     $chat.classList.add('plusDate', 'sender-messages');
-                    $chat.innerHTML = `<div class="plusDate sender-messages">
-                        <div class="message sender-message">
-                            <div class="profile">
-                                <div class="senderName">${chat.employeeDTO.name}</div>
-                            </div>
-                            <div class="message-text">${chat.contents}</div>
-                        </div>
-                        <div class="dateTime">
-                            <P>${day}<br>${time}</P>
-                        </div>
-                    </div>`
-
+                    const senderName = chat.employeeDTO.name;
+                    const shortenedSenderName = senderName.length > 2 ? senderName.substring(senderName.length - 2) : senderName;
+                    $chat.innerHTML = `
+            <div class="plusDate sender-messages">
+                <div class="message sender-message">
+                    <div class="profile">
+                        <div class="senderName">${shortenedSenderName}</div>
+                    </div>
+                    <div class="message-text">${messageText}</div>
+                </div>
+                <div class="dateTime">
+                    <p>${day}<br>${time}</p>
+                </div>
+            </div>`;
                 }
                 $messageContainer.appendChild($chat);
-            })
+            });
+
         }
 
 
@@ -503,8 +512,6 @@
             event.preventDefault();
 
             const message = document.getElementById('inputMessage').value;
-
-
             const $messageContainer = document.querySelector(".message-container");
 
             fetch("/registNewMessage", {
@@ -524,6 +531,16 @@
                     const time = date[1];
                     const $chat = document.createElement("div");
                     $chat.classList.add('plusDate', 'receiver-messages');
+
+                    const maxLength = 26; // 예시로 50자로 설정
+                    let messageText = chat.contents;
+                    if (messageText.length > maxLength) {
+                        const firstLine = messageText.substring(0, maxLength);
+                        const remainingLines = messageText.substring(maxLength);
+                        messageText = firstLine + "<br>" + remainingLines;
+                    }
+
+
                     $chat.innerHTML = `<div class="plusDate receiver-messages">
                         <div class="dateTime">
                             <P>${day}<br>${time}</P>
@@ -533,6 +550,9 @@
                         </div>
                     </div>`
                     $messageContainer.appendChild($chat);
+
+                    document.getElementById('inputMessage').value = "";
+
                 })
 
                 .catch(error => {
