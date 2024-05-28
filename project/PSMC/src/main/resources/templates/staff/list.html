@@ -67,34 +67,29 @@
                 <div class="card card-margin">
                     <div class="card-body">
                         <div class="row search-body">
-                            <div class="col-lg-2">
-                                <div class="">
-                                    <table class="widget-26">
-                                        <tr>
-                                            <th>이름</th>
-                                            <th>이메일</th>
-                                            <th>전화번호</th>
-                                            <th>연구실번호</th>
-                                            <th>전공분야</th>
-                                            <th>직급</th>
-                                        </tr>
-                                        <tr th:each="employee : ${employeeList}">
-                                            <td th:text="${employee.name}"></td>
-                                            <td th:text="${employee.companyEmail}"></td>
-                                            <td th:text="${employee.phone}"></td>
-                                            <td th:text="${employee.officeNum}"></td>
-                                            <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
-                                            <td th:text="${employee.positionDTO.positionName}"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                            <table class="widget-26">
+                                <tr>
+                                    <th>이름</th>
+                                    <th>이메일</th>
+                                    <th>전화번호</th>
+                                    <th>연구실번호</th>
+                                    <th>전공분야</th>
+                                    <th>직급</th>
+                                </tr>
+                                <tr th:each="employee : ${employeeList}">
+                                    <td th:text="${employee.name}"></td>
+                                    <td th:text="${employee.companyEmail}"></td>
+                                    <td th:text="${employee.phone}"></td>
+                                    <td th:text="${employee.officeNum}"></td>
+                                    <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
+                                    <td th:text="${employee.positionDTO.positionName}"></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
         <script src="/assets/js/list.js"></script>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
