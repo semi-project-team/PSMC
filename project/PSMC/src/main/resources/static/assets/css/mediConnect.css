@@ -54,6 +54,8 @@ section.notice {
 #deleteButton{
     align-self: flex-end;
     margin-right: 1.5%;
+    margin-top: 1.5%;
+    border-radius: 5px;
 
 }
 

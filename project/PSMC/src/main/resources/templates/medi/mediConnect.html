@@ -23,12 +23,12 @@
         <div class="container">
 
             <div class="search-window">
-                <form action="">
+                <form action="/searchByTitle">
                     <div class="search-wrap d-flex">
-                        <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
+                        <input id="search" type="search" name="titleSearch" placeholder="검색어를 입력해주세요." value="">
                         <button type="submit" class="btn btn-dark">검색</button>
                     </div>
-                    <div class="form-container">
+                    <div class="form-container" sec:authorize="hasAnyAuthority('d')">
                         <button type="button" class="btn btn-light">작성하기</button>
                     </div>
                 </form>
@@ -48,6 +48,7 @@
                         <th scope="col" class="checkbox-btn"></th>
                         <th scope="col" class="th-num">번호</th>
                         <th scope="col" class="th-title">제목</th>
+                        <th scope="col" class="th-name">작성자</th>
                         <th scope="col" class="th-date">등록일</th>
                     </tr>
                     </thead>
@@ -62,7 +63,7 @@
                     </tbody>
                 </table>
                 <div class="delete-btn" id="delete-btn">
-                    <button type="submit" id="deleteButton" class="btn btn-dark" style="display: none;">Delete</button>
+                    <button type="submit" id="deleteButton" class="btn btn-dark" style="display: none;" sec:authorize="hasAnyAuthority('d')">Delete</button>
                 </div>
                 </form>
             </div>
