@@ -119,6 +119,12 @@
             a.medi_status = 'Y';
     </select>
 
+    <insert id="registNewMedi" parameterType="hashmap"
+            useGeneratedKeys="true" keyProperty="mediNo">
+        INSERT INTO `medi_connect` (`medi_title`, `medi_content`, `project_no`, `medi_status`, `medi_board_date`) VALUES
+        (#{mediTitle}, #{mediContent}, #{projectNo}, 'Y', #{mediBoardDate});
+    </insert>
+
     <select id="searchByBoardTitle" resultMap="showMediConnectsResultMap" parameterType="hashmap">
         select
             a.medi_no,

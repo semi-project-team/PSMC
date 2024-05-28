@@ -73,4 +73,9 @@ public class MediConnectService {
 
         return projectMapper.searchByBoardTitle(parameter);
     }
+
+    public int registNewMedi(Map<String, Object> param) {
+
+        return projectMapper.registNewMedi(param);
+    }
 }

@@ -36,6 +36,8 @@ public interface ProjectsMapper {
 
     List<ShowMediConnectDTO> searchByBoardTitle(Map<String, Object> parameter);
 
+    int registNewMedi(Map<String, Object> param);
+
 
 //    List<ShowMediConnectDTO> showBoardDetail(Map<String, Object> parameter);
 }
