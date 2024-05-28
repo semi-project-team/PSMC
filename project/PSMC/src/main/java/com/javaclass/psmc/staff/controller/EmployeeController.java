@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Map;
@@ -41,12 +42,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/search")
-    public String searchByParam(@RequestParam Map<String,String> parameter, Model model) {
+    public String searchByParam(@RequestParam Map<String,String> parameter, Model model, RedirectAttributes redirect) {
 
         System.out.println("parameter = " + parameter);
         List<EmployeeToMedicalFieldDTO> employeeList= employeeService.findMemberByFieldCode(parameter);
         if(employeeList.size() == 0) {
-            model.addAttribute("isNull", true);
+            redirect.addFlashAttribute("isNull", true);
+            return "redirect:/staff/list";
         }
         model.addAttribute("employeeList",employeeList);
         System.out.println("employeeList = " + employeeList);

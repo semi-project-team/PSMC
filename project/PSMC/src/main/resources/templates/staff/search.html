@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>search</title>
+    <link rel="stylesheet" href="/assets/css/search.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<script>
-    if(`[[${isNull}]]`){
-        alert('조회된 값이 없음');
-    }
-</script>
+
 <h2>직원조회</h2>
-<table>
-    <tr>
-        <th>이름</th>
-        <th>이메일</th>
-        <th>전화번호</th>
-        <th>연구실번호</th>
-        <th>전공분야</th>
-        <th>직급</th>
-    </tr>
-    <tr th:each="employee : ${employeeList}">
-        <td th:text="${employee.name}"></td>
-        <td th:text="${employee.companyEmail}"></td>
-        <td th:text="${employee.phone}"></td>
-        <td th:text="${employee.officeNum}"></td>
-        <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
-        <td th:text="${employee.positionDTO.positionName}"></td>
-    </tr>
-</table>
+<!--result-->
+    <div class="search-body">
+        <table class="search-result">
+            <tr>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>전화번호</th>
+                <th>연구실번호</th>
+                <th>전공분야</th>
+                <th>직급</th>
+            </tr>
+            <tr th:each="employee : ${employeeList}">
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.companyEmail}"></td>
+                <td th:text="${employee.phone}"></td>
+                <td th:text="${employee.officeNum}"></td>
+                <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
+                <td th:text="${employee.positionDTO.positionName}"></td>
+            </tr>
+        </table>
+    </div>
+
 </body>
 </html>
