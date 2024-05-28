@@ -15,6 +15,7 @@ import com.javaclass.psmc.user.model.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Pageable;
@@ -25,13 +26,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
 public class TheraLinkController {
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
     private final UserService userService;
     private final ObjectMapper objectMapper;
@@ -164,7 +167,7 @@ public class TheraLinkController {
         model.addAttribute("projectNo",projectNo);
         model.addAttribute("totalPage",totalPage);
         model.addAttribute("pageNo",pageNo);
-        return "/theraLink/secondPage";
+        return "theraLink/secondPage";
     }
 
 
@@ -246,62 +249,72 @@ public class TheraLinkController {
     }
 
 
+    // upload
+
     @PostMapping("/theraLink/theraUpload/{projectNo}")
     public ResponseEntity<Map<String, String>> fileUpload(@ModelAttribute RecieveDTO recieveDTO, @PathVariable int projectNo) throws IOException {
-
         System.out.println("업로드로 들어옴");
         List<MultipartFile> images = recieveDTO.getImages();
-        if(!Objects.isNull(recieveDTO.getImages())) {
-
-
-
+        if (!Objects.isNull(images)) {
             for (MultipartFile i : images) {
                 System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
             }
         }
 
+        File directory  = new File(uploadDir);
+        if(!directory.exists()){
+            directory.mkdirs();
+        }
+
+
 
         System.out.println("title = " + recieveDTO.getTheraTitle());
-
         System.out.println("theraLinkContent = " + recieveDTO.getContents());
 
         TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
-
         theraLinkDTO.setProjectNo(projectNo);
         theraLinkDTO.setTheraTitle(recieveDTO.getTheraTitle());
         theraLinkDTO.setTheraContents(recieveDTO.getContents());
         theraLinkDTO.setTheraBoardDate(LocalDateTime.now());
 
         int[] results = userService.makeTheraLink(theraLinkDTO);
-
         int theraLinkNo = results[1];
 
-        if(!Objects.isNull(images)){
-            Resource resource = resourceLoader.getResource("classpath:static/common/postimg");
-            String filepath = null;
-            if(!resource.exists()){
-                String root ="src/main/resources/static/common/postimg";
-                File file = new File(root);
-                file.mkdirs();
-                filepath=file.getAbsolutePath();
-            }else{
-                filepath=resourceLoader.getResource("classpath:static/common/postimg").getFile().getAbsolutePath();
-            }
-
-            System.out.println("filepath = " + filepath);
+        if (!Objects.isNull(images)) {
+//            String uploadDir = "static/common/postimg";
+//            InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(uploadDir);
+//            if (resourceStream == null) {
+//                File file = new File("src/main/resources/" + uploadDir);
+//                if (!file.exists()) {
+//                    file.mkdirs(); // 디렉토리 생성
+//                }
+//            }
+//            String filepath = new File("src/main/resources/" + uploadDir).getAbsolutePath();
+//
+//            System.out.println("filepath = " + filepath);
 
             List<TheraLinkPhotoDTO> theraLinkPhotoDTOS = new ArrayList<>();
             List<String> saveFiles = new ArrayList<>();
-            for(MultipartFile im: images){
-                String oringFileName = im.getOriginalFilename();
-                String ext = oringFileName.substring(oringFileName.lastIndexOf("."));
-                String savedName = UUID.randomUUID().toString().replace("-","")+ext;
+            for (MultipartFile im : images) {
+                String originalFileName = im.getOriginalFilename();
+                String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
+                String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
 
-                im.transferTo(new File(filepath+"/"+savedName));
-                saveFiles.add("static/common/postimg/" +savedName);
+                try{
+                    im.transferTo(new File(directory+"/"+savedName));
+                }catch (IOException e){
+                    throw new  RuntimeException("파일 업로드 중 오류가 발생했습니다"+e);
+                }
+
+                String filepath = "/images/postimg/"+savedName;
+                // 파일 저장 디렉토리 확인 및 생성
+//                File saveFile = new File(filepath + File.separator + savedName);
+//                im.transferTo(saveFile);
+
+//                saveFiles.add(uploadDir + "/" + savedName); // 변경된 경로
 
                 TheraLinkPhotoDTO newPhoto = new TheraLinkPhotoDTO();
-                newPhoto.setTheralinkOriginName(oringFileName);
+                newPhoto.setTheralinkOriginName(originalFileName);
                 newPhoto.setTheralinkSavedName(savedName);
                 newPhoto.setTheralinkFilepath(filepath);
                 newPhoto.setTheralinkNo(theraLinkNo);
@@ -310,23 +323,21 @@ public class TheraLinkController {
             }
         }
 
-        Map<String,String> response = new HashMap<>();
-        String url = "/theraLink/open/"+projectNo+"/1";
-        response.put("redirectURL",url);
+        Map<String, String> response = new HashMap<>();
+        String url = "/theraLink/open/" + projectNo + "/1";
+        response.put("redirectURL", url);
 
         return ResponseEntity.ok(response);
     }
 
+    // update
+
     @PostMapping("/theraLink/theraModi/{projectNo}")
-    public ResponseEntity<Map<String,String>> modifyBlog(@ModelAttribute RecieveDTO recieveDTO,@PathVariable int projectNo) throws IOException {
-
-
+    public ResponseEntity<Map<String, String>> modifyBlog(@ModelAttribute RecieveDTO recieveDTO, @PathVariable int projectNo) throws IOException {
         System.out.println("수정으로 들어옴");
 
-
         List<MultipartFile> images = recieveDTO.getImages();
-        if(!Objects.isNull(recieveDTO.getImages())) {
-
+        if (!Objects.isNull(images)) {
             for (MultipartFile i : images) {
                 System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
             }
@@ -335,41 +346,58 @@ public class TheraLinkController {
         int result1 = userService.killAllpictureByTheralinkNo(recieveDTO.getTheralinkNo());
 
 
-        System.out.println("theralinkNo"+recieveDTO.getTheralinkNo());
-        TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
 
+        System.out.println("theralinkNo" + recieveDTO.getTheralinkNo());
+        TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
         theraLinkDTO.setTheraLinkNo(recieveDTO.getTheralinkNo());
         theraLinkDTO.setTheraTitle(recieveDTO.getTheraTitle());
         theraLinkDTO.setTheraContents(recieveDTO.getContents());
 
         int result = userService.updateTheraLink(theraLinkDTO);
 
-        if(!Objects.isNull(images)){
-            Resource resource = resourceLoader.getResource("classpath:static/common/postimg");
-            String filepath = null;
-            if(!resource.exists()){
-                String root ="src/main/resources/static/common/postimg";
-                File file = new File(root);
-                file.mkdirs();
-                filepath=file.getAbsolutePath();
-            }else{
-                filepath=resourceLoader.getResource("classpath:static/common/postimg").getFile().getAbsolutePath();
+        File directory  = new File(uploadDir);
+        if(!directory.exists()){
+            directory.mkdirs();
+        }
+
+
+        if (!Objects.isNull(images)) {
+
+            String uploadDir = "static/common/postimg";
+            InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(uploadDir);
+            if (resourceStream == null) {
+                File file = new File("src/main/resources/" + uploadDir);
+                if (!file.exists()) {
+                    file.mkdirs(); // 디렉토리 생성
+                }
             }
-
-
+//            String filepath = new File("src/main/resources/" + uploadDir).getAbsolutePath();
+//
+//            System.out.println("filepath = " + filepath);
 
             List<TheraLinkPhotoDTO> theraLinkPhotoDTOS = new ArrayList<>();
             List<String> saveFiles = new ArrayList<>();
-            for(MultipartFile im: images){
-                String oringFileName = im.getOriginalFilename();
-                String ext = oringFileName.substring(oringFileName.lastIndexOf("."));
-                String savedName = UUID.randomUUID().toString().replace("-","")+ext;
+            for (MultipartFile im : images) {
+                String originalFileName = im.getOriginalFilename();
+                String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
+                String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
 
-                im.transferTo(new File(filepath+"/"+savedName));
-                saveFiles.add("static/common/postimg/" +savedName);
+                // 파일 저장 디렉토리 확인 및 생성
+//                File saveFile = new File(filepath + File.separator + savedName);
+//                im.transferTo(saveFile);
+
+                try{
+                    im.transferTo(new File(directory+"/"+savedName));
+                }catch (IOException e){
+                    throw new  RuntimeException("파일 업로드 중 오류가 발생했습니다"+e);
+                }
+
+
+                String filepath = "/images/postimg/"+savedName;
+//                saveFiles.add(uploadDir + "/" + savedName); // 변경된 경로
 
                 TheraLinkPhotoDTO newPhoto = new TheraLinkPhotoDTO();
-                newPhoto.setTheralinkOriginName(oringFileName);
+                newPhoto.setTheralinkOriginName(originalFileName);
                 newPhoto.setTheralinkSavedName(savedName);
                 newPhoto.setTheralinkFilepath(filepath);
                 newPhoto.setTheralinkNo(recieveDTO.getTheralinkNo());
@@ -378,11 +406,9 @@ public class TheraLinkController {
             }
         }
 
-
-
-        Map<String,String> response = new HashMap<>();
-        String url = "/theraLink/open/"+projectNo+"/1";
-        response.put("redirectURL",url);
+        Map<String, String> response = new HashMap<>();
+        String url = "/theraLink/open/" + projectNo + "/1";
+        response.put("redirectURL", url);
         return ResponseEntity.ok(response);
     }
 
@@ -395,7 +421,7 @@ public class TheraLinkController {
 
             request.setAttribute("param",parameters);
 
-        return "forward:/theraLink/"+1;
+        return "forward:theraLink/"+1;
     }
 
 

@@ -142,14 +142,15 @@ public class AuthController {
             model.addAttribute("reservationMessages", messages);
         }
 
-        return "/auth/login";
+        return "auth/login";
     }
 
     @GetMapping("/fail")
-    public ModelAndView loginFail(ModelAndView mv,@RequestParam String message){
-        mv.addObject("message",message);
-        mv.setViewName("/auth/fail");
-        return mv;
+    public String loginFail(Model model,@RequestParam String message){
+
+        model.addAttribute("message",message);
+
+        return "auth/fail";
     }
 
     @PostMapping("/takeCode")

@@ -41,14 +41,16 @@ public class MainController {
         model.addAttribute("message",message);
 
 
-        return "/main";
+        return "main";
     }
 
 
     @GetMapping("/common/signal")
-    public void signal(Model model,HttpSession httpSession){
+    public String signal(Model model,HttpSession httpSession){
         model.addAttribute("message",httpSession.getAttribute("message"));
         httpSession.removeAttribute("message");
+
+        return "common/signal";
     }
 
     @PostMapping(value = "/finddingId",produces = "application/json; charset=UTF-8")

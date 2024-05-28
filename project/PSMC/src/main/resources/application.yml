@@ -31,6 +31,6 @@ spring:
 mybatis:
   mapper-locations: mappers/*.xml
 
-
-
+file:
+  upload-dir: ${user.home}/app/images/profile
 
