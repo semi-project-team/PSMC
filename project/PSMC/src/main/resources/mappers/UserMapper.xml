@@ -203,6 +203,15 @@
             t.time_val;
 
     </select>
+    
+    <resultMap id="mediConnectResultMap" type="com.javaclass.psmc.common.model.dto.MediConnectDTO">
+        <id property="mediNo" column="medi_no"/>
+        <result property="mediTitle" column="medi_title"/>
+        <result property="mediContent" column="medi_content"/>
+        <result property="mediBoardDate" column="medi_board_date"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="mediStatus" column="medi_status"/>
+    </resultMap>
 
     <select id="allTimes" resultMap="timeToMediInfoMap" parameterType="string">
         select
@@ -280,6 +289,57 @@
 
 
     </update>
+
+    <resultMap id="miniMediResultMap" type="com.javaclass.psmc.auth.model.dto.MiniMediConnectDTO">
+        <id property="chatNo" column="chat_no"/>
+        <result property="contents" column="contents"/>
+        <result property="mediChatBoardDate" column="medi_chat_board_date"/>
+        <association property="mediConnectDTO" resultMap="mediConnectResultMap"/>
+        <association property="patientDTO" resultMap="patientMap"/>
+    </resultMap>
+
+    <select id="showFourMedi" resultMap="miniMediResultMap" parameterType="hashmap">
+        select
+            c.medi_no,
+            b.patient_name,
+            c.medi_title,
+            a.contents,
+            a.medi_chat_board_date
+        <if test="role == 'doctor'">
+            from
+                create_project d
+            join
+                project e on e.project_no = d.project_no
+        </if>
+        <if test="role == 'thera'">
+            from
+                assign_project f
+            join
+                project e on e.project_no = f.project_no
+        </if>
+        join
+            patient b on b.patient_no = e.patient_no
+        join
+            injury g on g.injury_code = e.injury_code
+        join
+            medi_connect c on c.project_no = e.project_no
+        join
+            medi_chat a on a.medi_no = c.medi_no
+        where
+        <if test="role == 'doctor'">
+            d.pm_code = #{pmCode}
+        </if>
+        <if test="role == 'thera'">
+            f.pm_code = #{pmCode}
+        </if>
+            and
+            a.pm_code != #{pmCode}
+            and
+            a.medi_chat_status = 'Y'
+        order by
+            a.medi_chat_board_date desc
+            limit 0,4;
+    </select>
 
     <resultMap id="theraToPro" type="com.javaclass.psmc.mainPage.model.dto.TheraToProDTO">
         <id property="theraCode" column="thera_code"/>

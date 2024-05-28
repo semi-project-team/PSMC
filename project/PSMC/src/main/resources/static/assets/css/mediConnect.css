@@ -71,6 +71,11 @@ section.notice {
     border: none; /* 테두리를 없앱니다. */
     align-self: flex-end;
     margin-right: 1%;
+    margin-top: 1%;
+}
+
+#searchButton:hover{
+    background-color: #5e5e5e;
 }
 
 #deleteButton:hover,

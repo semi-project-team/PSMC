@@ -18,6 +18,17 @@ function toggleDeleteButton() {
     }
 }
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const dateElements = document.querySelectorAll('.mediBoardDate');
+    dateElements.forEach(el => {
+        let dateStr = el.textContent;
+        if (dateStr.includes('T')) {
+            el.textContent = dateStr.replace('T', ' ');
+        }
+    });
+});
+
 // 모달 객체 가져오기
 var modal = document.getElementById("myModal");
 

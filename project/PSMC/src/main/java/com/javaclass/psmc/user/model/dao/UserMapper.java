@@ -120,4 +120,6 @@ public interface UserMapper {
     int updateEmployeePhoto(EmployeePhotoDTO savePhoto);
 
     int insertEmployeePhoto(EmployeePhotoDTO savePhoto);
+
+    List<MiniMediConnectDTO> showFourMedi(Map<String, Object> sender);
 }

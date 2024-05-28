@@ -29,6 +29,26 @@ public class MediConnectController {
         this.mediConnectService = mediConnectService;
     }
 
+    @PostMapping("/searchByTitle")
+    public String searchByTitle(@RequestParam("titleSearch") String mediTitle, Model model, HttpSession session) {
+
+        LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
+        String pmCode = loginUserDTO.getPmCode();
+
+        int projectNo = (int) session.getAttribute("projectNo");
+
+        Map<String,Object> parameter = new HashMap<>();
+        parameter.put("pmCode",pmCode);
+        parameter.put("projectNo",projectNo);
+        parameter.put("mediTitle", mediTitle);
+
+        List<ShowMediConnectDTO> boards = mediConnectService.searchByBoardTitle(parameter);
+
+        model.addAttribute("boards", boards);
+
+        return "redirect:/medi/mediConnect/" + projectNo;
+    }
+
     @GetMapping("/medi/mediConnect/{projectNo}")
     public String mediConnectPage(@PathVariable int projectNo, Model model, HttpSession session) {
 
@@ -117,24 +137,27 @@ public class MediConnectController {
         return (List<ShowAllMediChatDTO>) session.getAttribute("mediChatDetail");
     }
 
-    @PostMapping( value = "/medi/registNewMessage", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/registNewMessage", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ShowAllMediChatDTO newMessgae(@RequestBody String newMessage, HttpSession session, ShowAllMediChatDTO showAllMediChatDTO) {
+    public ShowAllMediChatDTO newMessgae(@RequestBody ShowAllMediChatDTO showAllMediChatDTO, HttpSession session) {
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
 
-        String status = "Y";
-
         showAllMediChatDTO.setMediChatBoardDate(LocalDateTime.now());
         showAllMediChatDTO.setPmCode(pmCode);
         showAllMediChatDTO.setMediNo((int)session.getAttribute("mediNo"));
-        showAllMediChatDTO.setContents(newMessage);
-        showAllMediChatDTO.setMediChatStatus(status);
+
+        int mediNo = (int)session.getAttribute("mediNo");
 
         int result = mediConnectService.registNewMessage(showAllMediChatDTO);
 
-        return showAllMediChatDTO;
+        ShowAllMediChatDTO showNewChat = mediConnectService.showNewChat(mediNo);
+
+        return showNewChat;
     }
+
+//    @PostMapping
+//    public ShowMediConnectDTO
 
 }
