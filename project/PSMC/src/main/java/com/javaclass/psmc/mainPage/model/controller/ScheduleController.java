@@ -140,7 +140,7 @@ public class ScheduleController {
 
         session.setAttribute("param",param);
 
-        return "forward:/schedule/scheduler";
+        return "forward:schedule/scheduler";
     }
 
     @PostMapping("/delete/{mediCode}")

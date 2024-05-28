@@ -94,6 +94,7 @@
         <result property="mediBoardDate" column="medi_board_date"/>
         <result property="projectNo" column="project_no"/>
         <association property="createProjectDTO" resultMap="createProjectResultMap"/>
+        <association property="employeeDTO" resultMap="employeeResultMap"/>
     </resultMap>
 
     <select id="showAllBoards" resultMap="showMediConnectsResultMap" parameterType="hashmap">
@@ -102,17 +103,48 @@
             a.medi_title,
             a.medi_content,
             a.medi_board_date,
-            b.pm_code
+            b.pm_code,
+            c.name
         from
             medi_connect a
         join
             create_project b on a.project_no = b.project_no
+        join
+            employee c on b.pm_code = c.pm_code
         where
-            b.pm_code = #{pmCode}
-            and
+<!--            b.pm_code = #{pmCode}-->
+<!--            and-->
             b.project_no = #{projectNo}
             and
             a.medi_status = 'Y';
+    </select>
+
+    <insert id="registNewMedi" parameterType="hashmap"
+            useGeneratedKeys="true" keyProperty="mediNo">
+        INSERT INTO `medi_connect` (`medi_title`, `medi_content`, `project_no`, `medi_status`, `medi_board_date`) VALUES
+        (#{mediTitle}, #{mediContent}, #{projectNo}, 'Y', #{mediBoardDate});
+    </insert>
+
+    <select id="searchByBoardTitle" resultMap="showMediConnectsResultMap" parameterType="hashmap">
+        select
+            a.medi_no,
+            a.medi_title,
+            a.medi_content,
+            a.medi_board_date,
+            b.pm_code,
+            c.name
+        from
+            medi_connect a
+        join
+            create_project b on a.project_no = b.project_no
+        join
+            employee c on b.pm_code = c.pm_code
+        where
+            b.project_no = #{projectNo}
+            and
+            a.medi_status = 'Y'
+            and
+            a.medi_title like '%' || #{mediTitle} || '%'
     </select>
 
     <update id="deleteBoard" parameterType="hashmap">
@@ -216,11 +248,33 @@
             medi_chat_board_date;
     </select>
 
+    <select id="showNewChat" resultMap="showMediChatDetailResultMap" parameterType="int">
+        select
+            b.name,
+            c.id,
+            a.pm_code,
+            a.chat_no,
+            a.medi_no,
+            a.contents,
+            a.medi_chat_board_date
+        from
+            medi_chat a
+        join
+            employee b on a.pm_code = b.pm_code
+        join
+            member_regist c on a.pm_code = c.pm_code
+        where
+            a.medi_no = #{mediNo}
+        order by
+            a.medi_chat_board_date DESC
+            limit 1;
+    </select>
+
     <insert id="registNewMessage" parameterType="com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO"
             useGeneratedKeys="true" keyProperty="chatNo">
         INSERT INTO `medi_chat`(`medi_no`,`pm_code`,`contents`,`medi_chat_board_date`,`medi_chat_status`)
         VALUES
-        (#{mediNo},#{pmCode},#{contents},#{mediChatBoardDate},#{mediChatStatus});
+        (#{mediNo},#{pmCode},#{contents},#{mediChatBoardDate},'Y');
     </insert>
 
 </mapper>

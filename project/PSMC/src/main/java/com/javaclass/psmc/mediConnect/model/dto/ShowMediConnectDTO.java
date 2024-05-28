@@ -2,6 +2,7 @@ package com.javaclass.psmc.mediConnect.model.dto;
 
 import com.javaclass.psmc.common.model.dto.AssignProjectDTO;
 import com.javaclass.psmc.common.model.dto.CreateProjectDTO;
+import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,12 @@ public class ShowMediConnectDTO {
     private CreateProjectDTO createProjectDTO;
 
     private AssignProjectDTO assignProjectDTO;
+    private EmployeeDTO employeeDTO;
 
     public ShowMediConnectDTO() {
     }
 
-    public ShowMediConnectDTO(int mediNo, String mediTitle, String mediContent, LocalDateTime mediBoardDate, int projectNo, CreateProjectDTO createProjectDTO, AssignProjectDTO assignProjectDTO) {
+    public ShowMediConnectDTO(int mediNo, String mediTitle, String mediContent, LocalDateTime mediBoardDate, int projectNo, CreateProjectDTO createProjectDTO, AssignProjectDTO assignProjectDTO, EmployeeDTO employeeDTO) {
         this.mediNo = mediNo;
         this.mediTitle = mediTitle;
         this.mediContent = mediContent;
@@ -30,6 +32,7 @@ public class ShowMediConnectDTO {
         this.projectNo = projectNo;
         this.createProjectDTO = createProjectDTO;
         this.assignProjectDTO = assignProjectDTO;
+        this.employeeDTO = employeeDTO;
     }
 
     public int getMediNo() {
@@ -88,6 +91,14 @@ public class ShowMediConnectDTO {
         this.assignProjectDTO = assignProjectDTO;
     }
 
+    public EmployeeDTO getEmployeeDTO() {
+        return employeeDTO;
+    }
+
+    public void setEmployeeDTO(EmployeeDTO employeeDTO) {
+        this.employeeDTO = employeeDTO;
+    }
+
     @Override
     public String toString() {
         return "ShowMediConnectDTO{" +
@@ -98,6 +109,7 @@ public class ShowMediConnectDTO {
                 ", projectNo=" + projectNo +
                 ", createProjectDTO=" + createProjectDTO +
                 ", assignProjectDTO=" + assignProjectDTO +
+                ", employeeDTO=" + employeeDTO +
                 '}';
     }
 }

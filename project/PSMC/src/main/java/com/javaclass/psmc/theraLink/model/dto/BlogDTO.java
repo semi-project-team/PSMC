@@ -15,5 +15,6 @@ public class BlogDTO {
     private String theraStatus;
     private LocalDate theraBoardDate;
     private String savedName;
+    private String filepath;
     private String comment;
 }

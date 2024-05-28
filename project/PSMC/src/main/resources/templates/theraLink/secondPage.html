@@ -16,8 +16,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
       integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
-    <th:block th:insert="~{/common/nav}"></th:block>
-    <th:block th:insert="~{/common/header}"></th:block>
+    <th:block th:insert="~{common/nav}"></th:block>
+    <th:block th:insert="~{common/header}"></th:block>
 
     <!-- 내용물 시작 -->
     <div class="container-fluid">
@@ -28,7 +28,7 @@
                     <div class="blog-post rounded border">
                         <div class="blog-img d-block overflow-hidden position-relative">
                             <th:block th:if="${thera.savedName!=null}">
-                                <img th:src="|/static/common/postimg/${thera.savedName}|" class="img-fluid rounded-top" alt>
+                                <img th:src="${thera.filepath}" class="img-fluid rounded-top" alt>
                             </th:block>
                             <th:block th:unless="${thera.savedName!=null}">
                                 <img src="/common/img/no-image.png" class="img-fluid rounded-top" alt>

@@ -62,4 +62,20 @@ public class MediConnectService {
 
         return projectMapper.deleteChat(param);
     }
+
+    public ShowAllMediChatDTO showNewChat(int mediNo) {
+
+        return projectMapper.showNewChat(mediNo);
+    }
+
+
+    public List<ShowMediConnectDTO> searchByBoardTitle(Map<String, Object> parameter) {
+
+        return projectMapper.searchByBoardTitle(parameter);
+    }
+
+    public int registNewMedi(Map<String, Object> param) {
+
+        return projectMapper.registNewMedi(param);
+    }
 }

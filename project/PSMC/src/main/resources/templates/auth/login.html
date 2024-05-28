@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/mainpage.css">
 </head>
 <body>
-<th:block th:insert="~{/common/nav}"></th:block>
+<th:block th:insert="~{common/nav}"></th:block>
 
 <div class="mainPage">
     <script>
@@ -26,12 +26,12 @@
 
 
 
-    <th:block th:insert="~{/common/header}"></th:block>
+    <th:block th:insert="~{common/header}"></th:block>
     <div class="containerouter">
         <div class="box1">
             <div class="profile">
                 <th:block th:if="${profile.getEmployeePhotoDTO().getEmployeeSavedName()!=null}">
-                    <img th:src="@{|/common/employeeimg/${profile.getEmployeePhotoDTO().getEmployeeSavedName()}|}" alt="/common/img/profile.png" class="circle-image">
+                    <img th:src="${profile.employeePhotoDTO.employeeFilepath}" alt="/common/img/profile.png" class="circle-image">
                 </th:block>
                 <th:block th:if="${profile.employeePhotoDTO.employeeSavedName==null}">
                     <img src="/common/img/profile.png">
@@ -391,11 +391,14 @@
         <div class="box5">
             <div class="mediconnect">
                 <div class="title2">mediconnect</div>
-                <div class="button-bar">
-                    <button class="button-6">내역 1.김땡땡 오른쪽 무릎 </button><br>
-                    <button class="button-6">내역 2.조땡땡 왼쪽 발목 골절</button><br>
-                    <button class="button-6">내역 3.박땡땡  ~~~~</button><br>
-                    <button class="button-6">내역 4.이떙떙 ~~~~~</button>
+                <div class="button-bar" th:each="medi : ${miniMedi}">
+                    <button class="button-6">
+                        <a class="mediBoardDate" th:text="|내역 ${medi.mediConnectDTO.mediNo}. ${medi.patientDTO.patientName} ${medi.contents} ${medi.mediChatBoardDate}|"
+                                                th:href="@{|/medi/mediConnectDetail/${medi.mediConnectDTO.mediNo}|}"
+                                                style="text-decoration: none; color: black"></a></button><br>
+<!--                    <button class="button-6">내역 2.조땡땡 왼쪽 발목 골절</button><br>-->
+<!--                    <button class="button-6">내역 3.박땡땡  ~~~~</button><br>-->
+<!--                    <button class="button-6">내역 4.이떙떙 ~~~~~</button>-->
                 </div>
             </div>
         </div>
@@ -530,6 +533,16 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateElements = document.querySelectorAll('.mediBoardDate');
+        dateElements.forEach(el => {
+            let dateStr = el.textContent;
+            if (dateStr.includes('T')) {
+                el.textContent = dateStr.replace('T', ' ');
+            }
+        });
+    });
+
     const $regist = document.getElementById('regist');
     const $makeProject = document.getElementById('makeProject');
     const $therapy = document.getElementById('therapy');

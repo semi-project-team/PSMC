@@ -234,6 +234,7 @@
 
         .message-text {
             font-size: 0.7rem;
+            white-space: nowrap; /* 개행 제거 */
         }
 
         .dateTime{
@@ -270,8 +271,8 @@
         .profile .senderName {
             border-radius: 50%;
             background-color: #22b0b5;
-            font-size: 0.4rem;
-            padding: 5px;
+            font-size: 0.5rem;
+            padding: 4px;
             margin-right: 8px;
             /* font-weight: bold; */
             color: white;
@@ -336,13 +337,13 @@
     </style>
 </head>
 <body>
-    <th:block th:insert="~{/common/nav}"></th:block>
+    <th:block th:insert="~{common/nav}"></th:block>
 
-    <th:block th:insert="~{/common/header}"></th:block>
+    <th:block th:insert="~{common/header}"></th:block>
 
     <div class="containerSpace">
         <div class="headerSpace">
-            <h5 th:text="${boardDetail.mediTitle} + ' ' + '(' + ${boardDetail.mediBoardDate} + ')'"></h5>
+            <h5 class="mediBoardDate" th:text="${boardDetail.mediTitle} + ' ' + '(' + ${boardDetail.mediBoardDate} + ')'"></h5>
                 <p th:text="'No.' + ${patientDetail.patientDTO.patientNo} + ' ' + ${patientDetail.patientDTO.patientName} + ' 환자'
                 + ' (만 ' + ${patientDetail.patientDTO.age} + '세, ' + ${patientDetail.patientDTO.gender} + ')'"></p>
         </div>
@@ -383,7 +384,7 @@
                                                 <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1" />
                                             </svg>
                                         </small>
-                                        <small class="text-body-secondary" th:text="${chat.mediChatBoardDate}"></small>
+                                        <small class="text-body-secondary mediChatBoardDate" th:text="${chat.mediChatBoardDate}"></small>
                                     </div>
                                     <p class="mb-1" th:text="${{chat.contents}}"></p>
                                 </div>
@@ -413,9 +414,9 @@
                             </div>
                         </div>
                     </div>
-                    <form action="/medi/registNewMessage" method="post">
+                    <form id="messageForm" method="post">
                         <div class="messageInput">
-                            <input name="newMessage" type="text" placeholder="Type your message..." autofocus>
+                            <input id="inputMessage" name="contents" type="text" placeholder="Type your message..." autofocus>
                             <button>Send</button>
                         </div>
                     </form>
@@ -425,6 +426,18 @@
     </div>
 
     <script>
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateElements = document.querySelectorAll('.mediBoardDate, .mediChatBoardDate');
+            dateElements.forEach(el => {
+                let dateStr = el.textContent;
+                if (dateStr.includes('T')) {
+                    el.textContent = dateStr.replace('T', ' ');
+                }
+            });
+        });
+
         document.addEventListener("DOMContentLoaded", function (){
 
 
@@ -446,14 +459,88 @@
 
             const $messageContainer = document.querySelector(".message-container");
             $messageContainer.textContent="";
+            const maxLength = 26; // 예시로 50자로 설정
             data.forEach(chat => {
-                const date = chat.mediChatBoardDate.toString().split("T")
+                const date = chat.mediChatBoardDate.toString().split("T");
                 const day = date[0];
                 const time = date[1];
+                let messageText = chat.contents;
+                if (messageText.length > maxLength) {
+                    const firstLine = messageText.substring(0, maxLength);
+                    const remainingLines = messageText.substring(maxLength);
+                    messageText = firstLine + "<br>" + remainingLines;
+                }
                 const $chat = document.createElement("div");
                 if (chat.pmCode === $pmCode) {
-
+                    // 수신 메시지 스타일
                     $chat.classList.add('plusDate', 'receiver-messages');
+                    $chat.innerHTML = `
+            <div class="plusDate receiver-messages">
+                <div class="dateTime">
+                    <p>${day}<br>${time}</p>
+                </div>
+                <div class="message receiver-message">
+                    <div class="message-text">${messageText}</div>
+                </div>
+            </div>`;
+                } else {
+                    // 발신 메시지 스타일
+                    $chat.classList.add('plusDate', 'sender-messages');
+                    const senderName = chat.employeeDTO.name;
+                    const shortenedSenderName = senderName.length > 2 ? senderName.substring(senderName.length - 2) : senderName;
+                    $chat.innerHTML = `
+            <div class="plusDate sender-messages">
+                <div class="message sender-message">
+                    <div class="profile">
+                        <div class="senderName">${shortenedSenderName}</div>
+                    </div>
+                    <div class="message-text">${messageText}</div>
+                </div>
+                <div class="dateTime">
+                    <p>${day}<br>${time}</p>
+                </div>
+            </div>`;
+                }
+                $messageContainer.appendChild($chat);
+            });
+
+        }
+
+
+
+        document.getElementById("messageForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const message = document.getElementById('inputMessage').value;
+            const $messageContainer = document.querySelector(".message-container");
+
+            fetch("/registNewMessage", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contents: message
+                })
+            })
+
+                .then(response => response.json())
+                .then(chat => {
+                    const date = chat.mediChatBoardDate.toString().split("T")
+                    const day = date[0];
+                    const time = date[1];
+                    const $chat = document.createElement("div");
+                    $chat.classList.add('plusDate', 'receiver-messages');
+
+                    const maxLength = 26; // 예시로 50자로 설정
+                    let messageText = chat.contents;
+                    if (messageText.length > maxLength) {
+                        const firstLine = messageText.substring(0, maxLength);
+                        const remainingLines = messageText.substring(maxLength);
+                        messageText = firstLine + "<br>" + remainingLines;
+                    }
+
+
                     $chat.innerHTML = `<div class="plusDate receiver-messages">
                         <div class="dateTime">
                             <P>${day}<br>${time}</P>
@@ -462,28 +549,17 @@
                             <div class="message-text">${chat.contents}</div>
                         </div>
                     </div>`
+                    $messageContainer.appendChild($chat);
 
-                } else {
+                    document.getElementById('inputMessage').value = "";
 
-                    console.log('오른쪽');
+                })
 
-                    $chat.classList.add('plusDate', 'sender-messages');
-                    $chat.innerHTML = `<div class="plusDate sender-messages">
-                        <div class="message sender-message">
-                            <div class="profile">
-                                <div class="senderName">${chat.employeeDTO.name}</div>
-                            </div>
-                            <div class="message-text">${chat.contents}</div>
-                        </div>
-                        <div class="dateTime">
-                            <P>${day}<br>${time}</P>
-                        </div>
-                    </div>`
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-                }
-                $messageContainer.appendChild($chat);
-            })
-        }
+        })
 
         function toggleDeleteButton() {
             var checkboxes = document.getElementsByName("postCheckbox");
@@ -505,20 +581,7 @@
             }
         }
 
-        // function deleteSelectedPosts() {
-        //     var checkboxes = document.getElementsByName("postCheckbox");
-        //     var rowsToDelete = [];
-        //
-        //     for (var i = 0; i < checkboxes.length; i++) {
-        //         if (checkboxes[i].checked) {
-        //             rowsToDelete.push(checkboxes[i].parentNode.parentNode);
-        //         }
-        //     }
-        //
-        //     for (var i = 0; i < rowsToDelete.length; i++) {
-        //         rowsToDelete[i].parentNode.removeChild(rowsToDelete[i]);
-        //     }
-        // }
+
 
 
     </script>

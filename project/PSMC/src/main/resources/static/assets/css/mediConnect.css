@@ -1,24 +1,13 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 
 
 
 .notice {
     margin-top: -20px; /* 전체적으로 위로 올리기 위한 값 */
-
 }
 
 table {
     border-collapse: collapse;
     border-spacing: 0;
-}
-
-body{
-    font-family: 'Poppins', sans-serif;
-    background-color: rgb(215, 214, 214);
 }
 
 section {
@@ -47,6 +36,7 @@ section.notice {
     flex-direction: column;
     border-top-left-radius: 10px; /* 위쪽 왼쪽 모서리 둥글게 */
     border-top-right-radius: 10px; /* 위쪽 오른쪽 모서리 둥글게 */
+
 }
 
 
@@ -62,22 +52,10 @@ section.notice {
 }
 
 #deleteButton{
-    padding: 8px 23px; /* 버튼 내부 여백 설정 */
-    font-size: 0.9rem; /* 버튼 글꼴 크기 설정 */
-    border-radius: 5px; /* 버튼 모서리를 둥글게 만듭니다. */
-    max-width: 150px; /* 버튼의 최대 가로 길이를 설정합니다. */
-    background-color: white; /* 배경색을 변경합니다. */
-    color: black; /* 텍스트 색상을 흰색으로 설정합니다. */
-    border: none; /* 테두리를 없앱니다. */
     align-self: flex-end;
-    margin-right: 1%;
-}
+    margin-right: 1.5%;
 
-#deleteButton:hover,
-#deleteButton:focus {
-    background-color: #cc0000; /* 호버 시 배경색을 조금 더 어둡게 변경합니다. */
 }
-
 
 #board-search .search-window .search-wrap {
     /* position: relative; */
@@ -283,7 +261,7 @@ section.notice {
 .boxxx {
     display: flex;
     flex-wrap: wrap;
-    padding: 30px;
+    padding: 20px;
     background-color:#f5f5f5;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -293,16 +271,10 @@ section.notice {
     border-bottom-right-radius: 20px; /* 아래쪽 오른쪽 모서리 둥글게 */
 }
 
-.boxxx > * {
-    flex: 1 1 100%; /* 모든 자식 요소들이 부모 요소의 가로 길이에 맞춰짐 */
-    margin: 10px; /* 요소 간 간격 설정 */
-    box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 설정 */
-}
-
 .parent-container {
     margin-top: -20px; /* 전체적으로 위로 올리기 위한 값 */
-
 }
+
 .modal {
     display: none; /* 초기에는 숨겨진 상태 */
     position: fixed;

@@ -298,6 +298,10 @@ public class UserService {
         return userMapper.insertEmployeePhoto(savePhoto);
     }
 
+    public List<MiniMediConnectDTO> showFourMedi(Map<String, Object> sender) {
+        return userMapper.showFourMedi(sender);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }
