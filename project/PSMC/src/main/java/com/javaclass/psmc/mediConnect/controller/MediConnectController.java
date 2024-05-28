@@ -30,7 +30,7 @@ public class MediConnectController {
         this.mediConnectService = mediConnectService;
     }
 
-    @PostMapping("/searchByTitle")
+    @GetMapping("/searchByTitle")
     public String searchByTitle(@RequestParam("titleSearch") String mediTitle, Model model, HttpSession session) {
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
@@ -47,7 +47,7 @@ public class MediConnectController {
 
         model.addAttribute("boards", boards);
 
-        return "redirect:/medi/mediConnect/" + projectNo;
+        return "/medi/mediConnect";
     }
 
     @GetMapping("/medi/mediConnect/{projectNo}")
