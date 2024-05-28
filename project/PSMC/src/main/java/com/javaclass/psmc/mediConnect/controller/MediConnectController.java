@@ -64,7 +64,7 @@ public class MediConnectController {
         session.setAttribute("projectNo",projectNo);
         model.addAttribute("boards", boards);
 
-        return "/medi/mediConnect";
+        return "medi/mediConnect";
     }
 
     @PostMapping("/deleteBtn")
@@ -128,7 +128,7 @@ public class MediConnectController {
         model.addAttribute("employeeDetail", employee);
         model.addAttribute("mediChatDetail", chat);
 
-        return "/medi/mediConnectDetail";
+        return "medi/mediConnectDetail";
     }
 
     @GetMapping(value = "/medi/responseChat", produces = "application/json; charset=UTF-8")

@@ -1,72 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>MediConnect</title>
-    <link rel="stylesheet" href="/assets/css/mediConnect.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/mediConnect.css">
 </head>
 <body style="background-color: rgb(215, 214, 214);">
 <th:block th:insert="~{common/nav}"></th:block>
 <th:block th:insert="~{common/header}"></th:block>
+<!--<section class="notice">-->
+
 <section class="notice">
+    <!-- <div class="page-title">
+         <div class="container">
+        </div> -->
 
 
     <!-- board seach area -->
-        <div id="board-search">
-            <div class="container">
-                <div class="search-window">
-                    <form action="/searchByTitle" method="post">
-                        <div class="search-wrap d-flex">
-                            <input id="search" type="text" name="titleSearch" placeholder="검색어를 입력해주세요.">
-                            <button id="searchButton" type="submit" class="btn btn-dark">검색</button>
-                        </div>
-                    </form>
+    <div id="board-search">
+        <div class="container">
+
+            <div class="search-window">
+                <form action="">
+                    <div class="search-wrap d-flex">
+                        <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
+                        <button type="submit" class="btn btn-dark">검색</button>
+                    </div>
                     <div class="form-container">
                         <button type="button" class="btn btn-light">작성하기</button>
-                     </div>
-                </div>
+                    </div>
+                </form>
+
             </div>
         </div>
+    </div>
 
     <!-- board list area -->
-        <div id="board-list">
-            <div class="container">
-                <div class="boxxx">
-
-                    <form action="/deleteBtn" method="post">
-                        <table class="board-table">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="checkbox-btn"></th>
-                            <th scope="col" class="th-num">번호</th>
-                            <th scope="col" class="th-title">제목</th>
-                            <th scope="col" class="th-name">작성자</th>
-                            <th scope="col" class="th-date">등록일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="board : ${boards}">
-                            <td><input type="checkbox" name="postCheckbox" th:value="${board.mediNo}" onchange="toggleDeleteButton()"></td>
-                            <td th:text="${board.mediNo}"></td>
-                            <th>
-                                <a th:href="@{/medi/mediConnectDetail/{mediNo}(mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a>
-                            </th>
-                            <td th:text="${board.employeeDTO.name}"></td>
-                            <td class="mediBoardDate" th:text="${board.mediBoardDate}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                        <div class="delete-btn" id="delete-btn">
-                            <button type="submit" id="deleteButton" class="btn btn-dark" style="display: none;">Delete</button>
-                        </div>
-                    </form>
-
+    <div id="board-list">
+        <div class="container">
+            <div class="boxxx">
+                <form style="width: 100%" action="/deleteBtn" method="post">
+                <table class="board-table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="checkbox-btn"></th>
+                        <th scope="col" class="th-num">번호</th>
+                        <th scope="col" class="th-title">제목</th>
+                        <th scope="col" class="th-date">등록일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="board : ${boards}">
+                        <td><input type="checkbox" name="postCheckbox" onchange="toggleDeleteButton()" th:value="${board.mediNo}"></td>
+                        <td th:text="${board.mediNo}">3</td>
+                        <td><a th:href="@{/medi/mediConnectDetail/{mediNo}(mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a></td>
+                        <td th:text="${board.employeeDTO.name}"></td>
+                        <td class="mediBoardDate" th:text="${board.mediBoardDate}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="delete-btn" id="delete-btn">
+                    <button type="submit" id="deleteButton" class="btn btn-dark" style="display: none;">Delete</button>
                 </div>
+                </form>
             </div>
+
         </div>
-    </form>
+    </div>
+
 </section>
+
+<!--    &lt;!&ndash; board seach area &ndash;&gt;-->
+<!--        <div id="board-search">-->
+<!--            <div class="container">-->
+<!--                <div class="search-window">-->
+<!--                    <form action="/searchByTitle" method="post">-->
+<!--                        <div class="row-100">-->
+<!--                            <input id="search" type="text" name="titleSearch" placeholder="검색어를 입력해주세요.">-->
+<!--                            <button id="searchButton" type="submit" class="btn btn-dark">검색</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                    <div class="form-container">-->
+<!--                        <button type="button" class="btn btn-light" sec:authorize="hasAnyAuthority('d')">작성하기</button>-->
+<!--                     </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    &lt;!&ndash; board list area &ndash;&gt;-->
+<!--        <div id="board-list">-->
+<!--            <div class="container">-->
+<!--                <div class="boxxx">-->
+
+<!--                    <form action="/deleteBtn" method="post">-->
+<!--                        <table class="board-table">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th scope="col" class="checkbox-btn"></th>-->
+<!--                            <th scope="col" class="th-num">번호</th>-->
+<!--                            <th scope="col" class="th-title">제목</th>-->
+<!--                            <th scope="col" class="th-name">작성자</th>-->
+<!--                            <th scope="col" class="th-date">등록일</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr th:each="board : ${boards}">-->
+<!--                            <td><input type="checkbox" name="postCheckbox" th:value="${board.mediNo}" onchange="toggleDeleteButton()"></td>-->
+<!--                            <td th:text="${board.mediNo}"></td>-->
+<!--                            <th>-->
+<!--                                <a th:href="@{/medi/mediConnectDetail/{mediNo}(mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a>-->
+<!--                            </th>-->
+<!--                            <td th:text="${board.employeeDTO.name}"></td>-->
+<!--                            <td class="mediBoardDate" th:text="${board.mediBoardDate}"></td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                        <div class="delete-btn" id="delete-btn">-->
+<!--                            <button type="submit" id="deleteButton" class="btn btn-dark" style="display: none;">Delete</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</section>-->
+
+
+
 <div id="myModal" class="modal">
     <!-- 팝업 컨텐츠 -->
     <div class="modal-content">
@@ -88,5 +151,6 @@
     </div>
 </div>
 <script src="/assets/js/mediConnect.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
