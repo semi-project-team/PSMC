@@ -122,4 +122,6 @@ public interface UserMapper {
     int insertEmployeePhoto(EmployeePhotoDTO savePhoto);
 
     List<MiniMediConnectDTO> showFourMedi(Map<String, Object> sender);
+
+    List<MiniTheraLinkDTO> showFourThera(Map<String, Object> sender);
 }

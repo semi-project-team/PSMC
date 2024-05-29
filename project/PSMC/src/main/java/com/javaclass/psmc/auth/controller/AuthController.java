@@ -3,10 +3,7 @@ package com.javaclass.psmc.auth.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaclass.psmc.auth.model.AuthDetails;
-import com.javaclass.psmc.auth.model.dto.MiniMediConnectDTO;
-import com.javaclass.psmc.auth.model.dto.MyPatientDTO;
-import com.javaclass.psmc.auth.model.dto.ProjectsDTO;
-import com.javaclass.psmc.auth.model.dto.TheraProjectDTO;
+import com.javaclass.psmc.auth.model.dto.*;
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.common.model.dto.InjuryDTO;
 import com.javaclass.psmc.common.model.method.MakePhoneNumber;
@@ -86,8 +83,13 @@ public class AuthController {
         List<InjuryDTO> injuryDTOS = userService.findInjuryByFieldCode(profileDTO.getFieldCode());
         model.addAttribute("injuryMap",injuryDTOS);
 
+
+        /*최신 채팅*/
         List<MiniMediConnectDTO> miniMedi = userService.showFourMedi(sender);
         model.addAttribute("miniMedi", miniMedi);
+
+        List<MiniTheraLinkDTO> miniThera = userService.showFourThera(sender);
+        model.addAttribute("miniThera",miniThera);
 
         /*Today schedule 보여주기*/
         LocalDate today = LocalDate.now();
