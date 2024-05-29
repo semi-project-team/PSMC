@@ -394,7 +394,7 @@
                 <div class="button-bar" th:each="medi : ${miniMedi}">
                     <button class="button-6">
                         <a class="mediBoardDate" th:text="|내역 ${medi.mediConnectDTO.mediNo}. ${medi.patientDTO.patientName} ${medi.contents} ${medi.mediChatBoardDate}|"
-                                                th:href="@{|/medi/mediConnectDetail/${medi.mediConnectDTO.mediNo}|}"
+                                                th:href="@{|/medi/mediConnectDetail/${medi.mediConnectDTO.projectNo}/${medi.mediConnectDTO.mediNo}|}"
                                                 style="text-decoration: none; color: black"></a></button><br>
 <!--                    <button class="button-6">내역 2.조땡땡 왼쪽 발목 골절</button><br>-->
 <!--                    <button class="button-6">내역 3.박땡땡  ~~~~</button><br>-->

@@ -304,7 +304,8 @@
             b.patient_name,
             c.medi_title,
             a.contents,
-            a.medi_chat_board_date
+            a.medi_chat_board_date,
+            c.project_no
         <if test="role == 'doctor'">
             from
                 create_project d

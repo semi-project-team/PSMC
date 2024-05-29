@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.annotation.PatchExchange;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class MediConnectController {
     }
 
     @GetMapping("/searchByTitle")
-    public String searchByTitle(@RequestParam("titleSearch") String mediTitle, Model model, HttpSession session) {
+    public String searchByTitle(@RequestParam("titleSearch") String mediTitle, RedirectAttributes redirectAttributes,Model model, HttpSession session) {
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
@@ -95,20 +96,20 @@ public class MediConnectController {
         Map<String, List<Integer>> param = new HashMap<>();
         param.put("chatNo", postCheckbox);
 
+        int projectNo = (int) session.getAttribute("projectNo");
+
         int mediNo = (int) session.getAttribute("mediNo");
         int result = mediConnectService.deleteChat(param);
 
-        return "redirect:/medi/mediConnectDetail/" + mediNo;
+        return "redirect:/medi/mediConnectDetail/" + projectNo + "/" + mediNo;
     }
 
-    @GetMapping("/medi/mediConnectDetail/{mediNo}")
-    public String showBoardDetail(@PathVariable int mediNo, Model model, HttpSession session) {
+    @GetMapping("/medi/mediConnectDetail/{projectNo}/{mediNo}")
+    public String showBoardDetail(@PathVariable int projectNo ,@PathVariable int mediNo, Model model, HttpSession session) {
 
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
-
-        int projectNo = (int) session.getAttribute("projectNo");
 
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("pmCode",pmCode);

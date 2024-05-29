@@ -372,7 +372,19 @@
                 <div class="commentCards">
                     <div class="list-group">
                         <div class="list-one" th:each="chat : ${mediChatDetail}">
-                            <input type="checkbox" name="postCheckbox" th:value="${chat.chatNo}" onchange="toggleDeleteButton()">
+                            <th:block th:if="${#lists.isEmpty(mediChatDetail)}">
+                                <a href="#" class="list-group-item list-group-item-action" aria-current="true"
+                                   data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <div class="commentCard">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">채팅 시작하기</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </th:block>
+                            <th:block th:if="${chat.pmCode == pmCode}">
+                                <input type="checkbox" name="postCheckbox" th:value="${chat.chatNo}" onchange="toggleDeleteButton()">
+                            </th:block>
                             <a href="#" class="list-group-item list-group-item-action" aria-current="true"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <div class="commentCard">
@@ -580,8 +592,6 @@
                 deleteButton.style.display='none';
             }
         }
-
-
 
 
     </script>
