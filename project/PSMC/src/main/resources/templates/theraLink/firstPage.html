@@ -70,12 +70,7 @@
                                             <div class="col-lg-6">
                                                 <div class="result-actions">
                                                     <div class="result-sorting">
-<!--                                                        <span>Sort By:</span>-->
-<!--                                                        <select class="form-control border-0" id="exampleOption">-->
-<!--                                                            <option value="1">Relevance</option>-->
-<!--                                                            <option value="2">Names (A-Z)</option>-->
-<!--                                                            <option value="3">Names (Z-A)</option>-->
-<!--                                                        </select>-->
+
                                                     </div>
                                                     <div class="result-views">
 
@@ -92,6 +87,7 @@
                                             <table class="table widget-26">
                                                 <tbody>
                                                 <!-- 한줄 시작-->
+                                                <th:block th:if="${patients.size()!=0}">
                                                 <tr th:each="p : ${patients}">
                                                     <td>
                                                         <a th:href="@{|/theraLink/open/${p.projectNo}/1|}" class="widget-26-job-emp-img" th:text="${p.patientNo}">
@@ -133,6 +129,12 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                </th:block>
+                                                <th:blcok th:if="patients.size==0">
+                                                    <tr>
+                                                        <td>처리중인 환자가 없습니다</td>
+                                                    </tr>
+                                                </th:blcok>
                                                 <!-- 한줄 끝-->
 
 

@@ -23,6 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- blog1 -->
+            <th:block th:if="${theraLink.size()!=0}">
             <th:block th:each="thera : ${theraLink}">
                 <div class="col-lg-3 col-md-6 mt-4 pt-2 blogPage" th:id="${thera.theraLinkNo}">
                     <div class="blog-post rounded border">
@@ -54,8 +55,12 @@
                     </div>
                 </div>
             </th:block>
+            </th:block>
             <!-- blog1 -->
 
+            <th:block th:if="${theraLink.size()==0}">
+                <div class="blankWindow">관련 컨텐츠가 없습니다.....</div>
+            </th:block>
 
         </div>
         <!-- pagination -->
