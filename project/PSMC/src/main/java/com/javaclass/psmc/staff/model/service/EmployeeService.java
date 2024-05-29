@@ -3,7 +3,6 @@ package com.javaclass.psmc.staff.model.service;
 import com.javaclass.psmc.common.model.dto.MedicalFieldDTO;
 import com.javaclass.psmc.staff.model.dao.EmployeeMapper;
 import com.javaclass.psmc.staff.model.dto.EmployeeFieldPositionDTO;
-import com.javaclass.psmc.staff.model.dto.EmployeeToMedicalFieldDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,7 @@ public class EmployeeService {
         return employeeMapper.searchByParam(employeeDTO);
     }
 
-    public List<EmployeeToMedicalFieldDTO> findMemberByFieldCode(Map<String, String> parameter) {
+    public List<EmployeeFieldPositionDTO> findMemberByFieldCode(Map<String, String> parameter) {
 
         return employeeMapper.findMemberByFieldCode(parameter);
     }
