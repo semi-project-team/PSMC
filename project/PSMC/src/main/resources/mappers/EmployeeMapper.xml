@@ -50,47 +50,47 @@
 
     </select>
 
-    <select id="searchByParam" resultMap="employeeResultMap">
-        SELECT
-        a.name,
-        a.company_email,
-        a.phone,
-        a.office_num,
-        b.field_name,
-        c.position_name
+<!--    <select id="searchByParam" resultMap="employeeResultMap">-->
+<!--        SELECT-->
+<!--        a.name,-->
+<!--        a.company_email,-->
+<!--        a.phone,-->
+<!--        a.office_num,-->
+<!--        b.field_name,-->
+<!--        c.position_name-->
 
-        FROM employee a
+<!--        FROM employee a-->
 
-        JOIN medical_field b ON a.field_code = b.field_code
+<!--        JOIN medical_field b ON a.field_code = b.field_code-->
 
-        JOIN position c ON a.position_code = c.position_code
+<!--        JOIN position c ON a.position_code = c.position_code-->
 
-        WHERE
-        <if test="name != null">
-            AND name = #{ name }
-        </if>
-        <if test="fieldName != null">
-            AND field_name = #{ fieldName }
-        </if>
+<!--        WHERE-->
+<!--        <if test="name != null">-->
+<!--            AND name = #{ name }-->
+<!--        </if>-->
+<!--        <if test="fieldName != null">-->
+<!--            AND field_name = #{ fieldName }-->
+<!--        </if>-->
 
-    </select>
+<!--    </select>-->
 
-    <resultMap id="employeeAndMedicalMap" type="com.javaclass.psmc.staff.model.dto.EmployeeToMedicalFieldDTO">
-        <id property="pmCode" column="pmCode"/>
-        <result property="empNo" column="emp_no"/>
-        <result property="phone" column="phone"/>
-        <result property="companyEmail" column="company_email"/>
-        <result property="name" column="name"/>
-        <result property="age" column="age"/>
-        <result property="positionCode" column="position_code"/>
-        <result property="gender" column="gender"/>
-        <result property="officeNum" column="office_num"/>
-        <result property="fieldCode" column="field_code"/>
-        <association property="medicalFieldDTO" resultMap="medicalFieldResultMap"/>
-        <association property="positionDTO" resultMap="positionResultMap"/>
-    </resultMap>
+<!--    <resultMap id="employeeAndMedicalMap" type="com.javaclass.psmc.staff.model.dto.EmployeeToMedicalFieldDTO">-->
+<!--        <id property="pmCode" column="pmCode"/>-->
+<!--        <result property="empNo" column="emp_no"/>-->
+<!--        <result property="phone" column="phone"/>-->
+<!--        <result property="companyEmail" column="company_email"/>-->
+<!--        <result property="name" column="name"/>-->
+<!--        <result property="age" column="age"/>-->
+<!--        <result property="positionCode" column="position_code"/>-->
+<!--        <result property="gender" column="gender"/>-->
+<!--        <result property="officeNum" column="office_num"/>-->
+<!--        <result property="fieldCode" column="field_code"/>-->
+<!--        <association property="medicalFieldDTO" resultMap="medicalFieldResultMap"/>-->
+<!--        <association property="positionDTO" resultMap="positionResultMap"/>-->
+<!--    </resultMap>-->
 
-    <select id="findMemberByFieldCode" resultMap="employeeAndMedicalMap" parameterType="hashmap">
+    <select id="findMemberByFieldCode" resultMap="employeeResultMap" parameterType="hashmap">
         select
         a.*,
         b.field_name,
@@ -106,18 +106,17 @@
         on
         c.position_code= a.position_code
 
+        <where>
+            <if test="fieldCode != null">
+                a.field_code = #{fieldCode}
+            </if>
+            <if test="staffName != null and staffName!=''">
+                and
+                a.name = #{ staffName }
+            </if>
+        </where>
 
-        where
-        a.field_code = #{ fieldCode } and name = #{ staffName }
-        <!--        <where>-->
-        <!--            <if test="name !=null">-->
-        <!--                a.name = #{staffName}-->
-        <!--            </if>-->
-        <!--            <if test="fieldCode!=null">-->
-        <!--                and-->
-        <!--                a.field_code = #{fieldCode}-->
-        <!--            </if>-->
-        <!--        </where>-->
+
     </select>
 
     <select id="findAllField" resultMap="medicalFieldResultMap">
