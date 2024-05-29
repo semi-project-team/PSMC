@@ -56,7 +56,7 @@
                     <tr th:each="board : ${boards}">
                         <td><input type="checkbox" name="postCheckbox" onchange="toggleDeleteButton()" th:value="${board.mediNo}"></td>
                         <td th:text="${board.mediNo}">3</td>
-                        <td><a th:href="@{/medi/mediConnectDetail/{mediNo}(mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a></td>
+                        <td><a th:href="@{/medi/mediConnectDetail/{projectNo}/{mediNo}(projectNo=${board.projectNo}, mediNo=${board.mediNo})}" th:text="${board.mediTitle}"></a></td>
                         <td th:text="${board.employeeDTO.name}"></td>
                         <td class="mediBoardDate" th:text="${board.mediBoardDate}"></td>
                     </tr>

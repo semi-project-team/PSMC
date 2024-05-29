@@ -103,7 +103,8 @@
             a.medi_title,
             a.medi_content,
             a.medi_board_date,
-            c.name
+            c.name,
+            a.project_no
         from
             medi_connect a
         join

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -74,7 +74,7 @@
 
     <form action="/deleteProjectBtn" method="post">
         <div class="button" id="delete-btn">
-            <button type="submit" class="btn btn-primary" style="display: none;">
+            <button type="submit" class="btn btn-primary" style="display: none;" sec:authorize="hasAnyAuthority('d')">
                 DELETE
             </button>
         </div>
