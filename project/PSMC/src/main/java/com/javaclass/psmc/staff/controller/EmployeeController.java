@@ -1,6 +1,7 @@
 package com.javaclass.psmc.staff.controller;
 
 import com.javaclass.psmc.common.model.dto.MedicalFieldDTO;
+import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 import com.javaclass.psmc.staff.model.dto.EmployeeFieldPositionDTO;
 import com.javaclass.psmc.staff.model.service.EmployeeService;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import java.util.Map;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private MakePhoneNumber makePhoneNumber=new MakePhoneNumber();
 
     @Autowired
     public EmployeeController(EmployeeService employeeService) {
@@ -33,11 +35,16 @@ public class EmployeeController {
             System.out.println("employeeDTO = " + employeeDTO);
         }
 
+        for(EmployeeFieldPositionDTO e: employeeList){
+            e.setPhone(makePhoneNumber.formatPhoneNumber(e.getPhone()));
+        }
+        
         List<MedicalFieldDTO> allField = employeeService.findAllField();
         session.setAttribute("allField", allField);
 
 
-        model.addAttribute("medicalField", allField);
+
+        model.addAttribute("allField", allField);
         model.addAttribute("employeeList", employeeList);
 
         return "/staff/list";
@@ -54,6 +61,10 @@ public class EmployeeController {
         }
 
         List<MedicalFieldDTO> allField = (List<MedicalFieldDTO>) session.getAttribute("allField");
+
+        for(EmployeeFieldPositionDTO e: employeeList){
+            e.setPhone(makePhoneNumber.formatPhoneNumber(e.getPhone()));
+        }
 
         model.addAttribute("allField", allField);
         model.addAttribute("employeeList", employeeList);
@@ -77,6 +88,10 @@ public class EmployeeController {
         }
 
         List<MedicalFieldDTO> allField = (List<MedicalFieldDTO>) session.getAttribute("allField");
+
+        for(EmployeeFieldPositionDTO e: employeeList){
+            e.setPhone(makePhoneNumber.formatPhoneNumber(e.getPhone()));
+        }
 
         model.addAttribute("allField", allField);
         model.addAttribute("employeeList", employeeList);

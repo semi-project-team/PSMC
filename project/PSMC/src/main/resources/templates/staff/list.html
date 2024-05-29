@@ -3,99 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <title>list</title>
-    <link rel="stylesheet" href="/assets/css/list.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/list.css">
 </head>
 <body>
+<script>
+    if(`[[${isNull}]]`){
+        alert('조회된 값이 없음');
+    }
+</script>
     <th:block th:insert="~{/common/nav}"></th:block>
     <th:block th:insert="~{/common/header}"></th:block>
 
-    <div class="container-fluid">
+
+<div class="container-fluid">
 
     <!--search area-->
-        <div class="row">
-            <div class="col-lg-12 card-margin">
-                <div class="card search-form">
-                    <div class="card-body p-0">
-                        <form class="search-form" action="/searchByCondition" method="get">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                            <select class="form-control" name="fieldCode">
-                                                <option selected disabled>Field Code</option>
-                                                <th:block th:each="m : ${medicalField}">
-                                                    <option th:value="${m.fieldCode}" th:text="${m.fieldName}"></option>
-                                                </th:block>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-8 col-md-6 col-sm-12 p-0">
-                                            <input type="text" placeholder="직원이름..." class="form-control" id="search"
-                                                   name="staffName" required>
-                                        </div>
-                                        <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                                            <button type="submit" class="btn btn-base">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                     class="feather feather-search">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <script>
-                                                if(`[[${isNull}]]`){
-                                                    alert('조회된 값이 없음');
-                                                }
-                                            </script>
-                                        </div>
+    <div class="row">
+        <div class="col-lg-12 card-margin">
+            <div class="card search-form">
+                <div class="card-body p-0">
+                    <form id="search-form" action="/search" method="get">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="fieldCode">
+                                            <option selected disabled>Field Code</option>
+                                            <th:block th:each="m : ${allField}">
+                                                <option th:value="${m.fieldCode}" th:text="${m.fieldName}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                                        <input type="text" placeholder="직원명..." class="form-control" id="search"
+                                               name="staffName">
+                                    </div>
+                                    <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                                        <button type="submit" class="btn btn-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-search">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     <!--search-->
 
-    <!--팀장정보-->
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-margin">
-                    <div class="card-body">
-                        <div class="row search-body">
-                            <table class="widget-26">
-                                <tr>
-                                    <th>이름</th>
-                                    <th>이메일</th>
-                                    <th>전화번호</th>
-                                    <th>연구실번호</th>
-                                    <th>전공분야</th>
-                                    <th>직급</th>
-                                </tr>
-                                <tr th:each="employee : ${employeeList}">
-                                    <td th:text="${employee.name}"></td>
-                                    <td th:text="${employee.companyEmail}"></td>
-                                    <td th:text="${employee.phone}"></td>
-                                    <td th:text="${employee.officeNum}"></td>
-                                    <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
-                                    <td th:text="${employee.positionDTO.positionName}"></td>
-                                </tr>
-                            </table>
+    <!--sorting 과 현재 페이지 정보-->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-margin">
+                <div class="card-body">
+                    <div class="row search-body">
+                        <div class="col-lg-12">
+                            <div class="search-result">
+                                <div class="result-body">
+                                    <div class="table-responsive">
+                                        <table class="table widget-26">
+                                            <tbody>
+                                            <!--한줄시작 -->
+                                            <tr>
+                                                <th>이름</th>
+                                                <th>이메일</th>
+                                                <th>전화번호</th>
+                                                <th>연구실 번호</th>
+                                                <th>전공분야</th>
+                                                <th>직급</th>
+                                            </tr>
+                                            <!--한줄 끝-->
+
+                                            <!-- 한줄 시작-->
+                                            <tr th:each="employee : ${employeeList}">
+                                                <td th:text="${employee.name}"></td>
+                                                <td th:text="${employee.companyEmail}"></td>
+                                                <td th:text="${employee.phone}"></td>
+                                                <td th:text="${employee.officeNum}"></td>
+                                                <td th:text="${employee.medicalFieldDTO.fieldName}"></td>
+                                                <td th:text="${employee.positionDTO.positionName}"></td>
+                                            </tr>
+                                            <!-- 한줄 끝-->
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <script src="/assets/js/list.js"></script>
+
+<!--        <script src="/assets/js/list.js"></script>-->
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://kit.fontawesome.com/56b2fd8c85.js" crossorigin="anonymous"></script>
-        <script type="text/javascript"></script>
+<!--        <script type="text/javascript"></script>-->
 
 </body>
 </html>

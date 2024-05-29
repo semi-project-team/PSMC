@@ -106,17 +106,17 @@
         on
         c.position_code= a.position_code
 
-        where
-        a.field_code = #{ fieldCode } and name = #{ staffName }
-        <!--        <where>-->
-        <!--            <if test="name !=null">-->
-        <!--                a.name = #{staffName}-->
-        <!--            </if>-->
-        <!--            <if test="fieldCode!=null">-->
-        <!--                and-->
-        <!--                a.field_code = #{fieldCode}-->
-        <!--            </if>-->
-        <!--        </where>-->
+        <where>
+            <if test="fieldCode != null">
+                a.field_code = #{fieldCode}
+            </if>
+            <if test="staffName != null and staffName!=''">
+                and
+                a.name = #{ staffName }
+            </if>
+        </where>
+
+
     </select>
 
     <select id="findAllField" resultMap="medicalFieldResultMap">
