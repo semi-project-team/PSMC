@@ -415,6 +415,10 @@ fieldset.timeslot {
     vertical-align: baseline;
     width: 100%;
 }
+button-6 a{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .button-6:hover,
 .button-6:focus {

@@ -405,11 +405,11 @@
         <div class="box6">
             <div class="mediconnect">
                 <div class="title2">TheraLink</div>
-                <div class="button-bar">
-                    <button class="button-6">김땡땡 (23423) 오른쪽 무릎 </button><br>
-                    <button class="button-6">조땡땡 (24142)왼쪽 발목 골절</button><br>
-                    <button class="button-6">박땡땡 (23424) ~~~~</button><br>
-                    <button class="button-6">이떙떙 (24164) ~~~~~</button>
+                <div class="button-bar" th:each="t : ${miniThera}">
+                    <th:block th:if="t.chatNo!=0">
+                        <button class="button-6"><a th:href="@{|/theraLink/open/${t.projectNo}/1|}" th:text="|내역 ${t.projectNo}. ${t.patientName} ${t.theraChatContent} ${t.chatBoardDate}|" style="text-decoration: none; color: black"></a></button><br>
+                    </th:block>
+                    <th:block th:if="t.chatNo==0">새로운 채팅이 없습니다</th:block>
                 </div>
             </div>
         </div>

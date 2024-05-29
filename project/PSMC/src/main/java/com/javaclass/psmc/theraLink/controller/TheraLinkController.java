@@ -421,7 +421,7 @@ public class TheraLinkController {
 
             request.setAttribute("param",parameters);
 
-        return "forward:theraLink/"+1;
+        return "forward:/theraLink/"+1;
     }
 
 

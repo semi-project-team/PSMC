@@ -302,6 +302,11 @@ public class UserService {
         return userMapper.showFourMedi(sender);
     }
 
+    public List<MiniTheraLinkDTO> showFourThera(Map<String, Object> sender) {
+
+        return userMapper.showFourThera(sender);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }

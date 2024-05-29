@@ -341,6 +341,60 @@
             limit 0,4;
     </select>
 
+    <resultMap id="miniTheraResult" type="com.javaclass.psmc.auth.model.dto.MiniTheraLinkDTO">
+        <id property="chatNo" column="thera_chat_no"/>
+        <result property="projectNo" column="project_no"/>
+        <result property="theraChatContent" column="thera_chat_content"/>
+        <result property="chatBoardDate" column="thera_chat_board_date"/>
+        <result property="patientName" column="patient_name"/>
+    </resultMap>
+    <select id="showFourThera" resultMap="miniTheraResult" parameterType="hashmap">
+        select
+            c.project_no,
+            ch.thera_chat_content,
+            ch.thera_chat_board_date,
+            ch.thera_chat_no,
+            p.patient_name,
+            i.injury_name
+        from
+            <if test="role == 'doctor'">
+                create_project c
+            </if>
+            <if test="role=='thera'">
+                assign_project c
+            </if>
+        join
+            project a
+        on
+            a.project_no = c.project_no
+        join
+            patient p
+        on
+            p.patient_no = a.patient_no
+        join
+            injury i
+        on
+            i.injury_code = a.injury_code
+        join
+            thera_link b
+        on
+            b.project_no = a.project_no
+        join
+            thera_chat ch
+        on
+            ch.theraLink_no = b.theraLink_no
+        where
+            c.pm_code = #{pmCode}
+        and
+            ch.pm_code != #{pmCode}
+        and
+            a.project_status = 'Y'
+        order by
+            thera_chat_board_date desc
+        limit 0,4
+
+    </select>
+
     <resultMap id="theraToPro" type="com.javaclass.psmc.mainPage.model.dto.TheraToProDTO">
         <id property="theraCode" column="thera_code"/>
         <result property="theraDate" column="thera_date"/>
@@ -720,7 +774,7 @@
             </if>
             <if test="patientName !='' and patientName!=null">
                 and
-                p.patient_name = #{patientName}
+                p.patient_name like concat('%',#{patientName},'%')
             </if>
         </where>
         <if test="pageNo !=null">
