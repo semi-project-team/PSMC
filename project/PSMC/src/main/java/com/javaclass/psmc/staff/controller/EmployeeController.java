@@ -47,7 +47,7 @@ public class EmployeeController {
         model.addAttribute("allField", allField);
         model.addAttribute("employeeList", employeeList);
 
-        return "/staff/list";
+        return "staff/list";
     }
 
     @GetMapping("/searchByCondition")
@@ -74,7 +74,7 @@ public class EmployeeController {
 //            System.out.println("e = " + e);
 //        }
 
-        return "/staff/search";
+        return "staff/search";
     }
 
     @GetMapping("/search")
@@ -101,6 +101,6 @@ public class EmployeeController {
 //            System.out.println("e = " + e);
 //        }
 
-        return "/staff/search";
+        return "staff/search";
     }
 }
