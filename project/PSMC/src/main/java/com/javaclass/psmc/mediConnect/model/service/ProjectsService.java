@@ -1,10 +1,12 @@
 package com.javaclass.psmc.mediConnect.model.service;
 
 import com.javaclass.psmc.mediConnect.model.dao.ProjectsMapper;
+import com.javaclass.psmc.mediConnect.model.dto.NewProjectShowDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,11 @@ public class ProjectsService {
     public int deleteProject(Map<String, List<Integer>> projectParam) {
 
         return projectsMapper.deleteProjects(projectParam);
+    }
+
+    public List<NewProjectShowDTO> showNewProjects(HashMap<String, String> param) {
+
+        return projectsMapper.showNewProjects(param);
     }
 
 //    service

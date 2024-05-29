@@ -1,5 +1,6 @@
 package com.javaclass.psmc.mediConnect.controller;
 
+import com.javaclass.psmc.mediConnect.model.dto.NewProjectShowDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.service.ProjectsService;
 import com.javaclass.psmc.user.model.dto.LoginUserDTO;
@@ -32,16 +33,28 @@ public class ProjectsController {
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
 
-        List<ShowAllProjectsDTO> projects = projectsService.showAllProjects(pmCode);
+        HashMap<String, String> param = new HashMap<>();
+        param.put("pmCode", pmCode);
+
+        if (pmCode.charAt(0) == 'd') {
+            param.put("role", "doctor");
+        } else {
+            param.put("role", "thera");
+        }
+
+        List<NewProjectShowDTO> projects = projectsService.showNewProjects(param);
+//        List<ShowAllProjectsDTO> projects = projectsService.showAllProjects(pmCode);
+//        session.setAttribute("projectList", projects);
         session.setAttribute("projectList", projects);
+
 
         return "medi/projects";
     }
 
     @GetMapping(value = "/requestProject", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<ShowAllProjectsDTO> projectList(HttpSession session) {
-        return (List<ShowAllProjectsDTO>) session.getAttribute("projectList");
+    public List<NewProjectShowDTO> projectList(HttpSession session) {
+        return (List<NewProjectShowDTO>) session.getAttribute("projectList");
     }
 
     @PostMapping("/deleteProjectBtn")

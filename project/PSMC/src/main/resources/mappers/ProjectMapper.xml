@@ -274,4 +274,34 @@
         (#{mediNo},#{pmCode},#{contents},#{mediChatBoardDate},'Y');
     </insert>
 
+    <resultMap id="newProjectsResultMap" type="com.javaclass.psmc.mediConnect.model.dto.NewProjectShowDTO">
+        <id property="projectNo" column="project_no"/>
+        <association property="patientDTO" resultMap="patientResultMap"/>
+        <association property="injuryDTO" resultMap="injuryResultMap"/>
+    </resultMap>
+
+    <select id="showNewProjects" resultMap="newProjectsResultMap" parameterType="hashmap">
+        select
+            a.project_no,
+            p.*,
+            i.*
+        from
+            <if test="role == 'doctor'">
+                create_project c
+            </if>
+            <if test="role == 'thera'">
+                assign_project c
+            </if>
+        join
+            project a on a.project_no = c.project_no
+        join
+            patient p on p.patient_no = a.patient_no
+        join
+            injury i on i.injury_code = a.injury_code
+        where
+            c.pm_code = #{pmCode}
+            and
+            a.project_status = 'Y';
+    </select>
+
 </mapper>
