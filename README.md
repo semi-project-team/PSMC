@@ -46,17 +46,24 @@
 ## 3. 프로젝트 구조
 
 ```
-
-            psmc
-            ├─auth
-            │  ├─controller
-            │  └─model
-            ├─common
-            │  ├─exception
-            │  └─model
-            ├─configuration
-        회원 가입, 스케쥴러, TheraLink
+└─psmc
+    ├─auth
+    ├─common
+    │  ├─exception
+    │  └─model
+    │      ├─dto
+    │      └─method
+    ├─configuration
+    │  └─handler
+    ├─mainPage
+    ├─mediConnect
+    ├─mypage
+    ├─staff
+    ├─theraLink
+    └─user
 ```
+
+충돌을 방지하기 위해서 기능 별로 역할을 분담하고 기능별로 패키지를 구성하였습니다
 ## 역할 분담
 
 이호준
