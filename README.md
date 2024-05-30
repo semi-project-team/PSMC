@@ -112,4 +112,4 @@
 
 
 ## 신경 쓴 부분
-
+- [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC.wiki.git)
