@@ -93,6 +93,7 @@
             console.log("확인")
             console.table(data);
             const projectListDiv = document.getElementById("projectList");
+            const $pmCode = `[[${pmCode}]]`;
             data.forEach(project => {
 
 
@@ -100,13 +101,22 @@
                 const projectDiv = document.createElement('a');
                 projectDiv.classList.add('project-card');
                 projectDiv.href = `/medi/mediConnect/${project.projectNo}`;
+                if ($pmCode === 'd') {
                 projectDiv.innerHTML = `
-                    <input type="checkbox" name="projectCheckbox" value="${project.projectNo}" onchange="toggleDeleteButton()">
+                   <input type="checkbox" name="projectCheckbox" value="${project.projectNo}" onchange="toggleDeleteButton()">
+
+                    <h3><span id="nameSpan">${project.patientDTO.patientName}</span> <span id="nameValue">(만 ${project.patientDTO.age}세 ${project.patientDTO.gender})</span></h3>
+                    <p>project no: ${project.projectNo}</p>
+                    <p>patient code: ${project.patientDTO.patientNo}</p>
+                    <p>치료부위 : ${project.injuryDTO.injuryName} (${project.injuryDTO.injuryCode})</p>
+                `; } else {
+                    projectDiv.innerHTML = `
                     <h3><span id="nameSpan">${project.patientDTO.patientName}</span> <span id="nameValue">(만 ${project.patientDTO.age}세 ${project.patientDTO.gender})</span></h3>
                     <p>project no: ${project.projectNo}</p>
                     <p>patient code: ${project.patientDTO.patientNo}</p>
                     <p>치료부위 : ${project.injuryDTO.injuryName} (${project.injuryDTO.injuryCode})</p>
                 `;
+                }
                 projectListDiv.appendChild(projectDiv);
             });
             return projectListDiv;

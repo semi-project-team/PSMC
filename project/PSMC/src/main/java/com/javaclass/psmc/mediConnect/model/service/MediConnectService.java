@@ -1,6 +1,8 @@
 package com.javaclass.psmc.mediConnect.model.service;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
+import com.javaclass.psmc.mainPage.model.dto.EmployeePhotoDTO;
+import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
 import com.javaclass.psmc.mediConnect.model.dao.ProjectsMapper;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
@@ -77,5 +79,10 @@ public class MediConnectService {
     public int registNewMedi(Map<String, Object> param) {
 
         return projectMapper.registNewMedi(param);
+    }
+
+    public EmployeePhotoDTO findEmployeeByPmCode(String pmCode) {
+
+        return projectMapper.findEmployeeByPmCode(pmCode);
     }
 }
