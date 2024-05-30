@@ -43,6 +43,31 @@
 - bug : 기능에 오류 수정
 - 브랜치 별로 커밋을 한 후 충돌이 발생하지 않거나 충돌을 해결한 후 master 브랜치에 merge 하는 방식을 채택했습니다
 
+## 3. 프로젝트 구조
+
+```
+
+            psmc
+            ├─auth
+            │  ├─controller
+            │  └─model
+            ├─common
+            │  ├─exception
+            │  └─model
+            ├─configuration
+            │  └─handler
+            ├─mainPage
+            ├─mediConnect
+            ├─mypage
+            ├─staff
+            ├─theraLink
+            └─user
+
+```
+
+- 충돌을 방지 하기 위해서 기능별로 패키지를 만들었고 공통으로 사용하는 것은 common 패키지 하위에 담았습니다
+
+
 ## ✨주요 기능
 1. 진료일지(의사만 작성) - 의사와 치료사가 모두 확인할 수 있으며 일지에 대한 코멘트를 작성
 2. 치료일지(트레이너만 작성) - 의사와 치료사가 모두 확인할 수 있으며 일지에 대한 코멘트를 작성
