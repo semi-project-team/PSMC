@@ -35,7 +35,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedule/scheduler")
-    public void scheduler(Model model, HttpServletRequest request,HttpSession session){
+    public String scheduler(Model model, HttpServletRequest request,HttpSession session){
         System.out.println("와주십숑 scheduler 입니다");
         String message = (String) request.getAttribute("message");
         model.addAttribute("message",message);
@@ -45,6 +45,8 @@ public class ScheduleController {
             model.addAttribute("failUpdateMessage", (StringBuilder) session.getAttribute("failUpdateMessage"));
         }
         session.removeAttribute("failUpdateMessage");
+
+        return "schedule/scheduler";
     }
 
     @GetMapping("/schedule")
@@ -140,7 +142,7 @@ public class ScheduleController {
 
         session.setAttribute("param",param);
 
-        return "forward:schedule/scheduler";
+        return "forward:/schedule/scheduler";
     }
 
     @PostMapping("/delete/{mediCode}")
