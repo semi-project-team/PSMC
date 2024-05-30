@@ -116,3 +116,4 @@
 
 ## 신경 쓴 부분
 - [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
+- [채팅 추가하기](https://github.com/semi-project-team/PSMC/wiki/MediConnect-%EC%B1%84%ED%8C%85-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B8%B0)
