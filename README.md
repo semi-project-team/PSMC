@@ -58,11 +58,13 @@
         회원 가입, 스케쥴러, TheraLink
 ```
 ## 역할 분담
+
 이호준
 - 기능
   - 로그인, 아이디찾기, 비밀번호 찾기, 회원가입 약관, 회원가입 등록, 비밀번호 수정, mainpage 환자 등록, 스케쥴 작성, 식단표 작성, 스케쥴러 예약기능, theralink 블로그 생성 및 채팅 시스템
 - DB
   - DB 테이블 생성
+
 서정민
 - UI
   - 페이지 : MediConnect
@@ -70,6 +72,7 @@
    - MediConnect 생성하기 및 채팅 시스템, mainpage 의 MediConnect 최근 업데이트 정보
 - DB
   - DB 테이블 생성성
+
 조승윤
 - UI
   - 페이지 : 메인 페이지, mypage
