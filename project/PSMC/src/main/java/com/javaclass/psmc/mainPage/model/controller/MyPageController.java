@@ -335,22 +335,6 @@ public class MyPageController {
         LoginUserDTO log = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = log.getPmCode();
 
-        // 클래스패스 내의 디렉토리 경로
-//        String classpathLocation = "static/common/employeeimg";
-//        String filepath;
-
-        // 클래스패스 내의 디렉토리 경로 확인
-//        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(classpathLocation);
-//        if (resourceStream == null) {
-            // 디렉토리가 없으면 생성 (여기서는 외부 디렉토리를 사용하지 않기 위해 가정함)
-//            filepath = new File("src/main/resources/" + classpathLocation).getAbsolutePath();
-//            File fileDir = new File(filepath);
-//            if (!fileDir.exists()) {
-//                fileDir.mkdirs();
-//            }
-//        } else {
-//            filepath = new File("src/main/resources/" + classpathLocation).getAbsolutePath();
-//        }
 
         String originName = file.getOriginalFilename();
         String ext = originName.substring(originName.lastIndexOf("."));
@@ -362,9 +346,6 @@ public class MyPageController {
             throw new RuntimeException("프로필 업로드중 오류가 발생했습니다"+e);
         }
         String filepath = "/images/employeeimg/"+savedName;
-        // 파일을 지정된 경로에 저장
-//        File saveFile = new File(filepath + "/" + savedName);
-//        file.transferTo(saveFile);
 
         EmployeePhotoDTO savePhoto = new EmployeePhotoDTO();
         savePhoto.setPmCode(pmCode);
