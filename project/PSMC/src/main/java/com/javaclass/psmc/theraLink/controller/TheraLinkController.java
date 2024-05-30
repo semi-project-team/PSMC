@@ -52,14 +52,20 @@ public class TheraLinkController {
     @GetMapping("/theraLink/{pageNo}")
     public String goFirstPage(HttpSession session, Model model, @PathVariable int pageNo, HttpServletRequest request){
 
+        // 현재 회원 정보
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
         Map<String,Object> sender = new HashMap<>();
         sender.put("pmCode",pmCode);
 
-        System.out.println("forwrad로 온고");
+        // 의료진인지 치료사인지 확인
+        if(pmCode.charAt(0)=='d'){
+            sender.put("role","doctor");
+        }else{
+            sender.put("role","thera");
+        }
 
-
+        // form 을 통해 특정 조건의 프로젝트 조사
         Map<String,String> parameters = (Map<String, String>) request.getAttribute("param");
 
 
@@ -72,18 +78,10 @@ public class TheraLinkController {
             }
 
         }
-        if(pmCode.charAt(0)=='d'){
-            sender.put("role","doctor");
-        }else{
-            sender.put("role","thera");
-        }
+
         List<MyPatientDTO> myPatients = userService.myPatient(sender);
 
 
-        for(MyPatientDTO p : myPatients){
-            System.out.println("들어왔나");
-            System.out.println("p = " + p);
-        }
         sender.put("pageNo",(pageNo-1)*5);
 
         List<MyPatientDTO> myPatientLimit = userService.myPatient(sender);
@@ -107,15 +105,14 @@ public class TheraLinkController {
 
         int pageLimit = (pageNo-1)*5+1;
         model.addAttribute("pageLimit",pageLimit);
-
         model.addAttribute("pageNo",pageNo);
 
 
         ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
-        System.out.println(profileDTO);
         model.addAttribute("profile",profileDTO);
 
 
+        // 해당 의료종사자의 전공 분야에 해당하는 부상 코드 전송
         List<InjuryDTO> injuryDTOS = userService.findInjuryByFieldCode(profileDTO.getFieldCode());
         model.addAttribute("injuryMap",injuryDTOS);
 
@@ -125,20 +122,13 @@ public class TheraLinkController {
     @GetMapping("/theraLink/open/{projectNo}/{pageNo}")
     public String goSecondPage(@PathVariable int projectNo,Model model,@PathVariable int pageNo){
 
-        System.out.println("projectNo = " + projectNo);
 
         Map<String,Integer> sender = new HashMap<>();
         sender.put("projectNo",projectNo);
-//        List<TheraLinkWithMonthDTO> theraLinkWithMonthDTOS = userService.findAllTheraLinkByProjectNo(sender);
-
 
         List<BlogDTO> blogDTOS = userService.findAllBlogByProjectNo(sender);
 
-        
-
-//        int totalData = theraLinkWithMonthDTOS.size();
         int totalData = blogDTOS.size();
-//        int totalPage = (int) Math.ceil(totalData/4.0);
         int totalPage = (int) Math.ceil(totalData/4.0);
 
         if(totalPage==0){
@@ -147,20 +137,7 @@ public class TheraLinkController {
         int pageLimit  = (pageNo-1)*4;
         sender.put("pageNo",pageLimit);
 
-//        List<TheraLinkWithMonthDTO> theraLinkWithMonthLimit  = userService.findAllTheraLinkByProjectNo(sender);
-
         List<BlogDTO> blogDTOLimit = userService.findAllBlogByProjectNo(sender);
-
-//        for(TheraLinkWithMonthDTO t : theraLinkWithMonthLimit){
-//            System.out.println("theraLink data 확인중 = " + t);
-//            t.setDay(t.getTheraBoardDate().toString().split("-")[2]);
-//            System.out.println("t.getDay() = " + t.getDay());
-//
-//            int comment = t.getTheraChatDTOS().size();
-//
-//            t.setComment(comment);
-//
-//        }
 
         model.addAttribute("theraLink",blogDTOLimit);
 
@@ -187,7 +164,7 @@ public class TheraLinkController {
     @PostMapping(value = "/theraLink/blog",produces = "application/json; charset=UTF-8")
     @ResponseBody
     public TheraLinkForChatDTO showblog(@RequestBody String theraNum,HttpSession session) throws JsonProcessingException {
-        System.out.println("theraNum = " + theraNum);
+
 
         JsonNode jsonNode = objectMapper.readTree(theraNum);
         String theraNo = jsonNode.get("theraNum").asText();
@@ -196,12 +173,10 @@ public class TheraLinkController {
         TheraLinkForChatDTO theraChat = userService.getTheraChatBytheraNo(theraNo);
 
 
-        System.out.println(theraChat.getTheraTitle());
-
         if(!Objects.isNull(theraChat)) {
             String pmCode = ((LoginUserDTO) session.getAttribute("auth")).getPmCode();
             theraChat.setMe(pmCode);
-            System.out.println("theraChat = " + theraChat);
+
 
         }
         return theraChat;
@@ -211,7 +186,7 @@ public class TheraLinkController {
     @PostMapping(value = "/theraLink/addMessage",produces = "application/json; charset=UTF-8")
     @ResponseBody
     public TheraLinkForChatDTO makeChat(@RequestBody MessageDTO messageDTO,HttpSession session){
-        System.out.println("messageDTO = " + messageDTO);
+
 
         messageDTO.setPmCode(((LoginUserDTO)session.getAttribute("auth")).getPmCode());
         messageDTO.setTheraChatDate(LocalDateTime.now());
@@ -229,7 +204,6 @@ public class TheraLinkController {
     @ResponseBody
     public TheraLinkForChatDTO deleteChat(@RequestBody ChatDeleteDTO chatDeleteDTO,HttpSession session){
 
-        System.out.println("chatDeleteDTO = " + chatDeleteDTO);
 
         int result = userService.deleteChat(chatDeleteDTO);
 
@@ -238,7 +212,6 @@ public class TheraLinkController {
         if(!Objects.isNull(theraLinkForChatDTO)) {
             String pmCode = ((LoginUserDTO) session.getAttribute("auth")).getPmCode();
             theraLinkForChatDTO.setMe(pmCode);
-            System.out.println("theraChat = " + theraLinkForChatDTO);
 
         }
 
@@ -253,13 +226,7 @@ public class TheraLinkController {
 
     @PostMapping("/theraLink/theraUpload/{projectNo}")
     public ResponseEntity<Map<String, String>> fileUpload(@ModelAttribute RecieveDTO recieveDTO, @PathVariable int projectNo) throws IOException {
-        System.out.println("업로드로 들어옴");
         List<MultipartFile> images = recieveDTO.getImages();
-        if (!Objects.isNull(images)) {
-            for (MultipartFile i : images) {
-                System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
-            }
-        }
 
         File directory  = new File(uploadDir);
         if(!directory.exists()){
@@ -268,8 +235,6 @@ public class TheraLinkController {
 
 
 
-        System.out.println("title = " + recieveDTO.getTheraTitle());
-        System.out.println("theraLinkContent = " + recieveDTO.getContents());
 
         TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
         theraLinkDTO.setProjectNo(projectNo);
@@ -291,7 +256,7 @@ public class TheraLinkController {
 //            }
 //            String filepath = new File("src/main/resources/" + uploadDir).getAbsolutePath();
 //
-//            System.out.println("filepath = " + filepath);
+
 
             List<TheraLinkPhotoDTO> theraLinkPhotoDTOS = new ArrayList<>();
             List<String> saveFiles = new ArrayList<>();
@@ -334,20 +299,12 @@ public class TheraLinkController {
 
     @PostMapping("/theraLink/theraModi/{projectNo}")
     public ResponseEntity<Map<String, String>> modifyBlog(@ModelAttribute RecieveDTO recieveDTO, @PathVariable int projectNo) throws IOException {
-        System.out.println("수정으로 들어옴");
+
 
         List<MultipartFile> images = recieveDTO.getImages();
-        if (!Objects.isNull(images)) {
-            for (MultipartFile i : images) {
-                System.out.println("i 들어온 이미지들 = " + i.getOriginalFilename());
-            }
-        }
 
         int result1 = userService.killAllpictureByTheralinkNo(recieveDTO.getTheralinkNo());
 
-
-
-        System.out.println("theralinkNo" + recieveDTO.getTheralinkNo());
         TheraLinkDTO theraLinkDTO = new TheraLinkDTO();
         theraLinkDTO.setTheraLinkNo(recieveDTO.getTheralinkNo());
         theraLinkDTO.setTheraTitle(recieveDTO.getTheraTitle());
@@ -415,15 +372,9 @@ public class TheraLinkController {
     @GetMapping("/theraLink/patientSearch")
     public String patientSearch(@RequestParam Map<String,String> parameters,HttpServletRequest request){
 
-            System.out.println(parameters.keySet());
-
-
-
             request.setAttribute("param",parameters);
 
         return "forward:/theraLink/"+1;
     }
-
-
 
 }

@@ -73,7 +73,7 @@
                     </fieldset>
                 <script th:inline="javascript">
                     const patients = JSON.parse([[${patient}]]);
-                    console.table(patients);
+
                     const patientSelect =document.getElementById('patientSelect');
                     const patientNo = document.getElementById('patientNo');
                     const patientPhone =document.getElementById('patientPhone');
@@ -85,8 +85,7 @@
                     })
 
                     patientSelect.addEventListener('change',e=>{
-                        console.log('t는 왜 안되냐')
-                        console.table(patients);
+
                         const val = patientSelect.value;
                         patients.forEach(p=>{
                             if(p.projectNo == val){
@@ -171,7 +170,6 @@
                                     })
                                         .then(res=>res.json())
                                         .then(data=>{
-                                            console.table(data);
                                             if(data!=null){
                                                 data.forEach(thera=>{
                                                     if(thera.code!=null){
@@ -209,7 +207,6 @@
                                     })
                                 }).then(res=>res.json())
                                     .then(data=>{
-                                        console.table(data);
                                         if(data!=null){
                                             data.forEach(m=>{
                                                 const timeCode = m.timeCode;
@@ -288,8 +285,6 @@
                     const $today = document.getElementById('today');
                     const $day = parseInt(`[[${day}]]`.trim());
                     const $date = `[[${ModiToday}]]`;
-                    console.log($date+"오늘 날짜");
-                    console.log($day);
                     switch($day){
                         case 1:
                             $today.textContent=`${$date} (Sun)`
@@ -351,7 +346,6 @@
             fetch("/todayMenu")
                 .then(res=>res.json())
                 .then(data=>{
-                    console.table(data);
                     todayCalendar.textContent=data.date
                     makeMenu(data.menuDTO.menuName);
                 })
@@ -548,7 +542,6 @@
     const $therapy = document.getElementById('therapy');
 
     $regist.addEventListener('click',e=>{
-        console.log('클릭이벤트 들어왔나')
         $makeProject.action='/makeProject';
         $makeProject.submit();
     })
@@ -569,8 +562,7 @@
             })
         }).then(res=>res.json())
             .then(data=>{
-                console.log('치료사 이름 잘불러왔는가')
-                console.table(data);
+
                 data.forEach(e=>{
                     const $option = document.createElement('option');
                     $option.value = e.pmCode;
@@ -737,8 +729,6 @@
     })
 
     function checkIndicator(){
-
-        console.log(buttonIndicator);
         if(buttonIndicator.every(ele=>ele)){
             $regist.style.pointerEvents='auto';
             $regist.style.opacity=1;

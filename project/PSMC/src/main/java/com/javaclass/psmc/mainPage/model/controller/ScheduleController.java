@@ -36,11 +36,11 @@ public class ScheduleController {
 
     @GetMapping("/schedule/scheduler")
     public String scheduler(Model model, HttpServletRequest request,HttpSession session){
-        System.out.println("와주십숑 scheduler 입니다");
+
         String message = (String) request.getAttribute("message");
         model.addAttribute("message",message);
         StringBuilder failUpdateMessage = (StringBuilder) session.getAttribute("failUpdateMessage");
-        System.out.println("실패메시지 왜 안옴"+failUpdateMessage);
+
         if (failUpdateMessage!=null) {
             model.addAttribute("failUpdateMessage", (StringBuilder) session.getAttribute("failUpdateMessage"));
         }
@@ -59,8 +59,7 @@ public class ScheduleController {
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
-        System.out.println("startOfWeek = " + startOfWeek);
-        System.out.println("endOfWeek = " + endOfWeek);
+
 
         Map<String,Object> param = new HashMap<>();
         param.put("pmCode",pmCode);
@@ -70,7 +69,7 @@ public class ScheduleController {
         if(role.equals("[d]")){
             List<TtoMIDTO> dtimes = userService.todayMedi(param);
             param.put("dschedule",dtimes);
-            System.out.println("dtimes = " + dtimes);
+
         }
         else{
             List<TheraToProDTO> ttimes = userService.todayThera(param);
@@ -118,7 +117,7 @@ public class ScheduleController {
 
         String role = loginUserDTO.getRole().toString();
 
-        System.out.println("dating here"+dating);
+
         // 오늘이 속한 주의 시작 날짜 계산하기 (월요일)
         LocalDate startOfWeek = dating.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
 
@@ -132,7 +131,7 @@ public class ScheduleController {
         if(role.equals("[d]")){
             List<TtoMIDTO> dtimes = userService.todayMedi(param);
             param.put("dschedule",dtimes);
-            System.out.println("dtimes = " + dtimes);
+
         }
         else{
             List<TheraToProDTO> ttimes = userService.todayThera(param);
@@ -156,7 +155,7 @@ public class ScheduleController {
             delete.put("role","thera");
         }
         delete.put("code", String.valueOf(mediCode));
-        System.out.println(delete.get("code"));
+
         int result = userService.softDelete(delete);
 
         return "redirect:/schedule";
@@ -168,11 +167,8 @@ public class ScheduleController {
         LoginUserDTO loginUserDTO = ((LoginUserDTO) session.getAttribute("auth"));
         String pmCode = loginUserDTO.getPmCode();
         parameter.put("code",mediCode);
-        System.out.println("mediCode = " + mediCode);
-        for (String key : parameter.keySet()) {
-            Object value = parameter.get(key);
-            System.out.println("Key: " + key + ", Value: " + value);
-        }
+
+
         int result = 0;
 
         String role = String.valueOf(pmCode.charAt(0));
@@ -181,7 +177,7 @@ public class ScheduleController {
             result = userService.mediInfoUpdate(parameter);
         }
         else{
-            System.out.println("치료사 없데이트 시작입니다");
+
             parameter.put("role","thera");
 
             Map<String,Object> sender = new HashMap<>();
@@ -204,22 +200,20 @@ public class ScheduleController {
             sender.put("code",codes);
             List<TodayAllMediDTO> todayMedi = userService.todayMediByPRNo(sender);
 
-            for(Integer i : codes){
-                System.out.println("i 이번 코드는 뭐냐= " + i);
-            }
+
 
 
 
             if(checkThera.isEmpty() && todayMedi.isEmpty()){
-                System.out.println("업데이트 성공이요");
+
                 result = userService.mediInfoUpdate(parameter);
             }else{
-                System.out.println("겹치는게 있다 업데이트 실패다");
+
                 StringBuilder messages = new StringBuilder();
                 if(!checkThera.isEmpty()){
                     messages.append("겹치는 재활 일정 : \n");
                     for(TodayAllTheraDTO t : checkThera){
-                        System.out.println("재활 겹침"+t);
+
                         messages.append(t.getStart()+" ~ "+t.getEnd()+",");
                     }
 
@@ -227,7 +221,7 @@ public class ScheduleController {
                 if(!todayMedi.isEmpty()){
                     messages.append("겹치는 치료 일정 : \n");
                     for(TodayAllMediDTO m: todayMedi){
-                        System.out.println("치료 일정 겹침"+m);
+
                         messages.append(findTimeCode.startCode(m.getTimeCode())+ " ~ "+findTimeCode.endCode(m.getTimeCode())+",");
 
                     }
@@ -264,8 +258,7 @@ public class ScheduleController {
         List<AllTheraDTO> allThera = userService.allTheraInfo(param);
 
 
-        System.out.println("allThera = " + allThera);
-        System.out.println("allMedi = " + allMedi);
+
 
         param.put("allMedi",allMedi);
         param.put("allThera",allThera);

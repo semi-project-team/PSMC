@@ -1,5 +1,7 @@
 package com.javaclass.psmc.auth.model.dto;
 
+import java.time.LocalDate;
+
 public class MyPatientDTO {
 
     private int patientNo;
@@ -9,10 +11,11 @@ public class MyPatientDTO {
     private String email;
     private int age;
     private String injuryName;
+    private LocalDate projectDate;
 
     public MyPatientDTO(){}
 
-    public MyPatientDTO(int patientNo, String patientName, String phone, int projectNo, String email, int age, String injuryName) {
+    public MyPatientDTO(int patientNo, String patientName, String phone, int projectNo, String email, int age, String injuryName, LocalDate projectDate) {
         this.patientNo = patientNo;
         this.patientName = patientName;
         this.phone = phone;
@@ -20,6 +23,7 @@ public class MyPatientDTO {
         this.email = email;
         this.age = age;
         this.injuryName = injuryName;
+        this.projectDate = projectDate;
     }
 
     public int getPatientNo() {
@@ -78,6 +82,14 @@ public class MyPatientDTO {
         this.injuryName = injuryName;
     }
 
+    public LocalDate getProjectDate() {
+        return projectDate;
+    }
+
+    public void setProjectDate(LocalDate projectDate) {
+        this.projectDate = projectDate;
+    }
+
     @Override
     public String toString() {
         return "MyPatientDTO{" +
@@ -88,6 +100,7 @@ public class MyPatientDTO {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", injuryName='" + injuryName + '\'' +
+                ", projectDate=" + projectDate +
                 '}';
     }
 }

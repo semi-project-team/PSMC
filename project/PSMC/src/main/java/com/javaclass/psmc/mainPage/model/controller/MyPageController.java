@@ -65,7 +65,7 @@ public class MyPageController {
         ProfileDTO profile= userService.findEmployeeByPmCode(pmCode);
 
         profile.setPhone(makePhoneNumber.formatPhoneNumber(profile.getPhone()));
-        System.out.println(profile);
+
 
         model.addAttribute("profile",profile);
 
@@ -75,7 +75,7 @@ public class MyPageController {
     @GetMapping(value = "/todayMenu",produces = "application/json; charset=UTF-8")
     @ResponseBody
     public TodayMenuDTO menus(){
-        System.out.println("메뉴 비동 컨트롤러");
+
         LocalDateTime today = LocalDateTime.now();
 
         int day = userService.findDayNo(today.toString());
@@ -114,10 +114,6 @@ public class MyPageController {
         String message="";
         if(pmCode.charAt(0)=='d'){
             MediInfoDTO mediInfoDTO = new MediInfoDTO();
-            System.out.println(parameters.get("projectNo"));
-            System.out.println(parameters.get("date"));
-            System.out.println(parameters.get("timeCode"));
-            System.out.println(parameters.get("contents"));
             mediInfoDTO.setProjectNo(Integer.parseInt(parameters.get("projectNo")));
             mediInfoDTO.setTimeCode(Integer.parseInt(parameters.get("timeCode")));
             mediInfoDTO.setMediDate(Date.valueOf(parameters.get("date")));
@@ -135,11 +131,6 @@ public class MyPageController {
 
 
         }else{
-            System.out.println(parameters.get("projectNo"));
-            System.out.println(parameters.get("date"));
-            System.out.println(parameters.get("contents"));
-            System.out.println(parameters.get("start"));
-            System.out.println(parameters.get("end"));
 
             LocalTime start = LocalTime.parse(parameters.get("start"));
             LocalTime end = LocalTime.parse(parameters.get("end"));
@@ -171,7 +162,6 @@ public class MyPageController {
                 theraInfoDTO.setTheraDate(Date.valueOf(parameters.get("date")));
                 theraInfoDTO.setProjectNo(Integer.parseInt(parameters.get("projectNo")));
                 theraInfoDTO.setTheraRegDate(LocalDateTime.now());
-                System.out.println("이젠 시간 맞지?"+LocalTime.parse(parameters.get("start")));
                 theraInfoDTO.setStart(LocalTime.parse(parameters.get("start")));
                 theraInfoDTO.setEnd(LocalTime.parse(parameters.get("end")));
                 result = userService.makeTheraInfo(theraInfoDTO);
@@ -198,7 +188,7 @@ public class MyPageController {
                         words.append(timeRange+",");
                     }
                 }
-                System.out.println("words = " + words);
+
                 session.setAttribute("messages",words);
 
             }
@@ -217,25 +207,19 @@ public class MyPageController {
     @PostMapping(value = "/sendAllMedi",produces = "application/json; charset=UTF-8")
     @ResponseBody
     public List<TodayAllMediDTO> checkTimeCode(@RequestBody String selectDate, HttpSession session) throws JsonProcessingException {
-        System.out.println("selectDate = " + selectDate);
         JsonNode jsonNode =objectMapper.readTree(selectDate);
         String date = jsonNode.get("selectDate").asText();
-        System.out.println("date 날짜 변환되었나= " + date);
         Map<String,String> parameter = new HashMap<>();
         parameter.put("date",date);
         String pmCode = ((LoginUserDTO)session.getAttribute("auth")).getPmCode();
         parameter.put("pmCode",pmCode);
         List<TodayAllMediDTO> todayAllMedi = userService.todayAllMedi(parameter);
 
-        for (TodayAllMediDTO today : todayAllMedi){
-            System.out.println("today 오늘 mediInfo 다 = " + today);
-        }
         return todayAllMedi;
     }
     @PostMapping(value = "/sendThera",produces = "application/json; charset=UTF-8")
     @ResponseBody
     public List<TodayAllTheraDTO> checkTimeCodeByThera(@RequestBody TheraJSONDTO theraJSONDTO,HttpSession session){
-        System.out.println("시간바궜냐 그만 바꿔라"+theraJSONDTO);
 
         LoginUserDTO loginUserDTO = ((LoginUserDTO) session.getAttribute("auth"));
         String pmCode = loginUserDTO.getPmCode();
@@ -245,7 +229,6 @@ public class MyPageController {
 
         for(TodayAllTheraDTO t : todayTheraByPRNo){
             List<Integer> code = findTimeCode.CantTimeCode(t.getStart(),t.getEnd());
-            System.out.println("code = " + code);
             t.setCode(code);
         }
         return todayTheraByPRNo;
@@ -257,11 +240,7 @@ public class MyPageController {
         String message = "환자 등록에 실패했습니다";
         LoginUserDTO loginUserDTO= (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
-        System.out.println("프로젝트 생성 시작");
-        for (String key : parameters.keySet()) {
-            Object value = parameters.get(key);
-            System.out.println("Key: " + key + ", Value: " + value);
-        }
+
 
         PatientDTO projectPatientDTO = new PatientDTO();
 
@@ -279,7 +258,6 @@ public class MyPageController {
 
         int result1 = results1[0];
         int patientNo = results1[1];
-        System.out.println("patientNo = " + patientNo);
 
         if(result1>0){
             ProjectDTO newProject = new ProjectDTO();
@@ -288,9 +266,9 @@ public class MyPageController {
             newProject.setInjuryCode(Integer.parseInt(parameters.get("injuryCode")));
             int[] result2 = userService.insertProjectAndGetProjectNo(newProject);
 
-            System.out.println("프로젝트 등록 성고?"+result2[0]);
+
             int projectNo = result2[1];
-            System.out.println("projectNo = " + projectNo);
+
 
             if(result2[0]>0) {
                 CreateProjectDTO createProjectDTO = new CreateProjectDTO(projectNo, pmCode);
@@ -300,7 +278,6 @@ public class MyPageController {
 
                 if(result3>0) {
 
-                    System.out.println("createProject 등록 성공?");
                     String theraPmCode = parameters.get("theraPmCode");
                     int result4 = 0;
                     if (!theraPmCode.equals("none")) {
@@ -338,7 +315,6 @@ public class MyPageController {
 
         JsonNode jsonNode = objectMapper.readTree(parameter);
         String injuryCode = jsonNode.get("injuryCode").asText();
-        System.out.println("injuryCode = " + injuryCode);
 
         List<EmployeeDTO> employeeDTOS = userService.findEmployeeByInjuryCode(injuryCode);
 
@@ -350,7 +326,7 @@ public class MyPageController {
     @PostMapping(value = "/uploadProfileImage", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public ResponseEntity<EmployeePhotoDTO> uploadfileimage(@RequestParam MultipartFile file, HttpSession session) throws IOException {
-        System.out.println("들어온 이미지 이름: " + file.getOriginalFilename());
+
 
         File directory = new File(uploadDir);
         if(!directory.exists()){

@@ -731,6 +731,7 @@
         <result property="email" column="email"/>
         <result property="age" column="age"/>
         <result property="injuryName" column="injury_name"/>
+        <result property="projectDate" column="project_date"/>
     </resultMap>
 
     <select id="myPatient" resultMap="mypatientMap" parameterType="hashmap">
@@ -740,6 +741,7 @@
             p.phone,
             p.email,
             p.age,
+            a.project_date,
             a.project_no,
             i.injury_name
         from
@@ -778,6 +780,8 @@
                 p.patient_name like concat('%',#{patientName},'%')
             </if>
         </where>
+        order by
+        project_date desc
         <if test="pageNo !=null">
             limit #{pageNo},5
         </if>

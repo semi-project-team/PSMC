@@ -18,11 +18,9 @@ if(deleteButton!=null) {
 
             const queryString = param.toString();
 
-            console.log(queryString);
 
 
             const nowPage = window.location.href;
-            console.log(nowPage);
 
 
             window.location.replace(`${nowPage}/deleteTheraLink?${queryString}`);
@@ -43,7 +41,6 @@ $bloglist.forEach(b=>{
     b.addEventListener('click',e=>{
         const theraLinkNo = b.id;
 
-        console.log("theraLinkNo 잘 왔는가"+theraLinkNo);
 
         fetch("/theraLink/blog",{
             method: "POST",
@@ -55,19 +52,11 @@ $bloglist.forEach(b=>{
             })
         }).then(res=>res.json())
             .then(data=>{
-                console.log('잘받았습니다')
-                console.table(data);
 
                 $chatDeleteButton.value="";
                 $chatDeleteButton.value = theraLinkNo;
 
                 makeChatting(data,theraLinkNo);
-
-
-                console.table(data);
-                console.log('theraLinkNo 바꼈겠지'+theraLinkNo);
-
-
 
                 const $modifyTheraLink  = document.getElementById('modifyTheraLink');
 
@@ -112,7 +101,7 @@ $bloglist.forEach(b=>{
                                 inputElements.forEach(inputElements => {
                                     let files = inputElements.files;
                                     if(files.length>0) {
-                                        console.log('미리보기 파일 있나')
+
                                         for (let i = 0; i < files.length; i++) {
                                             formData.append('images', files[i]);
 
@@ -123,7 +112,7 @@ $bloglist.forEach(b=>{
 
                                 const nowPage = window.location.href;
                                 const projectNo = nowPage.split("/")[5];
-                                console.log('projectNo'+projectNo);
+
 
                                 $.ajax({
                                     url: `/theraLink/theraModi/${projectNo}`,
@@ -133,7 +122,7 @@ $bloglist.forEach(b=>{
                                     contentType: false,
                                     success: function(response) {
                                         if(response.redirectURL){
-                                            console.log('성공이요');
+
                                             window.location.href=response.redirectURL;
                                         }
 
@@ -141,7 +130,7 @@ $bloglist.forEach(b=>{
 
                                     },
                                     error: function(xhr, status, error) {
-                                        console.log('실패요');
+
                                         let response = JSON.parse(xhr.responseText);
 
 
@@ -249,9 +238,9 @@ $bloglist.forEach(b=>{
 
 $sendingMessage.addEventListener('click',e=>{
 
-    console.log('메세지 보낼거냐')
+
     if($inputMessage.value){
-        console.log('인풋값이 있네');
+
         const theraNumber = $sendingMessage.value;
         sendingMessage(theraNumber);
     }
@@ -259,9 +248,6 @@ $sendingMessage.addEventListener('click',e=>{
 
 function sendingMessage(theraLinkNo){
 
-
-
-            console.log("theraLinkNo 이 안넘오오나"+theraLinkNo)
             const message =$inputMessage.value;
             fetch("/theraLink/addMessage",{
                 method: "POST",
@@ -275,18 +261,11 @@ function sendingMessage(theraLinkNo){
                 })
             }).then(res=>res.json())
                 .then(data=>{
-                    console.log('업데이트 잘됬는가?')
-                    console.table(data);
                     makeChatting(data,theraLinkNo);
 
                 });
 
             $inputMessage.value='';
-
-
-
-
-
 
 }
 
@@ -316,9 +295,6 @@ function makeChatting(data,theraLinkNo){
 
 
                 if (t.pmCode === pmCode) {
-                    console.log('나다');
-
-
 
                     if(t.employeeFilepath==null) {
                         $chat.classList.add('chat-message-right', 'pb-4');
@@ -346,7 +322,7 @@ function makeChatting(data,theraLinkNo){
 
 
                 } else {
-                    console.log('나 아니다');
+
                     const date = t.theraChatBoardDate.toString().split("T")
                     const day = date[0];
                     const time = date[1];
@@ -386,11 +362,9 @@ function makeChatting(data,theraLinkNo){
 
     }
     if(data.theraLinkPhotoDTOS[0].theralinkSavedName!=null){
-        console.log('들어 왔나');
 
             data.theraLinkPhotoDTOS.forEach(p=>{
 
-                console.log('하나라도 있으면 들어와야')
 
                 const $div = document.createElement('div');
                 $div.classList.add('carousel-item','active');
@@ -476,7 +450,7 @@ $chatDeleteButton.addEventListener('click',e=>{
     if(param.length>0) {
 
         const theraNum = $chatDeleteButton.value;
-        console.log(param);
+
 
         fetch("/theraLink/deleteChating", {
             method: "POST",
@@ -489,7 +463,7 @@ $chatDeleteButton.addEventListener('click',e=>{
             })
         }).then(res => res.json())
             .then(data => {
-                console.table(data);
+
                 makeChatting(data, theraNum)
             })
     }
