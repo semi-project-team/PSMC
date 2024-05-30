@@ -2,6 +2,8 @@ package com.javaclass.psmc.mediConnect.controller;
 
 import com.javaclass.psmc.common.model.dto.EmployeeDTO;
 import com.javaclass.psmc.common.model.dto.MediConnectDTO;
+import com.javaclass.psmc.mainPage.model.dto.EmployeePhotoDTO;
+import com.javaclass.psmc.mainPage.model.dto.ProfileDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllMediChatDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowAllProjectsDTO;
 import com.javaclass.psmc.mediConnect.model.dto.ShowMediConnectDTO;
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class MediConnectController {
@@ -123,6 +126,18 @@ public class MediConnectController {
 
         session.setAttribute("mediChatDetail", chat);
         session.setAttribute("mediNo", mediNo);
+
+        EmployeePhotoDTO employeePhotoDTO = mediConnectService.findEmployeeByPmCode(pmCode);
+        System.out.println("employeePhotoDTO dddddddd= " + employeePhotoDTO);
+        if(!Objects.isNull(employeePhotoDTO)){
+
+        model.addAttribute("profile", employeePhotoDTO);
+        }
+        else{
+
+        model.addAttribute("profile",null);
+        }
+
 
         model.addAttribute("pmCode", pmCode);
         model.addAttribute("boardDetail", mediConnect);

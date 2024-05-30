@@ -7,6 +7,7 @@ import com.javaclass.psmc.user.model.dto.LoginUserDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,7 @@ public class ProjectsController {
     }
 
     @GetMapping("/MediConnect")
-    public String mediConnectLink(HttpSession session) {
+    public String mediConnectLink(HttpSession session, Model model) {
 
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
@@ -36,6 +37,7 @@ public class ProjectsController {
         HashMap<String, String> param = new HashMap<>();
         param.put("pmCode", pmCode);
 
+        String role = String.valueOf(pmCode.charAt(0));
         if (pmCode.charAt(0) == 'd') {
             param.put("role", "doctor");
         } else {
@@ -47,6 +49,8 @@ public class ProjectsController {
 //        session.setAttribute("projectList", projects);
         session.setAttribute("projectList", projects);
 
+
+        model.addAttribute("pmCode",role);
 
         return "medi/projects";
     }

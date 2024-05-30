@@ -351,8 +351,15 @@
         <div class="mainSpace">
             <div class="card">
                 <div class="card-header">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"
-                         height="32"> <p id="pmCodeName" th:value="${pmCode}" th:text="'@' + ${employeeDetail.name}"></p>
+                    <th:block th:if="${profile !=null}">
+                        <img th:src="${profile.employeeFilepath}" class="circle-image mr-2 rounded" width="32" height="32">
+                    </th:block>
+                    <th:block th:if="${profile == null}">
+                        <img src="/common/img/no-profile.png" class="circle-image mr-2 rounded" width="32" height="32">
+                    </th:block>
+<!--                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"-->
+<!--                         height="32"> -->
+                    <p id="pmCodeName" th:value="${pmCode}" th:text="'@' + ${employeeDetail.name}"></p>
                 </div>
                 <div class="card-body">
                     <p class="card-text" th:text="${boardDetail.mediContent}"></p>

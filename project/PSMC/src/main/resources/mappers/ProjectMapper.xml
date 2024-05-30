@@ -245,6 +245,24 @@
             medi_chat_board_date;
     </select>
 
+    <resultMap id="employeePhotoMap" type="com.javaclass.psmc.mainPage.model.dto.EmployeePhotoDTO">
+        <id property="employeePhotoNo" column="employee_photo_no"/>
+        <result property="employeeOriginName" column="employee_origin_name"/>
+        <result property="employeeSavedName" column="employee_saved_name"/>
+        <result property="employeeFilepath" column="employee_filepath"/>
+        <result property="pmCode" column="pm_code"/>
+    </resultMap>
+
+    <select id="findEmployeeByPmCode" parameterType="string" resultMap="employeePhotoMap">
+        select
+            a.employee_saved_name,
+            a.employee_filepath
+        from
+            employee_photo a
+        where
+            a.pm_code = #{pmCode}
+    </select>
+
     <select id="showNewChat" resultMap="showMediChatDetailResultMap" parameterType="int">
         select
             b.name,
@@ -276,6 +294,7 @@
 
     <resultMap id="newProjectsResultMap" type="com.javaclass.psmc.mediConnect.model.dto.NewProjectShowDTO">
         <id property="projectNo" column="project_no"/>
+        <result property="pmCode" column="pm_code"/>
         <association property="patientDTO" resultMap="patientResultMap"/>
         <association property="injuryDTO" resultMap="injuryResultMap"/>
     </resultMap>
@@ -284,7 +303,8 @@
         select
             a.project_no,
             p.*,
-            i.*
+            i.*,
+            c.pm_code
         from
             <if test="role == 'doctor'">
                 create_project c
