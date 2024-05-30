@@ -108,8 +108,9 @@
 
 ## ERD
 
-![최종 erd](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
+![최종 erd](https://github.com/semi-project-team/PSMC/assets/158137025/cfc96d07-53af-481a-9f41-afe968e584c6)
+
 
 
 ## 신경 쓴 부분
-- [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC.wiki.git](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
+- [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
