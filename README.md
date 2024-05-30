@@ -55,22 +55,7 @@
             │  ├─exception
             │  └─model
             ├─configuration
-            │  └─handler
-            ├─mainPage
-            ├─mediConnect
-            ├─mypage
-            ├─staff
-            ├─theraLink
-            └─user
-
-```
-
-- 충돌을 방지 하기 위해서 기능별로 패키지를 만들었고 공통으로 사용하는 것은 common 패키지 하위에 담았습니다
-
-## 역할 분담
-이호준
-- UI
-  - 페이지 : 로그인,외원 가입, 스케쥴러, TheraLink
+        회원 가입, 스케쥴러, TheraLink
 - 기능
   - 로그인, 아이디찾기, 비밀번호 찾기, 회원가입 약관, 회원가입 등록, 비밀번호 수정, mainpage 환자 등록, 스케쥴 작성, 식단표 작성, 스케쥴러 예약기능, theralink 블로그 생성 및 채팅 시스템
 - DB
