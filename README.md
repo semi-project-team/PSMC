@@ -126,3 +126,4 @@
 - [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
 - [유사 채팅 생성](https://github.com/semi-project-team/PSMC/wiki/%EC%9C%A0%EC%82%AC-%EC%B1%84%ED%8C%85-%EA%B8%B0%EB%8A%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
 - [페이징 처리](https://github.com/semi-project-team/PSMC/wiki/Paging-%EC%B2%98%EB%A6%AC)
+- [비밀번호찾기를 통한 이메일 전송](https://github.com/semi-project-team/PSMC/wiki/%EB%B9%84%EB%B0%80-%EB%B2%88%ED%98%B8-%EC%B0%BE%EA%B8%B0-%EA%B8%B0%EB%8A%A5)
