@@ -1,3 +1,8 @@
+<div align= "center">
+    <img src="https://capsule-render.vercel.app/api?type=waving&color=033d5e&height=240&section=header&text=PSMC&fontColor=f5f5f5&fontSize=90&fontAlignY=38&desc=Pro%20Sprots%20Medical%20Center&descAlignY=51" />
+    </div>
+    
+
 # PSMC(Pro Sports Medical Center) 세미프로젝트
 재활치료 전문 병원의 의사와 치료사의 원활한 소통을 위한 그룹웨어 제작 프로젝트
 
