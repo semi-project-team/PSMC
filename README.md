@@ -112,4 +112,4 @@
 
 
 ## 신경 쓴 부분
-- [예약 시간 관련 방식]([https://github.com/semi-project-team/PSMC.wiki.git](https://github.com/semi-project-team/PSMC/wiki/%EC%A7%84%EB%A3%8C-%EC%8B%9C%EA%B0%84-%EB%B0%8F-%EC%9E%AC%ED%99%9C-%EC%B9%98%EB%A3%8C%EC%8B%9C%EA%B0%84-%EC%98%88%EC%95%BD%ED%95%98%EA%B8%B0))
+- [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC.wiki.git](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
