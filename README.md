@@ -27,6 +27,22 @@
 | 김재중  | Backend | [김재중의 깃허브](https://github.com/Absensing) |
 | 조승윤  | Frontend | [조승윤의 깃허브](https://github.com/tmddbs9313) |
 
+
+## 1. 개발 환경
+- Front : HTML/CSS, javaScript, Bootstrap, Thymeleaf
+- Back : java/javaScript
+- 버전 및 이슈 관리 : Github
+- 협업 툴 : Notion
+- 서비스 배포 환경 : jar
+
+## 2. 브랜치 전략
+- 기능 별로 이름을 정하여 브랜치를 생성했습니다
+- CSS : 뷰포트의 이미지를 생성하는 기능
+- feature : CRUD 등 backend 관련 기능
+- DB : db 업데이트
+- bug : 기능에 오류 수정
+- 브랜치 별로 커밋을 한 후 충돌이 발생하지 않거나 충돌을 해결한 후 master 브랜치에 merge 하는 방식을 채택했습니다
+
 ## ✨주요 기능
 1. 진료일지(의사만 작성) - 의사와 치료사가 모두 확인할 수 있으며 일지에 대한 코멘트를 작성
 2. 치료일지(트레이너만 작성) - 의사와 치료사가 모두 확인할 수 있으며 일지에 대한 코멘트를 작성
