@@ -108,7 +108,7 @@
 
 ## ERD
 
-![최종 erd](https://github.com/semi-project-team/PSMC/assets/158137025/35283517-f0b0-406e-9682-6e46005d2fb8)
+![최종 erd](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
 
 
 ## 신경 쓴 부분
