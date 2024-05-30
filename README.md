@@ -46,51 +46,47 @@
 ## 3. 프로젝트 구조
 
 ```
-
-            psmc
-            ├─auth
-            │  ├─controller
-            │  └─model
-            ├─common
-            │  ├─exception
-            │  └─model
-            ├─configuration
-            │  └─handler
-            ├─mainPage
-            ├─mediConnect
-            ├─mypage
-            ├─staff
-            ├─theraLink
-            └─user
-
+└─psmc
+    ├─auth
+    ├─common
+    │  ├─exception
+    │  └─model
+    │      ├─dto
+    │      └─method
+    ├─configuration
+    │  └─handler
+    ├─mainPage
+    ├─mediConnect
+    ├─mypage
+    ├─staff
+    ├─theraLink
+    └─user
 ```
 
-- 충돌을 방지 하기 위해서 기능별로 패키지를 만들었고 공통으로 사용하는 것은 common 패키지 하위에 담았습니다
-
+충돌을 방지하기 위해서 기능 별로 역할을 분담하고 기능별로 패키지를 구성하였습니다
 ## 역할 분담
-#### 이호준
-- UI
-  - 페이지 : 로그인, 회원 가입, 스케쥴러, TheraLink
+
+이호준
 - 기능
   - 로그인, 아이디찾기, 비밀번호 찾기, 회원가입 약관, 회원가입 등록, 비밀번호 수정, mainpage 환자 등록, 스케쥴 작성, 식단표 작성, 스케쥴러 예약기능, theralink 블로그 생성 및 채팅 시스템
 - DB
   - DB 테이블 생성
-    
-#### 서정민
+
+서정민
 - UI
   - 페이지 : MediConnect
 - 기능
    - MediConnect 생성하기 및 채팅 시스템, mainpage 의 MediConnect 최근 업데이트 정보
 - DB
   - DB 테이블 생성
-    
-#### 조승윤
+
+조승윤
 - UI
   - 페이지 : 메인 페이지, mypage
 - 기능
   - mypage 자신의 정보 수정
 
-#### 김재중
+김재중
 - UI
   - 페이지 : Staff
 - 기능
@@ -112,8 +108,24 @@
 
 ![최종 erd](https://github.com/semi-project-team/PSMC/assets/158137025/cfc96d07-53af-481a-9f41-afe968e584c6)
 
-
+## 기능 설명
+- 첫 페이지 : 로그인, 회원가입, id 찾기, 비밀번호 찾기
+- mypage : 가입한 회원의 정보를 조회 및 수정
+- main page : 회원의 정보, 오늘의 식단표, 오늘의 스케쥴, mediconnect 과 theralink 의 최신 채팅 내용을 보여줍니다
+  - 의료진의 경우 : 새로운 환자를 등록하여 새로운 프로젝트를 생성합니다, 또한 자신의 환자에 대해서 진료 예약을 할 수 있습니다
+  - 재활 치료진의 경우 : 새로 부여받은 환자를 확인하고 재활 치료 시간을 예약할 수 있습니다
+- scheduler : 해당 날짜 또는 사용자가 선택한 날짜를 기준으로 일요일부터 월요일까지의 전체 스케쥴을 보여줍니다. 또한 일정을 수정할 수 있습니다.
+- mediconnect : 의료진에서 등록한 환자를 프로젝트 단위로 하여 프로젝트 하나당 하나의 공간을 생성하고 생성된 공간에서 할당된 재활 치료진과 의사소통을 할 수 있습니다
+  - 의료진의 경우 : 현재 환자 상태에 대해서 소견을 작성하고 할당된 재활 치료사와 의사소통을 합니다. 또한 자신의 채팅을 삭제 및 프로젝트를 종료 할 수 있습니다
+  - 재활 치료진의 경우 : 새로 부여 받은 환자에 대한 프로젝트를 확인할 수 있고 의료진의 소견을 확인하고 의견을 게시할 수 있고 또한 이에 근거하여 theralink를 생성하여 재활 치료에 관한 계획을 수립할 수 있습니다
+- theralink : 할당된 환자에 따라 자동으로 프로젝트가 생성되고 그에 따라 각각의 소통 창구가 생성됩니다
+  - 의료진의 경우 : 생성된 재활 일지를 확인하고 환자 상태에 대한 정보를 수집할 수 있고 또한 재활 치료진과 환자에 관하여 의사소통을 원할히 할 수 있습니다
+  - 재활 치료진의 경우 : 할당된 환자에 따라 프로젝트가 생성 되고 이에 따라 재활 일지를 작성하고 자신의 소견을 작성 할 수 있습니다 작성된 소견에 대하여 의사와 의사소통을 할 수 있습니다
+- staff : 기본적으로 각 분야에 해당하는 팀장 정보를 제공하여 의료 종사자 정보를 확인할 수 있습니다. 또한 전공 분야 또는 이름을 검색하여 해당 하는 의료전공자의 정보를 취득할 수 있습니다
 
 ## 신경 쓴 부분
 - [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
-- [채팅 추가하기](https://github.com/semi-project-team/PSMC/wiki/MediConnect-%EC%B1%84%ED%8C%85-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B8%B0)
+- [유사 채팅 생성](https://github.com/semi-project-team/PSMC/wiki/%EC%9C%A0%EC%82%AC-%EC%B1%84%ED%8C%85-%EA%B8%B0%EB%8A%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+- [페이징 처리](https://github.com/semi-project-team/PSMC/wiki/Paging-%EC%B2%98%EB%A6%AC)
+- [비밀번호찾기를 통한 이메일 전송](https://github.com/semi-project-team/PSMC/wiki/%EB%B9%84%EB%B0%80-%EB%B2%88%ED%98%B8-%EC%B0%BE%EA%B8%B0-%EA%B8%B0%EB%8A%A5)
+- [이미지 저장](https://github.com/semi-project-team/PSMC/wiki/%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0)
