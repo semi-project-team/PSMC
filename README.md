@@ -103,6 +103,8 @@
 - discussion 에서 할당 받은 작업에 관해 issue 탭에 자신의 issue 를 작성
 - 기능을 완수 하면 각각의 기능에 맞게 브랜치를 생성후 충돌을 모두 해결한 후 master 브랜치에 merge
 
+## ERD
+
 
 
 
