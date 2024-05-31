@@ -34,7 +34,7 @@
     </td>
     <td>
       <a href="https://github.com/Absensing">
-        <img src="https://avatars.githubusercontent.com/u/138289674?v=4" width="100" style="max-width: 100%;">
+        <img src="https://avatars.githubusercontent.com/u/138289?v=4" width="100" style="max-width: 100%;">
       </a>
     </td>
     <td>
