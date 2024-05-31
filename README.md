@@ -20,14 +20,50 @@
 
 ## 팀 구성원 및 역할
 
-| 이름    | 역할         | 깃허브 주소                   |
-|---------|--------------|-------------------------------|
-| 이호준  | 팀장 | [이호준의 깃허브](https://github.com/comaserious) |
-| 서정민  | Backend | [서정민의 깃허브](https://github.com/wjdals83) |
-| 김재중  | Backend | [김재중의 깃허브](https://github.com/Absensing) |
-| 조승윤  | Frontend | [조승윤의 깃허브](https://github.com/tmddbs9313) |
-
-
+<table>
+  <tr>
+    <td>
+      <a href="https://github.com/syy0O">
+        <img src="https://avatars.githubusercontent.com/u/86238720?v=4" width="100" style="max-width: 100%;">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/SihyunSeo">
+        <img src="https://avatars.githubusercontent.com/u/63051137?v=4" width="100" style="max-width: 100%;">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/xeunnie">
+        <img src="https://avatars.githubusercontent.com/u/138289674?v=4" width="100" style="max-width: 100%;">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/subi930">
+        <img src="https://avatars.githubusercontent.com/u/125132754?v=4" width="100" style="max-width: 100%;">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/comaserious">이호준</a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/wjdals83">서정민</a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Absensing">김재중</a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/tmddbs9313">조승윤</a>
+    </td>
+  </tr>
+    <tr>
+        <td>팀장</td>
+        <td>Backend</td>
+        <td>Backend</td>
+        <td>Frontend</td>
+    </tr>
+</table>
 ## 1. ✔개발 환경
 - Front : HTML/CSS, javaScript, Bootstrap, Thymeleaf
 - Back : java/javaScript
@@ -125,7 +161,7 @@
 - staff : 기본적으로 각 분야에 해당하는 팀장 정보를 제공하여 의료 종사자 정보를 확인할 수 있습니다. 또한 전공 분야 또는 이름을 검색하여 해당 하는 의료전공자의 정보를 취득할 수 있습니다
 
 ## 신경 쓴 부분
-- [예약 시간 관련 방식](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
+- [예약 및 수정 시간 관련 방식](https://github.com/semi-project-team/PSMC/wiki/진료-시간-및-재활-치료시간-예약하기)
 - [유사 채팅 생성](https://github.com/semi-project-team/PSMC/wiki/%EC%9C%A0%EC%82%AC-%EC%B1%84%ED%8C%85-%EA%B8%B0%EB%8A%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
 - [페이징 처리](https://github.com/semi-project-team/PSMC/wiki/Paging-%EC%B2%98%EB%A6%AC)
 - [비밀번호찾기를 통한 이메일 전송](https://github.com/semi-project-team/PSMC/wiki/%EB%B9%84%EB%B0%80-%EB%B2%88%ED%98%B8-%EC%B0%BE%EA%B8%B0-%EA%B8%B0%EB%8A%A5)
