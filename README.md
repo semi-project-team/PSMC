@@ -183,7 +183,7 @@
 
 ![6](https://github.com/semi-project-team/PSMC/assets/158137025/5b87fa34-8d14-488e-9a77-94a065bfa0b3)
 
-- 첫 페이지 : 로그인, 회원가입, id 찾기, 비밀번호 찾기
+
 - mypage : 가입한 회원의 정보를 조회 및 수정
 - main page : 회원의 정보, 오늘의 식단표, 오늘의 스케쥴, mediconnect 과 theralink 의 최신 채팅 내용을 보여줍니다
   - 의료진의 경우 : 새로운 환자를 등록하여 새로운 프로젝트를 생성합니다, 또한 자신의 환자에 대해서 진료 예약을 할 수 있습니다
