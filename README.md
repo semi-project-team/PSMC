@@ -20,7 +20,7 @@
 
 ## 팀 구성원 및 역할
 
-<table>
+<table align="center">
   <tr>
     <td>
       <a href="https://github.com/comaserious">
@@ -58,10 +58,10 @@
     </td>
   </tr>
     <tr>
-        <td>팀장</td>
-        <td>Backend</td>
-        <td>Backend</td>
-        <td>Frontend</td>
+        <td align="center">팀장</td>
+        <td align="center">Backend</td>
+        <td align="center">Backend</td>
+        <td align="center">Frontend</td>
     </tr>
 </table>
 
