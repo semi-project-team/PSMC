@@ -23,22 +23,22 @@
 <table>
   <tr>
     <td>
-      <a href="https://github.com/syy0O">
+      <a href="https://github.com/comaserious">
         <img src="https://avatars.githubusercontent.com/u/86238720?v=4" width="100" style="max-width: 100%;">
       </a>
     </td>
     <td>
-      <a href="https://github.com/SihyunSeo">
+      <a href="https://github.com/wjdals83">
         <img src="https://avatars.githubusercontent.com/u/63051137?v=4" width="100" style="max-width: 100%;">
       </a>
     </td>
     <td>
-      <a href="https://github.com/xeunnie">
+      <a href="https://github.com/Absensing">
         <img src="https://avatars.githubusercontent.com/u/138289674?v=4" width="100" style="max-width: 100%;">
       </a>
     </td>
     <td>
-      <a href="https://github.com/subi930">
+      <a href="https://github.com/tmddbs9313">
         <img src="https://avatars.githubusercontent.com/u/125132754?v=4" width="100" style="max-width: 100%;">
       </a>
     </td>
