@@ -164,6 +164,22 @@
 
 
 ## 기능 설명
+
+### 1. 첫페이지
+
+![1](https://github.com/semi-project-team/PSMC/assets/158137025/17b1888e-8225-40f8-96ae-afe6f1f3e492)
+
+### 2. 회원 가입
+
+![2](https://github.com/semi-project-team/PSMC/assets/158137025/66003d3e-d026-4e6c-998e-34ad6eeb4751)
+
+![3](https://github.com/semi-project-team/PSMC/assets/158137025/193a7574-8f98-45bd-b347-74298fa2fe8c)
+
+![4](https://github.com/semi-project-team/PSMC/assets/158137025/c16b8ea0-8585-49be-ae6b-3ffb0db18459)
+
+### 3. 아이디 찾기 및 비밀번호 찾기
+
+
 - 첫 페이지 : 로그인, 회원가입, id 찾기, 비밀번호 찾기
 - mypage : 가입한 회원의 정보를 조회 및 수정
 - main page : 회원의 정보, 오늘의 식단표, 오늘의 스케쥴, mediconnect 과 theralink 의 최신 채팅 내용을 보여줍니다
