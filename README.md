@@ -106,7 +106,8 @@
 
 ## ERD
 
-![최종 erd](https://github.com/semi-project-team/PSMC/assets/158137025/cfc96d07-53af-481a-9f41-afe968e584c6)
+![asdadfasdfdsaf](https://github.com/semi-project-team/PSMC/assets/158137025/622cefcb-b247-41fd-8d21-5261461ce243)
+
 
 ## 기능 설명
 - 첫 페이지 : 로그인, 회원가입, id 찾기, 비밀번호 찾기
