@@ -179,6 +179,9 @@
 
 ### 3. 아이디 찾기 및 비밀번호 찾기
 
+![11](https://github.com/semi-project-team/PSMC/assets/158137025/5dad0898-c879-4e98-b5e1-fe1d31c1315d)
+
+![6](https://github.com/semi-project-team/PSMC/assets/158137025/5b87fa34-8d14-488e-9a77-94a065bfa0b3)
 
 - 첫 페이지 : 로그인, 회원가입, id 찾기, 비밀번호 찾기
 - mypage : 가입한 회원의 정보를 조회 및 수정
