@@ -29,7 +29,7 @@
     </td>
     <td>
       <a href="https://github.com/wjdals83">
-        <img src="https://avatars.githubusercontent.com/u/63051137?v=4" width="100" style="max-width: 100%;">
+          <img src="https://avatars.githubusercontent.com/u/138289674?v=4" width="100" style="max-width: 100%;">
       </a>
     </td>
     <td>
@@ -39,7 +39,7 @@
     </td>
     <td>
       <a href="https://github.com/tmddbs9313">
-        <img src="https://avatars.githubusercontent.com/u/125132754?v=4" width="100" style="max-width: 100%;">
+          <img src="https://avatars.githubusercontent.com/u/86238720?v=4" width="100" style="max-width: 100%;">
       </a>
     </td>
   </tr>
