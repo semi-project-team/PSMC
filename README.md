@@ -133,15 +133,30 @@
 - 오류 테스트
 
 ## 📅프로젝트 기간
--  전체 개발 기간 : 2024.04.25 ~ 2024.06.03
-- DB 작성 : 2024.04.25 ~ 2024.05.02
-- UI 구현 : 2024.05.03 ~ 2024.05.23
-- 기능 구현 : 2024.05.04 ~ 2024.05.30
+
+<table>
+    <tr>
+        <th>전체 개발 기간</th>
+        <td>2024.04.25 ~ 2024.06.02</td>
+    </tr>
+    <tr>
+        <th>DB 작성</th>
+        <td>2024.04.25 ~ 2024.05.02</td>
+    </tr>
+    <tr>
+        <th>UI 구현</th>
+        <td>2024.05.03 ~ 2024.05.23</td>
+    </tr>
+    <tr>
+        <th>기능 구현</th>
+        <td>2024.05.04 ~ 2024.05.30</td>
+    </tr>
+</table>
 
 ## 작업관리
-- github 의 discussion 에 해당 일에 해야할 일을 작성
-- discussion 에서 할당 받은 작업에 관해 issue 탭에 자신의 issue 를 작성
-- 기능을 완수 하면 각각의 기능에 맞게 브랜치를 생성후 충돌을 모두 해결한 후 master 브랜치에 merge
+1. [discussion 을 통해 팀 전체적으로 오늘 할 일을 정합니다](https://github.com/semi-project-team/PSMC/discussions)
+2. [disscussion 을 통해 할당 받은 오늘의 과업에 대해 issue를 작성합니다](https://github.com/semi-project-team/PSMC/issues)
+3. [기능을 완수하면 각각의 기능에 맞게 브랜치를 생성후 충돌을 모두 해결한 후 master 브랜치에 merge ](https://github.com/semi-project-team/PSMC/pulls?q=is%3Apr+is%3Aclosed)
 
 ## ERD
 
