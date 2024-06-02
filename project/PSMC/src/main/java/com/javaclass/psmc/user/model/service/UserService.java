@@ -307,6 +307,10 @@ public class UserService {
         return userMapper.showFourThera(sender);
     }
 
+    public EmployeeDTO makeEmployeeDTOByPmCode(String pmCode) {
+        return userMapper.makeEmployeeDTOByPmCode(pmCode);
+    }
+
 //    public List<TheraToProDTO> todayThera(Map<String, Object> param) {
 //    }
 }

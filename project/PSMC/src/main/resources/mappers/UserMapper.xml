@@ -1293,4 +1293,12 @@
         values(#{employeeOriginName},#{employeeSavedName},#{employeeFilepath},'Y',#{pmCode})
     </insert>
 
+    <select id="makeEmployeeDTOByPmCode" resultMap="employeeMap" parameterType="string">
+        select
+            *
+        from
+            employee
+        where
+            pm_code = #{pmCode}
+    </select>
 </mapper>

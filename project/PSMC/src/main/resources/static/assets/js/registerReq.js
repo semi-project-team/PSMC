@@ -6,6 +6,8 @@ const $idCheck = document.getElementById('idcheck');
 const $dupliFail = document.getElementById('dupliFail');
 const $dupliOk = document.getElementById('dupliOk');
 const $checker = document.getElementById('checker');
+
+
 $userId.addEventListener('input', function() {
     const value = $userId.value;
     $dupliFail.style.display='none';
@@ -143,20 +145,30 @@ $email.addEventListener('input',e=>{
 
 
 
-const $name = document.getElementById('name')
+const $name = document.getElementById('name');
+const $nameMessage = document.getElementById('nameMessage');
 $name.addEventListener('input',e=>{
 
-    if($name.value){
-        check[3]=true;
-    }
-    else{
-        check[3]=false;
-    }
-    checking();
+    fetch("/member/employee")
+        .then(res=>res.json())
+        .then(data=>{
+            console.table(data);
+
+            if($name.value == data.name){
+                check[3]=true;
+                $nameMessage.style.display='none';
+            }else{
+                $nameMessage.style.display='block';
+                check[3]=false;
+            }
+
+            checking();
+        })
 });
 
 
 const $birth= document.getElementById('birth');
+const $birthMessage = document.getElementById('birthMessage');
 document.addEventListener('click',e=>{
     const value = $birth.value;
     if(value){
@@ -209,55 +221,8 @@ function checking(){
     }
 };
 
-// 아이디 중복 확인
 
-// const $idChecker = document.getElementById('idcheck');
-// const $idCheckFail = document.getElementById('dupliFail');
-// const $idCheckOk = document.getElementById('dupliOk');
-// $idChecker.addEventListener('click',function(){
 
-    // fetch("/allMember")
-    // .then(res=>res.json)
-    // .then(data=> {
-    //     data.forEach(element => {
-    //         if (element === $userId) {
-    //             console.log('여긴')
-    //             $idCheckFail.style.display = 'block'
-    //             $idCheckOk.style.display = 'none'
-    //             return;
-    //         } else {
-    //             $idCheckFail.style.display = 'none'
-    //             $idCheckOk.style.display = 'block'
-    //         }
-    //     })
-    // });
-
-// const $idCheck = document.getElementById('idcheck');
-// const $dupliFail = document.getElementById('dupliFail');
-// const $dupliOk = document.getElementById('dupliOk');
-// $idCheck.addEventListener('click',function(){
-//     fetch('/member/find')
-//         .then(res=>res.json())
-//         .then(data=>{
-//             for(let i =0; i<data.length;i++){
-//                 const value = $userId.value;
-//                 if(data[i].id==value){
-//                     console.log("실패");
-//                     $dupliFail.style.display='block';
-//                     $dupliOk.style.display='none';
-//                     check[0]=false;
-//                     break;
-//
-//                 }else{
-//                     console.log("성공");
-//                     $dupliOk.style.display='block';
-//                     $dupliFail.style.display='none';
-//                     check[0]=true;
-//                 }
-//             }
-//             checking();
-//         })
-// })
 
 
 

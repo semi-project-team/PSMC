@@ -11,7 +11,7 @@ inputImage.addEventListener('change',e=>{
         reader.onload = function(e){
             const imagePreview = document.getElementById('imagePreview');
             if(imagePreview){
-                imagePreview.innerHTML = `<img src=${e.target.result} alt="/common/img/employeeProfile.png" class="circle-image">`
+                imagePreview.innerHTML = `<img src=${e.target.result} alt="이미지 업로드 중입니다 잠시만 기다려 주세요" class="circle-image">`
             }
         };
         reader.readAsDataURL(file);

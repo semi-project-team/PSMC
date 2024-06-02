@@ -560,6 +560,12 @@ input[type=date]::-webkit-datetime-edit-year-field {
     font-weight: bold;
     display: none;
 }
+#nameMessage{
+    font-size: small;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
 
 /* 중복확인 버튼 */
 #idcheck {

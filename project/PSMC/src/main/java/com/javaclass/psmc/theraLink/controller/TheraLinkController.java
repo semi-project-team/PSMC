@@ -81,6 +81,11 @@ public class TheraLinkController {
 
         List<MyPatientDTO> myPatients = userService.myPatient(sender);
 
+        int totalData = myPatients.size();
+        int totalPage = (int)(Math.ceil(totalData/5.0));
+        if(totalPage==0){
+            totalPage=1;
+        }
 
         sender.put("pageNo",(pageNo-1)*5);
 
@@ -95,11 +100,7 @@ public class TheraLinkController {
 
         model.addAttribute("patients",myPatientLimit);
 
-        int totalData = myPatients.size();
-        int totalPage = (int)(Math.ceil(totalData/5.0));
-        if(totalPage==0){
-            totalPage=1;
-        }
+
         model.addAttribute("totalData",totalData);
         model.addAttribute("totalPage",totalPage);
 
