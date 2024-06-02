@@ -75,9 +75,7 @@ public class MediConnectController {
     @PostMapping("/deleteBtn")
     public String deleteBoard(@RequestParam("postCheckbox") List<Integer> postCheckbox, HttpSession session) {
 
-        for(Integer i : postCheckbox){
-            System.out.println("i 값확실 : "+i);
-        }
+
 
         Map<String,List<Integer>> paramPost = new HashMap<>();
         paramPost.put("post", postCheckbox);
@@ -92,9 +90,7 @@ public class MediConnectController {
     @PostMapping("/deleteChatBtn")
     public String deleteChat(@RequestParam("postCheckbox") List<Integer> postCheckbox, HttpSession session) {
 
-        for(Integer i : postCheckbox) {
-            System.out.println("i 값 확인 :" + i);
-        }
+
 
         Map<String, List<Integer>> param = new HashMap<>();
         param.put("chatNo", postCheckbox);
@@ -128,7 +124,7 @@ public class MediConnectController {
         session.setAttribute("mediNo", mediNo);
 
         EmployeePhotoDTO employeePhotoDTO = mediConnectService.findEmployeeByPmCode(pmCode);
-        System.out.println("employeePhotoDTO dddddddd= " + employeePhotoDTO);
+
         if(!Objects.isNull(employeePhotoDTO)){
 
         model.addAttribute("profile", employeePhotoDTO);

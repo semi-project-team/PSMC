@@ -62,10 +62,7 @@ public class ProjectsController {
     @PostMapping("/deleteProjectBtn")
     public String deleteProjects(@RequestParam("projectCheckbox") List<Integer> projectCheckbox) {
 
-        System.out.println("delete 여기");
-        for(Integer i : projectCheckbox){
-            System.out.println("i 값 확인 : " + i);
-        }
+
 
         Map<String, List<Integer>> projectParam = new HashMap<>();
         projectParam.put("project", projectCheckbox);

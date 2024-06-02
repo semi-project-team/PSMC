@@ -50,8 +50,7 @@ findIdButton.addEventListener('click',e=>{
         })
     }).then(res=>res.json())
         .then(data=>{
-            console.table(data);
-            console.log(data.userId);
+
             userId.value = data.userId;
         })
 

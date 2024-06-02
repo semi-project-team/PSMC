@@ -48,8 +48,7 @@ public class ChangeController {
         String id = changePassWordDTO.getUserId();
         String checkid = loginUserDTO.getId();
 
-        System.out.println("id = " + id);
-        System.out.println("checkid = " + checkid);
+
         if(!id.equals(checkid)){
             session.setAttribute("message","아이디가 일치 하지 않습니다");
             return "redirect:/change";

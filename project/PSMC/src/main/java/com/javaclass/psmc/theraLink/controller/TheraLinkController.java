@@ -329,9 +329,7 @@ public class TheraLinkController {
                     file.mkdirs(); // 디렉토리 생성
                 }
             }
-//            String filepath = new File("src/main/resources/" + uploadDir).getAbsolutePath();
-//
-//            System.out.println("filepath = " + filepath);
+
 
             List<TheraLinkPhotoDTO> theraLinkPhotoDTOS = new ArrayList<>();
             List<String> saveFiles = new ArrayList<>();
