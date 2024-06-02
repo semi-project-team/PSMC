@@ -124,4 +124,6 @@ public interface UserMapper {
     List<MiniMediConnectDTO> showFourMedi(Map<String, Object> sender);
 
     List<MiniTheraLinkDTO> showFourThera(Map<String, Object> sender);
+
+    EmployeeDTO makeEmployeeDTOByPmCode(String pmCode);
 }

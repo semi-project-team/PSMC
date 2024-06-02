@@ -79,5 +79,12 @@ public class RegisterController {
     @GetMapping("/term")
     public void term(){}
 
+    @GetMapping(value="/employee",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public EmployeeDTO getEmployee(HttpSession session){
+        String pmCode = (String) session.getAttribute("pmCode");
+        EmployeeDTO employeeInfo = userService.makeEmployeeDTOByPmCode(pmCode);
+        return employeeInfo;
+    }
 
 }

@@ -185,6 +185,7 @@ public class AuthController {
             }
             else{
 
+                httpSession.setAttribute("pmCode",pmCode);
                 return "redirect:/member/registerReq";
             }
 
