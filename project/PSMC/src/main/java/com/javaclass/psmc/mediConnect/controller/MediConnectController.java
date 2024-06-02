@@ -51,7 +51,7 @@ public class MediConnectController {
 
         model.addAttribute("boards", boards);
 
-        return "/medi/mediConnect";
+        return "medi/mediConnect";
     }
 
     @GetMapping("/medi/mediConnect/{projectNo}")
