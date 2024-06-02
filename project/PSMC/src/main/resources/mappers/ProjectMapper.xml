@@ -114,7 +114,9 @@
         where
             a.project_no = #{projectNo}
             and
-            a.medi_status = 'Y';
+            a.medi_status = 'Y'
+        order by
+            a.medi_board_date desc
     </select>
 
     <insert id="registNewMedi" parameterType="hashmap"
