@@ -45,8 +45,6 @@ public class ProjectsController {
         }
 
         List<NewProjectShowDTO> projects = projectsService.showNewProjects(param);
-//        List<ShowAllProjectsDTO> projects = projectsService.showAllProjects(pmCode);
-//        session.setAttribute("projectList", projects);
         session.setAttribute("projectList", projects);
 
 
@@ -76,8 +74,5 @@ public class ProjectsController {
 
         return "redirect:/MediConnect";
     }
-
-//    @GetMapping("/doc/projects")
-//    public void returnProjects() {}
 
 }

@@ -192,10 +192,9 @@ public class MediConnectController {
 
         int registMedi = mediConnectService.registNewMedi(param);
 
+        String message = null;
+
         return "redirect:/medi/mediConnect/" + projectNo;
     }
-
-//    @PostMapping
-//    public ShowMediConnectDTO
 
 }

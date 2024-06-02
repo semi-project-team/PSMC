@@ -357,8 +357,6 @@
                     <th:block th:if="${profile == null}">
                         <img src="/common/img/no-profile.png" class="circle-image mr-2 rounded" width="32" height="32">
                     </th:block>
-<!--                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"-->
-<!--                         height="32"> -->
                     <p id="pmCodeName" th:value="${pmCode}" th:text="'@' + ${employeeDetail.name}"></p>
                 </div>
                 <div class="card-body">
@@ -389,16 +387,6 @@
                             </a>
                         </th:block>
                         <div class="list-one" th:each="chat : ${mediChatDetail}">
-<!--                            <th:block th:if="${chat == 0}">-->
-<!--                                <a href="#" class="list-group-item list-group-item-action" aria-current="true"-->
-<!--                                   data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-<!--                                    <div class="commentCard">-->
-<!--                                        <div class="d-flex w-100 justify-content-between">-->
-<!--                                            <h5 class="mb-1">채팅 시작하기</h5>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </a>-->
-<!--                            </th:block>-->
                             <th:block th:if="${chat.pmCode == pmCode}">
                                 <input type="checkbox" name="postCheckbox" th:value="${chat.chatNo}" onchange="toggleDeleteButton()">
                             </th:block>
@@ -427,8 +415,6 @@
             </form>
         </div>
 
-
-        <!-- 모달창 --->
         <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
@@ -439,7 +425,6 @@
                     <div class="modal-body">
                         <div class="chat-container">
                             <div class="message-container">
-                                <!-- 채팅 추가 -->
                             </div>
                         </div>
                     </div>
@@ -455,7 +440,6 @@
     </div>
 
     <script>
-
 
         document.addEventListener('DOMContentLoaded', () => {
             const dateElements = document.querySelectorAll('.mediBoardDate, .mediChatBoardDate');
@@ -609,7 +593,6 @@
                 deleteButton.style.display='none';
             }
         }
-
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

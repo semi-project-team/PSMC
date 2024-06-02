@@ -11,7 +11,7 @@ table {
 }
 
 section {
-    margin-left: 15%;
+    margin-left: 10%;
     margin-top: 1%;
 }
 
@@ -172,6 +172,7 @@ section.notice {
 .btn-dark {
     background: #555;
     color: #fff;
+    border-radius: 5px;
 }
 
 .btn-dark:hover, .btn-dark:focus {
@@ -209,25 +210,16 @@ section.notice {
 
 /* 새로운 버튼 색상과 위치 스타일 */
 
-.btn-light {
-    background-color: #007bff; /* 파란색 */
-    color: #fff;
-}
-
 .btn-light:hover, .btn-light:focus {
     background-color: #0056b3; /* 호버 시 어두운 파란색 */
     border-color: #0056b3;
+    color: white;
 }
 
 /* 새로운 버튼 색상과 위치 스타일 */
 .btn-light {
     background-color: #007bff; /* 파란색 */
     color: #fff;
-}
-
-.btn-light:hover, .btn-light:focus {
-    background-color: #0056b3; /* 호버 시 어두운 파란색 */
-    border-color: #0056b3;
 }
 
 .form-container {
@@ -285,7 +277,8 @@ section.notice {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     background-color: rgba(0,0,0,0.4);
 }
 
@@ -297,13 +290,19 @@ section.notice {
     width: 70%; /* 팝업 너비를 조정 */
     max-width: 700px; /* 최대 너비 설정 */
     text-align: center; /* 내용 가운데 정렬 */
-    margin-right: 25%; /* 오른쪽 마진 설정 */
+    transform: translateY(-10%);
 }
 
 /* 작성하기, 취소하기 버튼 스타일 */
 .modal-content .btn {
     width: 48%; /* 버튼 너비를 조정 */
     margin: 5px; /* 버튼 간격 조정 */
+    border-radius: 5px;
+    color: black;
+}
+
+.modal-content .btn:hover{
+    color: white;
 }
 
 /* 닫기 버튼 스타일 */
