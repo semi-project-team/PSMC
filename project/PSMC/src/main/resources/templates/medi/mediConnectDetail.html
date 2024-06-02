@@ -472,7 +472,7 @@
 
             const $messageContainer = document.querySelector(".message-container");
             $messageContainer.textContent="";
-            const maxLength = 26; // 예시로 50자로 설정
+            const maxLength = 26;
             data.forEach(chat => {
                 const date = chat.mediChatBoardDate.toString().split("T");
                 const day = date[0];
@@ -485,7 +485,7 @@
                 }
                 const $chat = document.createElement("div");
                 if (chat.pmCode === $pmCode) {
-                    // 수신 메시지 스타일
+                    // 본인 메시지 스타일
                     $chat.classList.add('plusDate', 'receiver-messages');
                     $chat.innerHTML = `
             <div class="plusDate receiver-messages">
@@ -497,7 +497,7 @@
                 </div>
             </div>`;
                 } else {
-                    // 발신 메시지 스타일
+                    // 상대방 메시지 스타일
                     $chat.classList.add('plusDate', 'sender-messages');
                     const senderName = chat.employeeDTO.name;
                     const shortenedSenderName = senderName.length > 2 ? senderName.substring(senderName.length - 2) : senderName;
