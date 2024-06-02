@@ -18,7 +18,6 @@ function toggleDeleteButton() {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const dateElements = document.querySelectorAll('.mediBoardDate');
     dateElements.forEach(el => {
@@ -54,4 +53,3 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
