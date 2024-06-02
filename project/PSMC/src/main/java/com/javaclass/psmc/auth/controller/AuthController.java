@@ -55,7 +55,7 @@ public class AuthController {
         /*권한 정보 불러오기*/
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AuthDetails authDetails = (AuthDetails) authentication.getPrincipal();
-        System.out.println("authDetails = " + authDetails);
+
 
         /*권한 정보 session 에 저장하기*/
         session.setAttribute("auth",authDetails.getLoginUserDTO());
@@ -65,10 +65,10 @@ public class AuthController {
         String pmCode = authDetails.getLoginUserDTO().getPmCode();
         String role = String.valueOf(pmCode.charAt(0));
         if(role.equals("d")){
-            System.out.println("d가 맞아");
+
             sender.put("role","doctor");
         }else{
-            System.out.println("d가 아니야?");
+
             sender.put("role","thera");
         }
         model.addAttribute("role",role);
@@ -76,7 +76,7 @@ public class AuthController {
 
         /*mainpage profile 정보 받아오기*/
         ProfileDTO profileDTO = userService.findEmployeeByPmCode(pmCode);
-        System.out.println(profileDTO);
+
         model.addAttribute("profile",profileDTO);
 
         /*모달 페이지 용 injury db 불러오기*/
@@ -101,11 +101,11 @@ public class AuthController {
 
         /*Today schedule 보여주기*/
         LocalDate today = LocalDate.now();
-        System.out.println("today = " + today);
+
         sender.put("today",today);
 
         int day = userService.findDayNo(today.toString());
-        System.out.println("day = " + day);
+
         menuHandling.setDay(day);
         menuHandling.setDate(today);
 
@@ -119,9 +119,9 @@ public class AuthController {
             List<ProjectsDTO> projects = userService.mediToday(sender);
             if(projects!=null) {
                 for (ProjectsDTO p : projects) {
-                    System.out.println("p가 왜 하나냐"+p);
+
                     p.setTime(timePlus30.timeFormat(String.valueOf(p.getResTimeDTOS().getTimeVal())));
-                    System.out.println("projects 하나 = " + p);
+
                 }
             }
 
@@ -129,7 +129,7 @@ public class AuthController {
 
         }else{
             List<TheraProjectDTO> projects = userService.theraToday(sender);
-            System.out.println("projects tttt = " + projects);
+
             model.addAttribute("projects",projects);
         }
 
@@ -140,7 +140,7 @@ public class AuthController {
         }
 
         model.addAttribute("patient",objectMapper.writeValueAsString(mypatients));
-        System.out.println("mypatients = " + mypatients);
+
 
         String message = (String) session.getAttribute("reservationMessage");
         StringBuilder messages = (StringBuilder) session.getAttribute("messages");
@@ -169,7 +169,7 @@ public class AuthController {
         param.put("pmCode",pmCode);
         param.put("empNo",empNo);
         List<EmployeeDTO> employee = userService.findMember(param);
-        System.out.println("takeCode 여기");
+
         if(employee.isEmpty()){
             httpSession.setAttribute("message","잘못된 코드입니다. 코드를 확인하세요");
             return "redirect:/member/takeCode";

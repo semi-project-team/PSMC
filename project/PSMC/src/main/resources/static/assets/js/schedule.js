@@ -20,7 +20,7 @@ const day7 =document.getElementById('day7').firstElementChild;
 fetch("/setSchedule")
     .then(res=>res.json())
     .then(data=>{
-        console.table(data);
+
         let day = data.startDay;
         date[0].textContent=day;
         for(let i =1; i<date.length ; i++){
@@ -71,7 +71,7 @@ fetch("/setSchedule")
         }
         else if('tschedule' in data){
             data.tschedule.forEach(t=>{
-                console.table(t);
+
                 const dayNum = t.day;
                 const theraDate = t.theraDate;
                 const theraCode = t.theraCode;
@@ -140,7 +140,7 @@ fetch("/setSchedule")
                 $date.value=date;
                 $delete.style.display='block';
                 const timeRange = b.parentElement.previousElementSibling.textContent;
-                console.log(timeRange);
+
                 if(val=="none"){
                    const startTime = timeRange.split("-")[0].trim();
                    const endTime = timeRange.split("-")[1].trim();
@@ -165,7 +165,7 @@ fetch("/alltime")
 
             let projects = [];
             data.times.forEach(t => {
-                console.table(t);
+
                 if(data.pmCode.charAt(0)=='d'){
                     t.mItoProDTOS.forEach(m => {
                         const p = m.connectProjectDTO.projectNo;
@@ -195,12 +195,12 @@ fetch("/alltime")
     })
 
 function doDate(dating,projectNo){
-    console.log('date 들어옮');
+
     let times = [];
     fetch("/allProjects")
         .then(res=>res.json())
         .then(data=>{
-            console.table(data);
+
 
 
             if(data.role == "doctor") {
@@ -236,15 +236,12 @@ function doDate(dating,projectNo){
 
                 })
                 data.allThera.forEach(thera=>{
-                    console.table(thera);
-                    console.log('thera 들어옴');
-                    console.log(projectNo);
+
                     if(data.role == "doctor") {
                         if (thera.projectNo == projectNo) {
-                            console.log('project no 맞음')
+
                             thera.theraInfoDTOS.forEach(info => {
                                 if (info.theraDate == dating) {
-                                    console.log('thera 날짜도 맞음')
                                     const startTime = info.start;
                                     const endTime = info.end;
 

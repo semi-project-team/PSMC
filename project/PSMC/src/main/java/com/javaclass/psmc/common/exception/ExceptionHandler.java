@@ -16,7 +16,7 @@ public class ExceptionHandler {
         String noDate = "날짜를 입력하세요";
         request.setAttribute("url",request.getRequestURI());
         request.setAttribute("message",noDate);
-        System.out.println("오류 발생");
+
 
         return "forward:/error/date";
 

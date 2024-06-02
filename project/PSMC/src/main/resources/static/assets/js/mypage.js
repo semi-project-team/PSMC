@@ -24,7 +24,7 @@ inputImage.addEventListener('change',e=>{
             body: formData
         }).then(res=>res.json())
             .then(data=>{
-                console.table(data);
+
             })
     }
 })

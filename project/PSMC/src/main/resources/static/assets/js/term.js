@@ -53,7 +53,7 @@ $checkAll.addEventListener('click', e => {
 function checkNextButton() {
     const $next = document.getElementById('nextPage');
     if (agree.every(agreed => agreed) && agreeAll) { // 모든 agree가 true이고 agreeAll도 true인 경우
-        console.log('왔니');
+
         $next.style.pointerEvents='auto';
         $next.disabled = false;
         $next.style.opacity=1;

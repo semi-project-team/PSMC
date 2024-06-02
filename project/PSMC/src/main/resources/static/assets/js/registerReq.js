@@ -152,7 +152,7 @@ $name.addEventListener('input',e=>{
     fetch("/member/employee")
         .then(res=>res.json())
         .then(data=>{
-            console.table(data);
+
 
             if($name.value == data.name){
                 check[3]=true;
@@ -172,7 +172,8 @@ const $birthMessage = document.getElementById('birthMessage');
 document.addEventListener('click',e=>{
     const value = $birth.value;
     if(value){
-        console.log(value);
+
+
 
         check[4]=true;
     }

@@ -38,7 +38,7 @@ public class RegisterController {
     @GetMapping("/takeCode")
     public void stepTwo(HttpSession session,Model model){
             model.addAttribute("message",session.getAttribute("message"));
-        System.out.println("여기로 왔는가"+session.getAttribute("message"));
+
            session.removeAttribute("message");
 
     }
@@ -49,7 +49,7 @@ public class RegisterController {
     @PostMapping("/signup")
     public ModelAndView signup(@ModelAttribute SignupDTO signup, ModelAndView mv, HttpSession session){
         EmployeeDTO e = (EmployeeDTO) session.getAttribute("employeeInfo");
-        System.out.println(e);
+
         signup.setPmCode(e.getPmCode());
         signup.setRole(e.getPmCode().charAt(0)+"");
 
