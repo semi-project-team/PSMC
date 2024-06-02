@@ -89,6 +89,14 @@ public class AuthController {
         model.addAttribute("miniMedi", miniMedi);
 
         List<MiniTheraLinkDTO> miniThera = userService.showFourThera(sender);
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        if(!miniThera.isEmpty()){
+            for(MiniTheraLinkDTO t : miniThera){
+                t.setTransDate(t.getChatBoardDate().format(formatter1));
+            }
+        }
+
         model.addAttribute("miniThera",miniThera);
 
         /*Today schedule 보여주기*/

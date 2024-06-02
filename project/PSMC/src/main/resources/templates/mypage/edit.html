@@ -24,7 +24,7 @@
 
             <div class="mb-3 px-2">
                 <label for="id">ID</label>
-                <input name="id" type="text" class="form-control" id="id" th:value="${profile.memberRegistDTO.id}" readonly>
+                <input name="id" type="text" class="form-control" id="id" th:value="${profile.memberRegistDTO.id}">
             </div>
 
             <div class="mb-3 px-2">
@@ -57,10 +57,12 @@
                 <div class="col">
                     <label for="phone">Phone</label>
                     <input name="phone" type="text" class="form-control" id="phone" th:value="${profile.employeeDTO.phone}">
+                    <div>"-" 를 빼고 입력해주세요</div>
                 </div>
                 <div class="col">
                     <label for="officeNum">Office Number</label>
                     <input name="officeNum" type="text" class="form-control" id="officeNum" th:value="${profile.employeeDTO.officeNum}">
+                    <div>"-" 를 빼고 입력해주세요</div>
                 </div>
             </div>
 

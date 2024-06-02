@@ -285,8 +285,11 @@ function makeChatting(data,theraLinkNo){
 
     $sendingMessage.value='';
     $sendingMessage.value = theraLinkNo;
+
     if(data.theraChatForBlogDTOS!=null) {
         data.theraChatForBlogDTOS.forEach(t => {
+
+
             if(t.theraChatStatus==='Y') {
                 const date = t.theraChatBoardDate.toString().split("T")
                 const day = date[0];
@@ -342,7 +345,7 @@ function makeChatting(data,theraLinkNo){
                     else{
                         $chat.classList.add('chat-message-left', 'pb-4');
                         $chat.innerHTML = `<div>
-                                            <img src="t.employeeFilepath" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <img src="${t.employeeFilepath}" class="rounded-circle mr-1" alt="이미지 없음" width="40" height="40">
                                              <div class="text-muted small text-nowrap mt-2">${day}<br>${time}</div>
                                          </div>
                                          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
@@ -463,6 +466,7 @@ $chatDeleteButton.addEventListener('click',e=>{
             })
         }).then(res => res.json())
             .then(data => {
+
 
                 makeChatting(data, theraNum)
             })

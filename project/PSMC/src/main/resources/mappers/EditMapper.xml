@@ -58,6 +58,7 @@
         member_regist
         <set>
             <if test="email != null">email=#{email}</if>
+            <if test="id !=null">,id = #{id}</if>
         </set>
         where pm_code = #{pmCode}
     </update>

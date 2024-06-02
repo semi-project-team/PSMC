@@ -401,7 +401,7 @@
                 <div class="title2">TheraLink</div>
                 <div class="button-bar" th:each="t : ${miniThera}">
                     <th:block th:if="t.chatNo!=0">
-                        <button class="button-6"><a th:href="@{|/theraLink/open/${t.projectNo}/1|}" th:text="|내역 ${t.projectNo}. ${t.patientName} ${t.theraChatContent} ${t.chatBoardDate}|" style="text-decoration: none; color: black"></a></button><br>
+                        <button class="button-6"><a th:href="@{|/theraLink/open/${t.projectNo}/1|}" th:text="|내역 ${t.projectNo}. ${t.patientName} ${t.theraChatContent} ${t.transDate}|" style="text-decoration: none; color: black"></a></button><br>
                     </th:block>
                     <th:block th:if="t.chatNo==0">새로운 채팅이 없습니다</th:block>
                 </div>

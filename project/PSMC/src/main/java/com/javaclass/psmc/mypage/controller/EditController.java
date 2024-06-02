@@ -1,5 +1,6 @@
 package com.javaclass.psmc.mypage.controller;
 
+import com.javaclass.psmc.common.model.method.MakePhoneNumber;
 import com.javaclass.psmc.mypage.model.dto.EditDTO;
 import com.javaclass.psmc.mypage.model.dto.ProfileFroEditDTO;
 import com.javaclass.psmc.mypage.model.service.EditService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class EditController {
 
     private final EditService editService;
+    private MakePhoneNumber makePhoneNumber = new MakePhoneNumber();
 
     @Autowired
     public EditController(EditService editService) {
@@ -27,6 +29,9 @@ public class EditController {
         LoginUserDTO loginUserDTO = (LoginUserDTO) session.getAttribute("auth");
         String pmCode = loginUserDTO.getPmCode();
         ProfileFroEditDTO profileFroEditDTO = editService.findInfoForEdit(pmCode);
+
+        profileFroEditDTO.getEmployeeDTO().setPhone(makePhoneNumber.formatPhoneNumber(profileFroEditDTO.getEmployeeDTO().getPhone()));
+        profileFroEditDTO.getEmployeeDTO().setOfficeNum(makePhoneNumber.formatPhoneNumber(profileFroEditDTO.getEmployeeDTO().getOfficeNum()));
         model.addAttribute("profile", profileFroEditDTO);
         return "mypage/edit";
     }

@@ -12,5 +12,5 @@ public class MiniTheraLinkDTO {
     private String theraChatContent;
     private LocalDateTime chatBoardDate;
     private String patientName;
-
+    private String transDate;
 }
