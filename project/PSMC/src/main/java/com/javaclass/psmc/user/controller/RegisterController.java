@@ -73,7 +73,6 @@ public class RegisterController {
     public String getId() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         List<LoginUserDTO> member = userService.findAllMember();
-        System.out.println("member"+member);
         return mapper.writeValueAsString(member);
     }
 
